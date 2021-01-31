@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/base_components/arrow_list/ArrowList.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/generic_components/audio/audio_al.gd" type="Script" id=2]
+
+[node name="AudioAL" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+setting_name = "Master Volume"
+section_name = "audio"
+key_name = "master_volume"
+options_list = [ "0", "1", "2", "3", "4", "5" ]

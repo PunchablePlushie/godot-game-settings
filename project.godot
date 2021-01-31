@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "ArrowList",
+"language": "GDScript",
+"path": "res://src/base_components/arrow_list/arrow_list.gd"
+}, {
+"base": "Control",
+"class": "BoolSetting",
+"language": "GDScript",
+"path": "res://src/base_components/bool_setting/bool_setting.gd"
+}, {
+"base": "Control",
+"class": "DropDownList",
+"language": "GDScript",
+"path": "res://src/base_components/dropdown_list/dropdown_list.gd"
+}, {
+"base": "Control",
+"class": "SliderSetting",
+"language": "GDScript",
+"path": "res://src/base_components/slider_setting/slider_setting.gd"
+} ]
 _global_script_class_icons={
-
+"ArrowList": "",
+"BoolSetting": "",
+"DropDownList": "",
+"SliderSetting": ""
 }
 
 [application]
@@ -20,11 +43,16 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SettingsManager="*res://src/settings_manager/SettingsManager.tscn"
+SettingsManager="*res://src/SettingsManager.tscn"
 
 [debug]
 
 gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=640
+window/size/height=360
 
 [gdnative]
 

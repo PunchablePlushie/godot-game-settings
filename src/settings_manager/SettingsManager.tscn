@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/settings_manager/settings_manager.gd" type="Script" id=1]
-
-[node name="SettingsManager" type="Node"]
-script = ExtResource( 1 )
-file_path = "res://_debug/settings.cfg"
-default_file = "res://_debug/default_settings.cfg"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/generic_components/audio/audio_slider.gd" type="Script" id=1]
+[ext_resource path="res://src/base_components/slider_setting/SliderSetting.tscn" type="PackedScene" id=2]
+
+[node name="AudioSlider" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+setting_name = "Master Volume"
+section_name = "audio"
+key_name = "master_volume"

@@ -1,51 +1,43 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/base_components/arrow_list/arrow_list.gd" type="Script" id=1]
 
-[sub_resource type="GDScript" id=1]
-
-[node name="ArrowList" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ArrowList" type="HBoxContainer"]
+margin_right = 172.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 35 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SettingName" type="Label" parent="HBoxContainer"]
+[node name="SettingName" type="Label" parent="."]
 margin_top = 13.0
 margin_right = 86.0
 margin_bottom = 27.0
+size_flags_horizontal = 3
 text = "setting_name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 90.0
 margin_right = 172.0
 margin_bottom = 40.0
 
-[node name="PrevBtn" type="Button" parent="HBoxContainer/HBoxContainer"]
+[node name="PrevBtn" type="Button" parent="HBoxContainer"]
 margin_top = 10.0
 margin_right = 20.0
 margin_bottom = 30.0
 size_flags_vertical = 4
 text = "<"
 
-[node name="CurrentValue" type="Label" parent="HBoxContainer/HBoxContainer"]
+[node name="CurrentValue" type="Label" parent="HBoxContainer"]
 margin_left = 24.0
 margin_top = 13.0
 margin_right = 58.0
 margin_bottom = 27.0
 text = "value"
-script = SubResource( 1 )
 
-[node name="NextBtn" type="Button" parent="HBoxContainer/HBoxContainer"]
+[node name="NextBtn" type="Button" parent="HBoxContainer"]
 margin_left = 62.0
 margin_top = 10.0
 margin_right = 82.0
@@ -55,5 +47,5 @@ text = ">"
 __meta__ = {
 "_editor_description_": ""
 }
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/PrevBtn" to="." method="_on_PrevBtn_pressed"]
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/NextBtn" to="." method="_on_NextBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/PrevBtn" to="." method="_on_PrevBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/NextBtn" to="." method="_on_NextBtn_pressed"]

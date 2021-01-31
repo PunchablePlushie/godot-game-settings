@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/base_components/bool_setting/BoolSetting.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/generic_components/window_fullscreen/window_fullscreen_bool.gd" type="Script" id=2]
+
+
+[node name="Bool" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+setting_name = "Fullscreen"
+section_name = "display"
+key_name = "fullscreen"

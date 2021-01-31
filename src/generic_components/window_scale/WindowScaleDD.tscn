@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/generic_components/window_scale/window_scale_dd.gd" type="Script" id=1]
+[ext_resource path="res://src/base_components/dropdown_list/DropDownList.tscn" type="PackedScene" id=2]
+
+[node name="WindowScaleDD" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+setting_name = "Window Scale"
+section_name = "display"
+key_name = "window_scale"
+
+[node name="OptionButton" parent="." index="1"]
+margin_right = 134.0
+text = "x1"
+items = [ "x1", null, false, 0, null, "x2", null, false, 1, null, "x3", null, false, 2, null ]
+selected = 0

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/base_components/bool_setting/bool_setting.gd" type="Script" id=1]
+
+[node name="BoolSetting" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 35 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 13.0
+margin_right = 86.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "setting_name"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+margin_left = 90.0
+margin_right = 166.0
+margin_bottom = 40.0
+size_flags_vertical = 5
