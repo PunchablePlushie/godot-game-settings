@@ -5,15 +5,3 @@
 
 [node name="WindowScaleAL" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-setting_name = "Window Scale"
-section_name = "display"
-key_name = "window_scale"
-options_list = [ "x1", "x2", "x3" ]
-
-[node name="SettingName" parent="." index="0"]
-margin_right = 88.0
-text = "Window Scale"
-
-[node name="HBoxContainer" parent="." index="1"]
-margin_left = 92.0
-margin_right = 174.0

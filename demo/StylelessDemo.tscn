@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/generic_components/window_fullscreen/WindowFullScreenBool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/generic_components/audio/AudioSlider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/generic_components/keybind_setting/KeybindSetting.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/generic_components/window_scale/WindowScaleAL.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo/assets/mushroom dance.ogg" type="AudioStream" id=5]
+
+[node name="Demo1" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 195.0
+margin_top = 97.0
+margin_right = 445.0
+margin_bottom = 263.0
+rect_min_size = Vector2( 250, 0 )
+
+[node name="WindowFullScreen" parent="CenterContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 250.0
+setting_name = "Fullscreen"
+section_name = "display"
+key_name = "fullscreen"
+
+[node name="WindowScaleAL" parent="CenterContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 44.0
+margin_right = 250.0
+margin_bottom = 79.0
+setting_name = "Window Scale"
+section_name = "display"
+key_name = "window_scale"
+options_list = [ "x1", "x2", "x3" ]
+wrap_value = false
+
+[node name="AudioSlider" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 83.0
+margin_right = 250.0
+margin_bottom = 118.0
+setting_name = "Master Volume"
+section_name = "audio"
+key_name = "master_volume"
+steps = 0.5
+
+[node name="KeybindSetting" parent="CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 122.0
+margin_right = 250.0
+margin_bottom = 142.0
+rect_scale = Vector2( 1, 1 )
+setting_name = "Move Left"
+section_name = "controls"
+kb_key_name = "move_left"
+action_name = "move_left"
+
+[node name="KeybindSetting2" parent="CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 146.0
+margin_right = 250.0
+margin_bottom = 166.0
+rect_scale = Vector2( 1, 1 )
+setting_name = "Move Right"
+section_name = "controls"
+kb_key_name = "move_right"
+action_name = "move_right"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true

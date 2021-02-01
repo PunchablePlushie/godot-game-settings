@@ -1,21 +1,18 @@
 class_name ArrowList
-extends Control
+extends BaseComponent
 
-export(String) var setting_name: String
-export(String) var section_name: String = ""
-export(String) var key_name: String = ""
 export(Array, String) var options_list: Array
 export(bool) var wrap_value: bool = true
 
 var _current_value: int
 
-onready var setting_name_node: Label = $SettingName
+onready var label: Label = $Label
 onready var current_value_node: Label = $HBoxContainer/CurrentValue
 onready var prev_btn: Button = $HBoxContainer/PrevBtn
 onready var next_btn: Button = $HBoxContainer/NextBtn
 
 func _ready() -> void:
-	setting_name_node.text = setting_name
+	label.text = setting_name
 	_current_value = SettingsManager.get_setting(section_name, key_name)
 	current_value_node.text = options_list[_current_value]
 

@@ -5,12 +5,13 @@
 
 [node name="WindowScaleDD" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-setting_name = "Window Scale"
-section_name = "display"
 key_name = "window_scale"
 
+[node name="Label" parent="." index="0"]
+margin_right = 88.0
+size_flags_horizontal = 3
+
 [node name="OptionButton" parent="." index="1"]
-margin_right = 134.0
+margin_left = 92.0
+margin_right = 136.0
 text = "x1"
-items = [ "x1", null, false, 0, null, "x2", null, false, 1, null, "x3", null, false, 2, null ]
-selected = 0

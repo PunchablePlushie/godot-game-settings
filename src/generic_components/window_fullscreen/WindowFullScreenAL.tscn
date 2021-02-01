@@ -5,7 +5,4 @@
 
 [node name="WindowFullScreenAL" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-setting_name = "Window Type"
-section_name = "display"
-key_name = "fullscreen"
-options_list = [ "Windowed", "Fullscreen" ]
+options_list = [ "windowed", "fullscreen" ]

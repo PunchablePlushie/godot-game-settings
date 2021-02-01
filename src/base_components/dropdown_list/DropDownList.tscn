@@ -29,3 +29,4 @@ size_flags_vertical = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]

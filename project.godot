@@ -9,28 +9,34 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Control",
+"base": "BaseComponent",
 "class": "ArrowList",
 "language": "GDScript",
 "path": "res://src/base_components/arrow_list/arrow_list.gd"
 }, {
-"base": "Control",
+"base": "HBoxContainer",
+"class": "BaseComponent",
+"language": "GDScript",
+"path": "res://base_component.gd"
+}, {
+"base": "BaseComponent",
 "class": "BoolSetting",
 "language": "GDScript",
 "path": "res://src/base_components/bool_setting/bool_setting.gd"
 }, {
-"base": "Control",
+"base": "BaseComponent",
 "class": "DropDownList",
 "language": "GDScript",
 "path": "res://src/base_components/dropdown_list/dropdown_list.gd"
 }, {
-"base": "Control",
+"base": "BaseComponent",
 "class": "SliderSetting",
 "language": "GDScript",
 "path": "res://src/base_components/slider_setting/slider_setting.gd"
 } ]
 _global_script_class_icons={
 "ArrowList": "",
+"BaseComponent": "",
 "BoolSetting": "",
 "DropDownList": "",
 "SliderSetting": ""
@@ -60,14 +66,14 @@ singletons=[  ]
 
 [input]
 
-test_bind_1={
+move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
-test_bind_2={
+move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
 

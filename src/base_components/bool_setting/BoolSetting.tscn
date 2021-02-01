@@ -23,3 +23,4 @@ margin_left = 90.0
 margin_right = 166.0
 margin_bottom = 40.0
 size_flags_vertical = 5
+[connection signal="toggled" from="CheckButton" to="." method="_on_CheckButton_toggled"]

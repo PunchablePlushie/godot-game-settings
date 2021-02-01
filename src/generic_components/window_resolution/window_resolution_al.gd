@@ -1,10 +1,6 @@
 extends ArrowList
 
-export(Dictionary) var resolutions: Dictionary = {
-	"0": Vector2(640, 360),
-	"1": Vector2(1280, 720),
-	"2": Vector2(1980, 1080),
-}
+export(Dictionary) var resolutions: Dictionary
 
 
 func update_value(new_value: int) -> void:

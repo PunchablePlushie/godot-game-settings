@@ -1,40 +1,37 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/base_components/keybind_setting/keybind_setting.gd" type="Script" id=1]
+[ext_resource path="res://src/generic_components/keybind_setting/keybind_setting.gd" type="Script" id=1]
 
 [node name="KeybindSetting" type="HBoxContainer"]
-margin_right = 152.0
+margin_right = 160.0
 margin_bottom = 20.0
+rect_scale = Vector2( 0.951707, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-setting_name = "test_bind_1"
-section_name = "controls"
-kb_key_name = "test_bind_1k"
-gp_key_name = "test_bind_1g"
-action_name = "test_bind_1"
 
 [node name="Label" type="Label" parent="."]
-margin_top = 14.0
+margin_top = 3.0
 margin_right = 86.0
-margin_bottom = 28.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
 text = "setting_name"
 
 [node name="KeyboardBtn" type="Button" parent="."]
 margin_left = 90.0
 margin_right = 160.0
-margin_bottom = 42.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 35, 0 )
 text = "keyboard"
 
 [node name="GamepadBtn" type="Button" parent="."]
 margin_left = 164.0
 margin_right = 234.0
-margin_bottom = 42.0
+margin_bottom = 20.0
 text = "gamepad"
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
-visible = true
 margin_left = 238.0
 margin_right = 394.0
 margin_bottom = 42.0

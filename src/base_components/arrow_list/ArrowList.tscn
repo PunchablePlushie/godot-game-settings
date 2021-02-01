@@ -11,7 +11,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingName" type="Label" parent="."]
+[node name="Label" type="Label" parent="."]
 margin_top = 13.0
 margin_right = 86.0
 margin_bottom = 27.0

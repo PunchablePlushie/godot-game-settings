@@ -1,8 +1,7 @@
 extends HBoxContainer
-### Gamepad settings might not work properly as I didn't have a gamepad
+### Gamepad settings might not work as expected as I didn't have a gamepad
 ### to test it. Please report any issues you've found on github.
-### Simply hide the "GamepadBtn" node in the scene view to disable gamepad
-### support.
+### Simply set "support gamepad" to false to disable... well... gamepad support.
 
 enum InputTypes {
 	KEYBOARD,
@@ -14,6 +13,7 @@ export(String) var section_name: String
 export(String) var kb_key_name: String
 export(String) var gp_key_name: String
 export(String) var action_name: String
+export(bool) var support_gamepad: bool = false
 
 var _current_type = -1
 
@@ -25,6 +25,7 @@ onready var popup: PopupPanel = $PopupPanel
 
 func _ready() -> void:
 	set_process_input(false)
+	label.text = setting_name
 	
 	# Keyboard
 	keyboard_button.connect("pressed", self, "_on_KeyboardBtn_pressed")
@@ -33,12 +34,13 @@ func _ready() -> void:
 	keyboard_button.text = text
 	
 	# Gamepad
-	if gamepad_button.visible == false:
+	if support_gamepad == false:
+		gamepad_button.visible = false
 		return
 	
 	gamepad_button.connect("pressed", self, "_on_GamepadBtn_pressed")
 	scancode = SettingsManager.get_setting(section_name, gp_key_name)
-	text = OS.get_scancode_string(scancode)
+	text = Input.get_joy_button_string(scancode)
 	gamepad_button.text = text
 
 
@@ -96,10 +98,10 @@ func _change_gamepad_control(event: InputEvent) -> void:
 		InputMap.action_add_event(action_name, new_btn)
 		
 		# Update the config file
-		SettingsManager.set_setting(section_name, gp_key_name, new_btn.scancode)
+		SettingsManager.set_setting(section_name, gp_key_name, new_btn.button_index)
 		
 		# Update the text of setting button
-		gamepad_button.text = OS.get_scancode_string(new_btn.scancode)
+		gamepad_button.text = Input.get_joy_button_string(new_btn.button_index)
 		
 		# Close the popup
 		popup.visible = false

@@ -5,7 +5,6 @@
 
 [node name="WindowResolutionAL" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-setting_name = "Resolution"
-section_name = "display"
-key_name = "resolution"
-options_list = [ "640x360", "1280x720", "1980x1080" ]
+resolutions = {
+
+}
