@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/base_components/arrow_list/arrow_list.gd" type="Script" id=1]
+[ext_resource path="res://src/base_components/focusing_logic.gd" type="Script" id=2]
 
 [node name="ArrowList" type="HBoxContainer"]
 margin_right = 172.0
@@ -29,6 +30,7 @@ margin_right = 20.0
 margin_bottom = 30.0
 size_flags_vertical = 4
 text = "<"
+script = ExtResource( 2 )
 
 [node name="CurrentValue" type="Label" parent="HBoxContainer"]
 margin_left = 24.0
@@ -44,8 +46,7 @@ margin_right = 82.0
 margin_bottom = 30.0
 size_flags_vertical = 4
 text = ">"
+script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
-[connection signal="pressed" from="HBoxContainer/PrevBtn" to="." method="_on_PrevBtn_pressed"]
-[connection signal="pressed" from="HBoxContainer/NextBtn" to="." method="_on_NextBtn_pressed"]

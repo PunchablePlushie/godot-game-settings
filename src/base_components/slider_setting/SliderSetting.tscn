@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/base_components/slider_setting/slider_setting.gd" type="Script" id=1]
+[ext_resource path="res://src/base_components/focusing_logic.gd" type="Script" id=2]
 
 [node name="SliderSetting" type="HBoxContainer"]
 margin_right = 40.0
@@ -28,4 +29,4 @@ max_value = 1.0
 step = 0.1
 value = 1.0
 ticks_on_borders = true
-[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]
+script = ExtResource( 2 )

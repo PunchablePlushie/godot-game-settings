@@ -1,7 +1,5 @@
 extends HBoxContainer
-### Gamepad settings might not work as expected as I didn't have a gamepad
-### to test it. Please report any issues you've found on github.
-### Simply set "support gamepad" to false to disable... well... gamepad support.
+## Don't forget to set "GamepadBtn" to visible in the scene tree.
 
 enum InputTypes {
 	KEYBOARD,
@@ -12,6 +10,7 @@ export(String) var setting_name: String
 export(String) var section_name: String
 export(String) var kb_key_name: String
 export(String) var gp_key_name: String
+export(bool) var starts_with_focus: bool = false
 export(String) var action_name: String
 export(bool) var support_gamepad: bool = false
 
@@ -24,6 +23,9 @@ onready var popup: PopupPanel = $PopupPanel
 
 
 func _ready() -> void:
+	if starts_with_focus:
+		keyboard_button.grab_focus()
+	
 	set_process_input(false)
 	label.text = setting_name
 	
@@ -56,12 +58,14 @@ func _on_KeyboardBtn_pressed() -> void:
 	_current_type = InputTypes.KEYBOARD
 	popup.popup_centered()
 	set_process_input(true)
+	SettingsManager.play_sfx(0)
 
 
 func _on_GamepadBtn_pressed() -> void:
 	_current_type = InputTypes.GAMEPAD
 	popup.popup_centered()
 	set_process_input(true)
+	SettingsManager.play_sfx(0)
 
 
 func _change_keyboard_control(event: InputEvent) -> void:
@@ -82,6 +86,7 @@ func _change_keyboard_control(event: InputEvent) -> void:
 		keyboard_button.text = OS.get_scancode_string(new_key.scancode)
 		
 		# Close the popup
+		SettingsManager.play_sfx(0)
 		popup.visible = false
 		_current_type = -1
 
@@ -93,16 +98,17 @@ func _change_gamepad_control(event: InputEvent) -> void:
 		var new_btn: InputEventJoypadButton = event as InputEventJoypadButton
 		
 		# Replace the new button with the old button
-		var action_list: Array = InputMap.get_action_list(action_name)
-		InputMap.action_erase_event(action_name, action_list[1])
-		InputMap.action_add_event(action_name, new_btn)
+		SettingsManager.logic_change_gp_control(action_name, new_btn)
 		
 		# Update the config file
 		SettingsManager.set_setting(section_name, gp_key_name, new_btn.button_index)
 		
 		# Update the text of setting button
+		#!# This won't show gamepad button labels such as (A), (X), (L1), etc.
 		gamepad_button.text = Input.get_joy_button_string(new_btn.button_index)
 		
 		# Close the popup
+		SettingsManager.play_sfx(0)
 		popup.visible = false
 		_current_type = -1
+

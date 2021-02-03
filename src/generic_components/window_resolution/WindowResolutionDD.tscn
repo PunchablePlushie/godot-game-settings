@@ -5,13 +5,17 @@
 
 [node name="WindowResolutionDD" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-resolutions = {
-
-}
+section_name = "display"
+key_name = "window_resolution"
 
 [node name="Label" parent="." index="0"]
+margin_right = 68.0
 size_flags_horizontal = 3
+text = "Resolution"
 
 [node name="OptionButton" parent="." index="1"]
-margin_right = 174.0
+margin_left = 72.0
+margin_right = 156.0
 text = "640x360"
+items = [ "640x360", null, false, 0, null, "1280x720", null, false, 1, null, "1980x1080", null, false, 2, null ]
+selected = 0

@@ -1,12 +1,16 @@
 class_name BoolSetting
 extends BaseComponent
 
-onready var label: Label = $Label
 onready var button: CheckButton = $CheckButton
 
+
 func _ready() -> void:
+	if starts_with_focus:
+		button.grab_focus()
+
 	button.pressed = SettingsManager.get_setting(section_name, key_name)
-	label.text = setting_name
+	button.connect("toggled", self, "_on_CheckButton_toggled")
+	update_value(button.pressed)
 
 
 func update_value(button_state: bool) -> void:

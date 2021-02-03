@@ -5,6 +5,10 @@
 
 [node name="WindowResolutionAL" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-resolutions = {
+section_name = "display"
+key_name = "window_resolution"
+options_list = [ "640x360", "1280x720", "1980x1080" ]
+wrap_value = false
 
-}
+[node name="Label" parent="." index="0"]
+text = "Resolution"

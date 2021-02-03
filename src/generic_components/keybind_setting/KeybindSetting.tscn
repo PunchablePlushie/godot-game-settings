@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/generic_components/keybind_setting/keybind_setting.gd" type="Script" id=1]
+[ext_resource path="res://src/generic_components/keybind_setting/keybind_setting_gpless.gd" type="Script" id=1]
+[ext_resource path="res://src/base_components/focusing_logic.gd" type="Script" id=2]
 
 [node name="KeybindSetting" type="HBoxContainer"]
 margin_right = 160.0
@@ -10,26 +11,33 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+setting_name = "Move Left"
+section_name = "controls"
+key_name = "move_left"
+action_name = "move_left"
 
 [node name="Label" type="Label" parent="."]
 margin_top = 3.0
-margin_right = 86.0
+margin_right = 160.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "setting_name"
 
 [node name="KeyboardBtn" type="Button" parent="."]
-margin_left = 90.0
-margin_right = 160.0
+margin_left = 164.0
+margin_right = 234.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 35, 0 )
 text = "keyboard"
+script = ExtResource( 2 )
 
 [node name="GamepadBtn" type="Button" parent="."]
+visible = false
 margin_left = 164.0
 margin_right = 234.0
 margin_bottom = 20.0
 text = "gamepad"
+script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 margin_left = 238.0
