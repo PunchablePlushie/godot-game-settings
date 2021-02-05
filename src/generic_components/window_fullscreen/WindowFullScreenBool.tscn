@@ -11,4 +11,8 @@ section_name = "display"
 key_name = "fullscreen"
 
 [node name="Label" parent="." index="0"]
-text = "Fullscreen"
+margin_right = 86.0
+
+[node name="CheckButton" parent="." index="1"]
+margin_left = 90.0
+margin_right = 166.0

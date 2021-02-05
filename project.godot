@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Game Settings Template"
+config/name="Quick Game Settings"
 config/icon="res://icon.png"
 
 [autoload]

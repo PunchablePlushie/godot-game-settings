@@ -18,14 +18,14 @@ action_name = "move_left"
 
 [node name="Label" type="Label" parent="."]
 margin_top = 3.0
-margin_right = 160.0
+margin_right = 86.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "setting_name"
 
 [node name="KeyboardBtn" type="Button" parent="."]
-margin_left = 164.0
-margin_right = 234.0
+margin_left = 90.0
+margin_right = 160.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 35, 0 )
 text = "keyboard"

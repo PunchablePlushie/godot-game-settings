@@ -28,7 +28,7 @@ func _ready() -> void:
 	if error != OK:
 		_config.load(default_file)
 	
-	_apply_settings()
+	apply_settings()
 
 
 func get_setting(section: String, key: String):
@@ -45,6 +45,13 @@ func play_sfx(type: int) -> void:
 		return
 	audio_player.stream = _sfxs[type]
 	audio_player.play()
+
+
+func apply_settings() -> void:
+	logic_fullscreen(get_setting("display", "fullscreen"))
+	_apply_window_scale_settings()
+	_apply_volume_settings()
+	_apply_control_settings()
 
 
 # Logic methods
@@ -95,13 +102,6 @@ func logic_change_gp_control(action_name: String, new_button: InputEventJoypadBu
 
 
 # Local utility functions
-func _apply_settings() -> void:
-	logic_fullscreen(get_setting("display", "fullscreen"))
-	_apply_window_scale_settings()
-	_apply_volume_settings()
-	_apply_control_settings()
-
-
 func _apply_window_scale_settings() -> void:
 	if use_basic_window_scaling:
 		logic_window_scale(get_setting("display", "window_scale"))

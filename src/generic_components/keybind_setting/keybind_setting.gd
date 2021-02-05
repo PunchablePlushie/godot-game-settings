@@ -89,6 +89,8 @@ func _change_keyboard_control(event: InputEvent) -> void:
 		SettingsManager.play_sfx(0)
 		popup.visible = false
 		_current_type = -1
+		set_process_input(false)
+		get_tree().set_input_as_handled()
 
 
 func _change_gamepad_control(event: InputEvent) -> void:
@@ -111,4 +113,6 @@ func _change_gamepad_control(event: InputEvent) -> void:
 		SettingsManager.play_sfx(0)
 		popup.visible = false
 		_current_type = -1
+		set_process_input(false)
+		get_tree().set_input_as_handled()
 

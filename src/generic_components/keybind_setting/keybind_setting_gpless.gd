@@ -57,3 +57,5 @@ func _change_keyboard_control(event: InputEvent) -> void:
 		# Close the popup
 		SettingsManager.play_sfx(0)
 		popup.visible = false
+		set_process_input(false)
+		get_tree().set_input_as_handled()

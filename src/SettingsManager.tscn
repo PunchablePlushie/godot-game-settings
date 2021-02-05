@@ -4,6 +4,7 @@
 
 [node name="SettingsManager" type="Node"]
 script = ExtResource( 1 )
+save_path = "user://settings.cfg"
 default_file = "res://default_settings.cfg"
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
