@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/generic_components/window_fullscreen/WindowFullScreenBool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/generic_components/window_scale/WindowScaleAL.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/generic_components/audio/AudioSlider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/generic_components/keybind_setting/KeybindSetting.tscn" type="PackedScene" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -83.0
+margin_right = 83.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" parent="Container" instance=ExtResource( 1 )]
+margin_right = 190.0
+starts_with_focus = true
+
+[node name="Scale" parent="Container" instance=ExtResource( 2 )]
+margin_top = 44.0
+margin_right = 190.0
+margin_bottom = 79.0
+
+[node name="MasterV" parent="Container" instance=ExtResource( 3 )]
+margin_top = 83.0
+margin_right = 190.0
+margin_bottom = 118.0
+
+[node name="Move Left" parent="Container" instance=ExtResource( 4 )]
+margin_top = 122.0
+margin_right = 190.0
+margin_bottom = 142.0
+rect_scale = Vector2( 1, 1 )
+
+[node name="Move Right" parent="Container" instance=ExtResource( 4 )]
+margin_top = 146.0
+margin_right = 190.0
+margin_bottom = 166.0
+rect_scale = Vector2( 1, 1 )
+setting_name = "Move Right"
+key_name = "move_right"
+action_name = "move_right"
