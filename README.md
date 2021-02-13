@@ -12,7 +12,7 @@ Basic game settings such as changing the resolution, volume, keybinds, etc are a
 ## Theme
 GGS does not come with its own theme. You can check the [GUI Skinning page](https://docs.godotengine.org/en/stable/tutorials/gui/gui_skinning.html) of the Godot documentation to get started with making and using your own theme.
 ## Quick Start
-Check out the [quick start page]() on the wiki to see how you can make a basic settings menu quickly, with the premade setting nodes.
+Check out the [quick start page](https://github.com/PunchablePlushie/godot_ggs/wiki/Getting-Started) on the wiki to see how you can make a basic settings menu quickly, with the premade setting nodes.
 ## Demo
 A demo of how one can use and expand the project is available as a github repo. It has a custom theme and shows a simple example of how you can expand the project by using the base components provided. **[Get the Demo](https://github.com/PunchablePlushie/godot_ggs_demo)**!<br/>
 <p align="center">
