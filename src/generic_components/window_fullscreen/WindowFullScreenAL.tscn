@@ -5,8 +5,7 @@
 
 [node name="WindowFullScreenAL" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-section_name = "display"
-key_name = "fullscreen"
+setting_node = "Fullscreen"
 options_list = [ "Windowed", "Fullscreen" ]
 
 [node name="Label" parent="." index="0"]

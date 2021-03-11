@@ -8,4 +8,4 @@ func _process(_delta: float) -> void:
 
 func update_value(index: int) -> void:
 	.update_value(index)
-	SettingsManager.logic_window_scale(index)
+	GameSettings.WindowSize.set_scale(index)

@@ -5,10 +5,9 @@
 
 [node name="WindowScaleAL" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-section_name = "display"
-key_name = "window_scale"
-options_list = [ "x2", "x3", "x4", "x5" ]
+setting_node = "WindowSize"
 wrap_value = false
+options_list = [ "x2", "x3", "x4", "x5" ]
 
 [node name="Label" parent="." index="0"]
 margin_right = 88.0

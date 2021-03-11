@@ -5,14 +5,3 @@
 
 [node name="AudioAL" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-section_name = "audio"
-key_name = "master_volume"
-options_list = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
-
-[node name="Label" parent="." index="0"]
-margin_right = 97.0
-text = "Master Volume"
-
-[node name="HBoxContainer" parent="." index="1"]
-margin_left = 101.0
-margin_right = 183.0

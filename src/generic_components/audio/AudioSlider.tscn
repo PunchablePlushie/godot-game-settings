@@ -5,9 +5,9 @@
 
 [node name="AudioSlider" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-section_name = "audio"
-key_name = "master_volume"
+setting_node = "AudioVolume/Master"
 setting_name = "Master Volume"
+bus_name = "Master"
 
 [node name="Label" parent="." index="0"]
 size_flags_horizontal = 3

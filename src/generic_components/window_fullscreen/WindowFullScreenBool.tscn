@@ -7,8 +7,7 @@
 margin_right = 166.0
 rect_min_size = Vector2( 0, 0 )
 script = ExtResource( 2 )
-section_name = "display"
-key_name = "fullscreen"
+setting_node = "Fullscreen"
 
 [node name="Label" parent="." index="0"]
 margin_right = 86.0
