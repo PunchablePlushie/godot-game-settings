@@ -8,6 +8,7 @@ onready var setting: Node = GameSettings.get_node("GpControls/%s"%action_name)
 onready var label: Label = $Label
 onready var button: Button = $Button
 onready var popup: PopupPanel = $PopupPanel
+onready var popup_label: Label = $PopupPanel/MarginContainer/Label
 
 
 func _ready() -> void:
@@ -43,6 +44,15 @@ func _change_controls(event: InputEvent) -> void:
 		return
 	var new_btn: InputEventJoypadButton = event as InputEventJoypadButton
 	
+	# Check if key is already assigned
+	var actions: Array = GameSettings.KbControls.actions
+	for action in actions:
+		if InputMap.event_is_action(new_btn, action):
+			popup_label.text = "That button is already assigned..."
+			return
+		else:
+			continue
+	
 	# Replace the new key with the old key
 	GameSettings.GpControls.find_node(action_name).change(new_btn)
 	
@@ -59,8 +69,9 @@ func _change_controls(event: InputEvent) -> void:
 	
 	# Close the popup
 	popup.visible = false
-	set_process_input(false)
+	popup_label.text = "Press the new button..."
 	get_tree().set_input_as_handled()
+	set_process_input(false)
 
 
 func _get_glyph_text(button_string: String) -> String:

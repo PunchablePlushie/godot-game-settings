@@ -6,6 +6,7 @@
 [node name="GpSetting" type="HBoxContainer"]
 margin_right = 160.0
 margin_bottom = 20.0
+rect_min_size = Vector2( 0, 35 )
 rect_scale = Vector2( 0.951707, 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -15,17 +16,19 @@ action_name = "move_right"
 label_text = "Move Right"
 
 [node name="Label" type="Label" parent="."]
-margin_top = 4.0
-margin_right = 104.0
-margin_bottom = 18.0
+margin_top = 10.0
+margin_right = 86.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "setting_name"
 
 [node name="Button" type="Button" parent="."]
-margin_left = 108.0
-margin_right = 178.0
-margin_bottom = 22.0
+margin_left = 90.0
+margin_top = 7.0
+margin_right = 160.0
+margin_bottom = 27.0
 rect_min_size = Vector2( 35, 0 )
+size_flags_vertical = 4
 text = "gamepad"
 script = ExtResource( 2 )
 
@@ -38,7 +41,7 @@ popup_exclusive = true
 [node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 152.0
+margin_right = 172.0
 margin_bottom = 38.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -51,9 +54,9 @@ __meta__ = {
 [node name="Label" type="Label" parent="PopupPanel/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 138.0
+margin_right = 158.0
 margin_bottom = 24.0
-text = "Press the new key..."
+text = "Press the new button..."
 __meta__ = {
 "_edit_use_anchors_": false
 }

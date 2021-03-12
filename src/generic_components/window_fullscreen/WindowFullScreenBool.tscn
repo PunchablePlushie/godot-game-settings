@@ -11,6 +11,7 @@ setting_node = "Fullscreen"
 
 [node name="Label" parent="." index="0"]
 margin_right = 86.0
+text = "Fullscreen"
 
 [node name="CheckButton" parent="." index="1"]
 margin_left = 90.0

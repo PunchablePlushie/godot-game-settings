@@ -4,15 +4,32 @@
 [ext_resource path="res://src/base_components/arrow_list/ArrowList.tscn" type="PackedScene" id=2]
 
 [node name="WindowScaleAL" instance=ExtResource( 2 )]
+margin_right = 174.0
+margin_bottom = 20.0
 script = ExtResource( 1 )
 setting_node = "WindowSize"
 wrap_value = false
 options_list = [ "x2", "x3", "x4", "x5" ]
 
 [node name="Label" parent="." index="0"]
+margin_top = 10.0
 margin_right = 88.0
+margin_bottom = 24.0
 text = "Window Scale"
 
 [node name="HBoxContainer" parent="." index="1"]
 margin_left = 92.0
 margin_right = 174.0
+margin_bottom = 35.0
+
+[node name="PrevBtn" parent="HBoxContainer" index="0"]
+margin_top = 7.0
+margin_bottom = 27.0
+
+[node name="CurrentValue" parent="HBoxContainer" index="1"]
+margin_top = 10.0
+margin_bottom = 24.0
+
+[node name="NextBtn" parent="HBoxContainer" index="2"]
+margin_top = 7.0
+margin_bottom = 27.0

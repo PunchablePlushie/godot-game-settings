@@ -3,6 +3,8 @@
 [ext_resource path="res://src/base_components/dropdown_list/dropdown_list.gd" type="Script" id=1]
 [ext_resource path="res://src/base_components/focusing_logic.gd" type="Script" id=2]
 
+
+
 [node name="DropDownList" type="HBoxContainer"]
 margin_right = 40.0
 margin_bottom = 40.0

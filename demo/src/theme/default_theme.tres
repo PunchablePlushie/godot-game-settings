@@ -1,0 +1,56 @@
+[gd_resource type="Theme" load_steps=14 format=2]
+
+[ext_resource path="res://demo/assets/fonts/default.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://demo/src/theme/panel/panel_bg.tres" type="StyleBox" id=2]
+[ext_resource path="res://demo/src/theme/slider/slider_bg_active.tres" type="StyleBox" id=3]
+[ext_resource path="res://demo/src/theme/slider/slider_bg_inactive.tres" type="StyleBox" id=4]
+[ext_resource path="res://demo/assets/sprites/ui/slider_grabber.png" type="Texture" id=5]
+[ext_resource path="res://demo/assets/sprites/ui/slider_grabber_focus.png" type="Texture" id=6]
+[ext_resource path="res://demo/assets/sprites/ui/slider_tick.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[resource]
+default_font = SubResource( 1 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_hover = Color( 0.921569, 0.635294, 0.145098, 1 )
+Button/colors/font_color_pressed = Color( 0.921569, 0.635294, 0.145098, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = SubResource( 4 )
+Button/styles/normal = SubResource( 5 )
+Button/styles/pressed = SubResource( 6 )
+HSlider/icons/grabber = ExtResource( 5 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 6 )
+HSlider/icons/tick = ExtResource( 7 )
+HSlider/styles/grabber_area = ExtResource( 3 )
+HSlider/styles/grabber_area_highlight = ExtResource( 3 )
+HSlider/styles/slider = ExtResource( 4 )
+PanelContainer/styles/panel = ExtResource( 2 )
+PopupPanel/styles/panel = ExtResource( 2 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 2 )
+VScrollBar/styles/grabber_highlight = ExtResource( 2 )
+VScrollBar/styles/grabber_pressed = ExtResource( 2 )
+VScrollBar/styles/scroll = ExtResource( 2 )
+VScrollBar/styles/scroll_focus = ExtResource( 2 )

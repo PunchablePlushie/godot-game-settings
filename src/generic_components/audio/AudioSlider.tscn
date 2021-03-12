@@ -4,13 +4,18 @@
 [ext_resource path="res://src/base_components/slider_setting/SliderSetting.tscn" type="PackedScene" id=2]
 
 [node name="AudioSlider" instance=ExtResource( 2 )]
+margin_right = 190.0
+margin_bottom = 16.0
 script = ExtResource( 1 )
 setting_node = "AudioVolume/Master"
 setting_name = "Master Volume"
 bus_name = "Master"
 
 [node name="Label" parent="." index="0"]
+margin_top = 10.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HSlider" parent="." index="1"]
-step = 0.25
+margin_top = 9.0
+margin_bottom = 25.0

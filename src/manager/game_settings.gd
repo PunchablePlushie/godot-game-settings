@@ -42,5 +42,18 @@ func apply_all() -> void:
 		var bus: Node = get_node("AudioVolume/%s"%[bus_name])
 		bus.set_volume(bus.name, get_setting(bus.section, bus.key))
 	
-	# Controls
+	# Keyboard Controls
+	for action in KbControls.actions:
+		var event: InputEventKey = InputEventKey.new()
+		var node: Node = get_node("KbControls/%s"%[action])
+		event.scancode = get_setting(node.section, node.key)
+		node.change(event)
 	
+	# Gamepad Controls
+	for action in GpControls.actions:
+		var event: InputEventJoypadButton = InputEventJoypadButton.new()
+		var node: Node = get_node("GpControls/%s"%[action])
+		event.button_index = get_setting(node.section, node.key)
+		node.change(event)
+
+
