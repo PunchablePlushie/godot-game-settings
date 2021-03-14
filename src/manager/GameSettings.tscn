@@ -11,6 +11,7 @@
 
 [node name="GameSettings" type="Node"]
 script = ExtResource( 4 )
+save_path = "res://settings.cfg"
 default_file = "res://default_settings.cfg"
 
 [node name="Fullscreen" type="Node" parent="."]
@@ -21,7 +22,7 @@ key = "fullscreen"
 [node name="WindowSize" type="Node" parent="."]
 script = ExtResource( 5 )
 section = "display"
-key = "window_scale"
+key = "window_size"
 
 [node name="AudioVolume" type="Node" parent="."]
 script = ExtResource( 6 )

@@ -1,6 +1,6 @@
 extends Node
 
-var actions: Array
+var actions: Array = []
 
 
 func _ready() -> void:

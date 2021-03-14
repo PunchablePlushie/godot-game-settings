@@ -1,11 +1,11 @@
 extends Node
 
-export(String) var save_path: String = "res://settings.cfg"
+export(String) var save_path: String
 export(String, FILE, "*.cfg") var default_file: String
 
 var _config: ConfigFile = ConfigFile.new()
 
-
+## Remember to add your custom setting node here
 onready var Fullscreen: Node = $Fullscreen
 onready var WindowSize: Node = $WindowSize
 onready var AudioVolume: Node = $AudioVolume
@@ -50,10 +50,12 @@ func apply_all() -> void:
 		node.change(event)
 	
 	# Gamepad Controls
-	for action in GpControls.actions:
-		var event: InputEventJoypadButton = InputEventJoypadButton.new()
-		var node: Node = get_node("GpControls/%s"%[action])
-		event.button_index = get_setting(node.section, node.key)
-		node.change(event)
+	if GpControls.actions != []:
+		for action in GpControls.actions:
+			var event: InputEventJoypadButton = InputEventJoypadButton.new()
+			var node: Node = get_node("GpControls/%s"%[action])
+			event.button_index = get_setting(node.section, node.key)
+			node.change(event)
+		
 
 
