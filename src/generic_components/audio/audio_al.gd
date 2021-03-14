@@ -1,9 +1,13 @@
 extends ArrowList
 
-export(String) var bus_name: String = "Master"
+export(String) var setting_name: String
+export(String) var bus_name: String
 
+
+func _ready() -> void:
+	label.text = setting_name
+	
 
 func update_value(new_value: int) -> void:
 	.update_value(new_value)
-	var scale_range: Vector2 = Vector2(0, options_list.size() - 1)
-	SettingsManager.logic_audio_volume_al(bus_name, new_value, scale_range)
+	GameSettings.AudioVolume.find_node(bus_name).set_volume(bus_name, new_value)

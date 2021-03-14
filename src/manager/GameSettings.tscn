@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/manager/settings/controls/controls_base.gd" type="Script" id=1]
+[ext_resource path="res://src/manager/settings/controls/kb_control.gd" type="Script" id=2]
+[ext_resource path="res://src/manager/settings/fullscreen.gd" type="Script" id=3]
+[ext_resource path="res://src/manager/game_settings.gd" type="Script" id=4]
+[ext_resource path="res://src/manager/settings/window_size.gd" type="Script" id=5]
+[ext_resource path="res://src/manager/settings/audio_volume/audio_volume_base.gd" type="Script" id=6]
+[ext_resource path="res://src/manager/settings/controls/gp_control.gd" type="Script" id=7]
+[ext_resource path="res://src/manager/settings/audio_volume/audio_volume.gd" type="Script" id=8]
+
+[node name="GameSettings" type="Node"]
+script = ExtResource( 4 )
+save_path = "res://settings.cfg"
+default_file = "res://default_settings.cfg"
+
+[node name="Fullscreen" type="Node" parent="."]
+script = ExtResource( 3 )
+section = "display"
+key = "fullscreen"
+
+[node name="WindowSize" type="Node" parent="."]
+script = ExtResource( 5 )
+section = "display"
+key = "window_size"
+
+[node name="AudioVolume" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Master" type="Node" parent="AudioVolume"]
+script = ExtResource( 8 )
+section = "audio"
+key = "master_volume"
+
+[node name="KbControls" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="move_right" type="Node" parent="KbControls"]
+script = ExtResource( 2 )
+section = "controls"
+key = "move_right_kb"
+
+[node name="move_left" type="Node" parent="KbControls"]
+script = ExtResource( 2 )
+section = "controls"
+key = "move_left_kb"
+
+[node name="GpControls" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="move_right" type="Node" parent="GpControls"]
+script = ExtResource( 7 )
+section = "controls"
+key = "move_right_gp"
+
+[node name="move_left" type="Node" parent="GpControls"]
+script = ExtResource( 7 )
+section = "controls"
+key = "move_left_gp"

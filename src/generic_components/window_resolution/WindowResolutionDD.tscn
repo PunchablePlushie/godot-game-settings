@@ -3,6 +3,8 @@
 [ext_resource path="res://src/base_components/dropdown_list/DropDownList.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/generic_components/window_resolution/window_resolution_dd.gd" type="Script" id=2]
 
+
+
 [node name="WindowResolutionDD" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 section_name = "display"

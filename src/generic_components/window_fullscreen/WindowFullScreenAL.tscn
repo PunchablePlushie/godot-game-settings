@@ -4,10 +4,27 @@
 [ext_resource path="res://src/generic_components/window_fullscreen/window_fullscreen_al.gd" type="Script" id=2]
 
 [node name="WindowFullScreenAL" instance=ExtResource( 1 )]
+margin_bottom = 20.0
 script = ExtResource( 2 )
-section_name = "display"
-key_name = "fullscreen"
+setting_node = "Fullscreen"
 options_list = [ "Windowed", "Fullscreen" ]
 
 [node name="Label" parent="." index="0"]
+margin_top = 10.0
+margin_bottom = 24.0
 text = "Screen Mode"
+
+[node name="HBoxContainer" parent="." index="1"]
+margin_bottom = 35.0
+
+[node name="PrevBtn" parent="HBoxContainer" index="0"]
+margin_top = 7.0
+margin_bottom = 27.0
+
+[node name="CurrentValue" parent="HBoxContainer" index="1"]
+margin_top = 10.0
+margin_bottom = 24.0
+
+[node name="NextBtn" parent="HBoxContainer" index="2"]
+margin_top = 7.0
+margin_bottom = 27.0
