@@ -1,20 +1,28 @@
 # Godot Game Settings (GGS)
-Godot Game Settings is a template for people who don't want to spend a lot of time coding game settings.
+Godot Game Settings is a tool for people who don't want to spend a lot of time coding game settings. Easy to use and easy to expand to fit your own project.
 <p align="center">
-  <img src="https://i.imgur.com/4UbCFTJ.png" alt="demo preview">
+  <img src="https://i.imgur.com/aOIyWU5.png?2" alt="demo preview">
 </p>
 
 ## Introduction
 The project is component based. Typical setting _types_ (e.g. option list, slider, check button, etc) are all basic components that can be easily instanced and expanded to fit your needs.<br/>
 
-Please note that GGS is designed so that it can be expanded easily, which means you might need to dive into the code and modify it to suit your own needs.<br/>
-Basic game settings such as changing the resolution, volume, keybinds, etc are already built but any thing more than that should be made by yourself, which can be done easily using the basic components of the project. The code is easy to understand. However, if at any point you found yourself wondering what the heck is going on, you can check out the [github wiki page](https://github.com/PunchablePlushie/godot_ggs/wiki).
+Check out the [github wiki page](https://github.com/PunchablePlushie/godot_ggs/wiki) for complete instructions on how to use GGS.
+
 ## Theme
 GGS does not come with its own theme. You can check the [GUI Skinning page](https://docs.godotengine.org/en/stable/tutorials/gui/gui_skinning.html) of the Godot documentation to get started with making and using your own theme.
-## Quick Start
-Check out the [quick start page](https://github.com/PunchablePlushie/godot_ggs/wiki/Getting-Started) on the wiki to see how you can make a basic settings menu quickly, with the premade setting nodes.
+
 ## Demo
-A demo of how one can use and expand the project is available as a github repo. It has a custom theme and shows a simple example of how you can expand the project by using the base components provided. **[Get the Demo](https://github.com/PunchablePlushie/godot_ggs_demo)**!<br/>
-<p align="center">
-  <img src="https://i.imgur.com/RoD6yGY.png" alt="demo preview">
-</p>
+A demo is available inside the project itself. When adding GGS to your own project, I recommend not adding the demo folder as that won't be necessary. If you want to checkout the project, simply create an empty Godot project and add GGS to it, so that you won't have to worry about potentially messing up your own project.
+
+## Changelog
+* `v1.1`:
+  * Renamed `SettingsManager` to `GameSettings`.
+  * Changed how the logic functions are created and handled. It should be easier to maintain and use them now.
+  * Decluttered the exported variables of `GameSettings`. Each exported variable is now in it's own logic script. No more messy list of variables in the editor, yay!
+  * Added full gamepad support. You can rebind gamepad controls now.
+  * When rebinding controls, you cannot use already assigned keys now.
+  * Not really important but the icon is updated.
+
+* `1.0`:
+  * Published the project for the first time.
