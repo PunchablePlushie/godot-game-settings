@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/base_components/arrow_list/arrow_list.gd"
 }, {
-"base": "Reference",
+"base": "HBoxContainer",
 "class": "BaseComponent",
 "language": "GDScript",
 "path": "res://src/base_components/base_component.gd"

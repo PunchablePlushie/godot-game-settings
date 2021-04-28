@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/GGS/src/ui/setting_item/ui_setting_item.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/assets/icons/item_edit.svg" type="Texture" id=2]
+[ext_resource path="res://addons/GGS/assets/icons/script.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/assets/icons/item_remove.svg" type="Texture" id=4]
+
+[node name="uiSettingItem" type="HBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 22.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_top = 4.0
+margin_right = 222.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+text = "setting_name"
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_left = 226.0
+margin_right = 320.0
+margin_bottom = 22.0
+custom_constants/separation = 5
+
+[node name="Edit" type="Button" parent="HBox"]
+margin_right = 28.0
+margin_bottom = 22.0
+hint_tooltip = "Edit Properties"
+shortcut_in_tooltip = false
+icon = ExtResource( 2 )
+
+[node name="Script" type="Button" parent="HBox"]
+margin_left = 33.0
+margin_right = 61.0
+margin_bottom = 22.0
+hint_tooltip = "Logic Script"
+icon = ExtResource( 3 )
+
+[node name="Remove" type="Button" parent="HBox"]
+margin_left = 66.0
+margin_right = 94.0
+margin_bottom = 22.0
+hint_tooltip = "Remove"
+icon = ExtResource( 4 )

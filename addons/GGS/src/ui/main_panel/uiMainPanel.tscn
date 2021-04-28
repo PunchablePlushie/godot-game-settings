@@ -1,0 +1,226 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/confirm_dialog.gd" type="Script" id=2]
+[ext_resource path="res://addons/GGS/assets/icons/search_help.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/help_btn.gd" type="Script" id=4]
+[ext_resource path="res://addons/GGS/assets/icons/add_setting.svg" type="Texture" id=5]
+
+[node name="uiMainPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mrg" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scrl" type="ScrollContainer" parent="Mrg"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 300.0
+margin_bottom = 160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Mrg/Scrl"]
+margin_right = 268.0
+margin_bottom = 343.0
+size_flags_horizontal = 3
+
+[node name="HBox" type="HBoxContainer" parent="Mrg/Scrl/VBox"]
+margin_right = 268.0
+margin_bottom = 23.0
+
+[node name="Create" type="Button" parent="Mrg/Scrl/VBox/HBox"]
+margin_right = 120.0
+margin_bottom = 23.0
+size_flags_horizontal = 0
+custom_constants/hseparation = 2
+text = "Create Setting"
+icon = ExtResource( 5 )
+
+[node name="Help" type="Button" parent="Mrg/Scrl/VBox/HBox"]
+margin_left = 240.0
+margin_right = 268.0
+margin_bottom = 23.0
+hint_tooltip = "Open Github Wiki / Documentation"
+size_flags_horizontal = 10
+icon = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="HSepTop" type="HSeparator" parent="Mrg/Scrl/VBox"]
+margin_top = 27.0
+margin_right = 268.0
+margin_bottom = 31.0
+
+[node name="Mrg" type="MarginContainer" parent="Mrg/Scrl/VBox"]
+margin_top = 35.0
+margin_right = 268.0
+margin_bottom = 335.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="Scrl" type="ScrollContainer" parent="Mrg/Scrl/VBox/Mrg"]
+margin_right = 268.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
+margin_right = 268.0
+size_flags_horizontal = 3
+
+[node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]
+margin_top = 339.0
+margin_right = 268.0
+margin_bottom = 343.0
+
+[node name="WinDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -157.0
+margin_top = -72.0
+margin_right = 157.0
+margin_bottom = 72.0
+popup_exclusive = true
+window_title = "Create a New Setting"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mrg" type="MarginContainer" parent="WinDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="WinDialog/Mrg"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 304.0
+margin_bottom = 134.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
+margin_right = 294.0
+margin_bottom = 24.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Name"]
+margin_top = 5.0
+margin_right = 86.0
+margin_bottom = 19.0
+size_flags_horizontal = 2
+text = "Setting Name"
+
+[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Name"]
+margin_left = 144.0
+margin_right = 294.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+clear_button_enabled = true
+caret_blink = true
+
+[node name="Section" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
+margin_top = 34.0
+margin_right = 294.0
+margin_bottom = 58.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Section"]
+margin_top = 5.0
+margin_right = 114.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Section"
+
+[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Section"]
+margin_left = 144.0
+margin_right = 294.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+clear_button_enabled = true
+caret_blink = true
+
+[node name="Key" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
+margin_top = 68.0
+margin_right = 294.0
+margin_bottom = 92.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Key"]
+margin_top = 5.0
+margin_right = 114.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Setting Name"
+
+[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Key"]
+margin_left = 144.0
+margin_right = 294.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+clear_button_enabled = true
+caret_blink = true
+
+[node name="Buttons" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
+margin_left = 83.0
+margin_top = 102.0
+margin_right = 210.0
+margin_bottom = 122.0
+size_flags_horizontal = 4
+custom_constants/separation = 20
+
+[node name="Confirm" type="Button" parent="WinDialog/Mrg/VBox/Buttons"]
+margin_right = 53.0
+margin_bottom = 20.0
+disabled = true
+text = "Create"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="WinDialog/Mrg/VBox/Buttons"]
+margin_left = 73.0
+margin_right = 127.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Help" to="Mrg/Scrl/VBox/HBox/Help" method="_on_Help_pressed"]
+[connection signal="confirmed" from="WinDialog" to="." method="_on_WinDialog_confirmed"]
+[connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Confirm" to="WinDialog" method="_on_Confirm_pressed"]
+[connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Cancel" to="WinDialog" method="_on_Cancel_pressed"]
