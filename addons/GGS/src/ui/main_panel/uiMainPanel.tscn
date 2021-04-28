@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/confirm_dialog.gd" type="Script" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/search_help.svg" type="Texture" id=3]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/help_btn.gd" type="Script" id=4]
 [ext_resource path="res://addons/GGS/assets/icons/add_setting.svg" type="Texture" id=5]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/default_logic_path.gd" type="Script" id=6]
+[ext_resource path="res://addons/GGS/assets/icons/file_dialog.svg" type="Texture" id=7]
 
 [node name="uiMainPanel" type="Control"]
 anchor_right = 1.0
@@ -29,19 +31,19 @@ __meta__ = {
 [node name="Scrl" type="ScrollContainer" parent="Mrg"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 300.0
-margin_bottom = 160.0
+margin_right = 700.0
+margin_bottom = 1260.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBox" type="VBoxContainer" parent="Mrg/Scrl"]
-margin_right = 268.0
-margin_bottom = 343.0
+margin_right = 680.0
+margin_bottom = 371.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="Mrg/Scrl/VBox"]
-margin_right = 268.0
+margin_right = 680.0
 margin_bottom = 23.0
 
 [node name="Create" type="Button" parent="Mrg/Scrl/VBox/HBox"]
@@ -52,9 +54,15 @@ custom_constants/hseparation = 2
 text = "Create Setting"
 icon = ExtResource( 5 )
 
+[node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
+margin_left = 124.0
+margin_right = 179.0
+margin_bottom = 23.0
+text = "Reload"
+
 [node name="Help" type="Button" parent="Mrg/Scrl/VBox/HBox"]
-margin_left = 240.0
-margin_right = 268.0
+margin_left = 652.0
+margin_right = 680.0
 margin_bottom = 23.0
 hint_tooltip = "Open Github Wiki / Documentation"
 size_flags_horizontal = 10
@@ -63,28 +71,56 @@ script = ExtResource( 4 )
 
 [node name="HSepTop" type="HSeparator" parent="Mrg/Scrl/VBox"]
 margin_top = 27.0
-margin_right = 268.0
+margin_right = 680.0
 margin_bottom = 31.0
 
 [node name="Mrg" type="MarginContainer" parent="Mrg/Scrl/VBox"]
 margin_top = 35.0
-margin_right = 268.0
+margin_right = 680.0
 margin_bottom = 335.0
 rect_min_size = Vector2( 0, 300 )
 
 [node name="Scrl" type="ScrollContainer" parent="Mrg/Scrl/VBox/Mrg"]
-margin_right = 268.0
+margin_right = 680.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
-margin_right = 268.0
+margin_right = 680.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 
 [node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]
 margin_top = 339.0
-margin_right = 268.0
+margin_right = 680.0
 margin_bottom = 343.0
+
+[node name="DefaultLogicPath" type="HBoxContainer" parent="Mrg/Scrl/VBox"]
+margin_top = 347.0
+margin_right = 680.0
+margin_bottom = 371.0
+custom_constants/separation = 10
+script = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Mrg/Scrl/VBox/DefaultLogicPath"]
+margin_top = 5.0
+margin_right = 155.0
+margin_bottom = 19.0
+text = "Default Logic Script Path"
+
+[node name="LineEdit" type="LineEdit" parent="Mrg/Scrl/VBox/DefaultLogicPath"]
+margin_left = 165.0
+margin_right = 642.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+text = "res://"
+
+[node name="Button" type="Button" parent="Mrg/Scrl/VBox/DefaultLogicPath"]
+margin_left = 652.0
+margin_right = 680.0
+margin_bottom = 24.0
+icon = ExtResource( 7 )
 
 [node name="WinDialog" type="WindowDialog" parent="."]
 anchor_left = 0.5
@@ -219,8 +255,27 @@ margin_right = 127.0
 margin_bottom = 20.0
 text = "Cancel"
 
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 106.0
+margin_top = 174.0
+margin_right = 592.0
+margin_bottom = 534.0
+rect_min_size = Vector2( 500, 370 )
+popup_exclusive = true
+window_title = "Open a Directory"
+resizable = true
+dialog_hide_on_ok = true
+mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Reload" to="." method="_on_Reload_pressed"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Help" to="Mrg/Scrl/VBox/HBox/Help" method="_on_Help_pressed"]
+[connection signal="text_entered" from="Mrg/Scrl/VBox/DefaultLogicPath/LineEdit" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Mrg/Scrl/VBox/DefaultLogicPath/Button" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_Button_pressed"]
 [connection signal="confirmed" from="WinDialog" to="." method="_on_WinDialog_confirmed"]
 [connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Confirm" to="WinDialog" method="_on_Confirm_pressed"]
 [connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Cancel" to="WinDialog" method="_on_Cancel_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_FileDialog_dir_selected"]
