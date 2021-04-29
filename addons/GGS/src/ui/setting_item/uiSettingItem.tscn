@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/GGS/src/ui/setting_item/ui_setting_item.gd" type="Script" id=1]
-[ext_resource path="res://addons/GGS/assets/icons/item_edit.svg" type="Texture" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/script_create.svg" type="Texture" id=3]
 [ext_resource path="res://addons/GGS/assets/icons/item_remove.svg" type="Texture" id=4]
 
@@ -9,6 +8,7 @@
 load_path = "res://.import/script.svg-5c7911f5285fd439261366a62810fa30.stex"
 
 [node name="uiSettingItem" type="HBoxContainer"]
+process_priority = 3
 anchor_right = 1.0
 margin_bottom = 22.0
 script = ExtResource( 1 )
@@ -16,58 +16,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="."]
-margin_top = 4.0
-margin_right = 589.0
-margin_bottom = 18.0
+[node name="NameField" type="LineEdit" parent="."]
+margin_right = 200.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
-text = "setting_name"
+placeholder_text = "Name"
 
 [node name="HBox" type="HBoxContainer" parent="."]
-margin_left = 593.0
-margin_right = 720.0
-margin_bottom = 22.0
+margin_left = 204.0
+margin_right = 830.0
+margin_bottom = 24.0
 custom_constants/separation = 5
 
-[node name="Edit" type="Button" parent="HBox"]
-margin_right = 28.0
-margin_bottom = 22.0
-hint_tooltip = "Edit Properties"
-shortcut_in_tooltip = false
-icon = ExtResource( 2 )
+[node name="SectionField" type="LineEdit" parent="HBox"]
+margin_right = 100.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+editable = false
+placeholder_text = "Section"
+
+[node name="KeyField" type="LineEdit" parent="HBox"]
+margin_left = 105.0
+margin_right = 255.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+editable = false
+placeholder_text = "Key"
 
 [node name="EditScript" type="Button" parent="HBox"]
-margin_left = 33.0
-margin_right = 61.0
-margin_bottom = 22.0
-hint_tooltip = "Edit the logic script"
+margin_left = 260.0
+margin_right = 560.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 300, 0 )
+hint_tooltip = "Edit Script"
+custom_constants/hseparation = 5
+disabled = true
 icon = SubResource( 1 )
+align = 0
 
 [node name="AddScript" type="Button" parent="HBox"]
-margin_left = 66.0
-margin_right = 94.0
-margin_bottom = 22.0
-hint_tooltip = "Define a logic script"
+margin_left = 565.0
+margin_right = 593.0
+margin_bottom = 24.0
+hint_tooltip = "Assign/Change Script"
+disabled = true
 icon = ExtResource( 3 )
 
 [node name="Remove" type="Button" parent="HBox"]
-margin_left = 99.0
-margin_right = 127.0
-margin_bottom = 22.0
-hint_tooltip = "Remove"
+margin_left = 598.0
+margin_right = 626.0
+margin_bottom = 24.0
+hint_tooltip = "Remove Setting"
 icon = ExtResource( 4 )
 
-[node name="FileDialog" type="FileDialog" parent="."]
-margin_left = 405.0
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+margin_left = 520.0
 margin_right = 720.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 500, 370 )
-popup_exclusive = true
-window_title = "Create a Script"
-resizable = true
-dialog_hide_on_ok = true
-filters = PoolStringArray( "*.gd" )
+margin_bottom = 70.0
+window_title = "Remove Setting?"
+dialog_text = "Are you sure you want to remove this setting? This action cannot be undone."
 
+[connection signal="text_entered" from="NameField" to="." method="_on_NameField_text_entered"]
+[connection signal="text_entered" from="HBox/SectionField" to="." method="_on_SectionField_text_entered"]
+[connection signal="text_entered" from="HBox/KeyField" to="." method="_on_KeyField_text_entered"]
 [connection signal="pressed" from="HBox/EditScript" to="." method="_on_EditScript_pressed"]
 [connection signal="pressed" from="HBox/AddScript" to="." method="_on_AddScript_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="HBox/Remove" to="." method="_on_Remove_pressed"]
+[connection signal="confirmed" from="ConfirmDialog" to="." method="_on_ConfirmDialog_confirmed"]

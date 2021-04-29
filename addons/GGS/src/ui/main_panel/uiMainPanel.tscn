@@ -1,12 +1,68 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
-[ext_resource path="res://addons/GGS/src/ui/main_panel/confirm_dialog.gd" type="Script" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/search_help.svg" type="Texture" id=3]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/help_btn.gd" type="Script" id=4]
 [ext_resource path="res://addons/GGS/assets/icons/add_setting.svg" type="Texture" id=5]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/default_logic_path.gd" type="Script" id=6]
 [ext_resource path="res://addons/GGS/assets/icons/file_dialog.svg" type="Texture" id=7]
+[ext_resource path="res://addons/GGS/assets/icons/reload.svg" type="Texture" id=8]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/reload_button.gd" type="Script" id=9]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends WindowDialog
+signal confirmed(setting_name, section, key)
+
+var setting_name: String = \"\"
+var section: String = \"\"
+var key: String = \"\"
+
+# SceneTree
+onready var NameField: LineEdit = $Mrg/VBox/Name/LineEdit
+onready var SectionField: LineEdit = $Mrg/VBox/Section/LineEdit
+onready var KeyField: LineEdit = $Mrg/VBox/Key/LineEdit
+
+onready var ConfirmBtn: Button = $Mrg/VBox/Buttons/Confirm
+onready var CancelBtn: Button = $Mrg/VBox/Buttons/Cancel
+
+
+func _ready() -> void:
+	NameField.text = setting_name
+	SectionField.text = section
+	KeyField.text = key
+
+
+func _process(_delta):
+	if _input_is_valid():
+		ConfirmBtn.disabled = false
+	else:
+		ConfirmBtn.disabled = true
+
+
+func _on_Confirm_pressed():
+	emit_signal(\"confirmed\", NameField.text, SectionField.text, KeyField.text)
+	visible = false
+	_clear_input()
+
+
+func _on_Cancel_pressed():
+	visible = false
+	_clear_input()
+
+
+func _input_is_valid() -> bool:
+	if NameField.text != \"\" and SectionField.text != \"\" and KeyField.text != \"\":
+		return true
+	else:
+		return false
+
+
+func _clear_input() -> void:
+	NameField.text = \"\"
+	SectionField.text = \"\"
+	KeyField.text = \"\"
+"
 
 [node name="uiMainPanel" type="Control"]
 anchor_right = 1.0
@@ -56,9 +112,11 @@ icon = ExtResource( 5 )
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 124.0
-margin_right = 179.0
+margin_right = 152.0
 margin_bottom = 23.0
-text = "Reload"
+hint_tooltip = "Reload List"
+icon = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Help" type="Button" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 652.0
@@ -86,8 +144,8 @@ margin_bottom = 300.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
-margin_right = 680.0
-margin_bottom = 74.0
+margin_right = 830.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]
@@ -133,7 +191,7 @@ margin_right = 157.0
 margin_bottom = 72.0
 popup_exclusive = true
 window_title = "Create a New Setting"
-script = ExtResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -275,7 +333,6 @@ __meta__ = {
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Help" to="Mrg/Scrl/VBox/HBox/Help" method="_on_Help_pressed"]
 [connection signal="text_entered" from="Mrg/Scrl/VBox/DefaultLogicPath/LineEdit" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/DefaultLogicPath/Button" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_Button_pressed"]
-[connection signal="confirmed" from="WinDialog" to="." method="_on_WinDialog_confirmed"]
 [connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Confirm" to="WinDialog" method="_on_Confirm_pressed"]
 [connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Cancel" to="WinDialog" method="_on_Cancel_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_FileDialog_dir_selected"]
