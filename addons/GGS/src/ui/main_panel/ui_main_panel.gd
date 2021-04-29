@@ -4,33 +4,18 @@ extends Control
 # SceneTree
 onready var SettingsList: VBoxContainer = $Mrg/Scrl/VBox/Mrg/Scrl/SettingsList
 onready var CreateBtn: Button = $Mrg/Scrl/VBox/HBox/Create
-onready var ConfirmDialog: WindowDialog = $WinDialog
 
 # Resources
 onready var uiSettingItem: PackedScene = preload("../setting_item/uiSettingItem.tscn")
 
 
 func _ready() -> void:
-	_reload_settings()
-
-
-func _on_Create_pressed() -> void:
-	var ui_item: HBoxContainer = uiSettingItem.instance()
-	SettingsList.add_child(ui_item)
-	ui_item.NameField.grab_focus()
-	ui_item.connect("tree_exited", self, "_on_item_removed")
-	ggsManager.settings_data[str(ui_item.get_index())] = {
-		"name": "",
-		"section": "",
-		"key": "",
-		"logic": "",
-	}
-	ggsManager.save_as_json(ggsManager.settings_data, ggsManager.SETTINGS_DATA_PATH)
+	reload_settings()
 
 
 func _on_item_removed() -> void:
-#	if not Engine.has_singleton("ggsManager"):
-#		return
+	# Creates a small delay to fix a bug
+	yield(get_tree().create_timer(0.2), "timeout")
 	# Rebuild the settings_data
 	ggsManager.settings_data = {}
 	for item in SettingsList.get_children():
@@ -49,11 +34,7 @@ func _on_item_removed() -> void:
 	ggsManager.save_as_json(ggsManager.settings_data, ggsManager.SETTINGS_DATA_PATH)
 
 
-func _on_Reload_pressed() -> void:
-	_reload_settings()
-
-
-func _reload_settings() -> void:
+func reload_settings() -> void:
 	# Check if the list is already up-to-date.
 	var list_children: Array = SettingsList.get_children()
 	var cur_settings: Array = []
@@ -65,7 +46,7 @@ func _reload_settings() -> void:
 		saved_settings.append(setting)
 		
 	if cur_settings == saved_settings:
-		push_warning("GGS: Reload failed. The list is already up to date.")
+		#push_warning("GGS: Reload failed. The list is already up to date.")
 		return
 	
 	# Reload settings
@@ -83,9 +64,10 @@ func _reload_settings() -> void:
 				ui_item.KeyField.text = ggsManager.settings_data[index]["key"]
 				ui_item.KeyField.editable = true
 				
-				ui_item.EditScriptBtn.text = ggsManager.settings_data[index]["logic"]
+				var path: String = ggsManager.settings_data[index]["logic"]
+				ui_item.EditScriptBtn.hint_tooltip = "Open Script: %s"%[path]
 				ui_item.EditScriptBtn.disabled = false
 				ui_item.AddScriptBtn.disabled = false
 				
 				ui_item.initialized = true
-				ui_item.connect("tree_exited", self, "_on_item_removed")
+				ui_item.get_node("HBox/Remove").connect("item_removed", self, "_on_item_removed")

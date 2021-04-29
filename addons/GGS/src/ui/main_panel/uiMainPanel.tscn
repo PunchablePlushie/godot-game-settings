@@ -1,6 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/create_button.gd" type="Script" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/search_help.svg" type="Texture" id=3]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/help_btn.gd" type="Script" id=4]
 [ext_resource path="res://addons/GGS/assets/icons/add_setting.svg" type="Texture" id=5]
@@ -8,61 +9,6 @@
 [ext_resource path="res://addons/GGS/assets/icons/file_dialog.svg" type="Texture" id=7]
 [ext_resource path="res://addons/GGS/assets/icons/reload.svg" type="Texture" id=8]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/reload_button.gd" type="Script" id=9]
-
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends WindowDialog
-signal confirmed(setting_name, section, key)
-
-var setting_name: String = \"\"
-var section: String = \"\"
-var key: String = \"\"
-
-# SceneTree
-onready var NameField: LineEdit = $Mrg/VBox/Name/LineEdit
-onready var SectionField: LineEdit = $Mrg/VBox/Section/LineEdit
-onready var KeyField: LineEdit = $Mrg/VBox/Key/LineEdit
-
-onready var ConfirmBtn: Button = $Mrg/VBox/Buttons/Confirm
-onready var CancelBtn: Button = $Mrg/VBox/Buttons/Cancel
-
-
-func _ready() -> void:
-	NameField.text = setting_name
-	SectionField.text = section
-	KeyField.text = key
-
-
-func _process(_delta):
-	if _input_is_valid():
-		ConfirmBtn.disabled = false
-	else:
-		ConfirmBtn.disabled = true
-
-
-func _on_Confirm_pressed():
-	emit_signal(\"confirmed\", NameField.text, SectionField.text, KeyField.text)
-	visible = false
-	_clear_input()
-
-
-func _on_Cancel_pressed():
-	visible = false
-	_clear_input()
-
-
-func _input_is_valid() -> bool:
-	if NameField.text != \"\" and SectionField.text != \"\" and KeyField.text != \"\":
-		return true
-	else:
-		return false
-
-
-func _clear_input() -> void:
-	NameField.text = \"\"
-	SectionField.text = \"\"
-	KeyField.text = \"\"
-"
 
 [node name="uiMainPanel" type="Control"]
 anchor_right = 1.0
@@ -109,6 +55,7 @@ size_flags_horizontal = 0
 custom_constants/hseparation = 2
 text = "Create Setting"
 icon = ExtResource( 5 )
+script = ExtResource( 2 )
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 124.0
@@ -144,7 +91,7 @@ margin_bottom = 300.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
-margin_right = 830.0
+margin_right = 804.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
@@ -164,6 +111,7 @@ script = ExtResource( 6 )
 margin_top = 5.0
 margin_right = 155.0
 margin_bottom = 19.0
+mouse_filter = 0
 text = "Default Logic Script Path"
 
 [node name="LineEdit" type="LineEdit" parent="Mrg/Scrl/VBox/DefaultLogicPath"]
@@ -171,6 +119,7 @@ margin_left = 165.0
 margin_right = 642.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 0 )
+hint_tooltip = "Default path when creating scripts using the 'Add/Change Script' button."
 size_flags_horizontal = 3
 text = "res://"
 
@@ -179,139 +128,6 @@ margin_left = 652.0
 margin_right = 680.0
 margin_bottom = 24.0
 icon = ExtResource( 7 )
-
-[node name="WinDialog" type="WindowDialog" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -157.0
-margin_top = -72.0
-margin_right = 157.0
-margin_bottom = 72.0
-popup_exclusive = true
-window_title = "Create a New Setting"
-script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Mrg" type="MarginContainer" parent="WinDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBox" type="VBoxContainer" parent="WinDialog/Mrg"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 304.0
-margin_bottom = 134.0
-custom_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Name" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
-margin_right = 294.0
-margin_bottom = 24.0
-custom_constants/separation = 30
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Name"]
-margin_top = 5.0
-margin_right = 86.0
-margin_bottom = 19.0
-size_flags_horizontal = 2
-text = "Setting Name"
-
-[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Name"]
-margin_left = 144.0
-margin_right = 294.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 150, 0 )
-size_flags_horizontal = 3
-clear_button_enabled = true
-caret_blink = true
-
-[node name="Section" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
-margin_top = 34.0
-margin_right = 294.0
-margin_bottom = 58.0
-custom_constants/separation = 30
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Section"]
-margin_top = 5.0
-margin_right = 114.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-text = "Section"
-
-[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Section"]
-margin_left = 144.0
-margin_right = 294.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 150, 0 )
-clear_button_enabled = true
-caret_blink = true
-
-[node name="Key" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
-margin_top = 68.0
-margin_right = 294.0
-margin_bottom = 92.0
-custom_constants/separation = 30
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="WinDialog/Mrg/VBox/Key"]
-margin_top = 5.0
-margin_right = 114.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-text = "Setting Name"
-
-[node name="LineEdit" type="LineEdit" parent="WinDialog/Mrg/VBox/Key"]
-margin_left = 144.0
-margin_right = 294.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 150, 0 )
-size_flags_horizontal = 3
-clear_button_enabled = true
-caret_blink = true
-
-[node name="Buttons" type="HBoxContainer" parent="WinDialog/Mrg/VBox"]
-margin_left = 83.0
-margin_top = 102.0
-margin_right = 210.0
-margin_bottom = 122.0
-size_flags_horizontal = 4
-custom_constants/separation = 20
-
-[node name="Confirm" type="Button" parent="WinDialog/Mrg/VBox/Buttons"]
-margin_right = 53.0
-margin_bottom = 20.0
-disabled = true
-text = "Create"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Cancel" type="Button" parent="WinDialog/Mrg/VBox/Buttons"]
-margin_left = 73.0
-margin_right = 127.0
-margin_bottom = 20.0
-text = "Cancel"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 106.0
@@ -328,11 +144,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Create" to="." method="_on_Create_pressed"]
-[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Create" to="Mrg/Scrl/VBox/HBox/Create" method="_on_Create_pressed"]
+[connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Reload" to="Mrg/Scrl/VBox/HBox/Reload" method="_on_Reload_pressed"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Help" to="Mrg/Scrl/VBox/HBox/Help" method="_on_Help_pressed"]
 [connection signal="text_entered" from="Mrg/Scrl/VBox/DefaultLogicPath/LineEdit" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/DefaultLogicPath/Button" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_Button_pressed"]
-[connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Confirm" to="WinDialog" method="_on_Confirm_pressed"]
-[connection signal="pressed" from="WinDialog/Mrg/VBox/Buttons/Cancel" to="WinDialog" method="_on_Cancel_pressed"]
 [connection signal="dir_selected" from="FileDialog" to="Mrg/Scrl/VBox/DefaultLogicPath" method="_on_FileDialog_dir_selected"]
