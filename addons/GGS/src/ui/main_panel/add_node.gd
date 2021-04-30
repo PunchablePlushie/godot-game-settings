@@ -1,21 +1,61 @@
 tool
 extends MenuButton
 
-enum Type {Bool}
-var PopupObject: PopupMenu
+enum Type {Bool, OptionList, TextField, NumberField}
+
+# Resources
 onready var BoolComponent: PackedScene = preload("../../components/boolean/ggsBool.tscn")
+onready var HSliderComponent: PackedScene = preload("../../components/slider/ggsHSlider.tscn")
+onready var VSliderComponent: PackedScene = preload("../../components/slider/ggsVSlider.tscn")
+onready var OptionListComponent: PackedScene = preload("../../components/option_list/ggsOptionList.tscn")
+onready var TextFieldComponent: PackedScene = preload("../../components/text_field/ggsTextField.tscn")
+onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
+
 
 
 func _ready() -> void:
-	PopupObject = get_popup() 
-	PopupObject.connect("id_pressed", self, "_on_popup_item_selected")
+	_populate_menu()
 
 
-func _on_popup_item_selected(id: int) -> void:
+func _populate_menu() -> void:
+	var MainMenu: PopupMenu = get_popup()
+	var SliderSub: PopupMenu = PopupMenu.new()
+	SliderSub.set_name("SliderSub")
+	SliderSub.add_item("Horizontal")
+	SliderSub.add_item("Vertical")
+	SliderSub.connect("index_pressed", self, "_on_Slider_item_selected")
+	
+	MainMenu.add_item("Boolean")
+	MainMenu.add_item("Option List")
+	MainMenu.add_item("Text Field")
+	MainMenu.add_item("Number Field")
+	MainMenu.add_child(SliderSub)
+	MainMenu.add_submenu_item("Slider", "SliderSub")
+	MainMenu.connect("index_pressed", self, "_on_Main_item_selected")
+
+
+func _on_Main_item_selected(index: int) -> void:
 	var instance
-	match id:
+	match index:
 		Type.Bool:
 			instance = BoolComponent.instance()
+		Type.OptionList:
+			instance = OptionListComponent.instance()
+		Type.TextField:
+			instance = TextFieldComponent.instance()
+		Type.NumberField:
+			instance = NumberFieldComponent.instance()
+	
+	_add_node(instance)
+
+
+func _on_Slider_item_selected(index: int) -> void:
+	var instance
+	match index:
+		0:
+			instance = HSliderComponent.instance()
+		1:
+			instance = VSliderComponent.instance()
 	
 	_add_node(instance)
 
@@ -42,3 +82,4 @@ func _add_node(node: Object) -> void:
 		Selection.add_node(node)
 		Interface.inspect_object(node, "setting_index", true)
 	Interface.save_scene()
+

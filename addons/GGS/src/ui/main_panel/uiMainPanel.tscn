@@ -66,7 +66,6 @@ margin_bottom = 23.0
 shortcut_in_tooltip = false
 text = "Add Node"
 flat = false
-items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false ]
 script = ExtResource( 10 )
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
@@ -150,7 +149,7 @@ icon = ExtResource( 7 )
 margin_left = 794.0
 margin_right = 1040.0
 margin_bottom = 40.0
-hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically."
+hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically"
 custom_constants/hseparation = 20
 shortcut_in_tooltip = false
 text = "Auto Select New Nodes"

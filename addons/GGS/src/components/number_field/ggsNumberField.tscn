@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/GGS/src/components/number_field/ggs_number_field.gd" type="Script" id=1]
+
+[node name="ggsNumberField" type="SpinBox"]
+margin_right = 74.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

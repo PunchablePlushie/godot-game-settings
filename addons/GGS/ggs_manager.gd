@@ -42,7 +42,8 @@ func str2correct(value: String):
 	if check.is_valid_integer():
 		return int(check)
 	
-	return check
+	push_warning("GGS - str2correct: Redundant usage. No reason to convert string to string.")
+	return value
 
 
 func save_settings_data() -> void:

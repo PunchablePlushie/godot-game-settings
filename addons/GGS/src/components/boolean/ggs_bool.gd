@@ -16,10 +16,10 @@ func _ready() -> void:
 	script_instance = script.new()
 	
 	# Connect signal
-	connect("toggled", self, "_on_button_toggled")
+	connect("toggled", self, "_on_toggled")
 
 
-func _on_button_toggled(button_pressed: bool) -> void:
+func _on_toggled(button_pressed: bool) -> void:
 	ggsManager.settings_data[str(setting_index)]["current"] = button_pressed
 	ggsManager.save_settings_data()
 	script_instance.main(button_pressed)
