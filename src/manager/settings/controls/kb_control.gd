@@ -1,8 +1,13 @@
-extends BaseSetting
+extends Node
 
 
-func change(new_key: InputEventKey) -> void:
-	var action_list: Array = InputMap.get_action_list(name)
-	InputMap.action_erase_event(name, array_find_type(action_list, "InputEventKey"))
-	InputMap.action_add_event(name, new_key)
-
+# Input value is always an array: [action_name: String, event_scancode: int]
+func main(value: Array) -> void:
+	var target_action: String = value[0]
+	var action_list: Array = InputMap.get_action_list(target_action)
+	var prev_event: InputEventKey = ggsManager.array_find_type(action_list, "InputEventKey")
+	var new_event: InputEventKey = InputEventKey.new()
+	new_event.scancode = value[1]
+	
+	InputMap.action_erase_event(target_action, prev_event)
+	InputMap.action_add_event(target_action, new_event)

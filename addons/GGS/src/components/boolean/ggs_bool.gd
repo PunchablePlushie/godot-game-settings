@@ -7,7 +7,7 @@ var script_instance: Object
 func _ready() -> void:
 	# Load value
 	if ggsManager.settings_data[str(setting_index)]["current"] == null:
-		pressed = ggsManager.str2correct(ggsManager.settings_data[str(setting_index)]["default"])
+		pressed = ggsManager.settings_data[str(setting_index)]["default"]
 	else:
 		pressed = ggsManager.settings_data[str(setting_index)]["current"]
 	

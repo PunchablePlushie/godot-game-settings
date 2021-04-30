@@ -8,6 +8,8 @@ var settings_data: Dictionary = {}
 var ggs_data: Dictionary = {
 	"default_logic_path": "res://",
 	"auto_select_new_nodes": true,
+	"keybind_confirm_text": "Awaiting input...",
+	"keybind_assigned_text": "Already assigned...",
 }
 
 
@@ -25,25 +27,14 @@ func _ready() -> void:
 		_apply_settings()
 
 
-func str2correct(value: String):
-	var check: String = value.to_lower()
-	
-	# Convert to boolean if possible
-	if check == "true":
-		return true
-	if check == "false":
-		return false
-	
-	# Convert to float if possible
-	if check.is_valid_float():
-		return float(check)
-	
-	# Convert to integet if possible
-	if check.is_valid_integer():
-		return int(check)
-	
-	push_warning("GGS - str2correct: Redundant usage. No reason to convert string to string.")
-	return value
+func array_find_type(array: Array, type: String) -> Object:
+	for item in array:
+		var item_class: String = item.get_class()
+		if item_class == type:
+			return item
+		else:
+			continue
+	return null
 
 
 func save_settings_data() -> void:
@@ -82,7 +73,6 @@ func _apply_settings() -> void:
 			var script: Script = load(setting["logic"])
 			var script_instance: Object = script.new()
 			if setting["current"] == null:
-				print(str2correct(setting["default"]))
-				script_instance.main(str2correct(setting["default"]))
+				script_instance.main(setting["default"])
 			else:
 				script_instance.main(setting["current"])

@@ -10,7 +10,7 @@ onready var VSliderComponent: PackedScene = preload("../../components/slider/ggs
 onready var OptionListComponent: PackedScene = preload("../../components/option_list/ggsOptionList.tscn")
 onready var TextFieldComponent: PackedScene = preload("../../components/text_field/ggsTextField.tscn")
 onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
-
+onready var KeybindKbComponent: PackedScene = preload("../../components/keybind/ggsKeybindKb.tscn")
 
 
 func _ready() -> void:
@@ -20,6 +20,12 @@ func _ready() -> void:
 func _populate_menu() -> void:
 	var MainMenu: PopupMenu = get_popup()
 	var SliderSub: PopupMenu = PopupMenu.new()
+	var KeybindSub: PopupMenu = PopupMenu.new()
+	
+	KeybindSub.set_name("KeybindSub")
+	KeybindSub.add_item("Keyboard")
+	KeybindSub.connect("index_pressed", self, "_on_Keybind_item_selected")
+	
 	SliderSub.set_name("SliderSub")
 	SliderSub.add_item("Horizontal")
 	SliderSub.add_item("Vertical")
@@ -30,7 +36,9 @@ func _populate_menu() -> void:
 	MainMenu.add_item("Text Field")
 	MainMenu.add_item("Number Field")
 	MainMenu.add_child(SliderSub)
+	MainMenu.add_child(KeybindSub)
 	MainMenu.add_submenu_item("Slider", "SliderSub")
+	MainMenu.add_submenu_item("Keybind", "KeybindSub")
 	MainMenu.connect("index_pressed", self, "_on_Main_item_selected")
 
 
@@ -60,6 +68,15 @@ func _on_Slider_item_selected(index: int) -> void:
 	_add_node(instance)
 
 
+func _on_Keybind_item_selected(index: int) -> void:
+	var instance
+	match index:
+		0:
+			instance = KeybindKbComponent.instance()
+	
+	_add_node(instance)
+
+
 func _add_node(node: Object) -> void:
 	var Editor: EditorPlugin = EditorPlugin.new()
 	var Interface: EditorInterface = Editor.get_editor_interface()
@@ -71,10 +88,10 @@ func _add_node(node: Object) -> void:
 			selected_nodes[0].add_child(node)
 			node.owner = get_tree().edited_scene_root
 		else:
-			push_error("GGS - AddNode: Cannot add to multiple nodes. Please select one node only.")
+			printerr("GGS - AddNode: Cannot add to multiple nodes. Please select one node only.")
 			return
 	else:
-		push_error("GGS - AddNode: Cannot add to nothing. Please select a node first.")
+		printerr("GGS - AddNode: Cannot add to nothing. Please select a node first.")
 		return
 	
 	if ggsManager.ggs_data["auto_select_new_nodes"]:

@@ -66,6 +66,7 @@ margin_bottom = 23.0
 shortcut_in_tooltip = false
 text = "Add Node"
 flat = false
+items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Slider", null, 0, false, false, 4, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 5, 0, null, "KeybindSub", false ]
 script = ExtResource( 10 )
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
@@ -103,6 +104,7 @@ rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
 margin_right = 1040.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]
@@ -152,6 +154,7 @@ margin_bottom = 40.0
 hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically"
 custom_constants/hseparation = 20
 shortcut_in_tooltip = false
+pressed = true
 text = "Auto Select New Nodes"
 script = ExtResource( 11 )
 

@@ -1,0 +1,41 @@
+extends PopupPanel
+signal confirmed(event)
+
+onready var Message: Label = $Mrg/Message
+
+
+func _ready() -> void:
+	# Setup popup
+	get_tree().paused = true
+	Message.text = ggsManager.ggs_data["keybind_confirm_text"]
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Only accept keyboard and gamepad events
+	if not event is InputEventKey and not event is InputEventJoypadButton:
+		return
+	
+	# Only continue when the key is being released
+	if event.pressed == true:
+		return
+	
+	# Check if the key is already assigned. Ignores UI actions.
+	var actions: Array = _get_non_ui_actions(InputMap.get_actions())
+	print(actions)
+	for action in actions:
+		if InputMap.action_has_event(action, event):
+			Message.text = ggsManager.ggs_data["keybind_assigned_text"]
+			return
+	
+	# Confirm the new key
+	emit_signal("confirmed", event)
+	get_tree().paused = false
+	queue_free()
+
+
+func _get_non_ui_actions(actions: Array) -> Array:
+	var result: Array = []
+	for action in actions:
+		if not action.begins_with("ui_"):
+			result.append(action)
+	return result

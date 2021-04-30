@@ -1,1 +1,1 @@
-{"0":{"name":"something","default":"5","current":2,"logic":"res://name.gd"}}
+{"0":{"name":"Kb_move_right","value_type":4,"default":["move_right",68],"default_raw":"[move_right: String, 68: int]","current":["move_right",68],"logic":"res://src/manager/settings/controls/kb_control.gd"}}

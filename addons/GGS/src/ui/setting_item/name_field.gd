@@ -10,10 +10,9 @@ func _ready() -> void:
 
 func _on_NameField_text_entered(new_text: String) -> void:
 	if Root.initialized == false:
-		Root.DefaultField.grab_focus()
-		Root.DefaultField.editable = true
-	else:
-		release_focus()
+		Root.DefaultType.grab_focus()
 	ggsManager.settings_data[str(Root.get_index())]["name"] = new_text
 	ggsManager.save_settings_data()
+	
+	print("GGS - %02d: Name saved ('%s')"%[Root.get_index(), new_text])
 

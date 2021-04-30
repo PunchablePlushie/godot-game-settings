@@ -11,10 +11,11 @@ func _on_Create_pressed() -> void:
 	ui_item.RemoveBtn.connect("item_removed", Root, "_on_item_removed")
 	ggsManager.settings_data[str(ui_item.get_index())] = {
 		"name": "",
-		"default": "",
+		"value_type": 0,
+		"default": null,
+		"default_raw": "",
 		"current": null,
 		"logic": "",
 	}
-	print(ggsManager.settings_data[str(ui_item.get_index())])
 	ggsManager.save_settings_data()
 

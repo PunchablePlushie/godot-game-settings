@@ -21,10 +21,11 @@ func _on_item_removed() -> void:
 	ggsManager.settings_data = {}
 	for item in SettingsList.get_children():
 		var index: String = str(item.get_index())
-		print(item, " ", index)
 		ggsManager.settings_data[index] = {
 			"name": "",
-			"default": "",
+			"value_type": 0,
+			"default": null,
+			"default_raw": "",
 			"current": null,
 			"logic": "",
 		}
@@ -57,14 +58,13 @@ func reload_settings() -> void:
 			var ui_item: HBoxContainer = uiSettingItem.instance()
 			SettingsList.add_child(ui_item)
 			ui_item.NameField.text = ggsManager.settings_data[index]["name"]
-			
-			ui_item.DefaultField.text = ggsManager.settings_data[index]["default"]
-			ui_item.DefaultField.editable = true
+			ui_item.DefaultType.selected = ggsManager.settings_data[index]["value_type"]
+			ui_item.DefaultField.text = ggsManager.settings_data[index]["default_raw"]
 			
 			var path: String = ggsManager.settings_data[index]["logic"]
-			ui_item.EditScriptBtn.hint_tooltip = "%s: %s"%[ui_item.EditScriptBtn.BASE_TOOLTIP ,path]
-			ui_item.EditScriptBtn.disabled = false
-			ui_item.AddScriptBtn.disabled = false
+			if path != "":
+				ui_item.EditScriptBtn.hint_tooltip = "%s: %s"%[ui_item.EditScriptBtn.BASE_TOOLTIP ,path]
+				ui_item.EditScriptBtn.disabled = false
 			
 			ui_item.initialized = true
 			ui_item.RemoveBtn.connect("item_removed", self, "_on_item_removed")

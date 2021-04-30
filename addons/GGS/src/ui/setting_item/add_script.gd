@@ -34,3 +34,4 @@ func _on_ScriptCreateDialog_closed(script: Script) -> void:
 	if Root.initialized == false:
 		Root.initialized = true
 	
+	print("GGS - %02d: Script assigned (%s)"%[Root.get_index(), path])

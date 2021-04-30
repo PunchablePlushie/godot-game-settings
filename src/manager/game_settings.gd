@@ -19,7 +19,7 @@ func _ready() -> void:
 	if error != OK:
 		error = _config.load(default_file)
 		if error != OK:
-			push_error("GGS: Could not find a default setting file.")
+			printerr("GGS: Could not find a default setting file.")
 			return
 	
 	apply_all()
