@@ -14,6 +14,7 @@ onready var GpControls: Node = $GpControls
 
 
 func _ready() -> void:
+	return
 	var error = _config.load(save_path)
 	if error != OK:
 		error = _config.load(default_file)

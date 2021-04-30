@@ -5,7 +5,7 @@ extends HBoxContainer
 onready var OptionLabel: Label = $Label
 onready var Field: LineEdit = $LineEdit
 onready var OpenDirBtn: Button = $Button
-onready var FileDial: FileDialog = get_node("../../../../FileDialog")
+onready var FileDial: FileDialog = get_node("../../../../../FileDialog")
 
 
 func _ready() -> void:
@@ -48,5 +48,5 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 
 
 func _save_data() -> void:
-	ggsManager.save_as_json(ggsManager.ggs_data, ggsManager.GGS_DATA_PATH)
+	ggsManager.save_ggs_data()
 	

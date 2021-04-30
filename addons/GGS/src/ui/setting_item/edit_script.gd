@@ -18,4 +18,4 @@ func _on_EditScript_pressed() -> void:
 			var resource = load(path)
 			Editor.get_editor_interface().edit_resource(resource)
 		else:
-			push_error("GGS: Could not find the script at '%s'."%[path])
+			push_error("GGS - Open Script: Could not find the script at '%s'."%[path])

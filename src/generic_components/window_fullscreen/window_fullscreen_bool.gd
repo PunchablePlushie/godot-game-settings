@@ -1,4 +1,4 @@
-extends BoolSetting
+extends ggsBool
 
 
 func update_value(button_state: bool) -> void:

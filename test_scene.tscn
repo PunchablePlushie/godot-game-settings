@@ -1,8 +1,21 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/GGS/src/components/boolean/ggsBool.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/GGS/src/components/boolean/ggs_bool.gd" type="Script" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="CheckButton" parent="." instance=ExtResource( 1 )]
+margin_right = 166.0
+margin_bottom = 40.0
+shortcut_in_tooltip = false
+text = "Fullscreen"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

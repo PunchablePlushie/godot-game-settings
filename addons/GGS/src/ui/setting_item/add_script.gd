@@ -17,7 +17,7 @@ func _on_AddScript_pressed() -> void:
 	var dialog: ScriptCreateDialog = Editor.get_script_create_dialog()
 	dialog.dialog_hide_on_ok = true
 	dialog.window_title = "Create a New Logic Script"
-	if not dialog.is_connected("script_created", self, "_on_dialog_closed"):
+	if not dialog.is_connected("script_created", self, "_on_ScriptCreateDialog_closed"):
 		dialog.connect("script_created", self, "_on_ScriptCreateDialog_closed", [], CONNECT_ONESHOT)
 	dialog.config("Node", "%s%s"%[path, NameField.text])
 	
@@ -26,10 +26,10 @@ func _on_AddScript_pressed() -> void:
 
 func _on_ScriptCreateDialog_closed(script: Script) -> void:
 	ggsManager.settings_data[str(Root.get_index())]["logic"] = script.resource_path
-	ggsManager.save_as_json(ggsManager.settings_data, ggsManager.SETTINGS_DATA_PATH)
+	ggsManager.save_settings_data()
 	
 	var path: String = ggsManager.settings_data[str(Root.get_index())]["logic"]
-	EditScriptBtn.hint_tooltip = "%s%s"%[EditScriptBtn.BASE_TOOLTIP ,path]
+	EditScriptBtn.hint_tooltip = "%s: %s"%[EditScriptBtn.BASE_TOOLTIP ,path]
 	EditScriptBtn.disabled = false
 	if Root.initialized == false:
 		Root.initialized = true
