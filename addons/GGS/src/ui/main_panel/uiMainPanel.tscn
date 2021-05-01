@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/create_button.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://addons/GGS/src/ui/main_panel/reload_button.gd" type="Script" id=9]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/add_node.gd" type="Script" id=10]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/auto_select.gd" type="Script" id=11]
+[ext_resource path="res://addons/GGS/assets/icons/add_node.svg" type="Texture" id=12]
 
 [node name="uiMainPanel" type="Control"]
 anchor_right = 1.0
@@ -61,19 +62,22 @@ script = ExtResource( 2 )
 
 [node name="AddNode" type="MenuButton" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 124.0
-margin_right = 199.0
+margin_right = 218.0
 margin_bottom = 23.0
 shortcut_in_tooltip = false
 text = "Add Node"
+icon = ExtResource( 12 )
 flat = false
-items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Slider", null, 0, false, false, 4, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 5, 0, null, "KeybindSub", false ]
+items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Slider", null, 0, false, false, 4, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 5, 0, null, "KeybindSub", false, "Boolean", null, 0, false, false, 6, 0, null, "", false, "Option List", null, 0, false, false, 7, 0, null, "", false, "Text Field", null, 0, false, false, 8, 0, null, "", false, "Number Field", null, 0, false, false, 9, 0, null, "", false, "Slider", null, 0, false, false, 10, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 11, 0, null, "KeybindSub", false ]
 script = ExtResource( 10 )
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
-margin_left = 203.0
-margin_right = 231.0
+visible = false
+margin_left = 222.0
+margin_right = 250.0
 margin_bottom = 23.0
 hint_tooltip = "Reload List"
+disabled = true
 icon = ExtResource( 8 )
 script = ExtResource( 9 )
 

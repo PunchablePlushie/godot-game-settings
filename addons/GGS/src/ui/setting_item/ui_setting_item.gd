@@ -4,6 +4,7 @@ extends HBoxContainer
 var initialized: bool = false
 
 # SceneTree
+onready var IndexField: LineEdit = $Index
 onready var NameField: LineEdit = $NameField
 onready var DefaultType: OptionButton = $HBox/DefaultType
 onready var DefaultField: LineEdit = $HBox/DefaultField

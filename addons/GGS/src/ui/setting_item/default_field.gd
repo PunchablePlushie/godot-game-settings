@@ -3,6 +3,7 @@ extends LineEdit
 
 enum Type {Bool, Int, Float, Str, Arr, Dict}
 var err_text: String
+var saved: bool = false setget set_saved
 onready var Root: HBoxContainer = get_node("../..")
 
 
@@ -16,15 +17,33 @@ func _on_DefaultField_text_entered(new_text: String) -> void:
 		Root.AddScriptBtn.grab_focus()
 		Root.AddScriptBtn.disabled = false
 	
-	var value = _to_suitable_type(new_text)
+	var value = to_suitable_type(new_text)
 	ggsManager.settings_data[str(Root.get_index())]["default"] = value
-	ggsManager.settings_data[str(Root.get_index())]["default_raw"] = new_text
-	ggsManager.save_settings_data()
 	
-	print("GGS - %02d: Default value saved (%s)"%[Root.get_index(), value])
+	if value == null:
+		ggsManager.settings_data[str(Root.get_index())]["default_raw"] = ""
+		self.saved = false
+	else:
+		ggsManager.settings_data[str(Root.get_index())]["default_raw"] = new_text
+		self.saved = true
+		print("GGS - %02d: Default value saved (%s)"%[Root.get_index(), value])
+	
+	ggsManager.save_settings_data()
 
 
-func _to_suitable_type(input: String):
+func _on_DefaultField_text_changed(new_text: String) -> void:
+	self.saved = false
+
+
+func set_saved(value: bool) -> void:
+	saved = value
+	if saved:
+		modulate = ggsManager.COL_GOOD
+	else:
+		modulate = ggsManager.COL_ERR
+
+
+func to_suitable_type(input: String):
 	var type: int = ggsManager.settings_data[str(Root.get_index())]["value_type"]
 	var value: String = input.to_lower()
 	
@@ -118,3 +137,4 @@ func _to_array(value: String):
 				arr6.append(vv)
 	
 	return arr6
+

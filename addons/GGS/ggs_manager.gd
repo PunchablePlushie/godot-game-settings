@@ -3,13 +3,20 @@ extends Node
 
 const SETTINGS_DATA_PATH: String = "res://addons/GGS/settings_data.json"
 const GGS_DATA_PATH: String = "res://addons/GGS/ggs_data.json"
+const COL_ERR: Color = Color(1.0, 0.7, 0.7, 1.0)
+const COL_GOOD: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 var settings_data: Dictionary = {}
 var ggs_data: Dictionary = {
 	"default_logic_path": "res://",
 	"auto_select_new_nodes": true,
+	"show_prints": false,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned...",
+	"gamepad_use_glyphs": true,
+	"gamepad_glyphs_texture": "res://addons/GGS/assets/glyph/gamepad_glyphs.tres",
+	"keyboard_use_glyphs": false,
+	"keyboard_glyphs_texture": "",
 }
 
 

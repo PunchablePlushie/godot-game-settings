@@ -11,6 +11,7 @@ onready var OptionListComponent: PackedScene = preload("../../components/option_
 onready var TextFieldComponent: PackedScene = preload("../../components/text_field/ggsTextField.tscn")
 onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
 onready var KeybindKbComponent: PackedScene = preload("../../components/keybind/ggsKeybindKb.tscn")
+onready var KeybindGpComponent: PackedScene = preload("../../components/keybind/ggsKeybindGp.tscn")
 
 
 func _ready() -> void:
@@ -21,9 +22,11 @@ func _populate_menu() -> void:
 	var MainMenu: PopupMenu = get_popup()
 	var SliderSub: PopupMenu = PopupMenu.new()
 	var KeybindSub: PopupMenu = PopupMenu.new()
+	MainMenu.clear()
 	
 	KeybindSub.set_name("KeybindSub")
 	KeybindSub.add_item("Keyboard")
+	KeybindSub.add_item("Gamepad")
 	KeybindSub.connect("index_pressed", self, "_on_Keybind_item_selected")
 	
 	SliderSub.set_name("SliderSub")
@@ -73,6 +76,8 @@ func _on_Keybind_item_selected(index: int) -> void:
 	match index:
 		0:
 			instance = KeybindKbComponent.instance()
+		1:
+			instance = KeybindGpComponent.instance()
 	
 	_add_node(instance)
 

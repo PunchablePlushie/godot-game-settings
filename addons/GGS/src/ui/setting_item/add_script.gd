@@ -35,3 +35,4 @@ func _on_ScriptCreateDialog_closed(script: Script) -> void:
 		Root.initialized = true
 	
 	print("GGS - %02d: Script assigned (%s)"%[Root.get_index(), path])
+	EditScriptBtn.broken = false

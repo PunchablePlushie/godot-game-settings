@@ -21,8 +21,8 @@ func _ready() -> void:
 	button.connect("pressed", self, "_on_Button_pressed")
 	var btn_index: int = GameSettings.get_setting(setting.section, setting.key)
 	var button_string: String = Input.get_joy_button_string(btn_index)
-	var text: String = _get_glyph_text(button_string)
-	button.text = text
+#	var text: String = _get_glyph_text(button_string)
+#	button.text = text
 	
 	## Experimental: Show the current button with a sprite instead of text.
 	#button.text = ""
@@ -61,7 +61,7 @@ func _change_controls(event: InputEvent) -> void:
 	
 	# Update the text of setting button
 	var button_string: String = Input.get_joy_button_string(new_btn.button_index)
-	button.text = _get_glyph_text(button_string)
+#	button.text = _get_glyph_text(button_string)
 	
 	## Experimental: Show the current button with a sprite instead of text.
 	#button.text = ""
@@ -74,48 +74,10 @@ func _change_controls(event: InputEvent) -> void:
 	set_process_input(false)
 
 
-func _get_glyph_text(button_string: String) -> String:
-	# Based on Xbox Controller
-	var glyphs: Dictionary = {
-		"Face Button Right": "B",
-		"Face Button Top": "Y",
-		"Face Button Left": "X",
-		"Face Button Bottom": "A",
-		"L": "L1",
-		"L2": "L2",
-		"L3": "L3",
-		"R": "R1",
-		"R2": "R2",
-		"R3": "R3",
-		"DPAD Up": "Up",
-		"DPAD Left": "Left",
-		"DPAD Down": "Down",
-		"DPAD Right": "Right",
-		"Select": "Select",
-		"Start": "Start",
-	}
-
-	return glyphs[button_string]
 
 
-func _get_glyph_icon(button_string: String) -> ImageTexture:
-	var glyphs: Dictionary = {
-		"Face Button Right": "", # Example: load("btn_right.png")
-		"Face Button Top": "",
-		"Face Button Left": "",
-		"Face Button Bottom": "",
-		"L": "",
-		"L2": "",
-		"L3": "",
-		"R": "",
-		"R2": "",
-		"R3": "",
-		"DPAD Up": "",
-		"DPAD Left": "",
-		"DPAD Down": "",
-		"DPAD Right": "",
-		"Select": "",
-		"Start": "",
-	}
-	
-	return glyphs[button_string]
+
+#func _get_glyph_icon(button_string: String) -> ImageTexture:
+#	var glyphs: Dictionary =
+#
+#	return glyphs[button_string]

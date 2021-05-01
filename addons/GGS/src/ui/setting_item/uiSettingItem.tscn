@@ -118,8 +118,10 @@ margin_bottom = 70.0
 window_title = "Remove Setting?"
 dialog_text = "Are you sure you want to remove this setting? This action cannot be undone."
 
+[connection signal="text_changed" from="NameField" to="NameField" method="_on_NameField_text_changed"]
 [connection signal="text_entered" from="NameField" to="NameField" method="_on_NameField_text_entered"]
 [connection signal="item_selected" from="HBox/DefaultType" to="HBox/DefaultType" method="_on_DefaultType_item_selected"]
+[connection signal="text_changed" from="HBox/DefaultField" to="HBox/DefaultField" method="_on_DefaultField_text_changed"]
 [connection signal="text_entered" from="HBox/DefaultField" to="HBox/DefaultField" method="_on_DefaultField_text_entered"]
 [connection signal="pressed" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_pressed"]
 [connection signal="pressed" from="HBox/AddScript" to="HBox/AddScript" method="_on_AddScript_pressed"]

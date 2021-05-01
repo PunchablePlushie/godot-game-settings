@@ -1,6 +1,6 @@
 tool
 extends Button
-signal item_removed
+signal item_removed(index)
 
 onready var ConfirmDialog: ConfirmationDialog = get_node("../../ConfirmDialog")
 onready var Root: HBoxContainer = get_node("../..")
@@ -14,6 +14,6 @@ func _on_Remove_pressed() -> void:
 
 
 func _on_ConfirmDialog_confirmed() -> void:
-	emit_signal("item_removed")
+	emit_signal("item_removed", Root.get_index())
 	Root.queue_free()
 

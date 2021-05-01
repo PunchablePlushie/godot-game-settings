@@ -1,1 +1,1 @@
-{"0":{"name":"Kb_move_right","value_type":4,"default":["move_right",68],"default_raw":"[move_right: String, 68: int]","current":["move_right",68],"logic":"res://src/manager/settings/controls/kb_control.gd"}}
+{"0":{"name":"12315","value_type":0,"default":null,"default_raw":"","current":null,"logic":""},"1":{"name":"","value_type":0,"default":null,"default_raw":"","current":null,"logic":""}}

@@ -8,12 +8,17 @@ onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
 
 
 func _ready() -> void:
-	# Load value
-	if ggsManager.settings_data[str(setting_index)]["current"] == null:
-		var value: int =  ggsManager.settings_data[str(setting_index)]["default"][1]
-		text = OS.get_scancode_string(value)
+	# Load and set display value
+	var current = ggsManager.settings_data[str(setting_index)]["current"]
+	var value: int
+	
+	if ggsManager.ggs_data["keyboard_use_glyphs"]:
+		pass
 	else:
-		var value: int = ggsManager.settings_data[str(setting_index)]["current"][1]
+		if current == null:
+			value = ggsManager.settings_data[str(setting_index)]["default"][1]
+		else:
+			value = ggsManager.settings_data[str(setting_index)]["current"][1]
 		text = OS.get_scancode_string(value)
 	
 	# Load Script
@@ -26,20 +31,27 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	var instance: PopupPanel = ConfirmPopup.instance()
+	instance.type = 0
 	add_child(instance)
 	instance.popup_centered()
 	instance.connect("confirmed", self, "_on_ConfirmPopup_confirmed", [], CONNECT_ONESHOT)
 
 
 func _on_ConfirmPopup_confirmed(event: InputEventKey) -> void:
-	var cur_value = ggsManager.settings_data[str(setting_index)]["current"]
+	# Update save value
+	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var target_action = ggsManager.settings_data[str(setting_index)]["default"][0]
-	
-	if cur_value == null:
+	if current == null:
 		ggsManager.settings_data[str(setting_index)]["current"] = [target_action, event.scancode]
 	else:
 		ggsManager.settings_data[str(setting_index)]["current"][1] = event.scancode
 	ggsManager.save_settings_data()
-	script_instance.main(ggsManager.settings_data[str(setting_index)]["current"])
 	
-	text = OS.get_scancode_string(event.scancode)
+	# Update display value
+	if ggsManager.ggs_data["keyboard_use_glyphs"]:
+		pass
+	else:
+		text = ggsManager.gp_get_text(Input.get_joy_button_string(event.button_index))
+	
+	# Execute the logic script
+	script_instance.main(ggsManager.settings_data[str(setting_index)]["current"])

@@ -13,15 +13,22 @@ func _ready() -> void:
 	reload_settings()
 
 
-func _on_item_removed() -> void:
-	# Creates a small delay to fix a bug
-	yield(get_tree().create_timer(0.2), "timeout")
+func _on_item_removed(index: int) -> void:
+	# Erase the index and create the recovery list
+	ggsManager.settings_data.erase(str(index))
+	var recovery_list: Array = [[], [], [], [], [], []]
+	for setting in ggsManager.settings_data.values():
+		recovery_list[0].append(setting["name"])
+		recovery_list[1].append(setting["value_type"])
+		recovery_list[2].append(setting["default"])
+		recovery_list[3].append(setting["default_raw"])
+		recovery_list[4].append(setting["current"])
+		recovery_list[5].append(setting["logic"])
 	
 	# Rebuild the settings_data
 	ggsManager.settings_data = {}
-	for item in SettingsList.get_children():
-		var index: String = str(item.get_index())
-		ggsManager.settings_data[index] = {
+	for i in range(recovery_list[0].size()):
+		ggsManager.settings_data[str(i)] = {
 			"name": "",
 			"value_type": 0,
 			"default": null,
@@ -29,42 +36,39 @@ func _on_item_removed() -> void:
 			"current": null,
 			"logic": "",
 		}
-		ggsManager.settings_data[index]["name"] = item.NameField.text
-		ggsManager.settings_data[index]["logic"] = item.EditScriptBtn.text
+		ggsManager.settings_data[str(i)]["name"] = recovery_list[0][i]
+		ggsManager.settings_data[str(i)]["value_type"] = recovery_list[1][i]
+		ggsManager.settings_data[str(i)]["default"] = recovery_list[2][i]
+		ggsManager.settings_data[str(i)]["default_raw"] = recovery_list[3][i]
+		ggsManager.settings_data[str(i)]["current"] = recovery_list[4][i]
+		ggsManager.settings_data[str(i)]["logic"] = recovery_list[5][i]
 	
+	# Save and reload
 	ggsManager.save_settings_data()
+	reload_settings()
 
 
 func reload_settings() -> void:
-	# Check if the list is already up-to-date.
-	var settings_list: Array = SettingsList.get_children()
-	var cur_settings: Array = []
-	for item in settings_list:
-		cur_settings.append(str(item.get_index()))
-		
-	var saved_settings: Array = []
-	for setting in ggsManager.settings_data:
-		saved_settings.append(setting)
-		
-	if cur_settings == saved_settings:
-		#push_warning("GGS - Reload List: Reload failed. The list is already up to date.")
-		return
-	
-	# Reload settings
 	if ggsManager.settings_data != {}:
+		var settings_list: Array = SettingsList.get_children()
 		for item in settings_list:
 			item.queue_free()
+		
 		for index in ggsManager.settings_data:
 			var ui_item: HBoxContainer = uiSettingItem.instance()
 			SettingsList.add_child(ui_item)
+			ui_item.IndexField.text = "%02d"%[int(index)]
 			ui_item.NameField.text = ggsManager.settings_data[index]["name"]
 			ui_item.DefaultType.selected = ggsManager.settings_data[index]["value_type"]
+			ui_item.DefaultType.text = ""
 			ui_item.DefaultField.text = ggsManager.settings_data[index]["default_raw"]
 			
 			var path: String = ggsManager.settings_data[index]["logic"]
 			if path != "":
 				ui_item.EditScriptBtn.hint_tooltip = "%s: %s"%[ui_item.EditScriptBtn.BASE_TOOLTIP ,path]
 				ui_item.EditScriptBtn.disabled = false
+				if not ResourceLoader.exists(path):
+					ui_item.EditScriptBtn.broken = true
 			
 			ui_item.initialized = true
 			ui_item.RemoveBtn.connect("item_removed", self, "_on_item_removed")
