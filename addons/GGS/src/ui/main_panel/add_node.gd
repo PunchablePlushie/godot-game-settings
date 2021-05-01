@@ -1,7 +1,10 @@
 tool
-extends MenuButton
+extends Button
 
 enum Type {Bool, OptionList, TextField, NumberField}
+
+# Scene Tree
+onready var PopMenu: PopupMenu = $PopupMenu
 
 # Resources
 onready var BoolComponent: PackedScene = preload("../../components/boolean/ggsBool.tscn")
@@ -19,7 +22,7 @@ func _ready() -> void:
 
 
 func _populate_menu() -> void:
-	var MainMenu: PopupMenu = get_popup()
+	var MainMenu: PopupMenu = PopMenu
 	var SliderSub: PopupMenu = PopupMenu.new()
 	var KeybindSub: PopupMenu = PopupMenu.new()
 	MainMenu.clear()
@@ -105,3 +108,14 @@ func _add_node(node: Object) -> void:
 		Interface.inspect_object(node, "setting_index", true)
 	Interface.save_scene()
 
+
+func _on_AddNode_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		var offset: Vector2 = Vector2(0, rect_size.y + 2)
+		PopMenu.rect_global_position = rect_global_position + offset
+		PopMenu.popup()
+
+
+func _on_PopupMenu_popup_hide() -> void:
+	yield(get_tree().create_timer(0.01), "timeout")
+	pressed = false

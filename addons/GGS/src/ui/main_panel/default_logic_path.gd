@@ -1,6 +1,8 @@
 tool
 extends HBoxContainer
 
+var saved: bool = true setget set_saved
+
 # Scene Tree
 onready var OptionLabel: Label = $Label
 onready var Field: LineEdit = $LineEdit
@@ -28,7 +30,7 @@ func _on_FileDialog_dir_selected(dir) -> void:
 		add_slash = "/"
 	
 	ggsManager.ggs_data["default_logic_path"] = dir+add_slash
-	_save_data()
+	ggsManager.save_ggs_data()
 
 
 func _on_LineEdit_text_entered(new_text: String) -> void:
@@ -44,9 +46,20 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 		Field.text = "res://"
 	else:
 		ggsManager.ggs_data["default_logic_path"] = new_text+add_slash
-	_save_data()
-
-
-func _save_data() -> void:
 	ggsManager.save_ggs_data()
 	
+	self.saved = true
+	var message: String = "New path saved (%s)"%[new_text+add_slash]
+	ggsManager.print_notif("Default_Script_Path", message)
+
+
+func _on_LineEdit_text_changed(new_text: String) -> void:
+	self.saved = false
+
+
+func set_saved(value: bool) -> void:
+	saved = value
+	if saved:
+		modulate = ggsManager.COL_GOOD
+	else:
+		modulate = ggsManager.COL_ERR

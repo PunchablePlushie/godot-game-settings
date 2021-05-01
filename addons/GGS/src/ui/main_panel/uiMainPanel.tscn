@@ -44,61 +44,64 @@ __meta__ = {
 
 [node name="VBox" type="VBoxContainer" parent="Mrg/Scrl"]
 margin_right = 1040.0
-margin_bottom = 387.0
+margin_bottom = 386.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="Mrg/Scrl/VBox"]
 margin_right = 1040.0
-margin_bottom = 23.0
+margin_bottom = 22.0
 
 [node name="Create" type="Button" parent="Mrg/Scrl/VBox/HBox"]
-margin_right = 120.0
-margin_bottom = 23.0
+margin_right = 119.0
+margin_bottom = 22.0
 size_flags_horizontal = 0
 custom_constants/hseparation = 2
+shortcut_in_tooltip = false
 text = "Create Setting"
 icon = ExtResource( 5 )
 script = ExtResource( 2 )
 
-[node name="AddNode" type="MenuButton" parent="Mrg/Scrl/VBox/HBox"]
-margin_left = 124.0
-margin_right = 218.0
-margin_bottom = 23.0
+[node name="AddNode" type="Button" parent="Mrg/Scrl/VBox/HBox"]
+margin_left = 123.0
+margin_right = 216.0
+margin_bottom = 22.0
+toggle_mode = true
 shortcut_in_tooltip = false
+action_mode = 0
 text = "Add Node"
 icon = ExtResource( 12 )
-flat = false
-items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Slider", null, 0, false, false, 4, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 5, 0, null, "KeybindSub", false, "Boolean", null, 0, false, false, 6, 0, null, "", false, "Option List", null, 0, false, false, 7, 0, null, "", false, "Text Field", null, 0, false, false, 8, 0, null, "", false, "Number Field", null, 0, false, false, 9, 0, null, "", false, "Slider", null, 0, false, false, 10, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 11, 0, null, "KeybindSub", false ]
 script = ExtResource( 10 )
 
+[node name="PopupMenu" type="PopupMenu" parent="Mrg/Scrl/VBox/HBox/AddNode"]
+margin_right = 20.0
+margin_bottom = 20.0
+
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
-visible = false
-margin_left = 222.0
-margin_right = 250.0
-margin_bottom = 23.0
+margin_left = 220.0
+margin_right = 248.0
+margin_bottom = 22.0
 hint_tooltip = "Reload List"
-disabled = true
 icon = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Help" type="Button" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 1012.0
 margin_right = 1040.0
-margin_bottom = 23.0
+margin_bottom = 22.0
 hint_tooltip = "Open Github Wiki / Documentation"
 size_flags_horizontal = 10
 icon = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="HSepTop" type="HSeparator" parent="Mrg/Scrl/VBox"]
-margin_top = 27.0
+margin_top = 26.0
 margin_right = 1040.0
-margin_bottom = 31.0
+margin_bottom = 30.0
 
 [node name="Mrg" type="MarginContainer" parent="Mrg/Scrl/VBox"]
-margin_top = 35.0
+margin_top = 34.0
 margin_right = 1040.0
-margin_bottom = 335.0
+margin_bottom = 334.0
 rect_min_size = Vector2( 0, 300 )
 
 [node name="Scrl" type="ScrollContainer" parent="Mrg/Scrl/VBox/Mrg"]
@@ -108,18 +111,18 @@ rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
 margin_right = 1040.0
-margin_bottom = 24.0
+margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]
-margin_top = 339.0
+margin_top = 338.0
 margin_right = 1040.0
-margin_bottom = 343.0
+margin_bottom = 342.0
 
 [node name="GGSSettings" type="HBoxContainer" parent="Mrg/Scrl/VBox"]
-margin_top = 347.0
+margin_top = 346.0
 margin_right = 1040.0
-margin_bottom = 387.0
+margin_bottom = 386.0
 custom_constants/separation = 20
 
 [node name="DefaultLogicPath" type="HBoxContainer" parent="Mrg/Scrl/VBox/GGSSettings"]
@@ -158,7 +161,6 @@ margin_bottom = 40.0
 hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically"
 custom_constants/hseparation = 20
 shortcut_in_tooltip = false
-pressed = true
 text = "Auto Select New Nodes"
 script = ExtResource( 11 )
 
@@ -178,8 +180,11 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Create" to="Mrg/Scrl/VBox/HBox/Create" method="_on_Create_pressed"]
+[connection signal="toggled" from="Mrg/Scrl/VBox/HBox/AddNode" to="Mrg/Scrl/VBox/HBox/AddNode" method="_on_AddNode_toggled"]
+[connection signal="popup_hide" from="Mrg/Scrl/VBox/HBox/AddNode/PopupMenu" to="Mrg/Scrl/VBox/HBox/AddNode" method="_on_PopupMenu_popup_hide"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Reload" to="Mrg/Scrl/VBox/HBox/Reload" method="_on_Reload_pressed"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/HBox/Help" to="Mrg/Scrl/VBox/HBox/Help" method="_on_Help_pressed"]
+[connection signal="text_changed" from="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath/LineEdit" to="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath" method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath/LineEdit" to="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath" method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath/Button" to="Mrg/Scrl/VBox/GGSSettings/DefaultLogicPath" method="_on_Button_pressed"]
 [connection signal="toggled" from="Mrg/Scrl/VBox/GGSSettings/CheckButton" to="Mrg/Scrl/VBox/GGSSettings/CheckButton" method="_on_CheckButton_toggled"]

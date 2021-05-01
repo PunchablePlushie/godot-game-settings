@@ -10,7 +10,7 @@ var settings_data: Dictionary = {}
 var ggs_data: Dictionary = {
 	"default_logic_path": "res://",
 	"auto_select_new_nodes": true,
-	"show_prints": false,
+	"show_prints": true,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned...",
 	"gamepad_use_glyphs": true,
@@ -21,12 +21,8 @@ var ggs_data: Dictionary = {
 
 
 func _init() -> void:
-	var file: File = File.new()
-	if file.file_exists(SETTINGS_DATA_PATH):
-		settings_data = _load_json(SETTINGS_DATA_PATH)
-		
-	if file.file_exists(GGS_DATA_PATH):
-		ggs_data = _load_json(GGS_DATA_PATH)
+	load_ggs_data()
+	load_settings_data()
 
 
 func _ready() -> void:
@@ -34,43 +30,29 @@ func _ready() -> void:
 		_apply_settings()
 
 
-func array_find_type(array: Array, type: String) -> Object:
-	for item in array:
-		var item_class: String = item.get_class()
-		if item_class == type:
-			return item
-		else:
-			continue
-	return null
-
-
 func save_settings_data() -> void:
-	_save_json(settings_data, SETTINGS_DATA_PATH)
+	Utils.save_json(settings_data, SETTINGS_DATA_PATH)
 
 
 func save_ggs_data() -> void:
-	_save_json(ggs_data, GGS_DATA_PATH)
+	Utils.save_json(ggs_data, GGS_DATA_PATH)
 
 
-func _save_json(data: Dictionary, path: String) -> void:
-	var data_stringified: String = JSON.print(data)
+func load_settings_data() -> void:
 	var file: File = File.new()
-	var err: int = file.open(path, File.WRITE)
-	if err == OK:
-		file.store_string(data_stringified)
-		file.close()
+	if file.file_exists(SETTINGS_DATA_PATH):
+		settings_data = Utils.load_json(SETTINGS_DATA_PATH)
 
 
-func _load_json(path: String) -> Dictionary:
-	var data: String = ""
+func load_ggs_data() -> void:
 	var file: File = File.new()
-	var err: int = file.open(path, File.READ)
-	if err == OK:
-		data = file.get_as_text()
-		file.close()
-	var result: JSONParseResult = JSON.parse(data)
-	
-	return result.result
+	if file.file_exists(GGS_DATA_PATH):
+		ggs_data = Utils.load_json(GGS_DATA_PATH)
+
+
+func print_notif(_for: String, message: String) -> void:
+	if ggs_data["show_prints"] == true:
+		print("GGS - %s: %s"%[_for, message])
 
 
 func _apply_settings() -> void:

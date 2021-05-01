@@ -49,26 +49,29 @@ func _on_item_removed(index: int) -> void:
 
 
 func reload_settings() -> void:
-	if ggsManager.settings_data != {}:
-		var settings_list: Array = SettingsList.get_children()
-		for item in settings_list:
-			item.queue_free()
+	# Reload json file
+	ggsManager.load_settings_data()
+	
+	# Remake the tree with the new data
+	var settings_list: Array = SettingsList.get_children()
+	for item in settings_list:
+		item.queue_free()
+	
+	for index in ggsManager.settings_data:
+		var ui_item: HBoxContainer = uiSettingItem.instance()
+		SettingsList.add_child(ui_item)
+		ui_item.IndexField.text = "%02d"%[int(index)]
+		ui_item.NameField.text = ggsManager.settings_data[index]["name"]
+		ui_item.DefaultType.selected = ggsManager.settings_data[index]["value_type"]
+		ui_item.DefaultType.text = ""
+		ui_item.DefaultField.text = ggsManager.settings_data[index]["default_raw"]
 		
-		for index in ggsManager.settings_data:
-			var ui_item: HBoxContainer = uiSettingItem.instance()
-			SettingsList.add_child(ui_item)
-			ui_item.IndexField.text = "%02d"%[int(index)]
-			ui_item.NameField.text = ggsManager.settings_data[index]["name"]
-			ui_item.DefaultType.selected = ggsManager.settings_data[index]["value_type"]
-			ui_item.DefaultType.text = ""
-			ui_item.DefaultField.text = ggsManager.settings_data[index]["default_raw"]
-			
-			var path: String = ggsManager.settings_data[index]["logic"]
-			if path != "":
-				ui_item.EditScriptBtn.hint_tooltip = "%s: %s"%[ui_item.EditScriptBtn.BASE_TOOLTIP ,path]
-				ui_item.EditScriptBtn.disabled = false
-				if not ResourceLoader.exists(path):
-					ui_item.EditScriptBtn.broken = true
-			
-			ui_item.initialized = true
-			ui_item.RemoveBtn.connect("item_removed", self, "_on_item_removed")
+		var path: String = ggsManager.settings_data[index]["logic"]
+		if path != "":
+			ui_item.EditScriptBtn.hint_tooltip = "%s: %s"%[ui_item.EditScriptBtn.BASE_TOOLTIP ,path]
+			ui_item.EditScriptBtn.disabled = false
+			if not ResourceLoader.exists(path):
+				ui_item.EditScriptBtn.broken = true
+		
+		ui_item.initialized = true
+		ui_item.RemoveBtn.connect("item_removed", self, "_on_item_removed")

@@ -16,7 +16,7 @@ func _on_NameField_text_entered(new_text: String) -> void:
 	ggsManager.settings_data[str(Root.get_index())]["name"] = new_text
 	ggsManager.save_settings_data()
 	
-	print("GGS - %02d: Name saved ('%s')"%[Root.get_index(), new_text])
+	ggsManager.print_notif("%02d"%[Root.get_index()], "Name saved ('%s')"%[new_text])
 	self.saved = true
 
 

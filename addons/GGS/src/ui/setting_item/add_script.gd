@@ -34,5 +34,5 @@ func _on_ScriptCreateDialog_closed(script: Script) -> void:
 	if Root.initialized == false:
 		Root.initialized = true
 	
-	print("GGS - %02d: Script assigned (%s)"%[Root.get_index(), path])
+	ggsManager.print_notif("%02d"%[Root.get_index()], "Script assigned (%s)"%[path])
 	EditScriptBtn.broken = false

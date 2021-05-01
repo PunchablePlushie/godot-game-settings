@@ -17,4 +17,7 @@ func _on_DefaultType_item_selected(index: int) -> void:
 	ggsManager.settings_data[str(Root.get_index())]["value_type"] = index
 	ggsManager.save_settings_data()
 	
-	print("GGS - %02d: Item type selected (%d)"%[Root.get_index(), index])
+	ggsManager.print_notif("%02d"%[Root.get_index()], "Item type selected (%d)"%[index])
+	
+	# Attempt to accept the value in the DefaultField
+	Root.DefaultField._on_DefaultField_text_entered(Root.DefaultField.text)
