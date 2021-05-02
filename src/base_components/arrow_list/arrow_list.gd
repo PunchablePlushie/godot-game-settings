@@ -1,4 +1,4 @@
-class_name ArrowList
+class_name ArrowList222
 extends BaseComponent
 
 export(bool) var wrap_value: bool = true

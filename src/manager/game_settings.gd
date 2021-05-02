@@ -57,6 +57,3 @@ func apply_all() -> void:
 			var node: Node = get_node("GpControls/%s"%[action])
 			event.button_index = get_setting(node.section, node.key)
 			node.change(event)
-		
-
-

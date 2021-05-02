@@ -12,18 +12,14 @@ func _ready() -> void:
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int
 	
-	if ggsManager.ggs_data["gamepad_use_glyphs"]:
-		icon = load(ggsManager.ggs_data["gamepad_glyphs_texture"]) as AnimatedTexture
-		if current == null:
-			value = ggsManager.settings_data[str(setting_index)]["default"][1]
-		else:
-			value = ggsManager.settings_data[str(setting_index)]["current"][1]
+	if current == null:
+		value = ggsManager.settings_data[str(setting_index)]["default"][1]
+	else:
+		value = ggsManager.settings_data[str(setting_index)]["current"][1]
+	
+	if icon != null:
 		icon.current_frame = value
 	else:
-		if current == null:
-			value = ggsManager.settings_data[str(setting_index)]["default"][1]
-		else:
-			value = ggsManager.settings_data[str(setting_index)]["current"][1]
 		text = _get_actual_string(Input.get_joy_button_string(value))
 	
 	# Load Script
@@ -53,7 +49,7 @@ func _on_ConfirmPopup_confirmed(event: InputEventJoypadButton) -> void:
 	ggsManager.save_settings_data()
 	
 	# Update display value
-	if ggsManager.ggs_data["gamepad_use_glyphs"]:
+	if icon != null:
 		icon.current_frame = event.button_index
 	else:
 		text = _get_actual_string(Input.get_joy_button_string(event.button_index))

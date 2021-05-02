@@ -1,7 +1,7 @@
 tool
 extends Button
 
-enum Type {Bool, OptionList, TextField, NumberField}
+enum Type {Bool, OptionList, TextField, NumberField, ArrowList}
 
 # Scene Tree
 onready var PopMenu: PopupMenu = $PopupMenu
@@ -15,6 +15,7 @@ onready var TextFieldComponent: PackedScene = preload("../../components/text_fie
 onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
 onready var KeybindKbComponent: PackedScene = preload("../../components/keybind/ggsKeybindKb.tscn")
 onready var KeybindGpComponent: PackedScene = preload("../../components/keybind/ggsKeybindGp.tscn")
+onready var ArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsArrowList.tscn")
 
 
 func _ready() -> void:
@@ -41,6 +42,7 @@ func _populate_menu() -> void:
 	MainMenu.add_item("Option List")
 	MainMenu.add_item("Text Field")
 	MainMenu.add_item("Number Field")
+	MainMenu.add_item("Arrow List")
 	MainMenu.add_child(SliderSub)
 	MainMenu.add_child(KeybindSub)
 	MainMenu.add_submenu_item("Slider", "SliderSub")
@@ -59,6 +61,8 @@ func _on_Main_item_selected(index: int) -> void:
 			instance = TextFieldComponent.instance()
 		Type.NumberField:
 			instance = NumberFieldComponent.instance()
+		Type.ArrowList:
+			instance = ArrowListComponent.instance()
 	
 	_add_node(instance)
 

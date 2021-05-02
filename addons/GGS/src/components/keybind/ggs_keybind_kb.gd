@@ -12,13 +12,14 @@ func _ready() -> void:
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int
 	
-	if ggsManager.ggs_data["keyboard_use_glyphs"]:
-		pass
+	if current == null:
+		value = ggsManager.settings_data[str(setting_index)]["default"][1]
 	else:
-		if current == null:
-			value = ggsManager.settings_data[str(setting_index)]["default"][1]
-		else:
-			value = ggsManager.settings_data[str(setting_index)]["current"][1]
+		value = ggsManager.settings_data[str(setting_index)]["current"][1]
+	
+	if icon != null:
+		icon.current_frame = value
+	else:
 		text = OS.get_scancode_string(value)
 	
 	# Load Script
@@ -48,8 +49,8 @@ func _on_ConfirmPopup_confirmed(event: InputEventKey) -> void:
 	ggsManager.save_settings_data()
 	
 	# Update display value
-	if ggsManager.ggs_data["keyboard_use_glyphs"]:
-		pass
+	if icon != null:
+		icon.current_frame = event.scancode
 	else:
 		text = ggsManager.gp_get_text(Input.get_joy_button_string(event.button_index))
 	

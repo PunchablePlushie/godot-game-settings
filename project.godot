@@ -10,7 +10,7 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "BaseComponent",
-"class": "ArrowList",
+"class": "ArrowList222",
 "language": "GDScript",
 "path": "res://src/base_components/arrow_list/arrow_list.gd"
 }, {
@@ -45,7 +45,7 @@ _global_script_classes=[ {
 "path": "res://src/base_components/bool_setting/bool_setting.gd"
 } ]
 _global_script_class_icons={
-"ArrowList": "",
+"ArrowList222": "",
 "BaseComponent": "",
 "BaseSetting": "",
 "DropDownList": "",

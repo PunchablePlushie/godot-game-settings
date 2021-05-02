@@ -75,6 +75,7 @@ script = ExtResource( 10 )
 [node name="PopupMenu" type="PopupMenu" parent="Mrg/Scrl/VBox/HBox/AddNode"]
 margin_right = 20.0
 margin_bottom = 20.0
+items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Slider", null, 0, false, false, 4, 0, null, "SliderSub", false, "Keybind", null, 0, false, false, 5, 0, null, "KeybindSub", false ]
 
 [node name="Reload" type="Button" parent="Mrg/Scrl/VBox/HBox"]
 margin_left = 220.0
@@ -111,7 +112,7 @@ rect_min_size = Vector2( 0, 100 )
 
 [node name="SettingsList" type="VBoxContainer" parent="Mrg/Scrl/VBox/Mrg/Scrl"]
 margin_right = 1040.0
-margin_bottom = 52.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HSepBot" type="HSeparator" parent="Mrg/Scrl/VBox"]

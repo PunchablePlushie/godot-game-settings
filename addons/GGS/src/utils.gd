@@ -162,8 +162,3 @@ static func str2dict(value: String):
 				dict[kk] = vv
 	
 	return dict
-
-
-
-
-

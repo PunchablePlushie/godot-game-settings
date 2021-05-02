@@ -13,10 +13,6 @@ var ggs_data: Dictionary = {
 	"show_prints": true,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned...",
-	"gamepad_use_glyphs": true,
-	"gamepad_glyphs_texture": "res://addons/GGS/assets/glyph/gamepad_glyphs.tres",
-	"keyboard_use_glyphs": false,
-	"keyboard_glyphs_texture": "",
 }
 
 
