@@ -4,6 +4,7 @@ extends Control
 # SceneTree
 onready var SettingsList: VBoxContainer = $Mrg/Scrl/VBox/Mrg/Scrl/SettingsList
 onready var CreateBtn: Button = $Mrg/Scrl/VBox/HBox/Create
+onready var Search: HBoxContainer = $Mrg/Scrl/VBox/HBox/Search
 
 # Resources
 onready var uiSettingItem: PackedScene = preload("../setting_item/uiSettingItem.tscn")
@@ -75,3 +76,6 @@ func reload_settings() -> void:
 		
 		ui_item.initialized = true
 		ui_item.RemoveBtn.connect("item_removed", self, "_on_item_removed")
+		
+		# Retrigger the search if necessary
+		Search.commence_search(Search.Field.text)

@@ -95,6 +95,10 @@ icon = SubResource( 1 )
 align = 0
 script = ExtResource( 5 )
 
+[node name="PopupMenu" type="PopupMenu" parent="HBox/EditScript"]
+margin_right = 20.0
+margin_bottom = 20.0
+
 [node name="AddScript" type="Button" parent="HBox"]
 margin_left = 438.0
 margin_right = 466.0
@@ -123,7 +127,9 @@ dialog_text = "Are you sure you want to remove this setting? This action cannot 
 [connection signal="item_selected" from="HBox/DefaultType" to="HBox/DefaultType" method="_on_DefaultType_item_selected"]
 [connection signal="text_changed" from="HBox/DefaultField" to="HBox/DefaultField" method="_on_DefaultField_text_changed"]
 [connection signal="text_entered" from="HBox/DefaultField" to="HBox/DefaultField" method="_on_DefaultField_text_entered"]
+[connection signal="gui_input" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_gui_input"]
 [connection signal="pressed" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_pressed"]
+[connection signal="index_pressed" from="HBox/EditScript/PopupMenu" to="HBox/EditScript" method="_on_PopupMenu_index_pressed"]
 [connection signal="pressed" from="HBox/AddScript" to="HBox/AddScript" method="_on_AddScript_pressed"]
 [connection signal="pressed" from="HBox/Remove" to="HBox/Remove" method="_on_Remove_pressed"]
 [connection signal="confirmed" from="ConfirmDialog" to="HBox/Remove" method="_on_ConfirmDialog_confirmed"]

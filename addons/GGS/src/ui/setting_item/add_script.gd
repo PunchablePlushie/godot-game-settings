@@ -25,7 +25,12 @@ func _on_AddScript_pressed() -> void:
 
 
 func _on_ScriptCreateDialog_closed(script: Script) -> void:
-	ggsManager.settings_data[str(Root.get_index())]["logic"] = script.resource_path
+	var path: String = script.resource_path
+	assign_script(path)
+
+
+func assign_script(script_path: String) -> void:
+	ggsManager.settings_data[str(Root.get_index())]["logic"] = script_path
 	ggsManager.save_settings_data()
 	
 	var path: String = ggsManager.settings_data[str(Root.get_index())]["logic"]

@@ -20,4 +20,5 @@ func _on_DefaultType_item_selected(index: int) -> void:
 	ggsManager.print_notif("%02d"%[Root.get_index()], "Item type selected (%d)"%[index])
 	
 	# Attempt to accept the value in the DefaultField
-	Root.DefaultField._on_DefaultField_text_entered(Root.DefaultField.text)
+	if Root.DefaultField.text != "":
+		Root.DefaultField._on_DefaultField_text_entered(Root.DefaultField.text)
