@@ -10,12 +10,13 @@ onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
 func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
 	var value: int
 	
 	if current == null:
-		value = ggsManager.settings_data[str(setting_index)]["default"][1]
+		value = default[1]
 	else:
-		value = ggsManager.settings_data[str(setting_index)]["current"][1]
+		value = current[1]
 	
 	if icon != null:
 		icon.current_frame = value

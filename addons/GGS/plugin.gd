@@ -8,7 +8,7 @@ var main_panel_instance
 
 
 func _enter_tree() -> void:
-	add_autoload_singleton("ggsManager", "res://addons/GGS/ggs_manager.gd")
+	add_autoload_singleton("ggsManager", "res://addons/GGS/src/ggs_manager.gd")
 	main_panel_instance = MainPanel.instance()
 	get_editor_interface().get_editor_viewport().add_child(main_panel_instance)
 	make_visible(false)

@@ -9,49 +9,13 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "BaseComponent",
-"class": "ArrowList222",
-"language": "GDScript",
-"path": "res://src/base_components/arrow_list/arrow_list.gd"
-}, {
-"base": "HBoxContainer",
-"class": "BaseComponent",
-"language": "GDScript",
-"path": "res://src/base_components/base_component.gd"
-}, {
-"base": "Node",
-"class": "BaseSetting",
-"language": "GDScript",
-"path": "res://src/manager/base_setting.gd"
-}, {
-"base": "BaseComponent",
-"class": "DropDownList",
-"language": "GDScript",
-"path": "res://src/base_components/dropdown_list/dropdown_list.gd"
-}, {
-"base": "BaseComponent",
-"class": "SliderSetting",
-"language": "GDScript",
-"path": "res://src/base_components/slider_setting/slider_setting.gd"
-}, {
 "base": "Node",
 "class": "Utils",
 "language": "GDScript",
 "path": "res://addons/GGS/src/utils.gd"
-}, {
-"base": "BaseComponent",
-"class": "ggsBool",
-"language": "GDScript",
-"path": "res://src/base_components/bool_setting/bool_setting.gd"
 } ]
 _global_script_class_icons={
-"ArrowList222": "",
-"BaseComponent": "",
-"BaseSetting": "",
-"DropDownList": "",
-"SliderSetting": "",
-"Utils": "",
-"ggsBool": ""
+"Utils": ""
 }
 
 [application]
@@ -61,8 +25,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameSettings="*res://src/manager/GameSettings.tscn"
-ggsManager="*res://addons/GGS/ggs_manager.gd"
+ggsManager="*res://addons/GGS/src/ggs_manager.gd"
 
 [debug]
 
@@ -70,8 +33,8 @@ gdscript/warnings/return_value_discarded=false
 
 [display]
 
-window/size/width=1080
-window/size/height=720
+window/size/width=640
+window/size/height=360
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -82,6 +45,10 @@ enabled=PoolStringArray( "res://addons/GGS/plugin.cfg" )
 [gdnative]
 
 singletons=[  ]
+
+[global]
+
+display=false
 
 [importer_defaults]
 

@@ -1,4 +1,4 @@
-extends VSlider
+extends HSlider
 
 export(int, 0, 99) var setting_index: int
 var script_instance: Object
@@ -6,10 +6,13 @@ var script_instance: Object
 
 func _ready() -> void:
 	# Load value
-	if ggsManager.settings_data[str(setting_index)]["current"] == null:
-		value = ggsManager.settings_data[str(setting_index)]["default"]
+	var current = ggsManager.settings_data[str(setting_index)]["current"]
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
+	
+	if current == null:
+		value = default
 	else:
-		value = ggsManager.settings_data[str(setting_index)]["current"]
+		value = current
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])

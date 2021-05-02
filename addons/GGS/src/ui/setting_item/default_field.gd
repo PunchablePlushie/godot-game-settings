@@ -27,6 +27,7 @@ func _on_DefaultField_text_entered(new_text: String) -> void:
 		if Root.initialized == false:
 			Root.AddScriptBtn.grab_focus()
 	
+	ggsManager.settings_data[str(Root.get_index())]["current"] = null
 	ggsManager.save_settings_data()
 
 
@@ -44,7 +45,7 @@ func set_saved(value: bool) -> void:
 
 func _to_suitable_type(input: String):
 	var type: int = ggsManager.settings_data[str(Root.get_index())]["value_type"]
-	var value: String = input.to_lower()
+	var value: String = input
 	var result
 	
 	match type:

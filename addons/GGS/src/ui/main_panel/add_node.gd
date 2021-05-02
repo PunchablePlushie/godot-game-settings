@@ -8,8 +8,8 @@ onready var PopMenu: PopupMenu = $PopupMenu
 
 # Resources
 onready var BoolComponent: PackedScene = preload("../../components/boolean/ggsBool.tscn")
-onready var HSliderComponent: PackedScene = preload("../../components/slider/ggsHSlider.tscn")
-onready var VSliderComponent: PackedScene = preload("../../components/slider/ggsVSlider.tscn")
+onready var SliderComponent: PackedScene = preload("../../components/slider/ggsSlider.tscn")
+onready var AudioSliderComponent: PackedScene = preload("../../components/slider/ggsAudioSlider.tscn")
 onready var OptionListComponent: PackedScene = preload("../../components/option_list/ggsOptionList.tscn")
 onready var TextFieldComponent: PackedScene = preload("../../components/text_field/ggsTextField.tscn")
 onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
@@ -34,8 +34,8 @@ func _populate_menu() -> void:
 	KeybindSub.connect("index_pressed", self, "_on_Keybind_item_selected")
 	
 	SliderSub.set_name("SliderSub")
-	SliderSub.add_item("Horizontal")
-	SliderSub.add_item("Vertical")
+	SliderSub.add_item("Normal Slider")
+	SliderSub.add_item("Audio Slider")
 	SliderSub.connect("index_pressed", self, "_on_Slider_item_selected")
 	
 	MainMenu.add_item("Boolean")
@@ -71,9 +71,9 @@ func _on_Slider_item_selected(index: int) -> void:
 	var instance
 	match index:
 		0:
-			instance = HSliderComponent.instance()
+			instance = SliderComponent.instance()
 		1:
-			instance = VSliderComponent.instance()
+			instance = AudioSliderComponent.instance()
 	
 	_add_node(instance)
 

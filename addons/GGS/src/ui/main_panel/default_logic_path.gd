@@ -7,13 +7,13 @@ var saved: bool = true setget set_saved
 onready var OptionLabel: Label = $Label
 onready var Field: LineEdit = $LineEdit
 onready var OpenDirBtn: Button = $Button
-onready var FileDial: FileDialog = get_node("../../../../../FileDialog")
+onready var FileDial: FileDialog = $FileDialog
 
 
 func _ready() -> void:
 	Field.text = ggsManager.ggs_data["default_logic_path"]
 	Field.hint_tooltip = ""
-	OptionLabel.hint_tooltip = "Default path when creating scripts using the 'Assign/Change Script' button"
+	OptionLabel.hint_tooltip = "Default path when creating scripts using the 'Assign/Change Script' button."
 
 
 func _on_Button_pressed() -> void:
@@ -49,8 +49,8 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 	ggsManager.save_ggs_data()
 	
 	self.saved = true
-	var message: String = "New path saved (%s)"%[new_text+add_slash]
-	ggsManager.print_notif("Default_Script_Path", message)
+#	var message: String = "New path saved (%s)"%[new_text+add_slash]
+#	ggsManager.print_notif("Default_Script_Path", message)
 
 
 func _on_LineEdit_text_changed(new_text: String) -> void:

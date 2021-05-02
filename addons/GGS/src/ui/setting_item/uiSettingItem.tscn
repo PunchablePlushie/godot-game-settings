@@ -50,7 +50,7 @@ script = ExtResource( 2 )
 
 [node name="NameField" type="LineEdit" parent="."]
 margin_left = 34.0
-margin_right = 577.0
+margin_right = 284.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 250, 0 )
 hint_tooltip = "Setting Name"
@@ -59,8 +59,8 @@ placeholder_text = "Name"
 script = ExtResource( 8 )
 
 [node name="HBox" type="HBoxContainer" parent="."]
-margin_left = 581.0
-margin_right = 1080.0
+margin_left = 288.0
+margin_right = 787.0
 margin_bottom = 24.0
 custom_constants/separation = 5
 

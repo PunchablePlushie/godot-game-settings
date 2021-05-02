@@ -1,1 +1,1 @@
-{}
+{"0":{"name":"fullscreen","value_type":0,"default":false,"default_raw":"false","current":null,"logic":"res://addons/GGS/logic/logic_fullscreen.gd"},"1":{"name":"windowscale","value_type":1,"default":0,"default_raw":"0","current":null,"logic":"res://addons/GGS/logic/logic_window_scale.gd"},"2":{"name":"master_volume","value_type":4,"default":["Master",1],"default_raw":"[Master: String, 1.0: float]","current":["Master",1],"logic":"res://addons/GGS/logic/logic_audio_slider.gd"}}

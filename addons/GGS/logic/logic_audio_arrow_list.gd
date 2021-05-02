@@ -1,4 +1,4 @@
-extends BaseSetting
+extends Node
 
 onready var p: Node = get_parent()
 

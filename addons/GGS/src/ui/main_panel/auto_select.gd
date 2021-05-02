@@ -3,7 +3,7 @@ extends CheckButton
 
 
 func _ready() -> void:
-	hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically"
+	hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically."
 	pressed = ggsManager.ggs_data["auto_select_new_nodes"]
 
 

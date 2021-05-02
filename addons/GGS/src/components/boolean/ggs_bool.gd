@@ -6,10 +6,13 @@ var script_instance: Object
 
 func _ready() -> void:
 	# Load value
-	if ggsManager.settings_data[str(setting_index)]["current"] == null:
-		pressed = ggsManager.settings_data[str(setting_index)]["default"]
+	var current = ggsManager.settings_data[str(setting_index)]["current"]
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
+	
+	if current == null:
+		pressed = default
 	else:
-		pressed = ggsManager.settings_data[str(setting_index)]["current"]
+		pressed = current
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
