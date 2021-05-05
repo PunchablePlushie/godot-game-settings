@@ -24,11 +24,9 @@ func _ready() -> void:
 
 
 func set_current_index(value: int) -> void:
-	current_index = value
-	
-	DisplayLabel.text = list[current_index]
-	ggsManager.settings_data[str(setting_index)]["current"] = value
+	ggsManager.settings_data[str(setting_index)]["current"][1] = value
 	ggsManager.save_settings_data()
+	DisplayLabel.text = list[current_index]
 	script_instance.main(value)
 
 

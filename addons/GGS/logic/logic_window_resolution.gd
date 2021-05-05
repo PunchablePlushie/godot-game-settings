@@ -1,8 +1,8 @@
 extends Node
 
-var window_resolutions: Dictionary
+var res_list: Array
 
 
-func set_resolution(resolution_index: int) -> void:
-	OS.window_size = window_resolutions[str(resolution_index)]
+func main(value: int) -> void:
+	OS.window_size = Vector2(res_list[value][0], res_list[value][1])
 	OS.center_window()

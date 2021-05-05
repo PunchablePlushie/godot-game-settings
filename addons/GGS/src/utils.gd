@@ -8,7 +8,8 @@ static func save_json(data: Dictionary, path: String) -> void:
 	var file: File = File.new()
 	var err: int = file.open(path, File.WRITE)
 	if err == OK:
-		file.store_string(data_stringified)
+		var data_beautified: String = JSONBeautifier.beautify_json(data_stringified)
+		file.store_string(data_beautified)
 		file.close()
 
 
@@ -87,10 +88,11 @@ static func str2arr(value: String):
 	
 	# Convert each value to it's respective type
 	var arr6: Array = []
-	
+	print(arr4)
 	for item in arr4:
 		var vv: String = item[0]
 		var tt: String = item[1]
+		prints(item, vv, tt)
 		match tt.to_lower():
 			"float":
 				if vv.is_valid_float():
@@ -162,3 +164,4 @@ static func str2dict(value: String):
 				dict[kk] = vv
 	
 	return dict
+

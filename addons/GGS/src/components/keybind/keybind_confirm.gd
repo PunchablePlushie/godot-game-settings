@@ -3,6 +3,7 @@ signal confirmed(event)
 
 enum Type {Keyboard, Gamepad}
 var type: int
+var source: Object
 onready var Message: Label = $Mrg/Message
 
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 	Message.text = ggsManager.ggs_data["keybind_confirm_text"]
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	# Only accept the correct type
 	match type:
 		Type.Keyboard:
@@ -37,6 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	emit_signal("confirmed", event)
 	get_tree().set_input_as_handled()
 	get_tree().paused = false
+	source.grab_focus()
 	queue_free()
 
 

@@ -10,13 +10,8 @@ onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
 func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	var default = ggsManager.settings_data[str(setting_index)]["default"]
 	var value: int
-	
-	if current == null:
-		value = default[1]
-	else:
-		value = current[1]
+	value = current[1]
 	
 	if icon != null:
 		icon.current_frame = value
@@ -34,19 +29,16 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	var instance: PopupPanel = ConfirmPopup.instance()
 	instance.type = 1
+	instance.source = self
 	add_child(instance)
 	instance.popup_centered()
 	instance.connect("confirmed", self, "_on_ConfirmPopup_confirmed", [], CONNECT_ONESHOT)
+	release_focus()
 
 
 func _on_ConfirmPopup_confirmed(event: InputEventJoypadButton) -> void:
 	# Update save value
-	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	var target_action = ggsManager.settings_data[str(setting_index)]["default"][0]
-	if current == null:
-		ggsManager.settings_data[str(setting_index)]["current"] = [target_action, event.button_index]
-	else:
-		ggsManager.settings_data[str(setting_index)]["current"][1] = event.button_index
+	ggsManager.settings_data[str(setting_index)]["current"][1] = event.button_index
 	ggsManager.save_settings_data()
 	
 	# Update display value

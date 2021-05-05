@@ -11,9 +11,6 @@ func main(value: bool) -> void:
 	if value == false:
 		var script_instance: Object = script_res.new()
 		var current = ggsManager.settings_data[str(setting_index)]["current"]
-		if current == null:
-			script_instance.main(ggsManager.settings_data[str(setting_index)]["default"])
-		else:
-			script_instance.main(current)
+		script_instance.main(current)
 	
 	OS.center_window()

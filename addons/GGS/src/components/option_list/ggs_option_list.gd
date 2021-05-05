@@ -7,12 +7,7 @@ var script_instance: Object
 func _ready() -> void:
 	# Load value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	
-	if current == null:
-		selected = default
-	else:
-		selected = current
+	selected = current
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])

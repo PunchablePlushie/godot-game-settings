@@ -1,9 +1,7 @@
 tool
 extends EditorPlugin
 
-
 const MainPanel = preload("src/ui/main_panel/uiMainPanel.tscn")
-
 var main_panel_instance
 
 
@@ -15,9 +13,12 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
+	## Removing the autoload breaks singleton references in the code.
+	# This pushes annoying errors everytime the editor is reloaded.
+#	remove_autoload_singleton("ggsManager")
+	
 	if main_panel_instance:
 		main_panel_instance.queue_free()
-	remove_autoload_singleton("ggsManager")
 
 
 func has_main_screen() -> bool:

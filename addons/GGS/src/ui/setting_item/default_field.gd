@@ -14,20 +14,25 @@ func _ready() -> void:
 
 func _on_DefaultField_text_entered(new_text: String) -> void:
 	var value = _to_suitable_type(new_text)
-	ggsManager.settings_data[str(Root.get_index())]["default"] = value
 	
 	if value == null:
+		ggsManager.settings_data[str(Root.get_index())]["default"] = null
 		ggsManager.settings_data[str(Root.get_index())]["default_raw"] = ""
+		ggsManager.settings_data[str(Root.get_index())]["current"] = null
+		
 		self.saved = false
 	else:
+		ggsManager.settings_data[str(Root.get_index())]["default"] = value
 		ggsManager.settings_data[str(Root.get_index())]["default_raw"] = new_text
+		ggsManager.settings_data[str(Root.get_index())]["current"] = value
+		
 		self.saved = true
 		ggsManager.print_notif("%02d"%[Root.get_index()], "Default value saved (%s)"%[value])
 		
 		if Root.initialized == false:
 			Root.AddScriptBtn.grab_focus()
 	
-	ggsManager.settings_data[str(Root.get_index())]["current"] = null
+	
 	ggsManager.save_settings_data()
 
 
