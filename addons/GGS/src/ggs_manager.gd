@@ -12,6 +12,7 @@ var ggs_data: Dictionary = {
 	"default_logic_path": "res://",
 	"auto_select_new_nodes": true,
 	"show_prints": true,
+	"show_errors": true,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned...",
 }
@@ -50,6 +51,11 @@ func load_ggs_data() -> void:
 func print_notif(_for: String, message: String) -> void:
 	if ggs_data["show_prints"] == true:
 		print("GGS - %s: %s"%[_for, message])
+
+
+func print_err(_for: String, message: String) -> void:
+	if ggs_data["show_errors"] == true:
+		printerr("GGS - %s: %s"%[_for, message])
 
 
 func _apply_settings() -> void:

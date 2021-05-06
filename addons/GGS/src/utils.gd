@@ -36,9 +36,10 @@ static func array_find_type(array: Array, type: String) -> Object:
 
 
 static func str2bool(value: String):
-	if value == "false" or value == "0":
+	var val = value.to_lower()
+	if val == "false" or val == "0":
 		return false
-	elif value == "true" or value == "1":
+	elif val == "true" or val == "1":
 		return true
 	else:
 		return null

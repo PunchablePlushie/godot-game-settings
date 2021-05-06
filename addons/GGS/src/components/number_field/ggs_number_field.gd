@@ -17,6 +17,14 @@ func _ready() -> void:
 	connect("value_changed", self, "_on_value_changed")
 
 
+func reset_to_default() -> void:
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
+	ggsManager.settings_data[str(setting_index)]["current"] = default
+	value = default
+	ggsManager.save_settings_data()
+	script_instance.main(default)
+
+
 func _on_value_changed(value: float) -> void:
 	ggsManager.settings_data[str(setting_index)]["current"] = value
 	ggsManager.save_settings_data()

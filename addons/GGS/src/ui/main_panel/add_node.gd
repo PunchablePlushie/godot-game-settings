@@ -17,6 +17,8 @@ onready var KeybindKbComponent: PackedScene = preload("../../components/keybind/
 onready var KeybindGpComponent: PackedScene = preload("../../components/keybind/ggsKeybindGp.tscn")
 onready var ArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsArrowList.tscn")
 onready var ResetComponent: PackedScene = preload("../../components/reset/ggsReset.tscn")
+onready var AudioArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsAudioArrowList.tscn")
+
 
 # Create the menu itself
 func _ready() -> void:
@@ -27,6 +29,14 @@ func _populate_menu() -> void:
 	# Get and clear the main menu to prevent duplicates
 	var MainMenu: PopupMenu = PopMenu
 	MainMenu.clear()
+	
+	# Create Arrowlist submenu
+	var ArrowSub: PopupMenu = PopupMenu.new()
+	ArrowSub.set_name("ArrowSub")
+	ArrowSub.add_item("Normal List")
+	ArrowSub.add_item("Audio List")
+	ArrowSub.connect("index_pressed", self, "_on_Arrow_item_selected")
+	MainMenu.add_child(ArrowSub)
 	
 	# Create Keybind submenu
 	var KeybindSub: PopupMenu = PopupMenu.new()
@@ -49,7 +59,7 @@ func _populate_menu() -> void:
 	MainMenu.add_item("Option List")
 	MainMenu.add_item("Text Field")
 	MainMenu.add_item("Number Field")
-	MainMenu.add_item("Arrow List")
+	MainMenu.add_submenu_item("Arrow List", "ArrowSub")
 	MainMenu.add_submenu_item("Slider", "SliderSub")
 	MainMenu.add_submenu_item("Keybind", "KeybindSub")
 	MainMenu.add_separator()
@@ -99,6 +109,17 @@ func _on_Keybind_item_selected(index: int) -> void:
 	_add_node(instance)
 
 
+func _on_Arrow_item_selected(index: int) -> void:
+	var instance
+	match index:
+		0:
+			instance = ArrowListComponent.instance()
+		1:
+			instance = AudioArrowListComponent.instance()
+	
+	_add_node(instance)
+	
+
 func _add_node(node: Object) -> void:
 	var Editor: EditorPlugin = EditorPlugin.new()
 	var Interface: EditorInterface = Editor.get_editor_interface()
@@ -111,10 +132,10 @@ func _add_node(node: Object) -> void:
 			selected_nodes[0].add_child(node)
 			node.owner = get_tree().edited_scene_root
 		else:
-			printerr("GGS - AddNode: Cannot add to multiple nodes. Please select one node only.")
+			ggsManager.print_err("Add_Node", "Cannot add to multiple nodes. Please select one node only.")
 			return
 	else:
-		printerr("GGS - AddNode: Cannot add to nothing. Please select a node first.")
+		ggsManager.print_err("Add_Node", "Cannot add to nothing. Please select a node first.")
 		return
 	
 	# Auto select the new node

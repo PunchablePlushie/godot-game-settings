@@ -4,18 +4,18 @@ extends HBoxContainer
 enum Type {Name, ValueType, ScriptPath}
 onready var TypeBtn: OptionButton = $OptionButton
 onready var Field: LineEdit = $LineEdit
-onready var Root: Control = get_node("../../../../..")
+onready var Root: Control = get_node("../../../..")
 
 
 func commence_search(new_text: String) -> void:
 	var items_list: Array = Root.SettingsList.get_children()
-	
+
 	# Reset search
 	if new_text == "":
 		for item in items_list:
 			item.visible = true
 		return
-	
+
 	# Search
 	match TypeBtn.selected:
 		Type.Name:
@@ -30,7 +30,7 @@ func _search_name(new_text: String) -> void:
 	var items_list: Array = Root.SettingsList.get_children()
 	var regex: RegEx = RegEx.new()
 	regex.compile("^%s"%[new_text])
-	
+
 	for item in items_list:
 		var reg_result: RegExMatch = regex.search(item.NameField.text)
 		if reg_result != null and reg_result.get_string() != "":
@@ -44,44 +44,38 @@ func _search_value_type(new_text: String) -> void:
 	var target_index: int
 	match new_text.to_lower():
 		"bool":
-			target_index = 0
+			target_index = TYPE_BOOL
 		"boolean":
-			target_index = 0
+			target_index = TYPE_BOOL
 		"int":
-			target_index = 1
+			target_index = TYPE_INT
 		"integer":
-			target_index = 1
+			target_index = TYPE_INT
 		"flt":
-			target_index = 2
+			target_index = TYPE_REAL
 		"float":
-			target_index = 2
+			target_index = TYPE_REAL
 		"str":
-			target_index = 3
+			target_index = TYPE_STRING
 		"string":
-			target_index = 3
-		"arr":
-			target_index = 4
-		"array":
-			target_index = 4
-		"dict":
-			target_index = 5
-		"dictionary":
-			target_index = 5
+			target_index = TYPE_STRING
 		_:
 			target_index = -1
 	
 	for item in items_list:
-		if item.DefaultType.selected == target_index:
-			item.visible = true
-		else:
-			item.visible = false
+		var default = ggsManager.settings_data[str(item.get_index())]["default"]
+		for key in default:
+			if typeof(default[key]) == target_index:
+				item.visible = true
+			else:
+				item.visible = false
 
 
 func _search_script(new_text: String) -> void:
 	var items_list: Array = Root.SettingsList.get_children()
 	var regex: RegEx = RegEx.new()
 	regex.compile("%s"%[new_text])
-	
+
 	for item in items_list:
 		var subject: String = item.EditScriptBtn.hint_tooltip.trim_prefix("%s: "%[item.EditScriptBtn.BASE_TOOLTIP])
 		var reg_result: RegExMatch = regex.search(subject)

@@ -1,7 +1,6 @@
 tool
-extends LineEdit
+extends BaseInput
 
-var saved: bool = false setget set_saved
 onready var Root: HBoxContainer = get_node("..")
 
 
@@ -10,9 +9,6 @@ func _ready() -> void:
 
 
 func _on_NameField_text_entered(new_text: String) -> void:
-	if Root.initialized == false:
-		Root.DefaultType.grab_focus()
-		
 	ggsManager.settings_data[str(Root.get_index())]["name"] = new_text
 	ggsManager.save_settings_data()
 	
@@ -22,11 +18,3 @@ func _on_NameField_text_entered(new_text: String) -> void:
 
 func _on_NameField_text_changed(new_text: String) -> void:
 	self.saved = false
-
-
-func set_saved(value: bool) -> void:
-	saved = value
-	if saved:
-		modulate = ggsManager.COL_GOOD
-	else:
-		modulate = ggsManager.COL_ERR

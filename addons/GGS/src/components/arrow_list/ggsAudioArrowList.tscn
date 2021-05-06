@@ -2,9 +2,9 @@
 
 [ext_resource path="res://addons/GGS/assets/arrow_list/arrow_right.svg" type="Texture" id=1]
 [ext_resource path="res://addons/GGS/assets/arrow_list/arrow_left.svg" type="Texture" id=2]
-[ext_resource path="res://addons/GGS/src/components/arrow_list/ggs_arrow_list.gd" type="Script" id=3]
+[ext_resource path="res://addons/GGS/src/components/arrow_list/ggs_audio_arrow_list.gd" type="Script" id=3]
 
-[node name="ggsArrowList" type="HBoxContainer"]
+[node name="ggsAudioArrowList" type="HBoxContainer"]
 margin_right = 32.0
 margin_bottom = 20.0
 script = ExtResource( 3 )

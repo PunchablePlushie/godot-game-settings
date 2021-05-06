@@ -5,8 +5,8 @@ const BASE_TOOLTIP: String = "Open Script"
 
 var broken: bool = false setget set_broken
 onready var Root: HBoxContainer = get_node("../..")
-onready var Menu: PopupMenu = $PopupMenu
 onready var AddScriptBtn: Button = get_node("../AddScript")
+onready var Menu: PopupMenu = $PopupMenu
 
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func _on_EditScript_pressed() -> void:
 			var resource = load(path)
 			Editor.get_editor_interface().edit_resource(resource)
 		else:
-			printerr("GGS - %02d/Open_Script: Could not find the script at '%s'."%[Root.get_index(), path])
+			ggsManager.print_err("%02d/Open_Script"%[Root.get_index()], "Could not find the script at '%s'."%[path])
 			self.broken = true
 
 

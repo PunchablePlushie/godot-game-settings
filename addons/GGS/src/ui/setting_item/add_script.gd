@@ -36,8 +36,6 @@ func assign_script(script_path: String) -> void:
 	var path: String = ggsManager.settings_data[str(Root.get_index())]["logic"]
 	EditScriptBtn.hint_tooltip = "%s: %s"%[EditScriptBtn.BASE_TOOLTIP ,path]
 	EditScriptBtn.disabled = false
-	if Root.initialized == false:
-		Root.initialized = true
 	
 	ggsManager.print_notif("%02d"%[Root.get_index()], "Script assigned (%s)"%[path])
 	EditScriptBtn.broken = false

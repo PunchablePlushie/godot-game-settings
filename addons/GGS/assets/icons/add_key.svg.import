@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/array.svg-03a77a695a7387ae08b62ac37e704a23.stex"
+path="res://.import/add_key.svg-c8d3ce4b4f2753778d8a07b6781c72cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/GGS/assets/icons/types/array.svg"
-dest_files=[ "res://.import/array.svg-03a77a695a7387ae08b62ac37e704a23.stex" ]
+source_file="res://addons/GGS/assets/icons/add_key.svg"
+dest_files=[ "res://.import/add_key.svg-c8d3ce4b4f2753778d8a07b6781c72cd.stex" ]
 
 [params]
 

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "LineEdit",
+"class": "BaseInput",
+"language": "GDScript",
+"path": "res://addons/GGS/src/base_classes/base_input.gd"
+}, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://addons/GGS/src/utils.gd"
 } ]
 _global_script_class_icons={
+"BaseInput": "",
 "JSONBeautifier": "",
 "Utils": ""
 }

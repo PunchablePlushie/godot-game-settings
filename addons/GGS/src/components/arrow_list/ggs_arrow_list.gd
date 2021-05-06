@@ -15,12 +15,23 @@ onready var NextBtn: Button = $NextBtn
 func _ready() -> void:
 	# Load display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	current_index = current
+	if typeof(current) == TYPE_DICTIONARY:
+		current_index = current["value"]
+	else:
+		current_index = current
 	DisplayLabel.text = list[current_index]
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
 	script_instance = script.new()
+
+
+func reset_to_default() -> void:
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
+	if typeof(default) == TYPE_ARRAY:
+		set_current_index(default["value"])
+	else:
+		set_current_index(default)
 
 
 func set_current_index(value: int) -> void:

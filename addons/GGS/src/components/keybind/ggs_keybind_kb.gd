@@ -26,6 +26,16 @@ func _ready() -> void:
 	connect("pressed", self, "_on_pressed")
 
 
+func reset_to_default() -> void:
+	var default = ggsManager.settings_data[str(setting_index)]["default"]
+	if icon != null:
+		icon.current_frame = default[1]
+	else:
+		text = OS.get_scancode_string(default[1])
+	ggsManager.save_settings_data()
+	script_instance.main(ggsManager.settings_data[str(setting_index)]["default"])
+
+
 func _on_pressed() -> void:
 	var instance: PopupPanel = ConfirmPopup.instance()
 	instance.type = 0

@@ -1,7 +1,7 @@
 tool
 extends Button
 
-onready var Root: Control = get_node("../../../../..")
+onready var Root: Control = get_node("../../../..")
 
 
 func _on_Create_pressed() -> void:
@@ -11,10 +11,8 @@ func _on_Create_pressed() -> void:
 	ui_item.RemoveBtn.connect("item_removed", Root, "_on_item_removed")
 	ggsManager.settings_data[str(ui_item.get_index())] = {
 		"name": "",
-		"value_type": 0,
-		"default": null,
-		"default_raw": "",
-		"current": null,
+		"default": {},
+		"current": {},
 		"logic": "",
 	}
 	ggsManager.save_settings_data()
