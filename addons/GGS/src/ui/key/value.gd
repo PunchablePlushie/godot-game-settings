@@ -1,7 +1,7 @@
 tool
 extends BaseInput
 
-enum Type {_bool, _int, _float, _String}
+enum Type {_bool, _float, _String}
 onready var Root: HBoxContainer = get_parent()
 
 
@@ -14,8 +14,6 @@ func convert_value(value: String) -> void:
 			result = value
 		Type._bool:
 			result = Utils.str2bool(value)
-		Type._int:
-			result = Utils.str2int(value)
 		Type._float:
 			result = Utils.str2float(value)
 	
@@ -25,12 +23,14 @@ func convert_value(value: String) -> void:
 	else:
 		self.saved = true
 		ggsManager.settings_data[Root.index]["default"][key_name] = result
+		ggsManager.settings_data[Root.index]["current"][key_name] = result
 		ggsManager.save_settings_data()
 		ggsManager.print_notif("%02d/Value"%[int(Root.index)], "'%s' was set to '%s'"%[Root.KeyNameField.text, result])
 
 
 func _on_Value_text_entered(new_text: String) -> void:
-	convert_value(new_text)
+	if editable:
+		convert_value(new_text)
 
 
 func _on_Value_text_changed(new_text: String) -> void:

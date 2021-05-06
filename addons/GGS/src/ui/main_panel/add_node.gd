@@ -1,23 +1,21 @@
 tool
 extends Button
 
-enum Type {Bool, OptionList, TextField, NumberField, ArrowList, Reset = 8}
+enum Type {Bool, OptionList, TextField, NumberField, ArrowList, _Slider, Reset = 8}
 
 # Scene Tree
 onready var PopMenu: PopupMenu = $PopupMenu
 
 # Resources
 onready var BoolComponent: PackedScene = preload("../../components/boolean/ggsBool.tscn")
-onready var SliderComponent: PackedScene = preload("../../components/slider/ggsSlider.tscn")
-onready var AudioSliderComponent: PackedScene = preload("../../components/slider/ggsAudioSlider.tscn")
 onready var OptionListComponent: PackedScene = preload("../../components/option_list/ggsOptionList.tscn")
 onready var TextFieldComponent: PackedScene = preload("../../components/text_field/ggsTextField.tscn")
 onready var NumberFieldComponent: PackedScene = preload("../../components/number_field/ggsNumberField.tscn")
+onready var ArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsArrowList.tscn")
+onready var SliderComponent: PackedScene = preload("../../components/slider/ggsSlider.tscn")
 onready var KeybindKbComponent: PackedScene = preload("../../components/keybind/ggsKeybindKb.tscn")
 onready var KeybindGpComponent: PackedScene = preload("../../components/keybind/ggsKeybindGp.tscn")
-onready var ArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsArrowList.tscn")
 onready var ResetComponent: PackedScene = preload("../../components/reset/ggsReset.tscn")
-onready var AudioArrowListComponent: PackedScene = preload("../../components/arrow_list/ggsAudioArrowList.tscn")
 
 
 # Create the menu itself
@@ -30,14 +28,6 @@ func _populate_menu() -> void:
 	var MainMenu: PopupMenu = PopMenu
 	MainMenu.clear()
 	
-	# Create Arrowlist submenu
-	var ArrowSub: PopupMenu = PopupMenu.new()
-	ArrowSub.set_name("ArrowSub")
-	ArrowSub.add_item("Normal List")
-	ArrowSub.add_item("Audio List")
-	ArrowSub.connect("index_pressed", self, "_on_Arrow_item_selected")
-	MainMenu.add_child(ArrowSub)
-	
 	# Create Keybind submenu
 	var KeybindSub: PopupMenu = PopupMenu.new()
 	KeybindSub.set_name("KeybindSub")
@@ -46,21 +36,13 @@ func _populate_menu() -> void:
 	KeybindSub.connect("index_pressed", self, "_on_Keybind_item_selected")
 	MainMenu.add_child(KeybindSub)
 	
-	# Create Slider submenu
-	var SliderSub: PopupMenu = PopupMenu.new()
-	SliderSub.set_name("SliderSub")
-	SliderSub.add_item("Normal Slider")
-	SliderSub.add_item("Audio Slider")
-	SliderSub.connect("index_pressed", self, "_on_Slider_item_selected")
-	MainMenu.add_child(SliderSub)
-	
 	# Create the main menu
 	MainMenu.add_item("Boolean")
 	MainMenu.add_item("Option List")
 	MainMenu.add_item("Text Field")
 	MainMenu.add_item("Number Field")
-	MainMenu.add_submenu_item("Arrow List", "ArrowSub")
-	MainMenu.add_submenu_item("Slider", "SliderSub")
+	MainMenu.add_item("Arrow List")
+	MainMenu.add_item("Slider")
 	MainMenu.add_submenu_item("Keybind", "KeybindSub")
 	MainMenu.add_separator()
 	MainMenu.add_item("Reset Button")
@@ -81,19 +63,10 @@ func _on_Main_item_selected(index: int) -> void:
 			instance = NumberFieldComponent.instance()
 		Type.ArrowList:
 			instance = ArrowListComponent.instance()
+		Type._Slider:
+			instance = SliderComponent.instance()
 		Type.Reset:
 			instance = ResetComponent.instance()
-	
-	_add_node(instance)
-
-
-func _on_Slider_item_selected(index: int) -> void:
-	var instance
-	match index:
-		0:
-			instance = SliderComponent.instance()
-		1:
-			instance = AudioSliderComponent.instance()
 	
 	_add_node(instance)
 
@@ -108,17 +81,6 @@ func _on_Keybind_item_selected(index: int) -> void:
 	
 	_add_node(instance)
 
-
-func _on_Arrow_item_selected(index: int) -> void:
-	var instance
-	match index:
-		0:
-			instance = ArrowListComponent.instance()
-		1:
-			instance = AudioArrowListComponent.instance()
-	
-	_add_node(instance)
-	
 
 func _add_node(node: Object) -> void:
 	var Editor: EditorPlugin = EditorPlugin.new()

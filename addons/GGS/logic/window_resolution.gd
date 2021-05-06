@@ -1,8 +1,15 @@
 extends Node
+# value: int
+#	Index of one of the items in the 'resolution_list'.
 
-var res_list: Array
+# 'resolution_list' should be defined manually. Vector2(width, height).
+var resolution_list: Array = [
+	Vector2(640, 360),
+	Vector2(1280, 720),
+	Vector2(1920, 1080),
+]
 
 
-func main(value: int) -> void:
-	OS.window_size = Vector2(res_list[value][0], res_list[value][1])
+func main(value: Dictionary) -> void:
+	OS.window_size = resolution_list[value["value"]]
 	OS.center_window()

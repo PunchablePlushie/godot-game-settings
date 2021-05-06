@@ -11,7 +11,7 @@ func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int
-	value = current[1]
+	value = current["value"]
 	
 	if icon != null:
 		icon.current_frame = value
@@ -28,12 +28,9 @@ func _ready() -> void:
 
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	if icon != null:
-		icon.current_frame = default[1]
-	else:
-		text = _get_actual_string(Input.get_joy_button_string(default[1]))
-	ggsManager.save_settings_data()
-	script_instance.main(ggsManager.settings_data[str(setting_index)]["default"])
+	var event: InputEventJoypadButton = InputEventJoypadButton.new()
+	event.button_index = default["value"]
+	_on_ConfirmPopup_confirmed(event)
 
 
 func _on_pressed() -> void:
@@ -48,7 +45,8 @@ func _on_pressed() -> void:
 
 func _on_ConfirmPopup_confirmed(event: InputEventJoypadButton) -> void:
 	# Update save value
-	ggsManager.settings_data[str(setting_index)]["current"][1] = event.button_index
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = event.button_index
 	ggsManager.save_settings_data()
 	
 	# Update display value
@@ -58,7 +56,7 @@ func _on_ConfirmPopup_confirmed(event: InputEventJoypadButton) -> void:
 		text = _get_actual_string(Input.get_joy_button_string(event.button_index))
 	
 	# Execute the logic script
-	script_instance.main(ggsManager.settings_data[str(setting_index)]["current"])
+	script_instance.main(current)
 
 
 func _get_actual_string(button_string: String) -> String:

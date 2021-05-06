@@ -15,11 +15,8 @@ onready var NextBtn: Button = $NextBtn
 func _ready() -> void:
 	# Load display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	if typeof(current) == TYPE_DICTIONARY:
-		current_index = current["value"]
-	else:
-		current_index = current
-	DisplayLabel.text = list[current_index]
+	DisplayLabel.text = list[current["value"]]
+	current_index = current["value"]
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
@@ -28,19 +25,17 @@ func _ready() -> void:
 
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	if typeof(default) == TYPE_ARRAY:
-		set_current_index(default["value"])
-	else:
-		set_current_index(default)
+	self.current_index = default["value"]
 
 
 func set_current_index(value: int) -> void:
 	current_index = value
 	
-	DisplayLabel.text = list[current_index]
-	ggsManager.settings_data[str(setting_index)]["current"] = value
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = value
 	ggsManager.save_settings_data()
-	script_instance.main(value)
+	DisplayLabel.text = list[value]
+	script_instance.main(current)
 
 
 func _on_PrevBtn_pressed() -> void:

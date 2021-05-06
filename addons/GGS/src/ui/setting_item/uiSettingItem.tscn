@@ -44,7 +44,7 @@ script = ExtResource( 2 )
 
 [node name="NameField" type="LineEdit" parent="."]
 margin_left = 34.0
-margin_right = 462.0
+margin_right = 509.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 250, 0 )
 hint_tooltip = "Setting Name"
@@ -53,20 +53,21 @@ placeholder_text = "Name"
 script = ExtResource( 8 )
 
 [node name="HBox" type="HBoxContainer" parent="."]
-margin_left = 466.0
+margin_left = 513.0
 margin_right = 640.0
 margin_bottom = 24.0
 custom_constants/separation = 5
 
 [node name="EditValue" type="Button" parent="HBox"]
-margin_right = 75.0
+margin_right = 28.0
 margin_bottom = 24.0
+hint_tooltip = "Edit Value"
 icon = ExtResource( 10 )
 script = ExtResource( 9 )
 
 [node name="EditScript" type="Button" parent="HBox"]
-margin_left = 80.0
-margin_right = 108.0
+margin_left = 33.0
+margin_right = 61.0
 margin_bottom = 24.0
 hint_tooltip = "Open Script"
 custom_constants/hseparation = 5
@@ -80,16 +81,16 @@ margin_right = 20.0
 margin_bottom = 20.0
 
 [node name="AddScript" type="Button" parent="HBox"]
-margin_left = 113.0
-margin_right = 141.0
+margin_left = 66.0
+margin_right = 94.0
 margin_bottom = 24.0
 hint_tooltip = "Assign/Change Script"
 icon = ExtResource( 3 )
 script = ExtResource( 6 )
 
 [node name="Remove" type="Button" parent="HBox"]
-margin_left = 146.0
-margin_right = 174.0
+margin_left = 99.0
+margin_right = 127.0
 margin_bottom = 24.0
 hint_tooltip = "Remove Setting"
 icon = ExtResource( 4 )

@@ -1,1 +1,76 @@
-{}
+{
+	"0": {
+		"name": "fullscreen",
+		"default": {
+			"value": false,
+			"window_script_path": "res://addons/GGS/logic/window_resolution.gd",
+			"window_setting_index": 1
+		},
+		"current": {
+			"value": false,
+			"window_script_path": "res://addons/GGS/logic/window_resolution.gd",
+			"window_setting_index": 1
+		},
+		"logic": "res://addons/GGS/logic/fullscreen.gd"
+	},
+	"1": {
+		"name": "window_scale",
+		"default": {
+			"value": 1
+		},
+		"current": {
+			"value": 1
+		},
+		"logic": "res://addons/GGS/logic/window_resolution.gd"
+	},
+	"2": {
+		"name": "master_volume",
+		"default": {
+			"value": 4,
+			"bus_name": "Master",
+			"list_length": 11
+		},
+		"current": {
+			"value": 4,
+			"bus_name": "Master",
+			"list_length": 11
+		},
+		"logic": "res://addons/GGS/logic/audio_arrow_list.gd"
+	},
+	"3": {
+		"name": "kb_move_right",
+		"default": {
+			"value": 88,
+			"action_name": "move_right"
+		},
+		"current": {
+			"value": 88,
+			"action_name": "move_right"
+		},
+		"logic": "res://addons/GGS/logic/keybind_kb.gd"
+	},
+	"4": {
+		"name": "gp_move_right",
+		"default": {
+			"value": 1,
+			"action_name": "move_right"
+		},
+		"current": {
+			"value": 1,
+			"action_name": "move_right"
+		},
+		"logic": "res://addons/GGS/logic/keybind_gp.gd"
+	},
+	"5": {
+		"name": "gp_move_left",
+		"default": {
+			"value": 4,
+			"action_name": "move_left"
+		},
+		"current": {
+			"value": 4,
+			"action_name": "move_left"
+		},
+		"logic": "res://addons/GGS/logic/keybind_gp.gd"
+	}
+}

@@ -18,6 +18,7 @@
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/b.png" type="Texture" id=16]
 
 [resource]
+resource_local_to_scene = true
 frames = 16
 pause = true
 frame_0/texture = ExtResource( 15 )

@@ -13,4 +13,6 @@ func _on_uiAddKey_pressed() -> void:
 	var KeyInstance: HBoxContainer = KeyScene.instance()
 	KeyInstance.index = index
 	get_parent().add_child(KeyInstance)
+	KeyInstance.ValueField.editable = false
+	KeyInstance.TypeSelectionBtn.disabled = true
 	raise()

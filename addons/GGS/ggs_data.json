@@ -1,8 +1,8 @@
 {
-	"default_logic_path": "res://",
+	"default_logic_path": "res://addons/GGS/logic/",
 	"auto_select_new_nodes": false,
-	"show_prints": true,
-	"show_errors": true,
+	"show_prints": false,
+	"show_errors": false,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned..."
 }

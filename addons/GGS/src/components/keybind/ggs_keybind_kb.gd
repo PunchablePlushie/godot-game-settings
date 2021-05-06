@@ -11,7 +11,7 @@ func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int
-	value = current[1]
+	value = current["value"]
 	
 	if icon != null:
 		icon.current_frame = value
@@ -27,13 +27,10 @@ func _ready() -> void:
 
 
 func reset_to_default() -> void:
-	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	if icon != null:
-		icon.current_frame = default[1]
-	else:
-		text = OS.get_scancode_string(default[1])
-	ggsManager.save_settings_data()
-	script_instance.main(ggsManager.settings_data[str(setting_index)]["default"])
+	var default: Dictionary = ggsManager.settings_data[str(setting_index)]["default"]
+	var event: InputEventKey = InputEventKey.new()
+	event.scancode = default["value"]
+	_on_ConfirmPopup_confirmed(event)
 
 
 func _on_pressed() -> void:
@@ -48,7 +45,8 @@ func _on_pressed() -> void:
 
 func _on_ConfirmPopup_confirmed(event: InputEventKey) -> void:
 	# Update save value
-	ggsManager.settings_data[str(setting_index)]["current"][1] = event.scancode
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = event.scancode
 	ggsManager.save_settings_data()
 	
 	# Update display value
@@ -58,4 +56,4 @@ func _on_ConfirmPopup_confirmed(event: InputEventKey) -> void:
 		text = OS.get_scancode_string(event.scancode)
 	
 	# Execute the logic script
-	script_instance.main(ggsManager.settings_data[str(setting_index)]["current"])
+	script_instance.main(current)

@@ -7,7 +7,7 @@ var script_instance: Object
 func _ready() -> void:
 	# Load value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	selected = current
+	selected = current["value"]
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
@@ -19,13 +19,12 @@ func _ready() -> void:
 
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	ggsManager.settings_data[str(setting_index)]["current"] = default
-	selected = default
-	ggsManager.save_settings_data()
-	script_instance.main(default)
+	_on_item_selected(default["value"])
+	selected = default["value"]
 
 
 func _on_item_selected(index: int) -> void:
-	ggsManager.settings_data[str(setting_index)]["current"] = index
+	var current = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = index
 	ggsManager.save_settings_data()
-	script_instance.main(index)
+	script_instance.main(current)

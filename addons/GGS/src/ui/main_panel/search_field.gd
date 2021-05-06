@@ -47,18 +47,16 @@ func _search_value_type(new_text: String) -> void:
 			target_index = TYPE_BOOL
 		"boolean":
 			target_index = TYPE_BOOL
-		"int":
-			target_index = TYPE_INT
-		"integer":
-			target_index = TYPE_INT
-		"flt":
+		"number":
 			target_index = TYPE_REAL
-		"float":
+		"num":
 			target_index = TYPE_REAL
 		"str":
 			target_index = TYPE_STRING
 		"string":
 			target_index = TYPE_STRING
+		"null":
+			target_index = TYPE_NIL
 		_:
 			target_index = -1
 	
@@ -67,6 +65,7 @@ func _search_value_type(new_text: String) -> void:
 		for key in default:
 			if typeof(default[key]) == target_index:
 				item.visible = true
+				break
 			else:
 				item.visible = false
 

@@ -6,6 +6,8 @@
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 100, 0 )
+max_value = 1.0
+step = 0.1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

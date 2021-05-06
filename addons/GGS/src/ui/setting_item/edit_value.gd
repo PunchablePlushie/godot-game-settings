@@ -38,8 +38,10 @@ func _create_new_dict() -> void:
 	
 	KeyInstance.KeyNameField.text = "value"
 	KeyInstance.KeyNameField.editable = false
+	KeyInstance.RemoveBtn.disabled = true
 	
 	ggsManager.settings_data[str(Root.get_index())]["default"]["value"] = null
+	ggsManager.settings_data[str(Root.get_index())]["current"]["value"] = null
 	ggsManager.save_settings_data()
 
 
@@ -55,6 +57,7 @@ func _load_dict(default_value: Dictionary) -> void:
 		KeyInstance.KeyNameField.old_key = key
 		if key == "value":
 			KeyInstance.KeyNameField.editable = false
+			KeyInstance.RemoveBtn.disabled = true
 		
 		# Value Field
 		KeyInstance.ValueField.text = str(default_value[key])
@@ -65,12 +68,10 @@ func _load_dict(default_value: Dictionary) -> void:
 		match typeof(value):
 			TYPE_BOOL:
 				type = 0
-			TYPE_INT:
-				type = 1
 			TYPE_REAL:
-				type = 2
+				type = 1
 			TYPE_STRING:
-				type = 3
+				type = 2
 		
 		KeyInstance.TypeSelectionBtn.selected = type
 		KeyInstance.TypeSelectionBtn.text = ""

@@ -6,8 +6,8 @@ var script_instance: Object
 
 func _ready() -> void:
 	# Load value
-	var current = ggsManager.settings_data[str(setting_index)]["current"]
-	pressed = current
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	pressed = current["value"]
 	
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
@@ -18,14 +18,13 @@ func _ready() -> void:
 
 
 func reset_to_default() -> void:
-	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	ggsManager.settings_data[str(setting_index)]["current"] = default
-	pressed = default
-	ggsManager.save_settings_data()
-	script_instance.main(default)
+	var default: Dictionary = ggsManager.settings_data[str(setting_index)]["default"]
+	_on_toggled(default["value"])
+	pressed = default["value"]
 
 
 func _on_toggled(button_pressed: bool) -> void:
-	ggsManager.settings_data[str(setting_index)]["current"] = button_pressed
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = button_pressed
 	ggsManager.save_settings_data()
-	script_instance.main(button_pressed)
+	script_instance.main(current)
