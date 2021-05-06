@@ -1,15 +1,10 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://demo/assets/audio/CopyCat.wav" type="AudioStream" id=1]
 [ext_resource path="res://addons/GGS/src/components/boolean/ggsBool.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/GGS/src/components/boolean/ggs_bool.gd" type="Script" id=3]
-[ext_resource path="res://addons/GGS/src/components/option_list/ggs_option_list.gd" type="Script" id=4]
 [ext_resource path="res://addons/GGS/src/components/option_list/ggsOptionList.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/GGS/src/components/arrow_list/ggs_arrow_list.gd" type="Script" id=6]
 [ext_resource path="res://addons/GGS/src/components/arrow_list/ggsArrowList.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/GGS/src/components/keybind/ggs_keybind_kb.gd" type="Script" id=8]
 [ext_resource path="res://addons/GGS/src/components/keybind/ggsKeybindKb.tscn" type="PackedScene" id=9]
-[ext_resource path="res://addons/GGS/src/components/keybind/ggs_keybind_gp.gd" type="Script" id=10]
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/R2.png" type="Texture" id=11]
 [ext_resource path="res://addons/GGS/src/components/keybind/ggsKeybindGp.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/L2.png" type="Texture" id=13]
@@ -27,7 +22,6 @@
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/start.png" type="Texture" id=25]
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/R3.png" type="Texture" id=26]
 [ext_resource path="res://addons/GGS/assets/glyph/gamepad/y.png" type="Texture" id=27]
-[ext_resource path="res://addons/GGS/src/components/reset/ggs_reset.gd" type="Script" id=28]
 [ext_resource path="res://addons/GGS/src/components/reset/ggsReset.tscn" type="PackedScene" id=29]
 
 [sub_resource type="AnimatedTexture" id=1]
@@ -112,6 +106,7 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 1 )
+autoplay = true
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 40.0
@@ -120,83 +115,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fullscreen" type="CheckButton" parent="VBox" instance=ExtResource( 2 )]
+[node name="Fullscreen" parent="VBox" instance=ExtResource( 2 )]
 margin_right = 146.0
-margin_bottom = 40.0
-shortcut_in_tooltip = false
 text = "Fullscreen"
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="WindowSize" type="OptionButton" parent="VBox" instance=ExtResource( 5 )]
+[node name="WindowSize" parent="VBox" instance=ExtResource( 5 )]
 margin_top = 44.0
 margin_right = 146.0
 margin_bottom = 64.0
 text = "640x360"
 items = [ "640x360", null, false, 0, null, "1280x720", null, false, 1, null, "1920x1080", null, false, 2, null ]
-selected = 0
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_index = 1
 
-[node name="Mastervolume" type="HBoxContainer" parent="VBox" instance=ExtResource( 7 )]
+[node name="Mastervolume" parent="VBox" instance=ExtResource( 7 )]
 margin_top = 68.0
 margin_right = 146.0
 margin_bottom = 90.0
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_index = 2
 list = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
 wrap_value = false
 
-[node name="KbMoveRight" type="Button" parent="VBox" instance=ExtResource( 9 )]
+[node name="KbMoveRight" parent="VBox" instance=ExtResource( 9 )]
 margin_top = 94.0
 margin_right = 146.0
 margin_bottom = 114.0
-rect_min_size = Vector2( 20, 0 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_index = 3
 
-[node name="GpMoveRight" type="Button" parent="VBox" instance=ExtResource( 12 )]
+[node name="GpMoveRight" parent="VBox" instance=ExtResource( 12 )]
 margin_top = 118.0
 margin_right = 146.0
 margin_bottom = 140.0
-rect_min_size = Vector2( 20, 20 )
 icon = SubResource( 1 )
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_index = 4
 
-[node name="GpMoveLeft" type="Button" parent="VBox" instance=ExtResource( 12 )]
+[node name="GpMoveLeft" parent="VBox" instance=ExtResource( 12 )]
 margin_top = 144.0
 margin_right = 146.0
 margin_bottom = 166.0
-rect_min_size = Vector2( 20, 20 )
 icon = SubResource( 2 )
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_index = 5
 
-[node name="Reset" type="Button" parent="VBox" instance=ExtResource( 29 )]
+[node name="Reset" parent="VBox" instance=ExtResource( 29 )]
 margin_top = 170.0
 margin_right = 146.0
 margin_bottom = 190.0
-text = "Reset to Default"
-script = ExtResource( 28 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 setting_nodes = [ NodePath("../Fullscreen"), NodePath("../WindowSize"), NodePath("../Mastervolume"), NodePath("../KbMoveRight"), NodePath("../GpMoveRight"), NodePath("../GpMoveLeft") ]

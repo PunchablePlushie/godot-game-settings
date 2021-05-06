@@ -3,11 +3,11 @@
 [ext_resource path="res://addons/GGS/src/ui/key/ui_key.gd" type="Script" id=1]
 [ext_resource path="res://addons/GGS/assets/icons/types/float.svg" type="Texture" id=2]
 [ext_resource path="res://addons/GGS/assets/icons/types/string.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/assets/icons/remove_key.svg" type="Texture" id=4]
 [ext_resource path="res://addons/GGS/assets/icons/types/bool.svg" type="Texture" id=5]
 [ext_resource path="res://addons/GGS/src/ui/key/type_selection.gd" type="Script" id=6]
 [ext_resource path="res://addons/GGS/src/ui/key/value.gd" type="Script" id=7]
 [ext_resource path="res://addons/GGS/src/ui/key/key_name.gd" type="Script" id=8]
-[ext_resource path="res://addons/GGS/assets/icons/item_remove.svg" type="Texture" id=9]
 [ext_resource path="res://addons/GGS/src/ui/key/uikey_remove.gd" type="Script" id=10]
 
 [node name="uiKey" type="HBoxContainer"]
@@ -46,7 +46,7 @@ margin_left = 173.0
 margin_right = 201.0
 margin_bottom = 24.0
 hint_tooltip = "Remove Key"
-icon = ExtResource( 9 )
+icon = ExtResource( 4 )
 script = ExtResource( 10 )
 
 [connection signal="text_changed" from="KeyName" to="KeyName" method="_on_KeyName_text_changed"]

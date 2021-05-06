@@ -2,6 +2,7 @@ tool
 extends Node
 
 const SETTINGS_DATA_PATH: String = "res://addons/GGS/settings_data.json"
+const SETTINGS_SAVE_PATH: String = "user://settings_data.json"
 const GGS_DATA_PATH: String = "res://addons/GGS/ggs_data.json"
 const COL_ERR: Color = Color(1.0, 0.7, 0.7, 1.0)
 const COL_GOOD: Color = Color(1.0, 1.0, 1.0, 1.0)
@@ -23,6 +24,11 @@ func _init() -> void:
 	load_settings_data()
 
 
+func _exit_tree() -> void:
+	if not OS.is_debug_build():
+		Utils.save_json(settings_data, SETTINGS_SAVE_PATH)
+
+
 func _ready() -> void:
 	if Engine.editor_hint == false:
 		_apply_settings()
@@ -38,14 +44,26 @@ func save_ggs_data() -> void:
 
 func load_settings_data() -> void:
 	var file: File = File.new()
-	if file.file_exists(SETTINGS_DATA_PATH):
-		settings_data = Utils.load_json(SETTINGS_DATA_PATH)
+	if OS.is_debug_build():
+		if file.file_exists(SETTINGS_DATA_PATH):
+			settings_data = Utils.load_json(SETTINGS_DATA_PATH)
+		else:
+			save_settings_data()
+	else:
+		if file.file_exists(SETTINGS_SAVE_PATH):
+			settings_data = Utils.load_json(SETTINGS_SAVE_PATH)
+		elif file.file_exists(SETTINGS_DATA_PATH):
+			settings_data = Utils.load_json(SETTINGS_DATA_PATH)
+		else:
+			printerr("GGS - Load Data: Failed to load settings data.")
 
 
 func load_ggs_data() -> void:
 	var file: File = File.new()
 	if file.file_exists(GGS_DATA_PATH):
 		ggs_data = Utils.load_json(GGS_DATA_PATH)
+	else:
+		save_ggs_data()
 
 
 func print_notif(_for: String, message: String) -> void:

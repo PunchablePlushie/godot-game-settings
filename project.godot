@@ -33,6 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Game Settings"
+run/main_scene="res://test_scene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
