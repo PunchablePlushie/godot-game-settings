@@ -15,10 +15,19 @@ func _on_Remove_pressed() -> void:
 
 
 func _on_ConfirmDialog_confirmed() -> void:
-	# Clear the key list if it's showing the keys of the item that'll be removed
+	# Manage index highlight
 	var inspector_index = Root.MainPanel.Inspector.index
-	if inspector_index == Root.get_index():
+	var root_index = Root.get_index()
+	
+	if root_index == inspector_index:
+		Root.MainPanel.Inspector.index = -1
 		Root.MainPanel.Inspector.clear(true)
+	
+	if root_index > inspector_index:
+		Root.MainPanel.Inspector.highlight_cur_index()
+	
+	if root_index < inspector_index:
+		Root.MainPanel.Inspector.index -= 1
 	
 	# Remove item
 	emit_signal("item_removed", Root.get_index())

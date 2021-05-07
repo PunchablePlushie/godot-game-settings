@@ -1,6 +1,5 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://demo/assets/audio/CopyCat.wav" type="AudioStream" id=1]
 [ext_resource path="res://addons/GGS/src/components/boolean/ggsBool.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/GGS/src/components/option_list/ggsOptionList.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/GGS/src/components/arrow_list/ggsArrowList.tscn" type="PackedScene" id=7]
@@ -102,11 +101,6 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 1 )
-autoplay = true
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 40.0

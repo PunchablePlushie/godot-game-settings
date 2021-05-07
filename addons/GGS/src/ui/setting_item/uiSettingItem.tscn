@@ -39,7 +39,6 @@ context_menu_enabled = false
 virtual_keyboard_enabled = false
 shortcut_keys_enabled = false
 selecting_enabled = false
-placeholder_text = "#"
 script = ExtResource( 2 )
 
 [node name="NameField" type="LineEdit" parent="."]
@@ -64,6 +63,10 @@ margin_bottom = 24.0
 hint_tooltip = "Edit Value"
 icon = ExtResource( 10 )
 script = ExtResource( 9 )
+
+[node name="PopupMenu" type="PopupMenu" parent="HBox/EditValue"]
+margin_right = 20.0
+margin_bottom = 20.0
 
 [node name="EditScript" type="Button" parent="HBox"]
 margin_left = 33.0
@@ -105,7 +108,9 @@ dialog_text = "Are you sure you want to remove this setting? This action cannot 
 
 [connection signal="text_changed" from="NameField" to="NameField" method="_on_NameField_text_changed"]
 [connection signal="text_entered" from="NameField" to="NameField" method="_on_NameField_text_entered"]
+[connection signal="gui_input" from="HBox/EditValue" to="HBox/EditValue" method="_on_EditValue_gui_input"]
 [connection signal="pressed" from="HBox/EditValue" to="HBox/EditValue" method="_on_EditValue_pressed"]
+[connection signal="index_pressed" from="HBox/EditValue/PopupMenu" to="HBox/EditValue" method="_on_PopupMenu_index_pressed"]
 [connection signal="gui_input" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_gui_input"]
 [connection signal="pressed" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_pressed"]
 [connection signal="index_pressed" from="HBox/EditScript/PopupMenu" to="HBox/EditScript" method="_on_PopupMenu_index_pressed"]

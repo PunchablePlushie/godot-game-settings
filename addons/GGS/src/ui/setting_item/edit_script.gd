@@ -49,7 +49,7 @@ func _create_popup_menu() -> void:
 	if disabled:
 		Menu.set_item_disabled(0, true)
 		Menu.set_item_tooltip(0, "No path is available to copy")
-	if ggsManager.clip_board == null:
+	if ggsManager.script_clipboard == "":
 		Menu.set_item_disabled(1, true)
 		Menu.set_item_tooltip(1, "No path is copied to GGS clipboard")
 	
@@ -61,8 +61,8 @@ func _on_PopupMenu_index_pressed(index: int) -> void:
 	match index:
 		0:
 			var path: String = hint_tooltip.trim_prefix("%s: "%[BASE_TOOLTIP])
-			ggsManager.clip_board = path
+			ggsManager.script_clipboard = path
 			ggsManager.print_notif("%02d"%[Root.get_index()], "Script path copied to GGS clipboard (%s)"%[path])
 		1:
-			AddScriptBtn.assign_script(ggsManager.clip_board)
+			AddScriptBtn.assign_script(ggsManager.script_clipboard)
 	

@@ -6,8 +6,10 @@ const SETTINGS_SAVE_PATH: String = "user://settings_data.json"
 const GGS_DATA_PATH: String = "res://addons/GGS/ggs_data.json"
 const COL_ERR: Color = Color(1.0, 0.7, 0.7, 1.0)
 const COL_GOOD: Color = Color(1.0, 1.0, 1.0, 1.0)
+const COL_SELECTED: Color = Color("#f6ff4c")
 
-var clip_board
+var script_clipboard: String = ""
+var value_clipboard: Dictionary = {}
 var settings_data: Dictionary = {}
 var ggs_data: Dictionary = {
 	"default_logic_path": "res://",

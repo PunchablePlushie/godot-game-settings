@@ -3,6 +3,7 @@ extends Button
 
 # Scene Tree
 onready var Root: HBoxContainer = get_node("../..")
+onready var Menu: PopupMenu = $PopupMenu
 
 # Resource
 onready var KeyScene: PackedScene = preload("../key/uiKey.tscn")
@@ -75,3 +76,40 @@ func _load_dict(default_value: Dictionary) -> void:
 		
 		KeyInstance.TypeSelectionBtn.selected = type
 		KeyInstance.TypeSelectionBtn.text = ""
+
+
+# Context Menu
+func _on_EditScript_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			_create_popup_menu()
+
+
+func _create_popup_menu() -> void:
+	Menu.clear()
+	
+	Menu.add_item("Copy Path")
+	Menu.add_item("Paste Path")
+	
+	if ggsManager.value_clipboard.hash() == {}.hash():
+		Menu.set_item_disabled(1, true)
+		Menu.set_item_tooltip(1, "No value is copied to GGS clipboard")
+	
+	Menu.rect_global_position = get_global_mouse_position()
+	Menu.popup()
+
+
+func _on_PopupMenu_index_pressed(index: int) -> void:
+	match index:
+		0:
+			ggsManager.value_clipboard = ggsManager.settings_data[str(Root.get_index())]["default"]
+			ggsManager.print_notif("%02d"%[Root.get_index()], "Value copied to GGS clipboard.")
+		1:
+			ggsManager.settings_data[str(Root.get_index())]["default"] = ggsManager.value_clipboard.duplicate()
+			_on_EditValue_pressed()
+
+
+func _on_EditValue_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			_create_popup_menu()
