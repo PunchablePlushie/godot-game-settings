@@ -88,8 +88,8 @@ func _on_EditScript_gui_input(event: InputEvent) -> void:
 func _create_popup_menu() -> void:
 	Menu.clear()
 	
-	Menu.add_item("Copy Path")
-	Menu.add_item("Paste Path")
+	Menu.add_item("Copy Value")
+	Menu.add_item("Paste Value")
 	
 	if ggsManager.value_clipboard.hash() == {}.hash():
 		Menu.set_item_disabled(1, true)

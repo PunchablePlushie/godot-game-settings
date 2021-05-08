@@ -26,6 +26,6 @@ func highlight_cur_index() -> void:
 	var settings: Array = SettingsList.get_children()
 	for setting in settings:
 		if setting.get_index() == index:
-			setting.IndexField.modulate = ggsManager.COL_SELECTED
+			setting.modulate = ggsManager.COL_SELECTED
 		else:
-			setting.IndexField.modulate = ggsManager.COL_GOOD
+			setting.modulate = ggsManager.COL_GOOD

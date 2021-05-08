@@ -41,6 +41,8 @@ func _input(event: InputEvent) -> void:
 	# Confirm the new key
 	emit_signal("confirmed", event)
 	get_tree().set_input_as_handled()
+	
+	# Close the popup
 	get_tree().paused = false
 	source.grab_focus()
 	queue_free()
@@ -55,4 +57,6 @@ func _get_non_ui_actions(actions: Array) -> Array:
 
 # Auto close the popup after a while to prevent the player from being stuck on the popup
 func _on_Timer_timeout() -> void:
+	get_tree().paused = false
+	source.grab_focus()
 	queue_free()

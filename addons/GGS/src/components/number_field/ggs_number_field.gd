@@ -20,7 +20,7 @@ func _ready() -> void:
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
 	_on_value_changed(default["value"])
-	value = default
+	value = default["value"]
 
 
 func _on_value_changed(value: float) -> void:

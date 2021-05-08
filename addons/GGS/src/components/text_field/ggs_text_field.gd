@@ -20,10 +20,11 @@ func _ready() -> void:
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
 	_on_text_changed(default["value"])
-	text = default
+	text = default["value"]
 
 
 func _on_text_changed(new_text: String) -> void:
-	ggsManager.settings_data[str(setting_index)]["current"]["value"] = new_text
+	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
+	current["value"] = new_text
 	ggsManager.save_settings_data()
-	script_instance.main(new_text)
+	script_instance.main(current)

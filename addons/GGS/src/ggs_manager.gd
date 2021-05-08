@@ -6,7 +6,7 @@ const SETTINGS_SAVE_PATH: String = "user://settings_data.json"
 const GGS_DATA_PATH: String = "res://addons/GGS/ggs_data.json"
 const COL_ERR: Color = Color(1.0, 0.7, 0.7, 1.0)
 const COL_GOOD: Color = Color(1.0, 1.0, 1.0, 1.0)
-const COL_SELECTED: Color = Color("#f6ff4c")
+const COL_SELECTED: Color = Color("#fff6b6")
 
 var script_clipboard: String = ""
 var value_clipboard: Dictionary = {}
