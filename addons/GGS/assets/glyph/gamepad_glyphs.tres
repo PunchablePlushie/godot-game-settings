@@ -1,0 +1,54 @@
+[gd_resource type="AnimatedTexture" load_steps=17 format=2]
+
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/start.png" type="Texture" id=1]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/up.png" type="Texture" id=2]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/left.png" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/right.png" type="Texture" id=4]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/down.png" type="Texture" id=5]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/L1.png" type="Texture" id=6]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/R1.png" type="Texture" id=7]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/R2.png" type="Texture" id=8]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/x.png" type="Texture" id=9]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/L2.png" type="Texture" id=10]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/L3.png" type="Texture" id=11]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/R3.png" type="Texture" id=12]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/select.png" type="Texture" id=13]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/y.png" type="Texture" id=14]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/a.png" type="Texture" id=15]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad/b.png" type="Texture" id=16]
+
+[resource]
+resource_local_to_scene = true
+frames = 16
+pause = true
+frame_0/texture = ExtResource( 15 )
+frame_1/texture = ExtResource( 16 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 9 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 14 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 6 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 7 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 10 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 8 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 11 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 12 )
+frame_9/delay_sec = 0.0
+frame_10/texture = ExtResource( 13 )
+frame_10/delay_sec = 0.0
+frame_11/texture = ExtResource( 1 )
+frame_11/delay_sec = 0.0
+frame_12/texture = ExtResource( 2 )
+frame_12/delay_sec = 0.0
+frame_13/texture = ExtResource( 5 )
+frame_13/delay_sec = 0.0
+frame_14/texture = ExtResource( 3 )
+frame_14/delay_sec = 0.0
+frame_15/texture = ExtResource( 4 )
+frame_15/delay_sec = 0.0

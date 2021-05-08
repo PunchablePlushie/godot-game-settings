@@ -1,28 +1,38 @@
 # Godot Game Settings (GGS)
-Godot Game Settings is a tool for people who don't want to spend a lot of time coding game settings. Easy to use and easy to expand to fit your own project.
+Godot Game Settings is a tool that can help you easily and quickly create and maintain in-game settings menus. Check out the [How to Use page](https://github.com/PunchablePlushie/godot_ggs/wiki/How-to_use) to get started with GGS.
 <p align="center">
   <img src="https://i.imgur.com/aOIyWU5.png?2" alt="demo preview">
 </p>
 
-## Introduction
-The project is component based. Typical setting _types_ (e.g. option list, slider, check button, etc) are all basic components that can be easily instanced and expanded to fit your needs.<br/>
 
-Check out the [github wiki page](https://github.com/PunchablePlushie/godot_ggs/wiki) for complete instructions on how to use GGS.
 
 ## Theme
-GGS does not come with its own theme. You can check the [GUI Skinning page](https://docs.godotengine.org/en/stable/tutorials/gui/gui_skinning.html) of the Godot documentation to get started with making and using your own theme.
+GGS does not come with themes. You can check the [GUI Skinning page](https://docs.godotengine.org/en/stable/tutorials/gui/gui_skinning.html) of the Godot documentation to get started with making and using your own themes.
 
 ## Demo
-A demo is available inside the project itself. When adding GGS to your own project, I recommend not adding the demo folder as that won't be necessary. If you want to checkout the project, simply create an empty Godot project and add GGS to it, so that you won't have to worry about potentially messing up your own project.
+A demo repo is available that contains two versions of the same project. The "Base" version is the unfinished version that you can use to follow along when reading the [How to Use page](https://github.com/PunchablePlushie/godot_ggs/wiki/How-to_use). If you're looking to just see what a completed project with GGS would look like, you can check out the "Finished" version.
+
+You can find the demo [here.](https://github.com/PunchablePlushie/GGS-Demo)
+
+___
 
 ## Changelog
-* `v1.1`:
-  * Renamed `SettingsManager` to `GameSettings`.
-  * Changed how the logic functions are created and handled. It should be easier to maintain and use them now.
-  * Decluttered the exported variables of `GameSettings`. Each exported variable is now in it's own logic script. No more messy list of variables in the editor, yay!
-  * Added full gamepad support. You can rebind gamepad controls now.
-  * When rebinding controls, you cannot use already assigned keys now.
-  * Not really important but the icon is updated.
+GGS has been completely reworked for the `v2.0` version. Instead of relying mostly on nodes themselves, GGS now optimizes plugin features of Godot to create an easier and more intuitive way to create and manage both settings and UI components.
+* The way the user interacts with the plugin has been improved:
+  * `GameSettings.tscn` is no more. The main manager is now called `ggsManager.gd`. Unlike the previous versions, users don't have to edit the core plugin code itself anymore to use GGS to it's full potential.
+  * The plugin now adds a main screen editor to the Godot editor. Everything related to the plugin can be accessed through this new editor.
+  * The settings are created and handled differently now. They're no longer node depedant, rather they're just entries in a dictionary. This makes it much easier to edit and maintain the settings list.
 
-* `1.0`:
-  * Published the project for the first time.
+* The UI components have been reworked:
+  * The Arrow List component uses texture for its arrows instead of text now.
+  * The Keybind components (both keyboard and gamepad) now support glyph icons, in addition to just plain text. 
+  * Components are no longer divided into "base" and "generic" groups.
+  * Components can now be added to the scene through the main GGS editor. No more trying to find the component you want to instance in the Godot editor.
+  * All components have a cleaner scene tree now. This makes modifying them through the Inspector much easier and adds more flexibility when designing the menu UI.
+  * Three new components have been added: Text Field, Number Field, and Reset Button.
+
+* Save data is handled differently now. Instead of using ConfigFile, GGS uses JSON files and dictionaries to save and load data.
+* The way logic scripts are created and handled is slightly different now.
+* Choosing a default value for each setting is done through the GGS editor and by using dictionaries, instead of the previous method of providing a default config file.
+* The game settings should work properly after exporting the game now. The previous version had some issues with exporting.
+___

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/GGS/src/components/boolean/ggs_bool.gd" type="Script" id=1]
+
+[node name="ggsBool" type="CheckButton"]
+margin_right = 76.0
+margin_bottom = 40.0
+shortcut_in_tooltip = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

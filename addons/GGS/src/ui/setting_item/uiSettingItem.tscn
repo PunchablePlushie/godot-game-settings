@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/GGS/src/ui/setting_item/ui_setting_item.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/index.gd" type="Script" id=2]
+[ext_resource path="res://addons/GGS/assets/icons/script_create.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/assets/icons/item_remove.svg" type="Texture" id=4]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/edit_script.gd" type="Script" id=5]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/add_script.gd" type="Script" id=6]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/remove.gd" type="Script" id=7]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/name_field.gd" type="Script" id=8]
+[ext_resource path="res://addons/GGS/src/ui/setting_item/edit_value.gd" type="Script" id=9]
+[ext_resource path="res://addons/GGS/assets/icons/edit_value.svg" type="Texture" id=10]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/script.svg-5c7911f5285fd439261366a62810fa30.stex"
+
+[node name="uiSettingItem" type="HBoxContainer"]
+process_priority = 3
+anchor_right = 1.0
+margin_bottom = 22.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Index" type="LineEdit" parent="."]
+margin_right = 30.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 10, 0 )
+hint_tooltip = "Index"
+focus_mode = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+custom_constants/minimum_spaces = 5
+text = "00"
+align = 1
+editable = false
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+script = ExtResource( 2 )
+
+[node name="NameField" type="LineEdit" parent="."]
+margin_left = 34.0
+margin_right = 509.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+hint_tooltip = "Setting Name"
+size_flags_horizontal = 3
+placeholder_text = "Name"
+script = ExtResource( 8 )
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_left = 513.0
+margin_right = 640.0
+margin_bottom = 24.0
+custom_constants/separation = 5
+
+[node name="EditValue" type="Button" parent="HBox"]
+margin_right = 28.0
+margin_bottom = 24.0
+hint_tooltip = "Edit Value"
+icon = ExtResource( 10 )
+script = ExtResource( 9 )
+
+[node name="PopupMenu" type="PopupMenu" parent="HBox/EditValue"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="EditScript" type="Button" parent="HBox"]
+margin_left = 33.0
+margin_right = 61.0
+margin_bottom = 24.0
+hint_tooltip = "Open Script"
+custom_constants/hseparation = 5
+disabled = true
+icon = SubResource( 1 )
+align = 0
+script = ExtResource( 5 )
+
+[node name="PopupMenu" type="PopupMenu" parent="HBox/EditScript"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="AddScript" type="Button" parent="HBox"]
+margin_left = 66.0
+margin_right = 94.0
+margin_bottom = 24.0
+hint_tooltip = "Assign/Change Script"
+icon = ExtResource( 3 )
+script = ExtResource( 6 )
+
+[node name="Remove" type="Button" parent="HBox"]
+margin_left = 99.0
+margin_right = 127.0
+margin_bottom = 24.0
+hint_tooltip = "Remove Setting"
+icon = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+margin_left = 466.0
+margin_right = 972.0
+margin_bottom = 70.0
+window_title = "Remove Setting?"
+dialog_text = "Are you sure you want to remove this setting? This action cannot be undone."
+
+[connection signal="text_changed" from="NameField" to="NameField" method="_on_NameField_text_changed"]
+[connection signal="text_entered" from="NameField" to="NameField" method="_on_NameField_text_entered"]
+[connection signal="gui_input" from="HBox/EditValue" to="HBox/EditValue" method="_on_EditValue_gui_input"]
+[connection signal="pressed" from="HBox/EditValue" to="HBox/EditValue" method="_on_EditValue_pressed"]
+[connection signal="index_pressed" from="HBox/EditValue/PopupMenu" to="HBox/EditValue" method="_on_PopupMenu_index_pressed"]
+[connection signal="gui_input" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_gui_input"]
+[connection signal="pressed" from="HBox/EditScript" to="HBox/EditScript" method="_on_EditScript_pressed"]
+[connection signal="index_pressed" from="HBox/EditScript/PopupMenu" to="HBox/EditScript" method="_on_PopupMenu_index_pressed"]
+[connection signal="pressed" from="HBox/AddScript" to="HBox/AddScript" method="_on_AddScript_pressed"]
+[connection signal="pressed" from="HBox/Remove" to="HBox/Remove" method="_on_Remove_pressed"]
+[connection signal="confirmed" from="ConfirmDialog" to="HBox/Remove" method="_on_ConfirmDialog_confirmed"]

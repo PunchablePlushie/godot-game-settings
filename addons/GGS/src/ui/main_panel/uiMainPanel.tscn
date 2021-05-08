@@ -1,0 +1,350 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://addons/GGS/src/ui/main_panel/ui_main_panel.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/create_button.gd" type="Script" id=2]
+[ext_resource path="res://addons/GGS/assets/icons/search_help.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/help_btn.gd" type="Script" id=4]
+[ext_resource path="res://addons/GGS/assets/icons/add_setting.svg" type="Texture" id=5]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/default_logic_path.gd" type="Script" id=6]
+[ext_resource path="res://addons/GGS/assets/icons/file_dialog.svg" type="Texture" id=7]
+[ext_resource path="res://addons/GGS/assets/icons/reload.svg" type="Texture" id=8]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/reload_button.gd" type="Script" id=9]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/add_node.gd" type="Script" id=10]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/auto_select.gd" type="Script" id=11]
+[ext_resource path="res://addons/GGS/assets/icons/add_node.svg" type="Texture" id=12]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/search_field.gd" type="Script" id=13]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/print_notif.gd" type="Script" id=14]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/keybind_assign.gd" type="Script" id=15]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/keybind_already.gd" type="Script" id=16]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/inspector.gd" type="Script" id=17]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/print_err.gd" type="Script" id=18]
+
+[node name="uiMainPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game Settings" type="VBoxContainer" parent="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Toolbar" type="HBoxContainer" parent="Tabs/Game Settings"]
+margin_right = 656.0
+margin_bottom = 24.0
+
+[node name="Create" type="Button" parent="Tabs/Game Settings/Toolbar"]
+margin_right = 119.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+custom_constants/hseparation = 2
+shortcut_in_tooltip = false
+text = "Create Setting"
+icon = ExtResource( 5 )
+script = ExtResource( 2 )
+
+[node name="AddNode" type="Button" parent="Tabs/Game Settings/Toolbar"]
+margin_left = 123.0
+margin_right = 256.0
+margin_bottom = 24.0
+toggle_mode = true
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Add Component"
+icon = ExtResource( 12 )
+script = ExtResource( 10 )
+
+[node name="PopupMenu" type="PopupMenu" parent="Tabs/Game Settings/Toolbar/AddNode"]
+margin_right = 20.0
+margin_bottom = 20.0
+items = [ "Boolean", null, 0, false, false, 0, 0, null, "", false, "Option List", null, 0, false, false, 1, 0, null, "", false, "Text Field", null, 0, false, false, 2, 0, null, "", false, "Number Field", null, 0, false, false, 3, 0, null, "", false, "Arrow List", null, 0, false, false, 4, 0, null, "", false, "Slider", null, 0, false, false, 5, 0, null, "", false, "Keybind", null, 0, false, false, 6, 0, null, "KeybindSub", false, "", null, 0, false, false, -1, 0, null, "", true, "Reset Button", null, 0, false, false, 8, 0, null, "", false ]
+
+[node name="Reload" type="Button" parent="Tabs/Game Settings/Toolbar"]
+margin_left = 260.0
+margin_right = 288.0
+margin_bottom = 24.0
+hint_tooltip = "Reload List"
+icon = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="VSeparator" type="VSeparator" parent="Tabs/Game Settings/Toolbar"]
+margin_left = 292.0
+margin_right = 296.0
+margin_bottom = 24.0
+
+[node name="Search" type="HBoxContainer" parent="Tabs/Game Settings/Toolbar"]
+margin_left = 300.0
+margin_right = 624.0
+margin_bottom = 24.0
+script = ExtResource( 13 )
+
+[node name="OptionButton" type="OptionButton" parent="Tabs/Game Settings/Toolbar/Search"]
+margin_right = 70.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 70, 0 )
+text = "Name"
+items = [ "Name", null, false, 0, null, "Type", null, false, 1, null, "Script", null, false, 2, null ]
+selected = 0
+
+[node name="LineEdit" type="LineEdit" parent="Tabs/Game Settings/Toolbar/Search"]
+margin_left = 74.0
+margin_right = 324.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+clear_button_enabled = true
+shortcut_keys_enabled = false
+placeholder_text = "Search..."
+
+[node name="Help" type="Button" parent="Tabs/Game Settings/Toolbar"]
+margin_left = 628.0
+margin_right = 656.0
+margin_bottom = 24.0
+hint_tooltip = "Open Github Wiki / Documentation"
+size_flags_horizontal = 10
+icon = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="HSep" type="HSeparator" parent="Tabs/Game Settings"]
+margin_top = 28.0
+margin_right = 656.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="MainArea" type="ScrollContainer" parent="Tabs/Game Settings"]
+margin_top = 36.0
+margin_right = 656.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBox" type="HBoxContainer" parent="Tabs/Game Settings/MainArea"]
+margin_right = 656.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 5
+
+[node name="SettingsList" type="VBoxContainer" parent="Tabs/Game Settings/MainArea/HBox"]
+margin_right = 321.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="Tabs/Game Settings/MainArea/HBox"]
+margin_left = 326.0
+margin_right = 330.0
+margin_bottom = 288.0
+
+[node name="Inspector" type="VBoxContainer" parent="Tabs/Game Settings/MainArea/HBox"]
+margin_left = 335.0
+margin_right = 656.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+script = ExtResource( 17 )
+
+[node name="NoSelection" type="CenterContainer" parent="Tabs/Game Settings/MainArea/HBox/Inspector"]
+margin_right = 321.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Tabs/Game Settings/MainArea/HBox/Inspector/NoSelection"]
+margin_left = 22.0
+margin_top = 137.0
+margin_right = 298.0
+margin_bottom = 151.0
+text = "Click on \"Edit Value\" of a setting to inspect."
+
+[node name="GGS Settings" type="VBoxContainer" parent="Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/separation = 6
+
+[node name="Editor" type="VBoxContainer" parent="Tabs/GGS Settings"]
+margin_right = 632.0
+margin_bottom = 174.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tabs/GGS Settings/Editor"]
+margin_right = 632.0
+margin_bottom = 14.0
+text = "Editor"
+align = 1
+
+[node name="DefaultLogicPath" type="HBoxContainer" parent="Tabs/GGS Settings/Editor"]
+margin_top = 18.0
+margin_right = 632.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+script = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Tabs/GGS Settings/Editor/DefaultLogicPath"]
+margin_top = 5.0
+margin_right = 155.0
+margin_bottom = 19.0
+hint_tooltip = "Default path when creating scripts using the 'Assign/Change Script' button."
+mouse_filter = 0
+text = "Default Logic Script Path"
+
+[node name="LineEdit" type="LineEdit" parent="Tabs/GGS Settings/Editor/DefaultLogicPath"]
+margin_left = 163.0
+margin_right = 596.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+text = "res://"
+
+[node name="Button" type="Button" parent="Tabs/GGS Settings/Editor/DefaultLogicPath"]
+margin_left = 604.0
+margin_right = 632.0
+margin_bottom = 24.0
+icon = ExtResource( 7 )
+
+[node name="FileDialog" type="FileDialog" parent="Tabs/GGS Settings/Editor/DefaultLogicPath"]
+margin_left = 86.0
+margin_top = -212.0
+margin_right = 586.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 500, 370 )
+popup_exclusive = true
+window_title = "Open a Directory"
+resizable = true
+dialog_hide_on_ok = true
+mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrintNotif" type="CheckButton" parent="Tabs/GGS Settings/Editor"]
+margin_top = 46.0
+margin_right = 632.0
+margin_bottom = 86.0
+hint_tooltip = "If true, notifications will be printed to the 'Output'."
+pressed = true
+text = "Show Notifications"
+script = ExtResource( 14 )
+
+[node name="PrintErr" type="CheckButton" parent="Tabs/GGS Settings/Editor"]
+margin_top = 90.0
+margin_right = 632.0
+margin_bottom = 130.0
+hint_tooltip = "If true, errors will be printed to the 'Output'."
+pressed = true
+text = "Show Errors"
+script = ExtResource( 18 )
+
+[node name="CheckButton" type="CheckButton" parent="Tabs/GGS Settings/Editor"]
+margin_top = 134.0
+margin_right = 632.0
+margin_bottom = 174.0
+hint_tooltip = "If true, new nodes created through 'Add Node' menu will be selected automatically."
+custom_constants/hseparation = 20
+shortcut_in_tooltip = false
+pressed = true
+text = "Auto Select New Nodes"
+script = ExtResource( 11 )
+
+[node name="VSep" type="HSeparator" parent="Tabs/GGS Settings"]
+margin_top = 180.0
+margin_right = 632.0
+margin_bottom = 184.0
+
+[node name="Components" type="VBoxContainer" parent="Tabs/GGS Settings"]
+margin_top = 190.0
+margin_right = 632.0
+margin_bottom = 260.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Tabs/GGS Settings/Components"]
+margin_right = 632.0
+margin_bottom = 14.0
+text = "Components"
+align = 1
+
+[node name="KeybindAssign" type="HBoxContainer" parent="Tabs/GGS Settings/Components"]
+margin_top = 18.0
+margin_right = 632.0
+margin_bottom = 42.0
+script = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Tabs/GGS Settings/Components/KeybindAssign"]
+margin_top = 5.0
+margin_right = 378.0
+margin_bottom = 19.0
+hint_tooltip = "Popup message when using ggsKeybind components. Shown when asking for player input."
+mouse_filter = 0
+size_flags_horizontal = 3
+text = "Keybind \"Assign\" Message"
+
+[node name="LineEdit" type="LineEdit" parent="Tabs/GGS Settings/Components/KeybindAssign"]
+margin_left = 382.0
+margin_right = 632.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+text = "Awaiting input..."
+
+[node name="KeybindAlready" type="HBoxContainer" parent="Tabs/GGS Settings/Components"]
+margin_top = 46.0
+margin_right = 632.0
+margin_bottom = 70.0
+script = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="Tabs/GGS Settings/Components/KeybindAlready"]
+margin_top = 5.0
+margin_right = 378.0
+margin_bottom = 19.0
+hint_tooltip = "Popup message when using ggsKeybind components. Shown when the input is already assigned to another action."
+mouse_filter = 0
+size_flags_horizontal = 3
+text = "Keybind \"Already-Assigned\" Message"
+
+[node name="LineEdit" type="LineEdit" parent="Tabs/GGS Settings/Components/KeybindAlready"]
+margin_left = 382.0
+margin_right = 632.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 250, 0 )
+text = "Already assigned..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Tabs/Game Settings/Toolbar/Create" to="Tabs/Game Settings/Toolbar/Create" method="_on_Create_pressed"]
+[connection signal="toggled" from="Tabs/Game Settings/Toolbar/AddNode" to="Tabs/Game Settings/Toolbar/AddNode" method="_on_AddNode_toggled"]
+[connection signal="popup_hide" from="Tabs/Game Settings/Toolbar/AddNode/PopupMenu" to="Tabs/Game Settings/Toolbar/AddNode" method="_on_PopupMenu_popup_hide"]
+[connection signal="pressed" from="Tabs/Game Settings/Toolbar/Reload" to="Tabs/Game Settings/Toolbar/Reload" method="_on_Reload_pressed"]
+[connection signal="item_selected" from="Tabs/Game Settings/Toolbar/Search/OptionButton" to="Tabs/Game Settings/Toolbar/Search" method="_on_OptionButton_item_selected"]
+[connection signal="text_changed" from="Tabs/Game Settings/Toolbar/Search/LineEdit" to="Tabs/Game Settings/Toolbar/Search" method="_on_LineEdit_text_changed"]
+[connection signal="pressed" from="Tabs/Game Settings/Toolbar/Help" to="Tabs/Game Settings/Toolbar/Help" method="_on_Help_pressed"]
+[connection signal="text_changed" from="Tabs/GGS Settings/Editor/DefaultLogicPath/LineEdit" to="Tabs/GGS Settings/Editor/DefaultLogicPath" method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Tabs/GGS Settings/Editor/DefaultLogicPath/LineEdit" to="Tabs/GGS Settings/Editor/DefaultLogicPath" method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Tabs/GGS Settings/Editor/DefaultLogicPath/Button" to="Tabs/GGS Settings/Editor/DefaultLogicPath" method="_on_Button_pressed"]
+[connection signal="dir_selected" from="Tabs/GGS Settings/Editor/DefaultLogicPath/FileDialog" to="Tabs/GGS Settings/Editor/DefaultLogicPath" method="_on_FileDialog_dir_selected"]
+[connection signal="toggled" from="Tabs/GGS Settings/Editor/PrintNotif" to="Tabs/GGS Settings/Editor/PrintNotif" method="_on_PrintNotif_toggled"]
+[connection signal="toggled" from="Tabs/GGS Settings/Editor/PrintErr" to="Tabs/GGS Settings/Editor/PrintErr" method="_on_PrintErr_toggled"]
+[connection signal="toggled" from="Tabs/GGS Settings/Editor/CheckButton" to="Tabs/GGS Settings/Editor/CheckButton" method="_on_CheckButton_toggled"]
+[connection signal="text_changed" from="Tabs/GGS Settings/Components/KeybindAssign/LineEdit" to="Tabs/GGS Settings/Components/KeybindAssign" method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Tabs/GGS Settings/Components/KeybindAssign/LineEdit" to="Tabs/GGS Settings/Components/KeybindAssign" method="_on_LineEdit_text_entered"]
+[connection signal="text_changed" from="Tabs/GGS Settings/Components/KeybindAlready/LineEdit" to="Tabs/GGS Settings/Components/KeybindAlready" method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Tabs/GGS Settings/Components/KeybindAlready/LineEdit" to="Tabs/GGS Settings/Components/KeybindAlready" method="_on_LineEdit_text_entered"]

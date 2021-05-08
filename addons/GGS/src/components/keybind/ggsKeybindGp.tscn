@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/GGS/src/components/keybind/ggs_keybind_gp.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/assets/glyph/gamepad_glyphs.tres" type="Texture" id=2]
+
+[node name="ggsKeybindGp" type="Button"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+icon = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

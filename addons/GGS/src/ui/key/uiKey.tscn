@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/GGS/src/ui/key/ui_key.gd" type="Script" id=1]
+[ext_resource path="res://addons/GGS/assets/icons/types/float.svg" type="Texture" id=2]
+[ext_resource path="res://addons/GGS/assets/icons/types/string.svg" type="Texture" id=3]
+[ext_resource path="res://addons/GGS/assets/icons/remove_key.svg" type="Texture" id=4]
+[ext_resource path="res://addons/GGS/assets/icons/types/bool.svg" type="Texture" id=5]
+[ext_resource path="res://addons/GGS/src/ui/key/type_selection.gd" type="Script" id=6]
+[ext_resource path="res://addons/GGS/src/ui/key/value.gd" type="Script" id=7]
+[ext_resource path="res://addons/GGS/src/ui/key/key_name.gd" type="Script" id=8]
+[ext_resource path="res://addons/GGS/src/ui/key/uikey_remove.gd" type="Script" id=10]
+
+[node name="uiKey" type="HBoxContainer"]
+margin_right = 153.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyName" type="LineEdit" parent="."]
+margin_right = 58.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource( 8 )
+
+[node name="Value" type="LineEdit" parent="."]
+margin_left = 62.0
+margin_right = 120.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource( 7 )
+
+[node name="TypeSelection" type="OptionButton" parent="."]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 24.0
+icon = ExtResource( 5 )
+items = [ "Boolean", ExtResource( 5 ), false, 0, null, "Number", ExtResource( 2 ), false, 2, null, "String", ExtResource( 3 ), false, 3, null ]
+selected = 0
+script = ExtResource( 6 )
+
+[node name="Remove" type="Button" parent="."]
+margin_left = 173.0
+margin_right = 201.0
+margin_bottom = 24.0
+hint_tooltip = "Remove Key"
+icon = ExtResource( 4 )
+script = ExtResource( 10 )
+
+[connection signal="text_changed" from="KeyName" to="KeyName" method="_on_KeyName_text_changed"]
+[connection signal="text_entered" from="KeyName" to="KeyName" method="_on_KeyName_text_entered"]
+[connection signal="text_changed" from="Value" to="Value" method="_on_Value_text_changed"]
+[connection signal="text_entered" from="Value" to="Value" method="_on_Value_text_entered"]
+[connection signal="item_selected" from="TypeSelection" to="TypeSelection" method="_on_TypeSelection_item_selected"]
+[connection signal="pressed" from="Remove" to="Remove" method="_on_Remove_pressed"]

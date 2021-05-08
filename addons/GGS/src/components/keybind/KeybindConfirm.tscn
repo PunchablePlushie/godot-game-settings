@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/GGS/src/components/keybind/keybind_confirm.gd" type="Script" id=1]
+
+[node name="KeybindConfirm" type="PopupPanel"]
+pause_mode = 2
+margin_left = 1.24304
+margin_top = 2.24492
+margin_right = 157.243
+margin_bottom = 44.2449
+popup_exclusive = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mrg" type="MarginContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 152.0
+margin_bottom = 38.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="Mrg"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 137.0
+margin_bottom = 24.0
+text = "TEXT_HERE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
