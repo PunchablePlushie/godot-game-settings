@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _on_EditValue_pressed() -> void:
-	var default = ggsManager.settings_data[str(Root.get_index())]["default"]
+	var default = ggsManager.settings_data[str(Root.get_index())]["current"]
 	
 	# Clear the list and update its index
 	Root.MainPanel.Inspector.index = Root.get_index()
