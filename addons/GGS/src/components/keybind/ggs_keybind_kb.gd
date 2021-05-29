@@ -19,7 +19,10 @@ func _ready() -> void:
 	if icon != null:
 		icon.current_frame = value
 	else:
-		text = OS.get_scancode_string(value)
+		if value > 24:
+			text = OS.get_scancode_string(value)
+		else:
+			text = mouse_btn_names[str(value)]
 	
 	# Load Script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
