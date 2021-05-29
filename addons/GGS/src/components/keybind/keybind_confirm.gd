@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 	# Only accept the correct type
 	match type:
 		Type.Keyboard:
-			if not event is InputEventKey:
+			if not (event is InputEventKey or event is InputEventMouseButton):
 				return
 		Type.Gamepad:
 			if not event is InputEventJoypadButton:

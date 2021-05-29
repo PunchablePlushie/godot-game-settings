@@ -16,7 +16,10 @@ func _ready() -> void:
 	if icon != null:
 		icon.current_frame = value
 	else:
-		text = OS.get_scancode_string(value)
+		if value > 24:
+			text = OS.get_scancode_string(value)
+		else:
+			text = _get_mouse_button_string(value)
 	
 	# Load Script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
@@ -28,8 +31,13 @@ func _ready() -> void:
 
 func reset_to_default() -> void:
 	var default: Dictionary = ggsManager.settings_data[str(setting_index)]["default"]
-	var event: InputEventKey = InputEventKey.new()
-	event.scancode = default["value"]
+	var event: InputEventWithModifiers
+	if default["value"] > 24:
+		event = InputEventKey.new()
+		event.scancode = default["value"]
+	else:
+		event = InputEventMouseButton.new()
+		event.button_index = default["value"]
 	_on_ConfirmPopup_confirmed(event)
 
 
@@ -43,17 +51,41 @@ func _on_pressed() -> void:
 	release_focus()
 
 
-func _on_ConfirmPopup_confirmed(event: InputEventKey) -> void:
+func _on_ConfirmPopup_confirmed(event: InputEventWithModifiers) -> void:
 	# Update save value
 	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
-	current["value"] = event.scancode
+	if event is InputEventKey:
+		current["value"] = event.scancode
+	else:
+		current["value"] = event.button_index
 	ggsManager.save_settings_data()
 	
 	# Update display value
 	if icon != null:
-		icon.current_frame = event.scancode
+		if event is InputEventKey:
+			icon.current_frame = event.scancode
+		else:
+			icon.current_frame = event.button_index
 	else:
-		text = OS.get_scancode_string(event.scancode)
+		if event is InputEventKey:
+			text = OS.get_scancode_string(event.scancode)
+		else:
+			text = _get_mouse_button_string(event.button_index)
 	
 	# Execute the logic script
 	script_instance.main(current)
+
+
+func _get_mouse_button_string(button_index: int) -> String:
+	var strings: Dictionary = {
+		"1": "LMB",
+		"2": "RMB",
+		"3": "MMB",
+		"4": "MW Up",
+		"5": "Mw Down",
+		"6": "MW Left",
+		"7": "MW Right",
+		"8": "Mouse Extra 1",
+		"9": "Mouse Extra 2",
+	}
+	return strings[str(button_index)]
