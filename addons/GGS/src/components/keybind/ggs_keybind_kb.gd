@@ -5,9 +5,6 @@ var script_instance: Object
 
 # Resources
 onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
-const mouse_btn_names := {"1": "Left Mouse Button", "2": "Right Mouse Button", "3": "Middle Mouse Button",
-							"4": "Mouse Wheel Up", "5": "Mouse Wheel Down", "6": "Mouse Wheel Left",
-							"7": "Mouse Wheel Right", "8": "Mouse Extra Button 1", "9": "Mouse Extra Button 2"}
 
 
 func _ready() -> void:
@@ -22,7 +19,7 @@ func _ready() -> void:
 		if value > 24:
 			text = OS.get_scancode_string(value)
 		else:
-			text = mouse_btn_names[str(value)]
+			text = _get_mouse_button_string(value)
 	
 	# Load Script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
@@ -73,11 +70,22 @@ func _on_ConfirmPopup_confirmed(event: InputEventWithModifiers) -> void:
 		if event is InputEventKey:
 			text = OS.get_scancode_string(event.scancode)
 		else:
-			text = mouse_btn_names[str(event.button_index)]
+			text = _get_mouse_button_string(event.button_index)
 	
 	# Execute the logic script
 	script_instance.main(current)
 
 
-func _on_Button_button_down():
-	pass # Replace with function body.
+func _get_mouse_button_string(button_index: int) -> String:
+	var strings: Dictionary = {
+		"1": "LMB",
+		"2": "RMB",
+		"3": "MMB",
+		"4": "MW Up",
+		"5": "Mw Down",
+		"6": "MW Left",
+		"7": "MW Right",
+		"8": "Mouse Extra 1",
+		"9": "Mouse Extra 2",
+	}
+	return strings[str(button_index)]
