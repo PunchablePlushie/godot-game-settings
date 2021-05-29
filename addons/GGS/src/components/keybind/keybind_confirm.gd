@@ -3,6 +3,7 @@ signal confirmed(event)
 
 enum Type {Keyboard, Gamepad}
 var type: int
+var tree_already_paused: bool = false
 var source: Object
 
 onready var Message: Label = $Mrg/Message
@@ -11,6 +12,8 @@ onready var nTimer: Timer = $Timer
 
 func _ready() -> void:
 	# Setup popup
+	if get_tree().paused:
+		tree_already_paused = true
 	get_tree().paused = true
 	Message.text = ggsManager.ggs_data["keybind_confirm_text"]
 	nTimer.start()
@@ -43,7 +46,8 @@ func _input(event: InputEvent) -> void:
 	get_tree().set_input_as_handled()
 	
 	# Close the popup
-	get_tree().paused = false
+	if not tree_already_paused:
+		get_tree().paused = false
 	source.grab_focus()
 	queue_free()
 
