@@ -82,7 +82,7 @@ func _get_mouse_button_string(button_index: int) -> String:
 		"2": "RMB",
 		"3": "MMB",
 		"4": "MW Up",
-		"5": "Mw Down",
+		"5": "MW Down",
 		"6": "MW Left",
 		"7": "MW Right",
 		"8": "Mouse Extra 1",
