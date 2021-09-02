@@ -29,5 +29,7 @@ margin_right = 64.0
 margin_bottom = 22.0
 icon = ExtResource( 1 )
 
+[connection signal="mouse_entered" from="PrevBtn" to="." method="_on_PrevBtn_mouse_entered"]
 [connection signal="pressed" from="PrevBtn" to="." method="_on_PrevBtn_pressed"]
+[connection signal="mouse_entered" from="NextBtn" to="." method="_on_NextBtn_mouse_entered"]
 [connection signal="pressed" from="NextBtn" to="." method="_on_NextBtn_pressed"]

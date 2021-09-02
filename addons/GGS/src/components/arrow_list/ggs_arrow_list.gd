@@ -21,6 +21,12 @@ func _ready() -> void:
 	# Load script
 	var script: Script = load(ggsManager.settings_data[str(setting_index)]["logic"])
 	script_instance = script.new()
+	
+	# Handle mouse filter and cursor
+	PrevBtn.mouse_filter = mouse_filter
+	NextBtn.mouse_filter = mouse_filter
+	PrevBtn.mouse_default_cursor_shape = mouse_default_cursor_shape
+	NextBtn.mouse_default_cursor_shape = mouse_default_cursor_shape
 
 
 func reset_to_default() -> void:
@@ -58,3 +64,12 @@ func _on_NextBtn_pressed() -> void:
 	else:
 		if current_index < list.size() - 1:
 			self.current_index += 1
+
+
+# Handle mouse focus
+func _on_PrevBtn_mouse_entered() -> void:
+	PrevBtn.grab_focus()
+
+
+func _on_NextBtn_mouse_entered() -> void:
+	NextBtn.grab_focus()

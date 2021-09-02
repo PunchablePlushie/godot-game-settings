@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 	# Connect signal
 	connect("toggled", self, "_on_toggled")
+	connect("mouse_entered", self, "_on_mouse_entered")
 
 
 func reset_to_default() -> void:
@@ -28,3 +29,8 @@ func _on_toggled(button_pressed: bool) -> void:
 	current["value"] = button_pressed
 	ggsManager.save_settings_data()
 	script_instance.main(current)
+
+
+# Handle mouse focus
+func _on_mouse_entered() -> void:
+	grab_focus()

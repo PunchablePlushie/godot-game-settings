@@ -24,6 +24,7 @@ func _ready() -> void:
 	
 	# Connect signal
 	connect("pressed", self, "_on_pressed")
+	connect("mouse_entered", self, "_on_mouse_entered")
 
 
 func reset_to_default() -> void:
@@ -31,6 +32,11 @@ func reset_to_default() -> void:
 	var event: InputEventJoypadButton = InputEventJoypadButton.new()
 	event.button_index = default["value"]
 	_on_ConfirmPopup_confirmed(event)
+
+
+# Handle mouse focus
+func _on_mouse_entered() -> void:
+	grab_focus()
 
 
 func _on_pressed() -> void:
