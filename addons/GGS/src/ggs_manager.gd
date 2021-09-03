@@ -28,7 +28,7 @@ func _init() -> void:
 
 func _exit_tree() -> void:
 	if not OS.is_debug_build():
-		Utils.save_json(settings_data, SETTINGS_SAVE_PATH)
+		GGSUtils.save_json(settings_data, SETTINGS_SAVE_PATH)
 
 
 func _ready() -> void:
@@ -37,25 +37,25 @@ func _ready() -> void:
 
 
 func save_settings_data() -> void:
-	Utils.save_json(settings_data, SETTINGS_DATA_PATH)
+	GGSUtils.save_json(settings_data, SETTINGS_DATA_PATH)
 
 
 func save_ggs_data() -> void:
-	Utils.save_json(ggs_data, GGS_DATA_PATH)
+	GGSUtils.save_json(ggs_data, GGS_DATA_PATH)
 
 
 func load_settings_data() -> void:
 	var file: File = File.new()
 	if OS.is_debug_build():
 		if file.file_exists(SETTINGS_DATA_PATH):
-			settings_data = Utils.load_json(SETTINGS_DATA_PATH)
+			settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
 		else:
 			save_settings_data()
 	else:
 		if file.file_exists(SETTINGS_SAVE_PATH):
-			settings_data = Utils.load_json(SETTINGS_SAVE_PATH)
+			settings_data = GGSUtils.load_json(SETTINGS_SAVE_PATH)
 		elif file.file_exists(SETTINGS_DATA_PATH):
-			settings_data = Utils.load_json(SETTINGS_DATA_PATH)
+			settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
 		else:
 			printerr("GGS - Load Data: Failed to load settings data.")
 
@@ -63,7 +63,7 @@ func load_settings_data() -> void:
 func load_ggs_data() -> void:
 	var file: File = File.new()
 	if file.file_exists(GGS_DATA_PATH):
-		ggs_data = Utils.load_json(GGS_DATA_PATH)
+		ggs_data = GGSUtils.load_json(GGS_DATA_PATH)
 	else:
 		save_ggs_data()
 

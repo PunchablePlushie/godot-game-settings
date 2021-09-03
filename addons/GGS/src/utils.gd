@@ -1,5 +1,5 @@
 extends Node
-class_name Utils
+class_name GGSUtils
 ## A script containing various utility functions
 
 

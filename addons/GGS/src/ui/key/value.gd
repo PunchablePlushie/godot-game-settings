@@ -13,9 +13,9 @@ func convert_value(value: String) -> void:
 		Type._String:
 			result = value
 		Type._bool:
-			result = Utils.str2bool(value)
+			result = GGSUtils.str2bool(value)
 		Type._float:
-			result = Utils.str2float(value)
+			result = GGSUtils.str2float(value)
 	
 	if result == null:
 		self.saved = false
