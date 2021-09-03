@@ -14,20 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/GGS/src/base_classes/base_input.gd"
 }, {
+"base": "Node",
+"class": "GGSUtils",
+"language": "GDScript",
+"path": "res://addons/GGS/src/utils.gd"
+}, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
 "path": "res://addons/GGS/_depedencies/json_beautifier/json_beautifier.gd"
-}, {
-"base": "Node",
-"class": "Utils",
-"language": "GDScript",
-"path": "res://addons/GGS/src/utils.gd"
 } ]
 _global_script_class_icons={
 "BaseInput": "",
-"JSONBeautifier": "",
-"Utils": ""
+"GGSUtils": "",
+"JSONBeautifier": ""
 }
 
 [application]

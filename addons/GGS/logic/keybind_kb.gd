@@ -10,11 +10,11 @@ func main(value: Dictionary) -> void:
 	var action_list: Array = InputMap.get_action_list(target_action)
 	
 	# Get the correct event type
-	var prev_event: InputEventWithModifiers = Utils.array_find_type(action_list, "InputEventKey")
+	var prev_event: InputEventWithModifiers = GGSUtils.array_find_type(action_list, "InputEventKey")
 	var new_event: InputEventWithModifiers
 	
 	if prev_event == null:
-		prev_event = Utils.array_find_type(action_list, "InputEventMouseButton")
+		prev_event = GGSUtils.array_find_type(action_list, "InputEventMouseButton")
 	
 	# Create the correct event type based on the value
 	if value["value"] > 24:
