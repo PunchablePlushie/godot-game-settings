@@ -17,6 +17,8 @@ You can find the demo [here.](https://github.com/PunchablePlushie/GGS-Demo)
 ___
 
 ## Changelog
+View the [full changelog](https://github.com/PunchablePlushie/godot_ggs/wiki/Changelog).
+
 ### v2.1.0
 Thanks to [Kylogias](https://github.com/Kylogias)'s contributions:
 * GGS now supports mouse buttons for keybinds. The keyboard keybind component now accepts mouse buttons when assignign a new key to an action.
