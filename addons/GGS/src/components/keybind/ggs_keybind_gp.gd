@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func use_button_icon(value: int) -> void:
 	if icon != null:
-		icon.current_frame = value
+		set_icon(value)
 	else:
 		text = _get_actual_string(Input.get_joy_button_string(value))
 
@@ -38,28 +38,36 @@ func use_axis_icon(value: int, axis: int) -> void:
 		match axis:
 			JOY_AXIS_0:
 				if value < 0:
-					icon.current_frame = 23
+					set_icon(23)
 				else:
-					icon.current_frame = 24
+					set_icon(24)
 			JOY_AXIS_1:
 				if value < 0:
-					icon.current_frame = 25
+					set_icon(25)
 				else:
-					icon.current_frame = 26
+					set_icon(26)
 			JOY_AXIS_2:
 				if value < 0:
-					icon.current_frame = 27
+					set_icon(27)
 				else:
-					icon.current_frame = 28
+					set_icon(28)
 			JOY_AXIS_3:
 				if value < 0:
-					icon.current_frame = 29
+					set_icon(29)
 				else:
-					icon.current_frame = 30
+					set_icon(30)
 	else:
 		var axis_name: String = Input.get_joy_axis_string(axis)
 		var axis_dir: String = _get_axis_dir_string(axis, value)
 		text = "%s %s"%[axis_name, axis_dir]
+
+
+func set_icon(value : int) -> void:
+	if value >= 0 and value < icon.frames:
+		icon.current_frame = value
+	else:
+		# Code for key not handled. Set current frame to empty
+		icon.current_frame = 31
 
 
 func reset_to_default() -> void:
