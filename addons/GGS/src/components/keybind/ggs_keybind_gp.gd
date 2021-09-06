@@ -2,7 +2,6 @@ extends Button
 
 export(int, 0, 99) var setting_index: int
 var script_instance: Object
-var axis: int
 
 # Resources
 onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
@@ -12,10 +11,9 @@ func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int = current["value"]
-	axis = current["axis"]
 	
-	if axis != -1:
-		use_axis_icon(value, axis)
+	if current["axis"] != -1:
+		use_axis_icon(value, current["axis"])
 	else:
 		use_button_icon(value)
 	
@@ -98,7 +96,7 @@ func _on_pressed() -> void:
 func _on_ConfirmPopup_confirmed(event: InputEvent) -> void:
 	# Update save value
 	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
-	if axis != -1:
+	if event is InputEventJoypadMotion:
 		current["value"] = event.axis_value
 		current["axis"] = event.axis
 	else:
@@ -108,8 +106,8 @@ func _on_ConfirmPopup_confirmed(event: InputEvent) -> void:
 	ggsManager.save_settings_data()
 	
 	# Update display value
-	if axis != -1:
-		use_axis_icon(event.axis, event.axis_value)
+	if event is InputEventJoypadMotion:
+		use_axis_icon(event.axis_value, event.axis)
 	else:
 		use_button_icon(event.button_index)
 	
