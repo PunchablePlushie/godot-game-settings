@@ -30,7 +30,10 @@ func _input(event: InputEvent) -> void:
 				return
 	
 	# Only continue when the key is being pressed
-	if not event.pressed:
+	if event.has_meta("pressed") and event.pressed == false:
+		return
+	# Only continue when the key is being pressed
+	if event is InputEventJoypadMotion and abs(event.axis_value) < 1:
 		return
 	
 	# Check if the key is already assigned. Ignores UI actions.
