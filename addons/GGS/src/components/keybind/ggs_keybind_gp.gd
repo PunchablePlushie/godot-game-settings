@@ -12,7 +12,7 @@ func _ready() -> void:
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int = current["value"]
 	
-	if current["axis"] != -1:
+	if current.has("axis"):
 		use_axis_icon(value, current["axis"])
 	else:
 		use_button_icon(value)
@@ -64,10 +64,9 @@ func use_axis_icon(value: int, axis: int) -> void:
 
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	var axis: int = default["axis"]
 	var event: InputEvent
 	
-	if axis != -1:
+	if default.has("axis"):
 		event = InputEventJoypadMotion.new() as InputEventJoypadMotion
 		event.axis = default["axis"]
 		event.value = default["value"]
@@ -101,7 +100,8 @@ func _on_ConfirmPopup_confirmed(event: InputEvent) -> void:
 		current["axis"] = event.axis
 	else:
 		current["value"] = event.button_index
-		current["axis"] = -1
+		if current.has("axis"):
+			current.erase("axis")
 	
 	ggsManager.save_settings_data()
 	

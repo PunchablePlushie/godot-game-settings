@@ -22,7 +22,7 @@ func main(value: Dictionary) -> void:
 	
 	# Create the correct event type
 	var prev_event_class: String = prev_event.get_class()
-	if prev_event_class == "InputEventJoypadButton":
+	if not value.has("axis"):
 		new_event = InputEventJoypadButton.new() as InputEventJoypadButton
 		new_event.button_index = value["value"]
 	else:
