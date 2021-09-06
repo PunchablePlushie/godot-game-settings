@@ -40,24 +40,24 @@ func use_axis_icon(value: int, axis: int) -> void:
 		match axis:
 			JOY_AXIS_0:
 				if value < 0:
-					icon.current_frame = 23
+					icon.current_frame = 14
 				else:
-					icon.current_frame = 24
+					icon.current_frame = 15
 			JOY_AXIS_1:
 				if value < 0:
-					icon.current_frame = 25
+					icon.current_frame = 12
 				else:
-					icon.current_frame = 26
+					icon.current_frame = 13
 			JOY_AXIS_2:
 				if value < 0:
-					icon.current_frame = 27
+					icon.current_frame = 14
 				else:
-					icon.current_frame = 28
+					icon.current_frame = 15
 			JOY_AXIS_3:
 				if value < 0:
-					icon.current_frame = 29
+					icon.current_frame = 12
 				else:
-					icon.current_frame = 30
+					icon.current_frame = 13
 	else:
 		var axis_name: String = Input.get_joy_axis_string(axis)
 		var axis_dir: String = _get_axis_dir_string(axis, value)
