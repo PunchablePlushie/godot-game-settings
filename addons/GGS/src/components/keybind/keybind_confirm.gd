@@ -32,7 +32,7 @@ func _input(event: InputEvent) -> void:
 	# Only continue when the key is being pressed
 	if event.has_meta("pressed") and event.pressed == false:
 		return
-	# Only continue when the key is being pressed
+	# Only continue if the axis is fully pressed
 	if event is InputEventJoypadMotion and abs(event.axis_value) < 1:
 		return
 	
