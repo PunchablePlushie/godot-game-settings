@@ -40,6 +40,14 @@ func _input(event: InputEvent) -> void:
 	var actions: Array = _get_non_ui_actions(InputMap.get_actions())
 	for action in actions:
 		if InputMap.action_has_event(action, event):
+			
+			# Check if axis_values are the different for JoypadMotion events
+			# since action_has_event doesn't check subclass-vars
+			if event is InputEventJoypadMotion:
+				var match_index = InputMap.get_action_list(action).find(event)
+				if InputMap.get_action_list(action)[match_index].axis_value != event.axis_value:
+					continue
+			
 			Message.text = ggsManager.ggs_data["keybind_assigned_text"]
 			nTimer.start()
 			return
