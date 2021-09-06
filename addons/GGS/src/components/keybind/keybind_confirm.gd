@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 			if not (event is InputEventKey or event is InputEventMouseButton):
 				return
 		Type.Gamepad:
-			if not event is InputEventJoypadButton:
+			if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 				return
 	
 	# Only continue when the key is being pressed
