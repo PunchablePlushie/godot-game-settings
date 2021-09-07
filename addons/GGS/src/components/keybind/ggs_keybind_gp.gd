@@ -2,7 +2,6 @@ extends Button
 
 export(int, 0, 99) var setting_index: int
 var script_instance: Object
-var axis: int
 
 # Resources
 onready var ConfirmPopup: PackedScene = preload("KeybindConfirm.tscn")
@@ -12,10 +11,9 @@ func _ready() -> void:
 	# Load and set display value
 	var current = ggsManager.settings_data[str(setting_index)]["current"]
 	var value: int = current["value"]
-	axis = current["axis"]
 	
-	if axis != -1:
-		use_axis_icon(value, axis)
+	if current.has("axis"):
+		use_axis_icon(value, current["axis"])
 	else:
 		use_button_icon(value)
 	
@@ -30,7 +28,7 @@ func _ready() -> void:
 
 func use_button_icon(value: int) -> void:
 	if icon != null:
-		icon.current_frame = value
+		set_icon(value)
 	else:
 		text = _get_actual_string(Input.get_joy_button_string(value))
 
@@ -40,36 +38,43 @@ func use_axis_icon(value: int, axis: int) -> void:
 		match axis:
 			JOY_AXIS_0:
 				if value < 0:
-					icon.current_frame = 23
+					set_icon(23)
 				else:
-					icon.current_frame = 24
+					set_icon(24)
 			JOY_AXIS_1:
 				if value < 0:
-					icon.current_frame = 25
+					set_icon(25)
 				else:
-					icon.current_frame = 26
+					set_icon(26)
 			JOY_AXIS_2:
 				if value < 0:
-					icon.current_frame = 27
+					set_icon(27)
 				else:
-					icon.current_frame = 28
+					set_icon(28)
 			JOY_AXIS_3:
 				if value < 0:
-					icon.current_frame = 29
+					set_icon(29)
 				else:
-					icon.current_frame = 30
+					set_icon(30)
 	else:
 		var axis_name: String = Input.get_joy_axis_string(axis)
 		var axis_dir: String = _get_axis_dir_string(axis, value)
 		text = "%s %s"%[axis_name, axis_dir]
 
 
+func set_icon(value : int) -> void:
+	if value >= 0 and value < icon.frames:
+		icon.current_frame = value
+	else:
+		# Code for key not handled. Set current frame to empty
+		icon.current_frame = 31
+
+
 func reset_to_default() -> void:
 	var default = ggsManager.settings_data[str(setting_index)]["default"]
-	var axis: int = default["axis"]
 	var event: InputEvent
 	
-	if axis != -1:
+	if default.has("axis"):
 		event = InputEventJoypadMotion.new() as InputEventJoypadMotion
 		event.axis = default["axis"]
 		event.value = default["value"]
@@ -98,18 +103,19 @@ func _on_pressed() -> void:
 func _on_ConfirmPopup_confirmed(event: InputEvent) -> void:
 	# Update save value
 	var current: Dictionary = ggsManager.settings_data[str(setting_index)]["current"]
-	if axis != -1:
+	if event is InputEventJoypadMotion:
 		current["value"] = event.axis_value
 		current["axis"] = event.axis
 	else:
 		current["value"] = event.button_index
-		current["axis"] = -1
+		if current.has("axis"):
+			current.erase("axis")
 	
 	ggsManager.save_settings_data()
 	
 	# Update display value
-	if axis != -1:
-		use_axis_icon(event.axis, event.axis_value)
+	if event is InputEventJoypadMotion:
+		use_axis_icon(event.axis_value, event.axis)
 	else:
 		use_button_icon(event.button_index)
 	

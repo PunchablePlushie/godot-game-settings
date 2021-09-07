@@ -18,11 +18,11 @@ func main(value: Dictionary) -> void:
 	var prev_event: InputEvent = GGSUtils.array_find_type(action_list, "InputEventJoypadButton") as InputEventJoypadButton
 	
 	if prev_event == null:
-		prev_event = GGSUtils.array_find_type(action_list, "InputEventJoyMotion") as InputEventJoypadMotion
+		prev_event = GGSUtils.array_find_type(action_list, "InputEventJoypadMotion") as InputEventJoypadMotion
 	
 	# Create the correct event type
 	var prev_event_class: String = prev_event.get_class()
-	if prev_event_class == "InputEventJoypadButton":
+	if not value.has("axis"):
 		new_event = InputEventJoypadButton.new() as InputEventJoypadButton
 		new_event.button_index = value["value"]
 	else:
