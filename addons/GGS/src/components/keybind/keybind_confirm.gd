@@ -26,17 +26,29 @@ func _input(event: InputEvent) -> void:
 			if not (event is InputEventKey or event is InputEventMouseButton):
 				return
 		Type.Gamepad:
-			if not event is InputEventJoypadButton:
+			if not (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 				return
 	
 	# Only continue when the key is being pressed
-	if not event.pressed:
+	if (event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton) \
+		and event.pressed == false:
+			return
+	# Only continue if the axis is fully pressed
+	if event is InputEventJoypadMotion and abs(event.axis_value) < 1:
 		return
 	
 	# Check if the key is already assigned. Ignores UI actions.
 	var actions: Array = _get_non_ui_actions(InputMap.get_actions())
 	for action in actions:
 		if InputMap.action_has_event(action, event):
+			
+			# Check if axis_values are the different for JoypadMotion events
+			# since action_has_event doesn't check subclass-vars
+			if event is InputEventJoypadMotion:
+				var match_index = InputMap.get_action_list(action).find(event)
+				if InputMap.get_action_list(action)[match_index].axis_value != event.axis_value:
+					continue
+			
 			Message.text = ggsManager.ggs_data["keybind_assigned_text"]
 			nTimer.start()
 			return
