@@ -19,12 +19,11 @@ ___
 ## Changelog
 View the [full changelog](https://github.com/PunchablePlushie/godot_ggs/wiki/Changelog).
 
-### v2.1.0
-Thanks to [Kylogias](https://github.com/Kylogias)'s contributions:
-* GGS now supports mouse buttons for keybinds. The keyboard keybind component now accepts mouse buttons when assignign a new key to an action.
-* Slightly changed how the pausing works for the keybind popup dialog. Hopefully, It won't create issues anymore when you use `get_tree().paused` in your own game.
+### Latest Update (v2.3.0)
+Thanks to [kingoftheconnors](https://github.com/kingoftheconnors) efforts:
+* GGS now supports analog stick inputs. So `ggsKeybindGp` components can now detect analog stick inputs (`InputJoypadMotion`) from the player.
 
-### v2.0.0
+### Latest Major Update (v2.0.0)
 GGS has been completely reworked for the `v2.0` version. Instead of relying mostly on nodes themselves, GGS now optimizes plugin features of Godot to create an easier and more intuitive way to create and manage both settings and UI components.
 * The way the user interacts with the plugin has been improved:
   * `GameSettings.tscn` is no more. The main manager is now called `ggsManager.gd`. Unlike the previous versions, users don't have to edit the core plugin code itself anymore to use GGS to it's full potential.
