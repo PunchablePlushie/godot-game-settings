@@ -3,6 +3,10 @@ extends Node
 
 const SETTINGS_DATA_PATH: String = "res://addons/GGS/settings_data.json"
 const SETTINGS_SAVE_PATH: String = "user://settings_data.json"
+
+const SETTINGS_DATA_CFG_PATH: String = "res://addons/GGS/settings_data.cfg"
+const SETTINGS_SAVE_CFG_PATH: String = "user://settings_data.cfg"
+
 const GGS_DATA_PATH: String = "res://addons/GGS/ggs_data.json"
 const COL_ERR: Color = Color(1.0, 0.7, 0.7, 1.0)
 const COL_GOOD: Color = Color(1.0, 1.0, 1.0, 1.0)
@@ -18,6 +22,7 @@ var ggs_data: Dictionary = {
 	"show_errors": true,
 	"keybind_confirm_text": "Awaiting input...",
 	"keybind_assigned_text": "Already assigned...",
+	"use_cfg_save": false,
 }
 
 
@@ -28,7 +33,10 @@ func _init() -> void:
 
 func _exit_tree() -> void:
 	if not OS.is_debug_build():
-		GGSUtils.save_json(settings_data, SETTINGS_SAVE_PATH)
+		if ggs_data["use_cfg_save"] == true:
+			GGSUtils.save_cfg(settings_data, SETTINGS_SAVE_CFG_PATH)
+		else:
+			GGSUtils.save_json(settings_data, SETTINGS_SAVE_PATH)
 
 
 func _ready() -> void:
@@ -37,7 +45,10 @@ func _ready() -> void:
 
 
 func save_settings_data() -> void:
-	GGSUtils.save_json(settings_data, SETTINGS_DATA_PATH)
+	if ggs_data["use_cfg_save"] == true:
+		GGSUtils.save_cfg(settings_data, SETTINGS_DATA_CFG_PATH)
+	else:
+		GGSUtils.save_json(settings_data, SETTINGS_DATA_PATH)
 
 
 func save_ggs_data() -> void:
@@ -47,17 +58,31 @@ func save_ggs_data() -> void:
 func load_settings_data() -> void:
 	var file: File = File.new()
 	if OS.is_debug_build():
-		if file.file_exists(SETTINGS_DATA_PATH):
-			settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
+		if ggs_data["use_cfg_save"] == true:
+			if file.file_exists(SETTINGS_DATA_CFG_PATH):
+				settings_data = GGSUtils.load_cfg(SETTINGS_DATA_CFG_PATH)
+			else:
+				save_settings_data()
 		else:
-			save_settings_data()
+			if file.file_exists(SETTINGS_DATA_PATH):
+				settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
+			else:
+				save_settings_data()
 	else:
-		if file.file_exists(SETTINGS_SAVE_PATH):
-			settings_data = GGSUtils.load_json(SETTINGS_SAVE_PATH)
-		elif file.file_exists(SETTINGS_DATA_PATH):
-			settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
+		if ggs_data["use_cfg_save"] == true:
+			if file.file_exists(SETTINGS_SAVE_CFG_PATH):
+				settings_data = GGSUtils.load_cfg(SETTINGS_SAVE_CFG_PATH)
+			elif file.file_exists(SETTINGS_DATA_CFG_PATH):
+				settings_data = GGSUtils.load_cfg(SETTINGS_DATA_CFG_PATH)
+			else:
+				printerr("GGS - Load Data: Failed to load settings data.")
 		else:
-			printerr("GGS - Load Data: Failed to load settings data.")
+			if file.file_exists(SETTINGS_SAVE_PATH):
+				settings_data = GGSUtils.load_json(SETTINGS_SAVE_PATH)
+			elif file.file_exists(SETTINGS_DATA_PATH):
+				settings_data = GGSUtils.load_json(SETTINGS_DATA_PATH)
+			else:
+				printerr("GGS - Load Data: Failed to load settings data.")
 
 
 func load_ggs_data() -> void:

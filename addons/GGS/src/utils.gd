@@ -1,7 +1,7 @@
 extends Node
 class_name GGSUtils
 ## A script containing various utility functions
-
+const DEFAULT_SECTION:= "settings"
 
 static func save_json(data: Dictionary, path: String) -> void:
 	var data_stringified: String = JSON.print(data)
@@ -21,9 +21,39 @@ static func load_json(path: String) -> Dictionary:
 		data = file.get_as_text()
 		file.close()
 	var result: JSONParseResult = JSON.parse(data)
-	
 	return result.result
 
+
+static func save_cfg(data: Dictionary, path: String) -> void:
+	var _config_file = ConfigFile.new()
+	_config_file.set_value(DEFAULT_SECTION, DEFAULT_SECTION, data)
+	var err = _config_file.save(path)
+	if err == ERR_FILE_NOT_FOUND:
+		pass
+	elif err != OK:
+		printerr("Failed to load settings file")
+
+
+static func load_cfg(path: String) -> Dictionary:
+	var _config_file = ConfigFile.new()
+	var err = _config_file.load(path)
+	if err == ERR_FILE_NOT_FOUND:
+		pass
+	elif err != OK:
+		printerr("Failed to load settings file")
+	var ret = _config_file.get_value(DEFAULT_SECTION, DEFAULT_SECTION, null)
+
+	if ret:
+		var new_ret = {}
+		var keys = ret.keys()
+		var new_keys = []
+		for cur_key in keys:
+			new_keys.append(int(cur_key))
+		new_keys.sort()
+		for cur_key in new_keys:
+			new_ret[str(cur_key)] = ret[str(cur_key)]
+		return new_ret
+	return {}
 
 static func array_find_type(array: Array, type: String) -> Object:
 	for item in array:

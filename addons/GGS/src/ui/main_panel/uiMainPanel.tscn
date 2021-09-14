@@ -18,6 +18,8 @@
 [ext_resource path="res://addons/GGS/src/ui/main_panel/keybind_already.gd" type="Script" id=16]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/inspector.gd" type="Script" id=17]
 [ext_resource path="res://addons/GGS/src/ui/main_panel/print_err.gd" type="Script" id=18]
+[ext_resource path="res://addons/GGS/src/ui/main_panel/use_cfg.gd" type="Script" id=19]
+
 
 [node name="uiMainPanel" type="Control"]
 anchor_right = 1.0
@@ -266,6 +268,17 @@ pressed = true
 text = "Auto Select New Nodes"
 script = ExtResource( 11 )
 
+[node name="UseCFG" type="CheckButton" parent="Tabs/GGS Settings/Editor"]
+margin_top = 178.0
+margin_right = 1912.0
+margin_bottom = 218.0
+hint_tooltip = "If true, you will use cfg file save settings"
+custom_constants/hseparation = 20
+shortcut_in_tooltip = false
+pressed = true
+text = "Use CFG save"
+script = ExtResource( 19 )
+
 [node name="VSep" type="HSeparator" parent="Tabs/GGS Settings"]
 margin_top = 180.0
 margin_right = 632.0
@@ -348,3 +361,4 @@ __meta__ = {
 [connection signal="text_entered" from="Tabs/GGS Settings/Components/KeybindAssign/LineEdit" to="Tabs/GGS Settings/Components/KeybindAssign" method="_on_LineEdit_text_entered"]
 [connection signal="text_changed" from="Tabs/GGS Settings/Components/KeybindAlready/LineEdit" to="Tabs/GGS Settings/Components/KeybindAlready" method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Tabs/GGS Settings/Components/KeybindAlready/LineEdit" to="Tabs/GGS Settings/Components/KeybindAlready" method="_on_LineEdit_text_entered"]
+[connection signal="toggled" from="Tabs/GGS Settings/Editor/UseCFG" to="Tabs/GGS Settings/Editor/UseCFG" method="_on_CheckButton_toggled"]
