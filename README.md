@@ -1,0 +1,5 @@
+# GGS 3.0 Major Update - For Godot 4
+GGS 3.0 aims to bring a more robust experience to the user by having a better and more polished UI in addition to new features.
+<p align="center">
+  <img src="https://i.postimg.cc/rpKvBkSk/ggs-icon-nobg.png" alt="demo preview">
+</p>
