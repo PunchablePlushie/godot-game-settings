@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=6 format=3 uid="uid://oi6ewyuii748"]
+
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_ttblf"]
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
+
+[sub_resource type="Resource" id="Resource_e5xlt"]
+resource_name = "a"
+script = ExtResource("1_ttblf")
+name = "a"
+groups = Array[Resource("res://addons/ggs/classes/resources/ggs_group.gd")]([])
+settings = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+
+[sub_resource type="Resource" id="Resource_fnqtv"]
+resource_name = "b"
+script = ExtResource("1_ttblf")
+name = "b"
+groups = Array[Resource("res://addons/ggs/classes/resources/ggs_group.gd")]([])
+settings = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+
+[sub_resource type="Resource" id="Resource_pd4od"]
+resource_name = "c"
+script = ExtResource("1_ttblf")
+name = "c"
+groups = Array[Resource("res://addons/ggs/classes/resources/ggs_group.gd")]([])
+settings = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+
+[resource]
+script = ExtResource("1_wabe0")
+categories = {
+"a": SubResource("Resource_e5xlt"),
+"b": SubResource("Resource_fnqtv"),
+"c": SubResource("Resource_pd4od")
+}
+category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_e5xlt"), SubResource("Resource_fnqtv"), SubResource("Resource_pd4od")])
+split_offset_0 = 250

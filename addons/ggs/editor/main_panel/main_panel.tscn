@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba6307vlx5vhl"]
+
+[ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_37kg2"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/split_containers.gd" id="1_kpjjb"]
+[ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="1_srd8v"]
+
+[node name="MainPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_37kg2")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MainCtnr" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="Margin/MainCtnr"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="Margin/MainCtnr/TopBar"]
+layout_mode = 2
+flat = true
+
+[node name="Foo" type="PopupMenu" parent="Margin/MainCtnr/TopBar/MenuBar"]
+
+[node name="Bar" type="PopupMenu" parent="Margin/MainCtnr/TopBar/MenuBar"]
+
+[node name="Menu" type="PopupMenu" parent="Margin/MainCtnr/TopBar/MenuBar"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/MainCtnr/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Button" type="Button" parent="Margin/MainCtnr/TopBar/HBoxContainer"]
+layout_mode = 2
+text = "Some"
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="Margin/MainCtnr/TopBar/HBoxContainer"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="Margin/MainCtnr/TopBar/HBoxContainer"]
+layout_mode = 2
+text = "Stuff"
+
+[node name="Panels" type="HBoxContainer" parent="Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplit_0" type="HSplitContainer" parent="Margin/MainCtnr/Panels"]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offset = 250
+script = ExtResource("1_kpjjb")
+
+[node name="CategoryPanel" parent="Margin/MainCtnr/Panels/HSplit_0" instance=ExtResource("1_srd8v")]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Margin/MainCtnr/Panels/HSplit_0"]
+layout_mode = 2
+size_flags_horizontal = 3
