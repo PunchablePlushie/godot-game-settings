@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://chq6kg1u5nt23"]
+
+[node name="PanelLabel" type="LineEdit"]
+focus_mode = 0
+mouse_filter = 2
+alignment = 1
+editable = false

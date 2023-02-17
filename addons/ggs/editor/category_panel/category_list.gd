@@ -86,6 +86,9 @@ func _on_item_activated() -> void:
 ### Context Menu
 
 func _on_item_mouse_selected(pos: Vector2, mouse_btn: int) -> void:
+	var category: ggsCategory = get_item_at_position(pos).get_metadata(0)
+	GGS.category_selected.emit(category)
+	
 	if not mouse_btn == MOUSE_BUTTON_RIGHT:
 		return
 	

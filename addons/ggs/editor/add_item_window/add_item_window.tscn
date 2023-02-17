@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://do77oikw11sxq"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/add_item_window/add_item_window.gd" id="1_338sp"]
+[ext_resource type="Texture2D" uid="uid://otjpb5hpts2r" path="res://addons/ggs/assets/search.svg" id="1_th7u7"]
+[ext_resource type="Texture2D" uid="uid://xh60h8hrksvh" path="res://addons/ggs/assets/match_case.svg" id="2_86n7v"]
+[ext_resource type="Script" path="res://addons/ggs/editor/add_item_window/desc_field.gd" id="4_ig83s"]
+
+[node name="AddItemWindow" type="ConfirmationDialog"]
+title = "Add a Category Item"
+size = Vector2i(550, 463)
+visible = true
+min_size = Vector2i(550, 460)
+ok_button_text = "Add"
+script = ExtResource("1_338sp")
+
+[node name="MainCtnr" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 542.0
+offset_bottom = 414.0
+
+[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+
+[node name="AvailableLabel" type="Label" parent="MainCtnr/TopBar"]
+layout_mode = 2
+text = "Available items:"
+
+[node name="FilterCtnr" type="HBoxContainer" parent="MainCtnr/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar/FilterCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Filter Items..."
+clear_button_enabled = true
+right_icon = ExtResource("1_th7u7")
+
+[node name="MatchCaseBtn" type="Button" parent="MainCtnr/TopBar/FilterCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Match Case"
+toggle_mode = true
+icon = ExtResource("2_86n7v")
+
+[node name="ItemCtnr" type="HBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GroupCtnr" type="VBoxContainer" parent="MainCtnr/ItemCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="GroupLabel" type="LineEdit" parent="MainCtnr/ItemCtnr/GroupCtnr"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+text = "Groups"
+alignment = 1
+editable = false
+
+[node name="GroupList" type="ItemList" parent="MainCtnr/ItemCtnr/GroupCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingCtnr" type="VBoxContainer" parent="MainCtnr/ItemCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="SettingLabel" type="LineEdit" parent="MainCtnr/ItemCtnr/SettingCtnr"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+text = "Settings"
+alignment = 1
+editable = false
+
+[node name="SettingList" type="ItemList" parent="MainCtnr/ItemCtnr/SettingCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DescCtnr" type="VBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="DescLabel" type="Label" parent="MainCtnr/DescCtnr"]
+layout_mode = 2
+text = "Description:"
+
+[node name="DescField" type="RichTextLabel" parent="MainCtnr/DescCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+script = ExtResource("4_ig83s")

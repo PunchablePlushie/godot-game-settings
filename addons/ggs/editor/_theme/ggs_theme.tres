@@ -1,23 +1,21 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c4pwg7lhukqb8"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c4pwg7lhukqb8"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1nk8"]
-content_margin_left = 4.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl63k"]
+content_margin_left = 6.0
 content_margin_top = 4.0
-content_margin_right = 4.0
+content_margin_right = 6.0
 content_margin_bottom = 4.0
-bg_color = Color(0.905882, 0.647059, 0.0705882, 0.275)
-border_color = Color(0.21, 0.21, 0.21, 1)
+bg_color = Color(0.147, 0.147, 0.147, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 3
-expand_margin_left = 10.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5svi4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubsse"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -29,10 +27,29 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 3
-expand_margin_left = 10.0
+expand_margin_left = 6.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvwq1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.905882, 0.647059, 0.0705882, 0.275)
+border_color = Color(0.21, 0.21, 0.21, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+expand_margin_left = 12.0
 anti_aliasing = false
 
 [resource]
-Tree/styles/selected = SubResource("StyleBoxFlat_x1nk8")
-Tree/styles/selected_focus = SubResource("StyleBoxFlat_5svi4")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_vl63k")
+Tree/styles/selected = SubResource("StyleBoxFlat_ubsse")
+Tree/styles/selected_focus = SubResource("StyleBoxFlat_ubsse")
+TreeFoldable/base_type = &"Tree"
+TreeFoldable/styles/selected = SubResource("StyleBoxFlat_lvwq1")
+TreeFoldable/styles/selected_focus = SubResource("StyleBoxFlat_lvwq1")
 script = ExtResource("1_3cm4d")

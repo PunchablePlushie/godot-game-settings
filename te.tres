@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dipxtfdsbnrw"]
+
+[ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="1_60pev"]
+[ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/settings/display_mode.svg" id="1_gaphy"]
+
+[resource]
+script = ExtResource("1_60pev")
+current = 0
+default = 0
+name = ""
+key = ""
+group = ""
+icon = ExtResource("1_gaphy")
+desc = "Sets window mode to Windowed, Borderless Fullscreen, or Fullscreen."
+category = ""
+tree_item_id = 0

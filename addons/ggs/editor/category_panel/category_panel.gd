@@ -88,6 +88,7 @@ func _on_CMenu_index_pressed(index: int) -> void:
 # Category Deletion
 func _delete_category(category: ggsCategory) -> void:
 	GGS.data.remove_category(category)
+	GGS.category_selected.emit(null)
 	List.remove_item(List.get_selected())
 
 

@@ -1,8 +1,11 @@
 @tool
 extends Node
 
+### Signals
 
-## Global Variables
+signal category_selected(category: ggsCategory)
 
+
+### Variables
 
 var data: ggsPluginData = preload("../plugin_data.tres")
