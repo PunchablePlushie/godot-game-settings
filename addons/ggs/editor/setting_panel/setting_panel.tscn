@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/fold_manager.gd" id="4_hmwlu"]
 [ext_resource type="Texture2D" uid="uid://dyqqplo0qh5n2" path="res://addons/ggs/assets/tree_fold.svg" id="5_r48hb"]
 [ext_resource type="Texture2D" uid="uid://b2yyew6k4pcgb" path="res://addons/ggs/assets/tree_unfold.svg" id="6_o7kt7"]
-[ext_resource type="PackedScene" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
+[ext_resource type="PackedScene" uid="uid://111vt7wxn7lx" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
 
 [node name="SettingPanel" type="Control"]
 custom_minimum_size = Vector2(350, 0)
@@ -68,4 +68,3 @@ size_flags_vertical = 3
 theme_type_variation = &"TreeFoldable"
 
 [node name="AddSettingWindow" parent="." instance=ExtResource("7_o4e63")]
-visible = false

@@ -3,7 +3,8 @@ extends ConfirmationDialog
 
 var selected_setting: ggsSetting: set = _set_selected_setting
 
-@onready var List: ItemList = %SettingList
+@onready var SettingList: ItemList = %SettingList
+@onready var RecentList: ItemList = %RecentList
 @onready var DescField: RichTextLabel = %DescField
 @onready var FilterField: LineEdit = %FilterField
 @onready var OkBtn: Button = get_ok_button()
@@ -17,8 +18,10 @@ func _ready() -> void:
 	about_to_popup.connect(_on_about_to_popup)
 	visibility_changed.connect(_on_visibility_changed)
 	
-	List.item_selected.connect(_on_List_item_selected)
-	List.item_activated.connect(_on_List_item_activated)
+	SettingList.item_selected.connect(_on_AnyList_item_selected.bind(SettingList))
+	SettingList.item_activated.connect(_on_AnyList_item_activated.bind(SettingList))
+	RecentList.item_selected.connect(_on_AnyList_item_selected.bind(RecentList))
+	RecentList.item_activated.connect(_on_AnyList_item_activated.bind(RecentList))
 	
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
 
@@ -37,7 +40,8 @@ func _set_selected_setting(value: ggsSetting) -> void:
 func _on_about_to_popup() -> void:
 	selected_setting = null
 	FilterField.clear()
-	_populate_list()
+	_populate_list(SettingList)
+	_populate_list(RecentList)
 
 
 func _on_visibility_changed() -> void:
@@ -47,11 +51,17 @@ func _on_visibility_changed() -> void:
 
 ### List/General
 
-func _populate_list() -> void:
-	List.clear()
+func _populate_list(list: ItemList) -> void:
+	list.clear()
 	
 	var base_path: String = GGS.data.dir_settings
-	var setting_files: PackedStringArray = DirAccess.get_files_at(base_path)
+	
+	var setting_files: PackedStringArray
+	if list == SettingList:
+		setting_files = DirAccess.get_files_at(base_path)
+	else:
+		setting_files= PackedStringArray(GGS.data.recent_settings)
+	
 	for setting_file in setting_files:
 		var script: Script = load(base_path.path_join(setting_file))
 		var setting: ggsSetting = script.new()
@@ -59,33 +69,44 @@ func _populate_list() -> void:
 		var text: String = setting.name
 		var icon: Texture2D = setting.icon
 		
-		var item_index: int = List.add_item(text, icon)
-		List.set_item_metadata(item_index, setting)
+		var item_index: int = list.add_item(text, icon)
+		list.set_item_metadata(item_index, setting)
 
 
-func _on_List_item_selected(index: int) -> void:
-	selected_setting = List.get_item_metadata(index)
+func _deselect_other_list(list: ItemList) -> void:
+	if list == SettingList:
+		RecentList.deselect_all()
+	else:
+		SettingList.deselect_all()
 
 
-func _on_List_item_activated(_index: int) -> void:
+func _on_AnyList_item_selected(index: int, list: ItemList) -> void:
+	selected_setting = list.get_item_metadata(index)
+	_deselect_other_list(list)
+
+
+func _on_AnyList_item_activated(_index: int, list: ItemList) -> void:
 	confirmed.emit()
 	hide()
+	
+	if list == SettingList:
+		GGS.data.add_recent_setting(selected_setting)
 
 
-### Lists/Filtering
+### SettingList/Filtering
 
-func _filter_list(filter: String) -> void:
-	_populate_list()
+func _filter_setting_list(filter: String) -> void:
+	_populate_list(SettingList)
 	selected_setting = null
 	
-	for item_index in range(List.item_count):
-		var item_text: String = List.get_item_text(item_index).to_lower()
+	for item_index in range(SettingList.item_count):
+		var item_text: String = SettingList.get_item_text(item_index).to_lower()
 		
 		if not item_text.begins_with(filter.to_lower()):
-			List.remove_item(item_index)
+			SettingList.remove_item(item_index)
 	
-	List.sort_items_by_text()
+	SettingList.sort_items_by_text()
 
 
 func _on_FilterField_text_changed(new_text: String) -> void:
-	_filter_list(new_text)
+	_filter_setting_list(new_text)

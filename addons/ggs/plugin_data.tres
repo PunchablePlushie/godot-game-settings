@@ -32,6 +32,7 @@ categories = {
 "c": SubResource("Resource_oeukf")
 }
 category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_kfvfb"), SubResource("Resource_fnqtv"), SubResource("Resource_oeukf")])
+recent_settings = Array[String](["display_mode.gd", "display_fullscreen.gd"])
 dir_settings = "res://game_settings"
 split_offset_0 = 250
 split_offset_1 = 350

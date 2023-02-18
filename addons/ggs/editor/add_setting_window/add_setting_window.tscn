@@ -32,6 +32,7 @@ size_flags_vertical = 0
 text = "Recent:"
 
 [node name="RecentList" type="ItemList" parent="MainCtnr/HBox/LeftCtnr"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.66
