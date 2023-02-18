@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcdxaayxmsrqn"
-path="res://.godot/imported/group.svg-43d24ba3d281153a57d2f04e7c9c9579.ctex"
+uid="uid://dbtn4d6130bdj"
+path="res://.godot/imported/audio_mute.svg-55bc5127aa9aa0d0d51ed09923bedb5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/classes/group.svg"
-dest_files=["res://.godot/imported/group.svg-43d24ba3d281153a57d2f04e7c9c9579.ctex"]
+source_file="res://addons/ggs/assets/game_settings/audio_mute.svg"
+dest_files=["res://.godot/imported/audio_mute.svg-55bc5127aa9aa0d0d51ed09923bedb5b.ctex"]
 
 [params]
 

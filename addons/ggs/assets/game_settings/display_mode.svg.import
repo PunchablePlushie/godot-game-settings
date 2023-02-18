@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f7oed42fkqic"
-path="res://.godot/imported/display_vsync.svg-d7b6b475000165186ca15d5e8e0904e1.ctex"
+uid="uid://b4uw7sfnlm8x2"
+path="res://.godot/imported/display_mode.svg-f37a038b15f541e345562a3bdde0e65b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/game_settings/settings/display_vsync.svg"
-dest_files=["res://.godot/imported/display_vsync.svg-d7b6b475000165186ca15d5e8e0904e1.ctex"]
+source_file="res://addons/ggs/assets/game_settings/display_mode.svg"
+dest_files=["res://.godot/imported/display_mode.svg-f37a038b15f541e345562a3bdde0e65b.ctex"]
 
 [params]
 

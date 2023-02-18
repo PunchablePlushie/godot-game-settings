@@ -3,13 +3,16 @@ extends PanelContainer
 
 enum TargetSignal {CATEGORY, ITEM}
 
+@export var center_text: String
 @export_node_path("Control") var target_node: NodePath
 @export var target_signal: TargetSignal
 
 @onready var TargetNode: Control = get_node(target_node)
+@onready var CenterText: Label = $Center/CenterText
 
 
 func _ready() -> void:
+	CenterText.text = center_text
 	visible = true
 	TargetNode.hide()
 	

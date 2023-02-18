@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp3hx1cscuotr"
-path="res://.godot/imported/display_group.svg-760e811a8ce90960f8b906b90eeefe79.ctex"
+uid="uid://dimhb46k7ud10"
+path="res://.godot/imported/display_scale.svg-d5aa11b71c48df0ed4813eec81c0765d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/game_settings/groups/display_group.svg"
-dest_files=["res://.godot/imported/display_group.svg-760e811a8ce90960f8b906b90eeefe79.ctex"]
+source_file="res://addons/ggs/assets/game_settings/display_scale.svg"
+dest_files=["res://.godot/imported/display_scale.svg-d5aa11b71c48df0ed4813eec81c0765d.ctex"]
 
 [params]
 

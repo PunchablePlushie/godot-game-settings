@@ -8,24 +8,21 @@ resource_name = "a"
 script = ExtResource("1_ttblf")
 name = "a"
 settings = {}
-groups = {}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_cat_item.gd")]([])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
 
 [sub_resource type="Resource" id="Resource_kfvfb"]
 resource_name = "b"
 script = ExtResource("1_ttblf")
 name = "b"
 settings = {}
-groups = {}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_cat_item.gd")]([])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
 
 [sub_resource type="Resource" id="Resource_oeukf"]
 resource_name = "c"
 script = ExtResource("1_ttblf")
 name = "c"
 settings = {}
-groups = {}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_cat_item.gd")]([])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
 
 [resource]
 script = ExtResource("1_wabe0")
@@ -34,9 +31,7 @@ categories = {
 "b": SubResource("Resource_kfvfb"),
 "c": SubResource("Resource_oeukf")
 }
-category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_fnqtv"), SubResource("Resource_kfvfb"), SubResource("Resource_oeukf")])
-dir_settings = "res://game_settings/settings"
-dir_groups = "res://game_settings/groups"
+category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_kfvfb"), SubResource("Resource_fnqtv"), SubResource("Resource_oeukf")])
+dir_settings = "res://game_settings"
 split_offset_0 = 250
 split_offset_1 = 350
-add_item_filtering_match_case = true

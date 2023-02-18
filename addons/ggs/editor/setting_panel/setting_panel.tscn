@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://vt5mwwxhtu3x"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_panel.gd" id="1_2wlv0"]
+[ext_resource type="PackedScene" uid="uid://chq6kg1u5nt23" path="res://addons/ggs/editor/_components/panel_label/panel_label.tscn" id="2_47ho5"]
+[ext_resource type="Texture2D" uid="uid://brtdsxn4swphc" path="res://addons/ggs/assets/add.svg" id="3_tdauq"]
+[ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/fold_manager.gd" id="4_hmwlu"]
+[ext_resource type="Texture2D" uid="uid://dyqqplo0qh5n2" path="res://addons/ggs/assets/tree_fold.svg" id="5_r48hb"]
+[ext_resource type="Texture2D" uid="uid://b2yyew6k4pcgb" path="res://addons/ggs/assets/tree_unfold.svg" id="6_o7kt7"]
+[ext_resource type="PackedScene" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
+
+[node name="SettingPanel" type="Control"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wlv0")
+
+[node name="MainCtnr" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelLabel" parent="MainCtnr" instance=ExtResource("2_47ho5")]
+layout_mode = 2
+text = "Settings"
+
+[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+
+[node name="AddBtn" type="Button" parent="MainCtnr/TopBar" node_paths=PackedStringArray("shortcut_context")]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add Item"
+shortcut_context = NodePath("")
+icon = ExtResource("3_tdauq")
+flat = true
+
+[node name="FoldCtnr" type="HBoxContainer" parent="MainCtnr/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+script = ExtResource("4_hmwlu")
+
+[node name="Vsep" type="VSeparator" parent="MainCtnr/TopBar/FoldCtnr"]
+layout_mode = 2
+
+[node name="FoldBtn" type="Button" parent="MainCtnr/TopBar/FoldCtnr"]
+layout_mode = 2
+tooltip_text = "Fold All Items"
+icon = ExtResource("5_r48hb")
+flat = true
+
+[node name="UnfoldBtn" type="Button" parent="MainCtnr/TopBar/FoldCtnr"]
+layout_mode = 2
+tooltip_text = "Unfold All Items"
+icon = ExtResource("6_o7kt7")
+flat = true
+
+[node name="SettingList" type="Tree" parent="MainCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"TreeFoldable"
+
+[node name="AddSettingWindow" parent="." instance=ExtResource("7_o4e63")]
+visible = false

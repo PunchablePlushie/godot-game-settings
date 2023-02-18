@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba6307vlx5vhl"]
+[gd_scene load_steps=8 format=3 uid="uid://boidgahq4pqyo"]
 
-[ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_37kg2"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/split_containers.gd" id="1_kpjjb"]
-[ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="1_srd8v"]
-[ext_resource type="Texture2D" uid="uid://lmkcbltytf6u" path="res://addons/ggs/assets/preferences.svg" id="2_yxjqo"]
-[ext_resource type="Texture2D" uid="uid://wuoaj5hjvxsb" path="res://addons/ggs/assets/about.svg" id="3_qa1ic"]
-[ext_resource type="PackedScene" uid="uid://d15sjt6je7by5" path="res://addons/ggs/editor/item_panel/item_panel.tscn" id="4_syrrn"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/occluders.gd" id="6_hkqvk"]
+[ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
+[ext_resource type="Texture2D" uid="uid://lmkcbltytf6u" path="res://addons/ggs/assets/preferences.svg" id="2_y53xg"]
+[ext_resource type="Texture2D" uid="uid://wuoaj5hjvxsb" path="res://addons/ggs/assets/about.svg" id="3_siiau"]
+[ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/split_containers.gd" id="4_mplwh"]
+[ext_resource type="PackedScene" uid="uid://dhuectuu54vf3" path="res://addons/ggs/editor/_components/occluder/occluder.tscn" id="5_3dku6"]
+[ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/setting_panel/setting_panel.tscn" id="6_rabjj"]
 
 [node name="MainPanel" type="Control"]
 layout_mode = 3
@@ -17,84 +17,66 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_37kg2")
+theme = ExtResource("1_w3bfk")
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="MainCtnr" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
 
-[node name="MainCtnr" type="VBoxContainer" parent="Margin"]
+[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="TopBar" type="HBoxContainer" parent="Margin/MainCtnr"]
-layout_mode = 2
-
-[node name="MenuBar" type="MenuBar" parent="Margin/MainCtnr/TopBar"]
+[node name="MenuBar" type="MenuBar" parent="MainCtnr/TopBar"]
 layout_mode = 2
 flat = true
 
-[node name="Save File" type="PopupMenu" parent="Margin/MainCtnr/TopBar/MenuBar"]
+[node name="Save File" type="PopupMenu" parent="MainCtnr/TopBar/MenuBar"]
 
-[node name="MiscCtnr" type="HBoxContainer" parent="Margin/MainCtnr/TopBar"]
+[node name="RightCtnr" type="HBoxContainer" parent="MainCtnr/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="VSep" type="VSeparator" parent="Margin/MainCtnr/TopBar/MiscCtnr"]
-layout_mode = 2
-
-[node name="PrefBtn" type="Button" parent="Margin/MainCtnr/TopBar/MiscCtnr"]
+[node name="PrefBtn" type="Button" parent="MainCtnr/TopBar/RightCtnr"]
 layout_mode = 2
 text = "Preferences"
-icon = ExtResource("2_yxjqo")
+icon = ExtResource("2_y53xg")
 flat = true
 
-[node name="AboutBtn" type="Button" parent="Margin/MainCtnr/TopBar/MiscCtnr"]
+[node name="VSep" type="VSeparator" parent="MainCtnr/TopBar/RightCtnr"]
+layout_mode = 2
+
+[node name="AboutBtn" type="Button" parent="MainCtnr/TopBar/RightCtnr"]
 layout_mode = 2
 text = "About"
-icon = ExtResource("3_qa1ic")
+icon = ExtResource("3_siiau")
 flat = true
 
-[node name="Panels" type="HBoxContainer" parent="Margin/MainCtnr"]
+[node name="HSplit_0" type="HSplitContainer" parent="MainCtnr"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="HSplit_0" type="HSplitContainer" parent="Margin/MainCtnr/Panels"]
-layout_mode = 2
-size_flags_horizontal = 3
 split_offset = 250
-script = ExtResource("1_kpjjb")
+script = ExtResource("4_mplwh")
 
-[node name="CategoryPanel" parent="Margin/MainCtnr/Panels/HSplit_0" instance=ExtResource("1_srd8v")]
+[node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
 layout_mode = 2
 
-[node name="Occluder_0" type="PanelContainer" parent="Margin/MainCtnr/Panels/HSplit_0"]
+[node name="Occluder_0" parent="MainCtnr/HSplit_0" instance=ExtResource("5_3dku6")]
 layout_mode = 2
-script = ExtResource("6_hkqvk")
+center_text = "Select a Category"
 target_node = NodePath("../HSplit_1")
-target_signal = 0
 
-[node name="Center" type="CenterContainer" parent="Margin/MainCtnr/Panels/HSplit_0/Occluder_0"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margin/MainCtnr/Panels/HSplit_0/Occluder_0/Center"]
-layout_mode = 2
-text = "Select a Category"
-
-[node name="HSplit_1" type="HSplitContainer" parent="Margin/MainCtnr/Panels/HSplit_0"]
+[node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 visible = false
 layout_mode = 2
 split_offset = 350
-script = ExtResource("1_kpjjb")
+script = ExtResource("4_mplwh")
 
-[node name="ItemPanel" parent="Margin/MainCtnr/Panels/HSplit_0/HSplit_1" instance=ExtResource("4_syrrn")]
+[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Margin/MainCtnr/Panels/HSplit_0/HSplit_1"]
+[node name="Panel" type="Panel" parent="MainCtnr/HSplit_0/HSplit_1"]
 layout_mode = 2

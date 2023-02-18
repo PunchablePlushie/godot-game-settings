@@ -8,14 +8,11 @@ class_name ggsPluginData
 @export var category_order: Array[ggsCategory]
 
 @export_group("Directories", "dir_")
-@export_dir var dir_settings: String = "res://game_settings/settings"
-@export_dir var dir_groups: String = "res://game_settings/groups"
+@export_dir var dir_settings: String = "res://game_settings"
 
 @export_group("Split Offset", "split_offset_")
 @export var split_offset_0: int = 0
 @export var split_offset_1: int = 0
-
-@export var add_item_filtering_match_case: bool = false
 
 
 func set_data(data: String, value: Variant) -> void:

@@ -71,7 +71,7 @@ item_1/icon = ExtResource("7_frnfa")
 item_1/id = 1
 
 [node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
-title = "CConfirm Category Deletion"
+title = "Confirm Category Deletion"
 ok_button_text = "Delete"
 dialog_text = "Are you sure you want to delete the selected category?
 This action cannot be undone."
