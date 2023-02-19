@@ -1,7 +1,6 @@
 @tool
 extends ConfirmationDialog
-
-var selected_setting: ggsSetting: set = _set_selected_setting
+signal setting_selected(setting: ggsSetting)
 
 @onready var SettingList: ItemList = %SettingList
 @onready var RecentList: ItemList = %RecentList
@@ -26,19 +25,9 @@ func _ready() -> void:
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
 
 
-func _set_selected_setting(value: ggsSetting) -> void:
-	selected_setting = value
-	
-	if selected_setting == null:
-		OkBtn.disabled = true
-		DescField.clear_content()
-	else:
-		OkBtn.disabled = false
-		DescField.set_content(selected_setting)
-
-
 func _on_about_to_popup() -> void:
-	selected_setting = null
+	OkBtn.disabled = true
+	DescField.clear_content()
 	FilterField.clear()
 	_populate_list(SettingList)
 	_populate_list(RecentList)
@@ -47,6 +36,22 @@ func _on_about_to_popup() -> void:
 func _on_visibility_changed() -> void:
 	if visible == true:
 		FilterField.grab_focus()
+	else:
+		var selected_setting: ggsSetting
+		var selected_item: int
+		
+		if SettingList.is_anything_selected():
+			selected_item = SettingList.get_selected_items()[0]
+			selected_setting = SettingList.get_item_metadata(selected_item)
+		
+		if RecentList.is_anything_selected():
+			selected_item = RecentList.get_selected_items()[0]
+			selected_setting = RecentList.get_item_metadata(selected_item)
+		
+		if selected_setting == null:
+			return
+		
+		setting_selected.emit(selected_setting)
 
 
 ### List/General
@@ -81,29 +86,32 @@ func _deselect_other_list(list: ItemList) -> void:
 
 
 func _on_AnyList_item_selected(index: int, list: ItemList) -> void:
-	selected_setting = list.get_item_metadata(index)
+	OkBtn.disabled = false
+	DescField.set_content(list.get_item_metadata(index))
 	_deselect_other_list(list)
 
 
-func _on_AnyList_item_activated(_index: int, list: ItemList) -> void:
-	confirmed.emit()
+func _on_AnyList_item_activated(index: int, list: ItemList) -> void:
 	hide()
 	
-	if list == SettingList:
-		GGS.data.add_recent_setting(selected_setting)
+	var selected_setting: ggsSetting = list.get_item_metadata(index)
+	GGS.data.add_recent_setting(selected_setting)
 
 
 ### SettingList/Filtering
 
 func _filter_setting_list(filter: String) -> void:
+	var to_remove: Array[int]
 	_populate_list(SettingList)
-	selected_setting = null
 	
 	for item_index in range(SettingList.item_count):
 		var item_text: String = SettingList.get_item_text(item_index).to_lower()
 		
 		if not item_text.begins_with(filter.to_lower()):
-			SettingList.remove_item(item_index)
+			to_remove.push_front(item_index)
+	
+	for item_index in to_remove:
+		SettingList.remove_item(item_index)
 	
 	SettingList.sort_items_by_text()
 

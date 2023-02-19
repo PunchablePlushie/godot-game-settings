@@ -21,11 +21,6 @@ func _set_tree() -> void:
 	new_stylebox.expand_margin_left = TREE_EXPAND_MARGIN_SINGLE
 	set_stylebox("selected", "Tree", new_stylebox)
 	set_stylebox("selected_focus", "Tree", new_stylebox)
-	
-	new_stylebox = default_selected.duplicate()
-	new_stylebox.expand_margin_left = TREE_EXPAND_MARGIN
-	set_stylebox("selected", "TreeFoldable", new_stylebox)
-	set_stylebox("selected_focus", "TreeFoldable", new_stylebox)
 
 
 ### Panel Container

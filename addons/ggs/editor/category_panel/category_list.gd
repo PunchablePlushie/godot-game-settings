@@ -1,19 +1,18 @@
 @tool
-extends Tree
-
-var root: TreeItem
+extends ggsTree
 
 @onready var CMenu: PopupMenu = $ContextMenu
 
 
 func _ready() -> void:
+	item_selected.connect(_on_item_selected)
 	item_activated.connect(_on_item_activated)
 	item_mouse_selected.connect(_on_item_mouse_selected)
 	
-	_reload_items()
+	_load_list()
 
 
-func _reload_items() -> void:
+func _load_list() -> void:
 	clear()
 	root = create_item()
 	
@@ -28,9 +27,17 @@ func add_item(category: ggsCategory) -> void:
 
 
 func remove_item(item: TreeItem) -> void:
+	GGS.category_selected.emit(null)
 	item.free()
 	_update_item_order()
 
+
+func _on_item_selected() -> void:
+	var selected_category: ggsCategory = get_selected().get_metadata(0)
+	GGS.category_selected.emit(selected_category)
+
+
+### Drag and Drop
 
 func _update_item_order() -> void:
 	var new_order: Array[ggsCategory]
@@ -41,53 +48,10 @@ func _update_item_order() -> void:
 	GGS.data.update_category_order(new_order)
 
 
-### Drag and Drop
-
-func _get_drag_data(at_position: Vector2) -> Variant:
-	var data: TreeItem = get_item_at_position(at_position)
-	
-	var preview: Button = Button.new()
-	preview.flat = true
-	preview.text = data.get_text(0)
-	set_drag_preview(preview)
-	
-	return data
-
-
-func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	if get_item_at_position(at_position) == null:
-		return false
-	else:
-		drop_mode_flags = DROP_MODE_INBETWEEN
-		return true
-
-
-func _drop_data(at_position: Vector2, data: Variant) -> void:
-	var shift: int = get_drop_section_at_position(at_position)
-	var target: TreeItem = get_item_at_position(at_position)
-	
-	if shift == 1:
-		data.move_after(target)
-	else:
-		data.move_before(target)
-	
-	_update_item_order()
-
-
-### Renaming
-
-func _on_item_activated() -> void:
-	var selected_item: TreeItem = get_selected()
-	selected_item.set_editable(0, true)
-	selected_item.select(0)
-	edit_selected()
-
-
 ### Context Menu
 
 func _on_item_mouse_selected(pos: Vector2, mouse_btn: int) -> void:
 	var category: ggsCategory = get_item_at_position(pos).get_metadata(0)
-	GGS.category_selected.emit(category)
 	
 	if not mouse_btn == MOUSE_BUTTON_RIGHT:
 		return

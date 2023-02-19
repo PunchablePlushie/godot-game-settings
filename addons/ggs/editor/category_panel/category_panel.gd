@@ -61,8 +61,13 @@ func _on_AddBtn_pressed() -> void:
 func _rename_category(tree_item: TreeItem) -> void:
 	var category: ggsCategory = tree_item.get_metadata(0)
 	var prev_name: String = category.name
+	var new_name: String = tree_item.get_text(0)
+	
+	if prev_name == new_name:
+		return
+	
 	var name_list: PackedStringArray = GGS.data.get_category_name_list()
-	category.name = ggsUtils.get_unique_string(name_list, tree_item.get_text(0))
+	category.name = ggsUtils.get_unique_string(name_list, new_name)
 	
 	GGS.data.rename_category(prev_name, category)
 	
@@ -88,7 +93,6 @@ func _on_CMenu_index_pressed(index: int) -> void:
 # Category Deletion
 func _delete_category(category: ggsCategory) -> void:
 	GGS.data.remove_category(category)
-	GGS.category_selected.emit(null)
 	List.remove_item(List.get_selected())
 
 

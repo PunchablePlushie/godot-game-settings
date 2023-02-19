@@ -17,15 +17,28 @@ func set_name(value: String) -> void:
 ### Settings
 
 func add_setting(setting: ggsSetting) -> void:
-	settings[setting.key] = setting
+	settings[setting.name] = setting
 	item_order.append(setting)
 
 
 func remove_setting(setting: ggsSetting) -> void:
-	settings.erase(setting.key)
+	settings.erase(setting.name)
 	item_order.erase(setting)
 
 
 func rename_setting(prev_name: String, setting: ggsSetting) -> void:
 	settings.erase(prev_name)
-	settings[setting.key] = setting
+	settings[setting.name] = setting
+
+
+func get_setting_name_list() -> PackedStringArray:
+	var name_list: PackedStringArray
+	for setting in settings.values():
+		name_list.append(setting.name)
+	
+	return name_list
+
+
+func update_item_order(new_order: Array[ggsSetting]) -> void:
+	item_order.clear()
+	item_order = new_order

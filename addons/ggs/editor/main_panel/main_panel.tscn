@@ -65,12 +65,12 @@ script = ExtResource("4_mplwh")
 layout_mode = 2
 
 [node name="Occluder_0" parent="MainCtnr/HSplit_0" instance=ExtResource("5_3dku6")]
+visible = false
 layout_mode = 2
 center_text = "Select a Category"
 target_node = NodePath("../HSplit_1")
 
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
-visible = false
 layout_mode = 2
 split_offset = 350
 script = ExtResource("4_mplwh")
