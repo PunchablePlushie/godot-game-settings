@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=6 format=3 uid="uid://bkp77x1seytg7"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_panel.gd" id="1_yu7o4"]
-[ext_resource type="PackedScene" uid="uid://chq6kg1u5nt23" path="res://addons/ggs/editor/_components/panel_label/panel_label.tscn" id="2_macsa"]
 [ext_resource type="Texture2D" uid="uid://brtdsxn4swphc" path="res://addons/ggs/assets/add.svg" id="3_qio6m"]
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_list.gd" id="4_xqs08"]
 [ext_resource type="Texture2D" uid="uid://b7u0sjxctxinv" path="res://addons/ggs/assets/delete.svg" id="6_b7lqk"]
@@ -24,10 +23,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PanelLabel" parent="MainCtnr" instance=ExtResource("2_macsa")]
-layout_mode = 2
-text = "Categories"
 
 [node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
 layout_mode = 2

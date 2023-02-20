@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://boidgahq4pqyo"]
+[gd_scene load_steps=7 format=3 uid="uid://boidgahq4pqyo"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
-[ext_resource type="Texture2D" uid="uid://lmkcbltytf6u" path="res://addons/ggs/assets/preferences.svg" id="2_y53xg"]
-[ext_resource type="Texture2D" uid="uid://wuoaj5hjvxsb" path="res://addons/ggs/assets/about.svg" id="3_siiau"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/split_containers.gd" id="4_mplwh"]
-[ext_resource type="PackedScene" uid="uid://dhuectuu54vf3" path="res://addons/ggs/editor/_components/occluder/occluder.tscn" id="5_3dku6"]
+[ext_resource type="PackedScene" uid="uid://bjfylfmjrvyxa" path="res://addons/ggs/editor/component_panel/component_panel.tscn" id="5_7xo6y"]
 [ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/setting_panel/setting_panel.tscn" id="6_rabjj"]
+[ext_resource type="Texture2D" uid="uid://bqdur8f3jt437" path="res://addons/ggs/assets/icon_mono.svg" id="6_t7de8"]
 
 [node name="MainPanel" type="Control"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_w3bfk")
 
-[node name="MainCtnr" type="VBoxContainer" parent="."]
+[node name="MainCtnr" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,56 +27,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
-layout_mode = 2
-
-[node name="MenuBar" type="MenuBar" parent="MainCtnr/TopBar"]
-layout_mode = 2
-flat = true
-
-[node name="Save File" type="PopupMenu" parent="MainCtnr/TopBar/MenuBar"]
-
-[node name="RightCtnr" type="HBoxContainer" parent="MainCtnr/TopBar"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="PrefBtn" type="Button" parent="MainCtnr/TopBar/RightCtnr"]
-layout_mode = 2
-text = "Preferences"
-icon = ExtResource("2_y53xg")
-flat = true
-
-[node name="VSep" type="VSeparator" parent="MainCtnr/TopBar/RightCtnr"]
-layout_mode = 2
-
-[node name="AboutBtn" type="Button" parent="MainCtnr/TopBar/RightCtnr"]
-layout_mode = 2
-text = "About"
-icon = ExtResource("3_siiau")
-flat = true
-
 [node name="HSplit_0" type="HSplitContainer" parent="MainCtnr"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = 250
+split_offset = -241
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
 layout_mode = 2
-
-[node name="Occluder_0" parent="MainCtnr/HSplit_0" instance=ExtResource("5_3dku6")]
-visible = false
-layout_mode = 2
-center_text = "Select a Category"
-target_node = NodePath("../HSplit_1")
+size_flags_horizontal = 3
 
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
-split_offset = 350
+size_flags_horizontal = 3
+split_offset = 574
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MainCtnr/HSplit_0/HSplit_1"]
+[node name="ComponentPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("5_7xo6y")]
 layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MainCtnr"]
+layout_mode = 2
+
+[node name="BtnCtnr" type="VBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr"]
+layout_mode = 2
+tooltip_text = "Preferences"
+icon = ExtResource("6_t7de8")
+flat = true

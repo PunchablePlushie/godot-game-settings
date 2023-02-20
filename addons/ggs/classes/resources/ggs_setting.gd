@@ -6,7 +6,7 @@ class_name ggsSetting
 @export_group("Internal")
 @export var name: String: set = set_name
 @export var category: String
-@export var icon: Texture2D = preload("res://addons/ggs/assets/preferences.svg")
+@export var icon: Texture2D = preload("res://addons/ggs/assets/game_settings/_default.svg")
 @export_multiline var desc: String = "No description available."
 
 

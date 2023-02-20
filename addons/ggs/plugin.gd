@@ -9,28 +9,12 @@ var MainPanel: Control
 
 func _enter_tree() -> void:
 	_add_plugin_singleton()
-	_add_main_editor()
+	_add_editor()
 
 
 func _exit_tree() -> void:
 	_remove_plugin_singleton()
-	_remove_main_editor()
-
-
-func _has_main_screen() -> bool:
-	return true
-
-
-func _make_visible(visible: bool) -> void:
-	MainPanel.visible = visible
-
-
-func _get_plugin_name() -> String:
-	return "Game Settings"
-
-
-func _get_plugin_icon() -> Texture2D:
-	return preload("./assets/main_screen_icon.svg")
+	_remove_editor()
 
 
 ### Singleton
@@ -47,12 +31,12 @@ func _remove_plugin_singleton() -> void:
 
 ### Main Editor
 
-func _add_main_editor() -> void:
+func _add_editor() -> void:
 	MainPanel = main_panel_scn.instantiate()
-	get_editor_interface().get_editor_main_screen().add_child(MainPanel)
-	MainPanel.hide()
+	add_control_to_bottom_panel(MainPanel, "Game Settings")
 
 
-func _remove_main_editor() -> void:
+func _remove_editor() -> void:
 	if MainPanel:
+		remove_control_from_bottom_panel(MainPanel)
 		MainPanel.queue_free()

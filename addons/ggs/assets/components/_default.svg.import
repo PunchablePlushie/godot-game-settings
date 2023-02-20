@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2yyew6k4pcgb"
-path="res://.godot/imported/tree_unfold.svg-d233fd8b8ae40045e957dfcc217462ae.ctex"
+uid="uid://bqrfny4ip6psn"
+path="res://.godot/imported/_default.svg-532db7d2518592dbd5698f294440c21d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/tree_unfold.svg"
-dest_files=["res://.godot/imported/tree_unfold.svg-d233fd8b8ae40045e957dfcc217462ae.ctex"]
+source_file="res://addons/ggs/assets/components/_default.svg"
+dest_files=["res://.godot/imported/_default.svg-532db7d2518592dbd5698f294440c21d.ctex"]
 
 [params]
 

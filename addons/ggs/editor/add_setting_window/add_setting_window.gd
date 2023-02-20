@@ -16,6 +16,7 @@ func _init() -> void:
 func _ready() -> void:
 	about_to_popup.connect(_on_about_to_popup)
 	visibility_changed.connect(_on_visibility_changed)
+	confirmed.connect(_on_confirmed)
 	
 	SettingList.item_selected.connect(_on_AnyList_item_selected.bind(SettingList))
 	SettingList.item_activated.connect(_on_AnyList_item_activated.bind(SettingList))
@@ -23,6 +24,25 @@ func _ready() -> void:
 	RecentList.item_activated.connect(_on_AnyList_item_activated.bind(RecentList))
 	
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
+
+
+func _confirm() -> void:
+	var selected_setting: ggsSetting
+	var selected_item: int
+	
+	if SettingList.is_anything_selected():
+		selected_item = SettingList.get_selected_items()[0]
+		selected_setting = SettingList.get_item_metadata(selected_item)
+	
+	if RecentList.is_anything_selected():
+		selected_item = RecentList.get_selected_items()[0]
+		selected_setting = RecentList.get_item_metadata(selected_item)
+	
+	if selected_setting == null:
+		return
+	
+	setting_selected.emit(selected_setting)
+	GGS.data.add_recent_setting(selected_setting)
 
 
 func _on_about_to_popup() -> void:
@@ -36,22 +56,10 @@ func _on_about_to_popup() -> void:
 func _on_visibility_changed() -> void:
 	if visible == true:
 		FilterField.grab_focus()
-	else:
-		var selected_setting: ggsSetting
-		var selected_item: int
-		
-		if SettingList.is_anything_selected():
-			selected_item = SettingList.get_selected_items()[0]
-			selected_setting = SettingList.get_item_metadata(selected_item)
-		
-		if RecentList.is_anything_selected():
-			selected_item = RecentList.get_selected_items()[0]
-			selected_setting = RecentList.get_item_metadata(selected_item)
-		
-		if selected_setting == null:
-			return
-		
-		setting_selected.emit(selected_setting)
+
+
+func _on_confirmed() -> void:
+	_confirm()
 
 
 ### List/General
@@ -92,10 +100,8 @@ func _on_AnyList_item_selected(index: int, list: ItemList) -> void:
 
 
 func _on_AnyList_item_activated(index: int, list: ItemList) -> void:
+	_confirm()
 	hide()
-	
-	var selected_setting: ggsSetting = list.get_item_metadata(index)
-	GGS.data.add_recent_setting(selected_setting)
 
 
 ### SettingList/Filtering

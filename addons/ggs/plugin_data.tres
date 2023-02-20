@@ -1,251 +1,50 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=35 format=3 uid="uid://oi6ewyuii748"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=10 format=3 uid="uid://oi6ewyuii748"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_ttblf"]
+[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_vtj7r"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
-[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="2_by28x"]
-[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="3_at0xi"]
-[ext_resource type="Script" path="res://game_settings/display_fullscreen.gd" id="3_ydf11"]
-[ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/display_mode.svg" id="4_7s8yy"]
-[ext_resource type="Script" path="res://game_settings/audio_volume.gd" id="4_hcf57"]
-[ext_resource type="Texture2D" uid="uid://dlvhau28nu82n" path="res://addons/ggs/assets/game_settings/display_size.svg" id="5_5dk3m"]
-[ext_resource type="Script" path="res://game_settings/display_mode.gd" id="5_aofda"]
-[ext_resource type="Texture2D" uid="uid://dimhb46k7ud10" path="res://addons/ggs/assets/game_settings/display_scale.svg" id="6_tda0o"]
-[ext_resource type="Script" path="res://game_settings/display_size.gd" id="6_x25v8"]
-[ext_resource type="Script" path="res://game_settings/display_scale.gd" id="7_v7gqm"]
-[ext_resource type="Texture2D" uid="uid://dbtn4d6130bdj" path="res://addons/ggs/assets/game_settings/audio_mute.svg" id="11_o1vuy"]
-[ext_resource type="Script" path="res://game_settings/audio_mute.gd" id="12_45ghm"]
+[ext_resource type="Script" path="res://game_settings/display_fullscreen.gd" id="2_2fjef"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="3_toiby"]
+[ext_resource type="Script" path="res://game_settings/audio_volume.gd" id="4_lu0w6"]
 
-[sub_resource type="Resource" id="Resource_8vp70"]
-resource_name = "Audio Volume"
-script = ExtResource("4_hcf57")
-current = 80.0
-default = 80.0
-bus_name = "Master"
-name = "Audio Volume"
-category = "a"
-icon = ExtResource("3_at0xi")
-desc = "Change volume of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_2elc8"]
-resource_name = "Audio Mute"
-script = ExtResource("12_45ghm")
-current = false
-default = false
-bus_name = ""
-name = "Audio Mute"
-category = "a"
-icon = ExtResource("11_o1vuy")
-desc = "Toggle mute state of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_5lwv4"]
-resource_name = "Window Scale"
-script = ExtResource("7_v7gqm")
-current = 0
-default = 1
-scales = Array[int]([0, 1])
-name = "Window Scale"
-category = "a"
-icon = ExtResource("6_tda0o")
-desc = "Change window size by multiplying its width and height by a specific value."
-
-[sub_resource type="Resource" id="Resource_42rkv"]
-resource_name = "Window Size"
-script = ExtResource("6_x25v8")
-current = 0
-default = 0
-sizes = Array[Vector2]([Vector2(270, 360)])
-name = "Window Size"
-category = "a"
-icon = ExtResource("5_5dk3m")
-desc = "Change window size by setting its width and height to specific values."
-
-[sub_resource type="Resource" id="Resource_c78rh"]
-resource_name = "Display Mode"
-script = ExtResource("5_aofda")
-current = 0
-default = 0
-name = "Display Mode"
-category = "a"
-icon = ExtResource("4_7s8yy")
-desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
-
-[sub_resource type="Resource" id="Resource_kspga"]
+[sub_resource type="Resource" id="Resource_0eqo3"]
 resource_name = "Fullscreen Mode"
-script = ExtResource("3_ydf11")
+script = ExtResource("2_2fjef")
 current = false
 default = false
 name = "Fullscreen Mode"
-category = "a"
-icon = ExtResource("2_by28x")
+category = "test"
+icon = ExtResource("1_vtj7r")
 desc = "Toggle Fullscreen mode."
 
-[sub_resource type="Resource" id="Resource_fnqtv"]
-resource_name = "a"
+[sub_resource type="Resource" id="Resource_8fjkb"]
+resource_name = "Audio Volume"
+script = ExtResource("4_lu0w6")
+current = 80.0
+default = 80.0
+bus_name = ""
+name = "Audio Volume"
+category = "test"
+icon = ExtResource("3_toiby")
+desc = "Change volume of a specific audio bus."
+
+[sub_resource type="Resource" id="Resource_gn3he"]
+resource_name = "test"
 script = ExtResource("1_ttblf")
-name = "a"
+name = "test"
 settings = {
-"Audio Mute": SubResource("Resource_2elc8"),
-"Audio Volume": SubResource("Resource_8vp70"),
-"Display Mode": SubResource("Resource_c78rh"),
-"Fullscreen Mode": SubResource("Resource_kspga"),
-"Window Scale": SubResource("Resource_5lwv4"),
-"Window Size": SubResource("Resource_42rkv")
+"Audio Volume": SubResource("Resource_8fjkb"),
+"Fullscreen Mode": SubResource("Resource_0eqo3")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_8vp70"), SubResource("Resource_2elc8"), SubResource("Resource_5lwv4"), SubResource("Resource_42rkv"), SubResource("Resource_c78rh"), SubResource("Resource_kspga")])
-
-[sub_resource type="Resource" id="Resource_oeukf"]
-resource_name = "c"
-script = ExtResource("1_ttblf")
-name = "c"
-settings = {}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
-
-[sub_resource type="Resource" id="Resource_5t5wv"]
-resource_name = "Master Volume"
-script = ExtResource("4_hcf57")
-current = 80.0
-default = 80.0
-bus_name = "Master"
-name = "Master Volume"
-category = "b"
-icon = ExtResource("3_at0xi")
-desc = "Change volume of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_tc56j"]
-resource_name = "Master Mute"
-script = ExtResource("12_45ghm")
-current = false
-default = false
-bus_name = "Master"
-name = "Master Mute"
-category = "b"
-icon = ExtResource("11_o1vuy")
-desc = "Toggle mute state of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_sdqar"]
-resource_name = "Music Volume"
-script = ExtResource("4_hcf57")
-current = 80.0
-default = 80.0
-bus_name = "Music"
-name = "Music Volume"
-category = "b"
-icon = ExtResource("3_at0xi")
-desc = "Change volume of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_bgtm2"]
-resource_name = "Music Mute"
-script = ExtResource("12_45ghm")
-current = false
-default = false
-bus_name = "Music"
-name = "Music Mute"
-category = "b"
-icon = ExtResource("11_o1vuy")
-desc = "Toggle mute state of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_7rcy6"]
-resource_name = "SFX Volume"
-script = ExtResource("4_hcf57")
-current = 80.0
-default = 80.0
-bus_name = "SFX"
-name = "SFX Volume"
-category = "b"
-icon = ExtResource("3_at0xi")
-desc = "Change volume of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_c556p"]
-resource_name = "SFX Mute"
-script = ExtResource("12_45ghm")
-current = false
-default = false
-bus_name = "SFX"
-name = "SFX Mute"
-category = "b"
-icon = ExtResource("11_o1vuy")
-desc = "Toggle mute state of a specific audio bus."
-
-[sub_resource type="Resource" id="Resource_go50u"]
-resource_name = "Display Mode"
-script = ExtResource("5_aofda")
-current = 0
-default = 0
-name = "Display Mode"
-category = "b"
-icon = ExtResource("4_7s8yy")
-desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
-
-[sub_resource type="Resource" id="Resource_256rb"]
-resource_name = "Display Mode 3"
-script = ExtResource("5_aofda")
-current = 0
-default = 0
-name = "Display Mode 3"
-category = "b"
-icon = ExtResource("4_7s8yy")
-desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
-
-[sub_resource type="Resource" id="Resource_sra0a"]
-resource_name = "c"
-script = ExtResource("3_ydf11")
-current = false
-default = false
-name = "c"
-category = "b"
-icon = ExtResource("2_by28x")
-desc = "Toggle Fullscreen mode."
-
-[sub_resource type="Resource" id="Resource_ljppv"]
-resource_name = "Window Scale"
-script = ExtResource("7_v7gqm")
-current = 0
-default = 0
-scales = Array[int]([])
-name = "Window Scale"
-category = "b"
-icon = ExtResource("6_tda0o")
-desc = "Change window size by multiplying its width and height by a specific value."
-
-[sub_resource type="Resource" id="Resource_dgktl"]
-resource_name = "Window Scale 2"
-script = ExtResource("7_v7gqm")
-current = 0
-default = 0
-scales = Array[int]([])
-name = "Window Scale 2"
-category = "b"
-icon = ExtResource("6_tda0o")
-desc = "Change window size by multiplying its width and height by a specific value."
-
-[sub_resource type="Resource" id="Resource_kfvfb"]
-resource_name = "Audio"
-script = ExtResource("1_ttblf")
-name = "Audio"
-settings = {
-"Display Mode": SubResource("Resource_go50u"),
-"Display Mode 2": SubResource("Resource_256rb"),
-"Fullscreen Mode": SubResource("Resource_sra0a"),
-"Master Mute": SubResource("Resource_tc56j"),
-"Master Volume": SubResource("Resource_5t5wv"),
-"Music Mute": SubResource("Resource_bgtm2"),
-"Music Volume": SubResource("Resource_sdqar"),
-"SFX Mute": SubResource("Resource_c556p"),
-"SFX Volume": SubResource("Resource_7rcy6"),
-"Window Scale": SubResource("Resource_ljppv"),
-"Window Scale 2": SubResource("Resource_dgktl")
-}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_5t5wv"), SubResource("Resource_tc56j"), SubResource("Resource_sdqar"), SubResource("Resource_bgtm2"), SubResource("Resource_7rcy6"), SubResource("Resource_c556p")])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_0eqo3"), SubResource("Resource_8fjkb")])
 
 [resource]
 script = ExtResource("1_wabe0")
 categories = {
-"Audio": SubResource("Resource_kfvfb"),
-"a": SubResource("Resource_fnqtv"),
-"c": SubResource("Resource_oeukf")
+"test": SubResource("Resource_gn3he")
 }
-category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_fnqtv"), SubResource("Resource_kfvfb"), SubResource("Resource_oeukf")])
-recent_settings = Array[String](["display_size.gd", "audio_mute.gd", "audio_volume.gd", "display_fullscreen.gd", "display_mode.gd", "display_scale.gd"])
+category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_gn3he")])
+recent_settings = Array[String](["audio_volume.gd", "display_fullscreen.gd", "display_size.gd", "audio_mute.gd", "display_mode.gd", "display_scale.gd"])
 dir_settings = "res://game_settings"
-split_offset_0 = 250
-split_offset_1 = 350
+split_offset_0 = -241
+split_offset_1 = 574

@@ -1,5 +1,4 @@
 @tool
-@icon("res://addons/ggs/assets/main_screen_icon.svg")
 extends Resource
 class_name ggsPluginData
 
@@ -7,6 +6,7 @@ class_name ggsPluginData
 @export var categories: Dictionary
 @export var category_order: Array[ggsCategory]
 @export var recent_settings: Array[String]
+@export var components: Array[Dictionary]
 
 @export_group("Directories", "dir_")
 @export_dir var dir_settings: String = "res://game_settings"
@@ -81,3 +81,10 @@ func _bring_to_front(element: String) -> void:
 func _limit_size() -> void:
 	if recent_settings.size() > 10:
 		recent_settings.pop_back()
+
+
+### Components
+
+func add_component(comp_info: Dictionary) -> void:
+	components.append(comp_info)
+	_save_self()

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjfylfmjrvyxa"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/component_panel/component_panel.gd" id="1_3cgut"]
+
+[node name="ComponentPanel" type="Control"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3cgut")
+
+[node name="ComponentList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
