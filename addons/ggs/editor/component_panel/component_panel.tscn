@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjfylfmjrvyxa"]
+[gd_scene load_steps=3 format=3 uid="uid://bjfylfmjrvyxa"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/component_panel/component_panel.gd" id="1_3cgut"]
+[ext_resource type="Texture2D" uid="uid://d1w4gm5lxr5oe" path="res://addons/ggs/assets/components/switch.svg" id="2_0dps6"]
 
 [node name="ComponentPanel" type="Control"]
 custom_minimum_size = Vector2(150, 0)
@@ -19,3 +20,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+item_count = 1
+item_0/text = "Switch"
+item_0/icon = ExtResource("2_0dps6")
+item_0/selectable = false

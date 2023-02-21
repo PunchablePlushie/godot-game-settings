@@ -27,6 +27,8 @@ func _load_list() -> void:
 	
 	for item in GGS.active_category.item_order:
 		add_item(item)
+	
+	GGS.setting_selected.emit(null)
 
 
 func _on_item_selected() -> void:
