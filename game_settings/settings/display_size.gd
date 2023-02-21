@@ -42,7 +42,7 @@ func _get_property_list() -> Array:
 
 func set_current(value: int) -> void:
 	current = value
-	GGS.setting_property_changed.emit(self, "current")
+	update_save_file(value)
 
 
 func set_sizes(value: Array[Vector2]) -> void:

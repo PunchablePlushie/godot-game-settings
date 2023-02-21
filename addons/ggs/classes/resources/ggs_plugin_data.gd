@@ -11,7 +11,6 @@ class_name ggsPluginData
 @export_group("Directories", "dir_")
 @export_dir var dir_settings: String = "res://game_settings/settings"
 @export_dir var dir_components: String = "res://game_settings/components"
-@export_dir var dir_savefile: String = "user://settings.cfg"
 
 @export_group("Split Offset", "split_offset_")
 @export var split_offset_0: int = 0

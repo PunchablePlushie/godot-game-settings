@@ -28,9 +28,11 @@ func _add_setting(setting: ggsSetting) -> void:
 	var name_list: PackedStringArray = GGS.active_category.get_setting_name_list()
 	setting.name = ggsUtils.get_unique_string(name_list, setting.name)
 	setting.category = GGS.active_category.name
+	setting.current = setting.default
 	
 	List.add_item(setting)
 	GGS.active_category.add_setting(setting)
+	ggsSaveFile.new().set_key(setting.category, setting.name, setting.default)
 
 
 func _on_AddBtn_pressed() -> void:
@@ -55,6 +57,7 @@ func _rename_setting(tree_item: TreeItem) -> void:
 	setting.name = ggsUtils.get_unique_string(name_list, new_name)
 	
 	GGS.active_category.rename_setting(prev_name, setting)
+	ggsSaveFile.new().rename_key(setting.category, prev_name, setting.name)
 	
 	tree_item.set_text(0, setting.name)
 	tree_item.set_editable(0, false)
@@ -68,6 +71,7 @@ func _on_List_item_edited() -> void:
 
 func _delete_setting(setting: ggsSetting) -> void:
 	GGS.active_category.remove_setting(setting)
+	ggsSaveFile.new().delete_key(setting.category, setting.name)
 	List.remove_item(List.get_selected())
 
 

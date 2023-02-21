@@ -12,6 +12,9 @@ class_name ggsCategory
 func set_name(value: String) -> void:
 	name = value
 	resource_name = value
+	
+	for setting in settings.values():
+		setting.category = value
 
 
 ### Settings

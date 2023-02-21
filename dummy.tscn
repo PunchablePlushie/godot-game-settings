@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://bwei4q7h4dyqp"]
 
 [ext_resource type="PackedScene" path="res://game_settings/components/switch/switch.tscn" id="1_i0iop"]
-[ext_resource type="Script" path="res://game_settings/components/switch/switch.gd" id="2_yiy0u"]
+[ext_resource type="Script" path="res://game_settings/components/switch/switch.gd" id="2_ot3q2"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_14r7s"]
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="4_ua4yo"]
 
-[sub_resource type="Resource" id="Resource_0eqo3"]
-resource_name = "Fullscreen Mode"
+[sub_resource type="Resource" id="Resource_is61c"]
+resource_name = "fullscreen_mode"
 script = ExtResource("4_ua4yo")
-current = true
+current = false
 default = false
-name = "Fullscreen Mode"
+name = "fullscreen_mode"
 category = "test"
 icon = ExtResource("3_14r7s")
 desc = "Toggle Fullscreen mode."
@@ -31,6 +31,6 @@ text = "test"
 
 [node name="Switch" type="CheckButton" parent="HBoxContainer" instance=ExtResource("1_i0iop")]
 layout_mode = 2
-script = ExtResource("2_yiy0u")
-setting = SubResource("Resource_0eqo3")
+script = ExtResource("2_ot3q2")
+setting = SubResource("Resource_is61c")
 apply_on_change = true

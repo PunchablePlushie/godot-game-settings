@@ -19,3 +19,8 @@ func _init() -> void:
 func set_name(value: String) -> void:
 	name = value
 	resource_name = value
+
+
+func update_save_file(value: Variant) -> void:
+	ggsSaveFile.new().set_key(category, name, value)
+

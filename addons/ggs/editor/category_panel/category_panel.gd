@@ -70,6 +70,7 @@ func _rename_category(tree_item: TreeItem) -> void:
 	category.name = ggsUtils.get_unique_string(name_list, new_name)
 	
 	GGS.data.rename_category(prev_name, category)
+	ggsSaveFile.new().rename_section(prev_name, category.name)
 	
 	tree_item.set_text(0, category.name)
 	tree_item.set_editable(0, false)
@@ -93,6 +94,7 @@ func _on_CMenu_index_pressed(index: int) -> void:
 # Category Deletion
 func _delete_category(category: ggsCategory) -> void:
 	GGS.data.remove_category(category)
+	ggsSaveFile.new().delete_section(category.name)
 	List.remove_item(List.get_selected())
 
 

@@ -19,11 +19,16 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	if get_item_at_position(at_position) == null:
+	var target_item: TreeItem = get_item_at_position(at_position)
+	
+	if target_item == null:
 		return false
-	else:
-		drop_mode_flags = DROP_MODE_INBETWEEN
-		return true
+	
+	if data.get_tree() != target_item.get_tree():
+		return false
+	
+	drop_mode_flags = DROP_MODE_INBETWEEN
+	return true
 
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:

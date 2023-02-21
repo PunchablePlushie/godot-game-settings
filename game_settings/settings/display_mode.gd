@@ -16,7 +16,7 @@ func _init() -> void:
 
 func set_current(value: DisplayMode) -> void:
 	current = value
-	GGS.setting_property_changed.emit(self, "current")
+	update_save_file(value)
 
 
 func apply(_value: DisplayMode) -> void:

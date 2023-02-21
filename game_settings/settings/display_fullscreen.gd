@@ -16,7 +16,8 @@ func _init() -> void:
 
 func set_current(value: bool) -> void:
 	current = value
+	update_save_file(value)
 
 
-func apply(value: bool) -> void:
+func apply(_value: bool) -> void:
 	pass

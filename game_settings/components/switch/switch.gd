@@ -5,19 +5,22 @@ extends CheckButton
 
 var value: bool
 
+@onready var section: String = setting.category
+@onready var key: String = setting.name
+
 
 func _ready() -> void:
-	value = setting.current
-	button_pressed = setting.current
-	
 	toggled.connect(_on_toggled)
+	
+	prints(section, key)
+	value = ggsSaveFile.new().get_key(section, key)
+	set_pressed_no_signal(value)
 
 
 func reset() -> void:
 	value = setting.default
-	setting.current = value
-	
-	button_pressed = value
+	set_pressed_no_signal(value)
+	apply()
 
 
 func apply() -> void:
