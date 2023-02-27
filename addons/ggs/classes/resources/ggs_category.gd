@@ -17,21 +17,29 @@ func set_name(value: String) -> void:
 		setting.category = value
 
 
+func _save_plugin() -> void:
+	var plugin_data: ggsPluginData = load("res://addons/ggs/plugin_data.tres")
+	plugin_data.save()
+
+
 ### Settings
 
 func add_setting(setting: ggsSetting) -> void:
 	settings[setting.name] = setting
 	item_order.append(setting)
+	_save_plugin()
 
 
 func remove_setting(setting: ggsSetting) -> void:
 	settings.erase(setting.name)
 	item_order.erase(setting)
+	_save_plugin()
 
 
 func rename_setting(prev_name: String, setting: ggsSetting) -> void:
 	settings.erase(prev_name)
 	settings[setting.name] = setting
+	_save_plugin()
 
 
 func get_setting_name_list() -> PackedStringArray:
@@ -45,3 +53,4 @@ func get_setting_name_list() -> PackedStringArray:
 func update_item_order(new_order: Array[ggsSetting]) -> void:
 	item_order.clear()
 	item_order = new_order
+	_save_plugin()

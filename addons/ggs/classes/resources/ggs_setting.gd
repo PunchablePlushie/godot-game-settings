@@ -24,3 +24,14 @@ func set_name(value: String) -> void:
 func update_save_file(value: Variant) -> void:
 	ggsSaveFile.new().set_key(category, name, value)
 
+
+func update_current() -> void:
+	var save_file: ggsSaveFile = ggsSaveFile.new()
+	var value: Variant
+	if save_file.has_section_key(category, name):
+		value = save_file.get_key(category, name)
+	else:
+		value = get("default")
+		save_file.set_key(category, name, value)
+	
+	set("current", value)

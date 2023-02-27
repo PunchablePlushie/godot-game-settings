@@ -19,5 +19,5 @@ func set_current(value: bool) -> void:
 	update_save_file(value)
 
 
-func apply(_value: bool) -> void:
-	pass
+func apply(value: bool) -> void:
+	prints("Setting applied:", value)

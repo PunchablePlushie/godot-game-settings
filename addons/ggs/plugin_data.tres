@@ -1,38 +1,37 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=7 format=3 uid="uid://b7dgu16lfnadw"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=7 format=3 uid="uid://d0xmn17egw4cw"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_ttblf"]
-[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_vtj7r"]
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
+[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_q8wwr"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
-[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="2_hxfin"]
+[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="2_dk7wl"]
 
-[sub_resource type="Resource" id="Resource_is61c"]
+[sub_resource type="Resource" id="Resource_vceog"]
 resource_name = "fullscreen_mode"
-script = ExtResource("2_hxfin")
+script = ExtResource("2_dk7wl")
 current = false
 default = false
 name = "fullscreen_mode"
-category = "test"
-icon = ExtResource("1_vtj7r")
+category = "dsa"
+icon = ExtResource("1_q8wwr")
 desc = "Toggle Fullscreen mode."
 
-[sub_resource type="Resource" id="Resource_gn3he"]
-resource_name = "test"
-script = ExtResource("1_ttblf")
-name = "test"
+[sub_resource type="Resource" id="Resource_d7ygk"]
+resource_name = "dsa"
+script = ExtResource("1_bswtd")
+name = "dsa"
 settings = {
-"fullscreen_mode": SubResource("Resource_is61c")
+"fullscreen_mode": SubResource("Resource_vceog")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_is61c")])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_vceog")])
 
 [resource]
 script = ExtResource("1_wabe0")
 categories = {
-"test": SubResource("Resource_gn3he")
+"dsa": SubResource("Resource_d7ygk")
 }
-category_order = Array[ExtResource("1_ttblf")]([SubResource("Resource_gn3he")])
-recent_settings = Array[String](["display_fullscreen.gd", "audio_volume.gd", "display_size.gd", "audio_mute.gd", "display_mode.gd", "display_scale.gd"])
-apply_on_change_default = false
+category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_d7ygk")])
+recent_settings = Array[String](["display_fullscreen.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
-split_offset_0 = -241
+split_offset_0 = -198
 split_offset_1 = 574

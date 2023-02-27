@@ -24,4 +24,4 @@ size_flags_vertical = 3
 item_count = 1
 item_0/text = "Switch"
 item_0/icon = ExtResource("2_0dps6")
-item_0/selectable = false
+item_0/disabled = true

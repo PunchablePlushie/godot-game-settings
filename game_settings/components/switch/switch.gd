@@ -1,7 +1,8 @@
 extends CheckButton
 
+@export_category("GGS UI Component")
 @export var setting: ggsSetting
-@export var apply_on_change: bool = GGS.data.apply_on_change_default
+@export var apply_on_change: bool
 
 var value: bool
 
@@ -12,7 +13,6 @@ var value: bool
 func _ready() -> void:
 	toggled.connect(_on_toggled)
 	
-	prints(section, key)
 	value = ggsSaveFile.new().get_key(section, key)
 	set_pressed_no_signal(value)
 

@@ -78,6 +78,9 @@ func _on_Global_setting_selected(setting: ggsSetting) -> void:
 ### Component Instantiation
 
 func _on_List_item_activated(item_index: int) -> void:
+	if List.is_item_disabled(item_index):
+		return
+	
 	var EI: EditorInterface = ggsUtils.get_editor_interface()
 	var ES: EditorSelection = EI.get_selection()
 	var selected_nodes: Array[Node] = ES.get_selected_nodes()

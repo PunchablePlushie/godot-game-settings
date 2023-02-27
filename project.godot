@@ -36,3 +36,4 @@ import/blender/enabled=false
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+environment/glow/upscale_mode=0

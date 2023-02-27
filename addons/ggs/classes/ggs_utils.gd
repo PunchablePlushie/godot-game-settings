@@ -4,11 +4,7 @@ class_name ggsUtils
 
 
 static func get_editor_interface() -> EditorInterface:
-	return EditorPlugin.new().get_editor_interface()
-
-
-static func get_plugin_data() -> ggsPluginData:
-	return load("res://addons/ggs/plugin_data.tres")
+	return EditorScript.new().get_editor_interface()
 
 
 static func get_unique_string(list: PackedStringArray, string: String) -> String:
