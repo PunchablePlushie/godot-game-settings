@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c11tbsolk6dnu"]
+
+[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="1_47eay"]
+
+[node name="RadioList" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_47eay")

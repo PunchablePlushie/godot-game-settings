@@ -1,20 +1,20 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwei4q7h4dyqp"]
 
-[ext_resource type="PackedScene" uid="uid://1qpe22ky2s6y" path="res://game_settings/components/arrow_list/arrow_list.tscn" id="2_6t7pq"]
-[ext_resource type="Script" path="res://game_settings/components/arrow_list/arrow_list.gd" id="3_bqnm7"]
-[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="5_eraqp"]
+[ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="2_xycfs"]
+[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="3_20bln"]
+[ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/display_mode.svg" id="5_xo5e2"]
+[ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="6_baltg"]
 [ext_resource type="PackedScene" uid="uid://bkb482qf4rhnn" path="res://addons/ggs/misc_components/reset_btn/reset_btn.tscn" id="6_dytnw"]
-[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="6_efbtd"]
 
-[sub_resource type="Resource" id="Resource_vceog"]
-resource_name = "Fullscreen Mode"
-script = ExtResource("6_efbtd")
-current = false
-default = false
-name = "Fullscreen Mode"
+[sub_resource type="Resource" id="Resource_r3uh0"]
+resource_name = "Display Mode"
+script = ExtResource("6_baltg")
+current = 0
+default = 0
+name = "Display Mode"
 category = "dsa"
-icon = ExtResource("5_eraqp")
-desc = "Toggle Fullscreen mode."
+icon = ExtResource("5_xo5e2")
+desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -35,9 +35,23 @@ layout_mode = 2
 text = "Reset"
 group = "settings"
 
-[node name="ArrowList" type="HBoxContainer" parent="HBoxContainer" groups=["settings"] instance=ExtResource("2_6t7pq")]
+[node name="RadioList" type="HBoxContainer" parent="HBoxContainer" groups=["settings"] instance=ExtResource("2_xycfs")]
 layout_mode = 2
-script = ExtResource("3_bqnm7")
-setting = SubResource("Resource_vceog")
+script = ExtResource("3_20bln")
+setting = SubResource("Resource_r3uh0")
 apply_on_change = true
-options = Array[String](["Off", "On"])
+
+[node name="Button" type="Button" parent="HBoxContainer/RadioList"]
+layout_mode = 2
+toggle_mode = true
+text = "Windowed"
+
+[node name="Button2" type="Button" parent="HBoxContainer/RadioList"]
+layout_mode = 2
+toggle_mode = true
+text = "Borderless"
+
+[node name="Button3" type="Button" parent="HBoxContainer/RadioList"]
+layout_mode = 2
+toggle_mode = true
+text = "Fullscreen"
