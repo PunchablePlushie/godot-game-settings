@@ -30,13 +30,13 @@ func set_current(value: float) -> void:
 
 
 func apply(_value: float) -> void:
-	pass
+	print(_value)
 
 
 func _get_audio_buses() -> PackedStringArray:
-	var buses: PackedStringArray
+	var buses: PackedStringArray = []
 	for bus_index in range(AudioServer.bus_count):
-		var bus_name: String = AudioServer.get_bus_name(bus_index)
-		buses.append(bus_name)
+		var _bus_name_: String = AudioServer.get_bus_name(bus_index)
+		buses.append(_bus_name_)
 	
 	return buses

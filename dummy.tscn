@@ -1,20 +1,21 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwei4q7h4dyqp"]
 
-[ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="2_xycfs"]
-[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="3_20bln"]
-[ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/display_mode.svg" id="5_xo5e2"]
-[ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="6_baltg"]
+[ext_resource type="PackedScene" uid="uid://ckgtyf5d7kyl1" path="res://game_settings/components/slider/slider.tscn" id="2_u2xyi"]
+[ext_resource type="Script" path="res://game_settings/components/slider/slider.gd" id="3_gftav"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="4_wchgs"]
+[ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="5_jauno"]
 [ext_resource type="PackedScene" uid="uid://bkb482qf4rhnn" path="res://addons/ggs/misc_components/reset_btn/reset_btn.tscn" id="6_dytnw"]
 
-[sub_resource type="Resource" id="Resource_r3uh0"]
-resource_name = "Display Mode"
-script = ExtResource("6_baltg")
-current = 0
-default = 0
-name = "Display Mode"
+[sub_resource type="Resource" id="Resource_t1yaf"]
+resource_name = "Audio Volume"
+script = ExtResource("5_jauno")
+current = 80.0
+default = 80.0
+bus_name = "Master"
+name = "Audio Volume"
 category = "dsa"
-icon = ExtResource("5_xo5e2")
-desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
+icon = ExtResource("4_wchgs")
+desc = "Change volume of a specific audio bus."
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -35,23 +36,9 @@ layout_mode = 2
 text = "Reset"
 group = "settings"
 
-[node name="RadioList" type="HBoxContainer" parent="HBoxContainer" groups=["settings"] instance=ExtResource("2_xycfs")]
+[node name="Slider" type="HSlider" parent="HBoxContainer" groups=["settings"] instance=ExtResource("2_u2xyi")]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-script = ExtResource("3_20bln")
-setting = SubResource("Resource_r3uh0")
+script = ExtResource("3_gftav")
+setting = SubResource("Resource_t1yaf")
 apply_on_change = true
-
-[node name="Button" type="Button" parent="HBoxContainer/RadioList"]
-layout_mode = 2
-toggle_mode = true
-text = "Windowed"
-
-[node name="Button2" type="Button" parent="HBoxContainer/RadioList"]
-layout_mode = 2
-toggle_mode = true
-text = "Borderless"
-
-[node name="Button3" type="Button" parent="HBoxContainer/RadioList"]
-layout_mode = 2
-toggle_mode = true
-text = "Fullscreen"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=10 format=3 uid="uid://d0xmn17egw4cw"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=13 format=3 uid="uid://d0xmn17egw4cw"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_q8wwr"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="2_dk7wl"]
 [ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/display_mode.svg" id="3_18l4j"]
 [ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="4_d3fap"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="5_tdqdd"]
+[ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="6_tdcfw"]
 
 [sub_resource type="Resource" id="Resource_vceog"]
 resource_name = "Fullscreen Mode"
@@ -20,22 +22,34 @@ desc = "Toggle Fullscreen mode."
 [sub_resource type="Resource" id="Resource_r3uh0"]
 resource_name = "Display Mode"
 script = ExtResource("4_d3fap")
-current = 2
+current = 0
 default = 0
 name = "Display Mode"
 category = "dsa"
 icon = ExtResource("3_18l4j")
 desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
 
+[sub_resource type="Resource" id="Resource_t1yaf"]
+resource_name = "Audio Volume"
+script = ExtResource("6_tdcfw")
+current = 80.0
+default = 80.0
+bus_name = ""
+name = "Audio Volume"
+category = "dsa"
+icon = ExtResource("5_tdqdd")
+desc = "Change volume of a specific audio bus."
+
 [sub_resource type="Resource" id="Resource_d7ygk"]
 resource_name = "dsa"
 script = ExtResource("1_bswtd")
 name = "dsa"
 settings = {
+"Audio Volume": SubResource("Resource_t1yaf"),
 "Display Mode": SubResource("Resource_r3uh0"),
 "Fullscreen Mode": SubResource("Resource_vceog")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_vceog"), SubResource("Resource_r3uh0")])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_vceog"), SubResource("Resource_r3uh0"), SubResource("Resource_t1yaf")])
 
 [resource]
 script = ExtResource("1_wabe0")
@@ -43,7 +57,7 @@ categories = {
 "dsa": SubResource("Resource_d7ygk")
 }
 category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_d7ygk")])
-recent_settings = Array[String](["display_mode.gd", "display_fullscreen.gd"])
+recent_settings = Array[String](["audio_volume.gd", "display_mode.gd", "display_fullscreen.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -198
