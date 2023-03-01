@@ -22,4 +22,4 @@ func set_current(value: DisplayMode) -> void:
 
 
 func apply(_value: DisplayMode) -> void:
-	print(_value)
+	pass

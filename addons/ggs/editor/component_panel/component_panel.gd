@@ -54,6 +54,9 @@ func _get_comp_list() -> Array[Dictionary]:
 func _set_items_disabled(disabled: bool) -> void:
 	for item_index in range(List.item_count):
 		List.set_item_disabled(item_index, disabled)
+	
+	if disabled:
+		List.deselect_all()
 
 
 func _on_Global_setting_selected(setting: ggsSetting) -> void:

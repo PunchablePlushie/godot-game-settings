@@ -1,21 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwei4q7h4dyqp"]
+[gd_scene load_steps=7 format=3 uid="uid://bwei4q7h4dyqp"]
 
 [ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="3_erlil"]
 [ext_resource type="Script" path="res://game_settings/components/option_list/option_list.gd" id="4_bwwxl"]
-[ext_resource type="PackedScene" uid="uid://cafjv0utgs5uo" path="res://addons/ggs/misc_components/apply_btn/apply_btn.tscn" id="5_k3ccv"]
-[ext_resource type="Texture2D" uid="uid://b4uw7sfnlm8x2" path="res://addons/ggs/assets/game_settings/display_mode.svg" id="5_xo5e2"]
-[ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="6_baltg"]
+[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="5_eraqp"]
 [ext_resource type="PackedScene" uid="uid://bkb482qf4rhnn" path="res://addons/ggs/misc_components/reset_btn/reset_btn.tscn" id="6_dytnw"]
+[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="6_efbtd"]
 
-[sub_resource type="Resource" id="Resource_r3uh0"]
-resource_name = "Display Mode"
-script = ExtResource("6_baltg")
-current = 2
-default = 0
-name = "Display Mode"
+[sub_resource type="Resource" id="Resource_vceog"]
+resource_name = "renamed_fullscreen"
+script = ExtResource("6_efbtd")
+current = false
+default = false
+name = "renamed_fullscreen"
 category = "dsa"
-icon = ExtResource("5_xo5e2")
-desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
+icon = ExtResource("5_eraqp")
+desc = "Toggle Fullscreen mode."
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -31,23 +30,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "test"
 
-[node name="ApplyBtn" parent="HBoxContainer" instance=ExtResource("5_k3ccv")]
+[node name="OptionList" type="OptionButton" parent="HBoxContainer" groups=["settings"] instance=ExtResource("3_erlil")]
 layout_mode = 2
-group = "settings"
+item_count = 2
+popup/item_0/text = "Off"
+popup/item_0/id = 1
+popup/item_1/text = "On"
+popup/item_1/id = 0
+script = ExtResource("4_bwwxl")
+setting = SubResource("Resource_vceog")
+apply_on_change = true
 
 [node name="ResetBtn" parent="HBoxContainer" instance=ExtResource("6_dytnw")]
 layout_mode = 2
+text = "Reset"
 group = "settings"
-
-[node name="OptionList" type="OptionButton" parent="HBoxContainer" instance=ExtResource("3_erlil")]
-layout_mode = 2
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_0/id = 0
-popup/item_1/text = "Borderless"
-popup/item_1/id = 1
-popup/item_2/text = "Fullscreen"
-popup/item_2/id = 2
-script = ExtResource("4_bwwxl")
-setting = SubResource("Resource_r3uh0")
-apply_on_change = true
