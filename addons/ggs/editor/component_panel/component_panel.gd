@@ -22,10 +22,7 @@ func _load_list() -> void:
 	for component in comp_list:
 		var text: String = component["name"]
 		var icon: Texture2D = DEFAULT_ICON if component["icon"].is_empty() else load(component["icon"])
-		var meta: Dictionary = {
-			"scene": component["scene"],
-			"handles": component["handles"],
-		}
+		var meta: String = component["scene"]
 		
 		var item_index: int = List.add_item(text, icon)
 		List.set_item_disabled(item_index, true)
@@ -43,7 +40,6 @@ func _get_comp_list() -> Array[Dictionary]:
 		var info_file: ConfigFile = ConfigFile.new()
 		info_file.load(path.path_join("component.cfg"))
 		
-		info["handles"] = info_file.get_value("component", "handles")
 		info["name"] = info_file.get_value("component", "name", component)
 		info["icon"] = info_file.get_value("component", "icon", "")
 		info["scene"] = path.path_join("%s.tscn"%component)
@@ -55,25 +51,16 @@ func _get_comp_list() -> Array[Dictionary]:
 
 ### Component Pre-Instantiation
 
-func _enable_compatible_items(type: int) -> void:
+func _set_items_disabled(disabled: bool) -> void:
 	for item_index in range(List.item_count):
-		var item_type: int = List.get_item_metadata(item_index)["handles"]
-		
-		var compatible: bool = (item_type == type)
-		List.set_item_disabled(item_index, !compatible)
-
-
-func _disable_all_items() -> void:
-	List.deselect_all()
-	for item_index in range(List.item_count):
-		List.set_item_disabled(item_index, true)
+		List.set_item_disabled(item_index, disabled)
 
 
 func _on_Global_setting_selected(setting: ggsSetting) -> void:
 	if setting == null:
-		_disable_all_items()
+		_set_items_disabled(true)
 	else:
-		_enable_compatible_items(typeof(setting.current))
+		_set_items_disabled(false)
 
 
 ### Component Instantiation
@@ -90,11 +77,11 @@ func _on_List_item_activated(item_index: int) -> void:
 		printerr("GGS - Instantiate Component: Exactly 1 item in the scene tree must be selected to instantiate components.")
 		return
 	
-	var item_meta: Dictionary = List.get_item_metadata(item_index)
+	var item_meta: String = List.get_item_metadata(item_index)
 	var SelectedNode: Node = ES.get_selected_nodes()[0]
 	var ESR: Node = EI.get_edited_scene_root()
 	
-	var comp_scene: PackedScene = load(item_meta["scene"])
+	var comp_scene: PackedScene = load(item_meta)
 	var Component: Control = comp_scene.instantiate()
 	Component.setting = GGS.active_setting
 	

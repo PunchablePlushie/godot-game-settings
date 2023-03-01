@@ -9,6 +9,8 @@ enum DisplayMode {WINDOWED, BORDERLESS, FULLSCREEN}
 
 
 func _init() -> void:
+	super()
+	
 	name = "Display Mode"
 	icon = preload("res://addons/ggs/assets/game_settings/display_mode.svg")
 	desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
@@ -20,4 +22,4 @@ func set_current(value: DisplayMode) -> void:
 
 
 func apply(_value: DisplayMode) -> void:
-	pass
+	print(_value)
