@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwei4q7h4dyqp"]
 
-[ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="3_erlil"]
-[ext_resource type="Script" path="res://game_settings/components/option_list/option_list.gd" id="4_bwwxl"]
+[ext_resource type="PackedScene" uid="uid://1qpe22ky2s6y" path="res://game_settings/components/arrow_list/arrow_list.tscn" id="2_6t7pq"]
+[ext_resource type="Script" path="res://game_settings/components/arrow_list/arrow_list.gd" id="3_bqnm7"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="5_eraqp"]
 [ext_resource type="PackedScene" uid="uid://bkb482qf4rhnn" path="res://addons/ggs/misc_components/reset_btn/reset_btn.tscn" id="6_dytnw"]
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="6_efbtd"]
 
 [sub_resource type="Resource" id="Resource_vceog"]
-resource_name = "renamed_fullscreen"
+resource_name = "Fullscreen Mode"
 script = ExtResource("6_efbtd")
 current = false
 default = false
-name = "renamed_fullscreen"
+name = "Fullscreen Mode"
 category = "dsa"
 icon = ExtResource("5_eraqp")
 desc = "Toggle Fullscreen mode."
@@ -30,18 +30,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "test"
 
-[node name="OptionList" type="OptionButton" parent="HBoxContainer" groups=["settings"] instance=ExtResource("3_erlil")]
-layout_mode = 2
-item_count = 2
-popup/item_0/text = "Off"
-popup/item_0/id = 1
-popup/item_1/text = "On"
-popup/item_1/id = 0
-script = ExtResource("4_bwwxl")
-setting = SubResource("Resource_vceog")
-apply_on_change = true
-
 [node name="ResetBtn" parent="HBoxContainer" instance=ExtResource("6_dytnw")]
 layout_mode = 2
 text = "Reset"
 group = "settings"
+
+[node name="ArrowList" type="HBoxContainer" parent="HBoxContainer" groups=["settings"] instance=ExtResource("2_6t7pq")]
+layout_mode = 2
+script = ExtResource("3_bqnm7")
+setting = SubResource("Resource_vceog")
+apply_on_change = true
+options = Array[String](["Off", "On"])

@@ -8,11 +8,11 @@
 [ext_resource type="Script" path="res://game_settings/settings/display_mode.gd" id="4_d3fap"]
 
 [sub_resource type="Resource" id="Resource_vceog"]
-resource_name = "renamed_fullscreen"
+resource_name = "Fullscreen Mode"
 script = ExtResource("2_dk7wl")
 current = false
 default = false
-name = "renamed_fullscreen"
+name = "Fullscreen Mode"
 category = "dsa"
 icon = ExtResource("1_q8wwr")
 desc = "Toggle Fullscreen mode."
@@ -33,7 +33,7 @@ script = ExtResource("1_bswtd")
 name = "dsa"
 settings = {
 "Display Mode": SubResource("Resource_r3uh0"),
-"renamed_fullscreen": SubResource("Resource_vceog")
+"Fullscreen Mode": SubResource("Resource_vceog")
 }
 item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_vceog"), SubResource("Resource_r3uh0")])
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://1qpe22ky2s6y"]
+
+[ext_resource type="Script" path="res://game_settings/components/arrow_list/arrow_list.gd" id="1_cifu3"]
+
+[node name="ArrowList" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_cifu3")
+
+[node name="LeftBtn" type="Button" parent="."]
+layout_mode = 2
+text = "<"
+
+[node name="OptionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "OptionLabel"
+
+[node name="RightBtn" type="Button" parent="."]
+layout_mode = 2
+text = ">"
