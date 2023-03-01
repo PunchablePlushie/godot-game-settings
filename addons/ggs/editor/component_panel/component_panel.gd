@@ -64,6 +64,7 @@ func _enable_compatible_items(type: int) -> void:
 
 
 func _disable_all_items() -> void:
+	List.deselect_all()
 	for item_index in range(List.item_count):
 		List.set_item_disabled(item_index, true)
 

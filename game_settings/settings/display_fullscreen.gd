@@ -20,4 +20,4 @@ func set_current(value: bool) -> void:
 
 
 func apply(value: bool) -> void:
-	prints("Setting applied:", value)
+	pass
