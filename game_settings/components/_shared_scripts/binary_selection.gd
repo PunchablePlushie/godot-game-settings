@@ -1,29 +1,28 @@
-extends Slider
+extends Button
 
 @export_category("GGS UI Component")
 @export var setting: ggsSetting
 @export var apply_on_change: bool
 
-var setting_value
+var setting_value: bool
 
 @onready var save_section: String = setting.category
 @onready var save_key: String = setting.name
 
 
 func _ready() -> void:
-	value_changed.connect(_on_value_changed)
+	toggled.connect(_on_toggled)
 	
 	_init_value()
 
 
 func _init_value() -> void:
 	setting_value = ggsSaveFile.new().get_key(save_section, save_key)
-	set_value_no_signal(setting_value)
+	set_pressed_no_signal(setting_value)
 
 
-func _on_value_changed(new_value: float) -> void:
-	setting_value = new_value
-	
+func _on_toggled(btn_state: bool) -> void:
+	setting_value = btn_state
 	if apply_on_change:
 		apply_setting()
 
@@ -37,4 +36,5 @@ func apply_setting() -> void:
 
 func reset_setting() -> void:
 	setting_value = setting.default
-	value = setting_value
+	set_pressed_no_signal(setting_value)
+	apply_setting()

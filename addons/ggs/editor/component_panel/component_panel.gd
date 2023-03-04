@@ -35,6 +35,9 @@ func _get_comp_list() -> Array[Dictionary]:
 	var path: String
 	var components: PackedStringArray = DirAccess.get_directories_at(GGS.data.dir_components)
 	for component in components:
+		if component.begins_with("_"):
+			continue
+		
 		var info: Dictionary
 		path = GGS.data.dir_components.path_join(component)
 		var info_file: ConfigFile = ConfigFile.new()

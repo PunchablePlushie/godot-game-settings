@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d10row618jwcs"]
 
-[ext_resource type="Script" path="res://game_settings/components/switch/switch.gd" id="1_go6fh"]
+[ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="1_j77ap"]
 
 [node name="ToggleBtn" type="Button"]
 anchors_preset = 15
@@ -9,4 +9,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = true
-script = ExtResource("1_go6fh")
+script = ExtResource("1_j77ap")

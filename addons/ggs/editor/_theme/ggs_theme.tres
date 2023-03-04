@@ -15,7 +15,7 @@ corner_radius_bottom_left = 3
 corner_detail = 3
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k666n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g0nb"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -32,6 +32,6 @@ anti_aliasing = false
 
 [resource]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_0e1ia")
-Tree/styles/selected = SubResource("StyleBoxFlat_k666n")
-Tree/styles/selected_focus = SubResource("StyleBoxFlat_k666n")
+Tree/styles/selected = SubResource("StyleBoxFlat_2g0nb")
+Tree/styles/selected_focus = SubResource("StyleBoxFlat_2g0nb")
 script = ExtResource("1_3cm4d")

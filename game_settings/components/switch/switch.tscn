@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cha8xesfthpfk"]
 
-[ext_resource type="Script" path="res://game_settings/components/switch/switch.gd" id="1_go6fh"]
+[ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="1_tff36"]
 
 [node name="Switch" type="CheckButton"]
 anchors_preset = 15
@@ -8,4 +8,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_go6fh")
+script = ExtResource("1_tff36")

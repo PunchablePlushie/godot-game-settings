@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckgtyf5d7kyl1"]
+[gd_scene load_steps=2 format=3 uid="uid://ds06mwhee8ygm"]
 
-[ext_resource type="Script" path="res://game_settings/components/slider/slider.gd" id="1_b8fpi"]
+[ext_resource type="Script" path="res://game_settings/components/slider/slider.gd" id="1_4rmgf"]
 
 [node name="Slider" type="HSlider"]
 anchors_preset = 15
@@ -8,4 +8,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_b8fpi")
+script = ExtResource("1_4rmgf")

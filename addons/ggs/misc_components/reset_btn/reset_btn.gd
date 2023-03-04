@@ -8,4 +8,4 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	get_tree().call_group(group, "reset")
+	get_tree().call_group(group, "reset_setting")

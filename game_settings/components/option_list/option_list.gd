@@ -4,31 +4,37 @@ extends OptionButton
 @export var setting: ggsSetting
 @export var apply_on_change: bool
 
-var value: int
+var setting_value: int
 
-@onready var section: String = setting.category
-@onready var key: String = setting.name
+@onready var save_section: String = setting.category
+@onready var save_key: String = setting.name
 
 
 func _ready() -> void:
 	item_selected.connect(_on_item_selected)
 	
-	value = ggsSaveFile.new().get_key(section, key)
-	select(value)
+	_init_value()
 
 
-func reset() -> void:
-	value = setting.default
-	select(value)
-	apply()
-
-
-func apply() -> void:
-	setting.current = value
-	setting.apply(value)
+func _init_value() -> void:
+	setting_value = ggsSaveFile.new().get_key(save_section, save_key)
+	select(setting_value)
 
 
 func _on_item_selected(item_index: int) -> void:
-	value = item_index
+	setting_value = item_index
 	if apply_on_change:
-		apply()
+		apply_setting()
+
+
+### Setting
+
+func apply_setting() -> void:
+	setting.current = setting_value
+	setting.apply(setting_value)
+
+
+func reset_setting() -> void:
+	setting_value = setting.default
+	select(setting_value)
+	apply_setting()
