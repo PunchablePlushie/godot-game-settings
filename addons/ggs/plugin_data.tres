@@ -61,4 +61,4 @@ recent_settings = Array[String](["audio_volume.gd", "display_mode.gd", "display_
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -198
-split_offset_1 = 574
+split_offset_1 = 506

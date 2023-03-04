@@ -3,7 +3,9 @@ extends Control
 
 const DEFAULT_ICON: Texture2D = preload("res://addons/ggs/assets/components/_default.svg")
 
-@onready var List: ItemList = $ComponentList
+@onready var List: ItemList = %ComponentList
+@onready var GroupField: LineEdit = %GroupField
+@onready var ApplyBtn: Button = %ApplyBtn
 
 
 func _ready() -> void:
@@ -90,7 +92,13 @@ func _on_List_item_activated(item_index: int) -> void:
 	var comp_scene: PackedScene = load(item_meta)
 	var Component: Control = comp_scene.instantiate()
 	Component.setting = GGS.active_setting
+	Component.apply_on_change = ApplyBtn.button_pressed
 	
 	SelectedNode.add_child(Component, true)
 	Component.owner = ESR
+	
+	if not GroupField.text.strip_edges().is_empty():
+		print(GroupField.text.strip_edges())
+		Component.add_to_group(GroupField.text.strip_edges(), true)
+	
 	EI.save_scene()
