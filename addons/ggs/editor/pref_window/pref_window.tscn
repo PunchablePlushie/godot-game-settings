@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://c42mh74d7l2rt"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/pref_window/pref_window.gd" id="1_ihv6i"]
+[ext_resource type="Texture2D" uid="uid://byyjlh0afcrr5" path="res://addons/ggs/assets/file_dialog.svg" id="2_qx4su"]
+[ext_resource type="Texture2D" uid="uid://nrljysrl7w0m" path="res://addons/ggs/assets/icon_mini.svg" id="3_ggsp5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki5am"]
+
+[node name="PrefWindow" type="Window"]
+title = "GGS Preferences"
+size = Vector2i(813, 594)
+visible = false
+wrap_controls = true
+min_size = Vector2i(500, 0)
+script = ExtResource("1_ihv6i")
+
+[node name="BgPanel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"WindowBG"
+
+[node name="Margin" type="MarginContainer" parent="BgPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainCtnr" type="VBoxContainer" parent="BgPanel/Margin"]
+layout_mode = 2
+
+[node name="OptionsCtnr" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="SettingsDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+layout_mode = 2
+
+[node name="SettingDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Settings Directory:"
+
+[node name="SettingDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SettingDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+layout_mode = 2
+icon = ExtResource("2_qx4su")
+
+[node name="CompDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+layout_mode = 2
+
+[node name="CompDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Components Directory:"
+
+[node name="CompDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="CompDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+layout_mode = 2
+icon = ExtResource("2_qx4su")
+
+[node name="Disclaimer" type="Button" parent="BgPanel/Margin/MainCtnr"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+size_flags_vertical = 8
+focus_mode = 0
+mouse_filter = 2
+theme_override_constants/h_separation = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ki5am")
+disabled = true
+text = "※ All changes take effect after a plugin restart."
+flat = true
+alignment = 0
+
+[node name="HSep" type="HSeparator" parent="BgPanel/Margin/MainCtnr"]
+layout_mode = 2
+
+[node name="FooterCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="InfoCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 2
+
+[node name="PluginInfo" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+mouse_filter = 2
+theme_override_constants/h_separation = 5
+text = "Godot Game Settings"
+icon = ExtResource("3_ggsp5")
+flat = true
+alignment = 0
+
+[node name="VersionBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+layout_mode = 2
+tooltip_text = "View Changelog"
+text = "v3.0"
+
+[node name="CommitBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+layout_mode = 2
+tooltip_text = "View Release"
+text = "[1234567]"
+
+[node name="OkBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "OK"

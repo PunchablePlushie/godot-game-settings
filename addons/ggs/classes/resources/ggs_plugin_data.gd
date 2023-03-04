@@ -12,8 +12,8 @@ class_name ggsPluginData
 @export_dir var dir_components: String = "res://game_settings/components"
 
 @export_group("Split Offset", "split_offset_")
-@export var split_offset_0: int = 0
-@export var split_offset_1: int = 0
+@export var split_offset_0: int = -225
+@export var split_offset_1: int = 440
 
 
 func set_data(data: String, value: Variant) -> void:

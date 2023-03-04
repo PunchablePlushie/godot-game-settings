@@ -1,7 +1,7 @@
 @tool
 extends MenuButton
 
-enum MenuItems {OPEN, REMAKE_DEFAULT, REMAKE_CURRENT}
+enum MenuItems {OPEN, RESET}
 
 var Menu: PopupMenu = get_popup()
 
@@ -17,8 +17,7 @@ func _add_menu_items() -> void:
 	
 	Menu.add_item("Open Save File", MenuItems.OPEN)
 	Menu.add_separator()
-	Menu.add_item("Remake from Defaults", MenuItems.REMAKE_DEFAULT)
-	Menu.add_item("Remake from Currents", MenuItems.REMAKE_CURRENT)
+	Menu.add_item("Reset to Default", MenuItems.RESET)
 
 
 ### Functionality
@@ -28,11 +27,13 @@ func _open_save_file() -> void:
 	OS.shell_open(path)
 
 
+func _reset_save_file() -> void:
+	ggsSaveFile.new().reset()
+
+
 func _on_Menu_id_pressed(id: int) -> void:
 	match id:
 		MenuItems.OPEN:
 			_open_save_file()
-		MenuItems.REMAKE_DEFAULT:
-			pass
-		MenuItems.REMAKE_CURRENT:
-			pass
+		MenuItems.RESET:
+			_reset_save_file()

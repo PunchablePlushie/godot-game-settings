@@ -48,6 +48,15 @@ func rename_key(section: String, prev_name: String, new_name: String) -> void:
 	save(path)
 
 
+func reset() -> void:
+	for category in GGS.data.categories.values():
+		for setting in category.settings.values():
+			set_key(setting.category, setting.name, setting.default)
+	
+	save(path)
+	print("GGS - Reset Save File: Save file values were reset successfully.")
+
+
 func _get_section_data(section: String) -> Dictionary:
 	var section_data: Dictionary
 	for key in get_section_keys(section):

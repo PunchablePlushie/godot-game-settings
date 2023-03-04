@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=11 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/split_containers.gd" id="4_mplwh"]
-[ext_resource type="PackedScene" uid="uid://bjfylfmjrvyxa" path="res://addons/ggs/editor/component_panel/component_panel.tscn" id="5_7xo6y"]
+[ext_resource type="PackedScene" uid="uid://cfr2j0ekmm5bm" path="res://addons/ggs/editor/component_panel/component_panel.tscn" id="5_7xo6y"]
 [ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/setting_panel/setting_panel.tscn" id="6_rabjj"]
 [ext_resource type="Texture2D" uid="uid://bqdur8f3jt437" path="res://addons/ggs/assets/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/save_file_menu.gd" id="7_guojl"]
 [ext_resource type="Texture2D" uid="uid://yguv4c22h711" path="res://addons/ggs/assets/save_file.svg" id="8_3r2nn"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/pref_btn.gd" id="9_oodag"]
+[ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/pref_window/pref_window.tscn" id="10_ir36c"]
 
 [node name="MainPanel" type="Control"]
 custom_minimum_size = Vector2(0, 300)
@@ -33,7 +35,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = -198
+split_offset = -226
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
@@ -43,7 +45,7 @@ size_flags_horizontal = 3
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 574
+split_offset = 441
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
@@ -63,16 +65,14 @@ size_flags_horizontal = 8
 layout_mode = 2
 tooltip_text = "Save File"
 icon = ExtResource("8_3r2nn")
-item_count = 4
+item_count = 3
 popup/item_0/text = "Open Save File"
 popup/item_0/id = 0
 popup/item_1/text = ""
 popup/item_1/id = -1
 popup/item_1/separator = true
-popup/item_2/text = "Remake from Defaults"
+popup/item_2/text = "Reset to Default"
 popup/item_2/id = 1
-popup/item_3/text = "Remake from Currents"
-popup/item_3/id = 2
 script = ExtResource("7_guojl")
 
 [node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr"]
@@ -81,3 +81,8 @@ size_flags_vertical = 10
 tooltip_text = "Preferences"
 icon = ExtResource("6_t7de8")
 flat = true
+script = ExtResource("9_oodag")
+
+[node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
+unique_name_in_owner = true
+visible = false
