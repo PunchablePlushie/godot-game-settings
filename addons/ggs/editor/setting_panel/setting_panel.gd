@@ -6,7 +6,6 @@ extends Control
 @onready var List: Tree = %SettingList
 @onready var ASW: ConfirmationDialog = $AddSettingWindow
 @onready var DeleteConfirm: ConfirmationDialog = $DeleteConfirm
-@onready var FilterField: LineEdit = %FilterField
 
 
 func _ready() -> void:
@@ -79,7 +78,6 @@ func _on_Global_category_selected(category: ggsCategory) -> void:
 	DeleteBtn.disabled = true
 	
 	AddBtn.disabled = (category == null)
-	FilterField.editable = !(category == null)
 
 
 func _on_Global_setting_selected(setting: ggsSetting) -> void:

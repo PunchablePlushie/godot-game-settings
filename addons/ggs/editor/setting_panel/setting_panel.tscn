@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://vt5mwwxhtu3x"]
+[gd_scene load_steps=6 format=3 uid="uid://vt5mwwxhtu3x"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_panel.gd" id="1_2wlv0"]
 [ext_resource type="Texture2D" uid="uid://brtdsxn4swphc" path="res://addons/ggs/assets/add.svg" id="3_tdauq"]
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_list.gd" id="4_htr8u"]
-[ext_resource type="Texture2D" uid="uid://otjpb5hpts2r" path="res://addons/ggs/assets/search.svg" id="4_n5jnt"]
 [ext_resource type="Texture2D" uid="uid://b7u0sjxctxinv" path="res://addons/ggs/assets/delete.svg" id="4_xcneu"]
 [ext_resource type="PackedScene" uid="uid://111vt7wxn7lx" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
 
@@ -45,15 +44,6 @@ shortcut_context = NodePath("")
 disabled = true
 icon = ExtResource("4_xcneu")
 flat = true
-
-[node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-placeholder_text = "Filter Settings..."
-editable = false
-right_icon = ExtResource("4_n5jnt")
 
 [node name="SettingList" type="Tree" parent="MainCtnr"]
 unique_name_in_owner = true

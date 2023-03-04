@@ -36,11 +36,17 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Node Group Name
+Newly created nodes are added to this group.
+Has no effect if empty."
 placeholder_text = "Node Group Name"
+clear_button_enabled = true
 
 [node name="ApplyBtn" type="Button" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Apply On Change of New Nodes
+Sets `apply_on_change` of newly created nodes."
 toggle_mode = true
 icon = ExtResource("2_pmfiy")
 flat = true
