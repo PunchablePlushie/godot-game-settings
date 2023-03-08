@@ -6,7 +6,9 @@ extends HSplitContainer
 
 func _ready() -> void:
 	dragged.connect(_on_dragged)
-	split_offset = GGS.data.get(property)
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	split_offset = data.get(property)
 
 
 ### Private
@@ -17,4 +19,6 @@ func _get_property() -> StringName:
 ### Signals
 func _on_dragged(offset: int) -> void:
 	clamp_split_offset()
-	GGS.data.set_data(property, offset)
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.set_data(property, offset)

@@ -22,7 +22,8 @@ func _ready() -> void:
 ### Category Creation
 
 func _create_category_object(cat_name: String) -> ggsCategory:
-	var name_list: PackedStringArray = GGS.data.get_category_name_list()
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var name_list: PackedStringArray = data.get_category_name_list()
 	cat_name = ggsUtils.get_unique_string(name_list, cat_name)
 	
 	var new_cat: ggsCategory = ggsCategory.new()
@@ -31,8 +32,9 @@ func _create_category_object(cat_name: String) -> ggsCategory:
 
 
 func _create_category(cat_name: String) -> void:
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	var category_obj: ggsCategory = _create_category_object(cat_name)
-	GGS.data.add_category(category_obj)
+	data.add_category(category_obj)
 	List.add_item(category_obj)
 	
 	AddBtn.disabled = true
@@ -66,10 +68,11 @@ func _rename_category(tree_item: TreeItem) -> void:
 	if prev_name == new_name:
 		return
 	
-	var name_list: PackedStringArray = GGS.data.get_category_name_list()
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var name_list: PackedStringArray = data.get_category_name_list()
 	category.name = ggsUtils.get_unique_string(name_list, new_name)
 	
-	GGS.data.rename_category(prev_name, category)
+	data.rename_category(prev_name, category)
 	ggsSaveFile.new().rename_section(prev_name, category.name)
 	
 	tree_item.set_text(0, category.name)
@@ -93,7 +96,8 @@ func _on_CMenu_index_pressed(index: int) -> void:
 
 # Category Deletion
 func _delete_category(category: ggsCategory) -> void:
-	GGS.data.remove_category(category)
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.remove_category(category)
 	ggsSaveFile.new().delete_section(category.name)
 	List.remove_item(List.get_selected())
 

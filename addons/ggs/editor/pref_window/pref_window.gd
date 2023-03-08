@@ -34,8 +34,9 @@ func _ready() -> void:
 ### Fields
 
 func _init_fields() -> void:
-	SDF.text = GGS.data.dir_settings
-	CDF.text = GGS.data.dir_components
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	SDF.text = data.dir_settings
+	CDF.text = data.dir_components
 
 
 func _on_AnyDirectoryBtn_pressed(src: Button) -> void:
@@ -70,7 +71,8 @@ func _on_ResetBtn_pressed() -> void:
 
 
 func _on_CRW_confirmed() -> void:
-	GGS.data.reset()
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.reset()
 	hide()
 
 
@@ -85,6 +87,7 @@ func _on_close_requested() -> void:
 
 
 func _on_OkBtn_pressed() -> void:
-	GGS.data.set_data("dir_settings", SDF.text)
-	GGS.data.set_data("dir_components", CDF.text)
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.set_data("dir_settings", SDF.text)
+	data.set_data("dir_components", CDF.text)
 	hide()

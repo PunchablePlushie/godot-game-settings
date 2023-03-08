@@ -1,36 +1,62 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=7 format=3 uid="uid://dpk53al471l8m"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=11 format=3 uid="uid://dpk53al471l8m"]
 
+[ext_resource type="Texture2D" uid="uid://dimhb46k7ud10" path="res://addons/ggs/assets/game_settings/display_scale.svg" id="1_1leqa"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_q8wwr"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="2_dk7wl"]
+[ext_resource type="Script" path="res://game_settings/settings/display_scale.gd" id="2_k7img"]
 
-[sub_resource type="Resource" id="Resource_xjr3d"]
+[sub_resource type="Resource" id="Resource_yd6fp"]
+resource_name = "Window Scale"
+script = ExtResource("2_k7img")
+current = 0
+default = 0
+scales = Array[int]([])
+name = "Window Scale"
+category = "ewq"
+icon = ExtResource("1_1leqa")
+desc = "Change window size by multiplying its width and height by a specific value."
+
+[sub_resource type="Resource" id="Resource_15fmu"]
+resource_name = "Window Scale 2"
+script = ExtResource("2_k7img")
+current = 0
+default = 0
+scales = Array[int]([])
+name = "Window Scale 2"
+category = "ewq"
+icon = ExtResource("1_1leqa")
+desc = "Change window size by multiplying its width and height by a specific value."
+
+[sub_resource type="Resource" id="Resource_n0yi5"]
 resource_name = "Fullscreen Mode"
 script = ExtResource("2_dk7wl")
 current = false
 default = false
 name = "Fullscreen Mode"
-category = "test"
+category = "ewq"
 icon = ExtResource("1_q8wwr")
 desc = "Toggle Fullscreen mode."
 
-[sub_resource type="Resource" id="Resource_q224h"]
-resource_name = "test"
+[sub_resource type="Resource" id="Resource_d87rb"]
+resource_name = "ewq"
 script = ExtResource("1_bswtd")
-name = "test"
+name = "ewq"
 settings = {
-"Fullscreen Mode": SubResource("Resource_xjr3d")
+"Fullscreen Mode": SubResource("Resource_n0yi5"),
+"Window Scale": SubResource("Resource_yd6fp"),
+"Window Scale 2": SubResource("Resource_15fmu")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_xjr3d")])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_yd6fp"), SubResource("Resource_15fmu"), SubResource("Resource_n0yi5")])
 
 [resource]
 script = ExtResource("1_wabe0")
 categories = {
-"test": SubResource("Resource_q224h")
+"ewq": SubResource("Resource_d87rb")
 }
-category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_q224h")])
-recent_settings = Array[String](["display_fullscreen.gd"])
+category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_d87rb")])
+recent_settings = Array[String](["display_fullscreen.gd", "display_scale.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -225

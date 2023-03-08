@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pasc1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u72or"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -17,7 +17,7 @@ corner_detail = 3
 expand_margin_left = 6.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2eah"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhnv6"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -31,8 +31,8 @@ expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [resource]
-Tree/styles/selected = SubResource("StyleBoxFlat_pasc1")
-Tree/styles/selected_focus = SubResource("StyleBoxFlat_pasc1")
+Tree/styles/selected = SubResource("StyleBoxFlat_u72or")
+Tree/styles/selected_focus = SubResource("StyleBoxFlat_u72or")
 WindowBG/base_type = &"PanelContainer"
-WindowBG/styles/panel = SubResource("StyleBoxFlat_r2eah")
+WindowBG/styles/panel = SubResource("StyleBoxFlat_hhnv6")
 script = ExtResource("1_3cm4d")

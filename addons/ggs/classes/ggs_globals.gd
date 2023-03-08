@@ -9,7 +9,6 @@ signal setting_selected(setting: ggsSetting)
 
 ### Variables
 
-var data: ggsPluginData = preload("../plugin_data.tres")
 var active_category: ggsCategory
 var active_setting: ggsSetting
 
@@ -18,7 +17,8 @@ var active_setting: ggsSetting
 
 func _get_used_settings() -> Dictionary:
 	var used_data: Dictionary
-
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	
 	var categories: Dictionary = data.categories
 	for category in categories.values():
 		var used_keys: PackedStringArray
@@ -46,7 +46,8 @@ func _remove_unused_data(used_data: Dictionary) -> void:
 
 
 func _apply_settings() -> void:
-	for category in GGS.data.categories.values():
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	for category in data.categories.values():
 		for setting in category.settings.values():
 			var value: Variant = ggsSaveFile.new().get_key(setting.category, setting.name)
 			setting.apply(value)

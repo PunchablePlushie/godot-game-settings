@@ -35,13 +35,14 @@ func _get_comp_list() -> Array[Dictionary]:
 	var comp_list: Array[Dictionary]
 	
 	var path: String
-	var components: PackedStringArray = DirAccess.get_directories_at(GGS.data.dir_components)
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var components: PackedStringArray = DirAccess.get_directories_at(data.dir_components)
 	for component in components:
 		if component.begins_with("_"):
 			continue
 		
 		var info: Dictionary
-		path = GGS.data.dir_components.path_join(component)
+		path = data.dir_components.path_join(component)
 		var info_file: ConfigFile = ConfigFile.new()
 		info_file.load(path.path_join("component.cfg"))
 		

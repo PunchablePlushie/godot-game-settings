@@ -1,6 +1,6 @@
 @tool
 extends ConfigFile
-class_name ggsSaveFile2
+class_name ggsSaveFile
 
 var path: String = "user://settings.cfg"
 
@@ -22,11 +22,17 @@ func get_key(section: String, key: String) -> Variant:
 
 
 func delete_key(section: String, key: String) -> void:
+	if not has_section_key(section, key):
+		return
+	
 	erase_section_key(section, key)
 	save(path)
 
 
 func delete_section(section: String) -> void:
+	if not has_section(section):
+		return
+	
 	erase_section(section)
 	save(path)
 
@@ -49,7 +55,8 @@ func rename_key(section: String, prev_name: String, new_name: String) -> void:
 
 
 func reset() -> void:
-	for category in GGS.data.categories.values():
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	for category in data.categories.values():
 		for setting in category.settings.values():
 			set_key(setting.category, setting.name, setting.default)
 	

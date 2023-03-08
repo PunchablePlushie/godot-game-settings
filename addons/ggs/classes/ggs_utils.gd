@@ -15,3 +15,7 @@ static func get_unique_string(list: PackedStringArray, string: String) -> String
 		count += 1
 	
 	return cur_string
+
+
+static func get_plugin_data() -> ggsPluginData:
+	return load("res://addons/ggs/plugin_data.tres")

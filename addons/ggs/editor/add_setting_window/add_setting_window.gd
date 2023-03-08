@@ -42,7 +42,9 @@ func _confirm() -> void:
 		return
 	
 	setting_selected.emit(selected_setting)
-	GGS.data.add_recent_setting(selected_setting)
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.add_recent_setting(selected_setting)
 
 
 func _on_about_to_popup() -> void:
@@ -67,13 +69,14 @@ func _on_confirmed() -> void:
 func _populate_list(list: ItemList) -> void:
 	list.clear()
 	
-	var base_path: String = GGS.data.dir_settings
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var base_path: String = data.dir_settings
 	
 	var setting_files: PackedStringArray
 	if list == SettingList:
 		setting_files = DirAccess.get_files_at(base_path)
 	else:
-		setting_files= PackedStringArray(GGS.data.recent_settings)
+		setting_files= PackedStringArray(data.recent_settings)
 	
 	for setting_file in setting_files:
 		var script: Script = load(base_path.path_join(setting_file))

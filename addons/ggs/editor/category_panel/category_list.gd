@@ -16,7 +16,8 @@ func _load_list() -> void:
 	clear()
 	root = create_item()
 	
-	for item in GGS.data.category_order:
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	for item in data.category_order:
 		add_item(item)
 
 
@@ -45,7 +46,8 @@ func _update_item_order() -> void:
 		var category_obj: ggsCategory = child.get_metadata(0)
 		new_order.append(category_obj)
 	
-	GGS.data.update_category_order(new_order)
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.update_category_order(new_order)
 
 
 ### Context Menu
