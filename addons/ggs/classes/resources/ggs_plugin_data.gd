@@ -25,6 +25,16 @@ func save() -> void:
 	ResourceSaver.save(self, resource_path)
 
 
+func reset() -> void:
+	categories.clear()
+	category_order.clear()
+	recent_settings.clear()
+	dir_settings = "res://game_settings/settings"
+	dir_components = "res://game_settings/components"
+	split_offset_0 = -225
+	split_offset_1 = 440
+
+
 ### Categories
 
 func add_category(category: ggsCategory) -> void:

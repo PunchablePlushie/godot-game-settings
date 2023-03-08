@@ -1,6 +1,6 @@
 @tool
 extends ConfigFile
-class_name ggsSaveFile2
+class_name ggsSaveFile
 
 var path: String = "user://settings.cfg"
 
