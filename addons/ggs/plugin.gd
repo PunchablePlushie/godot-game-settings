@@ -8,16 +8,28 @@ var MainPanel: Control
 
 
 func _enter_tree() -> void:
+	_add_editor_interface_singleton()
 	_add_plugin_singleton()
 	_add_editor()
 
 
 func _exit_tree() -> void:
+	_remove_editor_interface_singleton()
 	_remove_plugin_singleton()
 	_remove_editor()
 
 
-### Singleton
+### Singletons
+
+func _add_editor_interface_singleton() -> void:
+	if not Engine.has_singleton("EI"):
+		Engine.register_singleton("EI", get_editor_interface())
+
+
+func _remove_editor_interface_singleton() -> void:
+	if Engine.has_singleton("EI"):
+		Engine.unregister_singleton("EI")
+
 
 func _add_plugin_singleton() -> void:
 	if not ProjectSettings.has_setting("autoload/GGS"):

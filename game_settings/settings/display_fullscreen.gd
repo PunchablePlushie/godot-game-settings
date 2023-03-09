@@ -1,23 +1,22 @@
 @tool
 extends ggsSetting
 
-@export_category("Fullscreen Mode")
-@export var current: bool: set = set_current
-@export var default: bool = false
-
 
 func _init() -> void:
-	super()
-	
 	name = "Fullscreen Mode"
 	icon = preload("res://addons/ggs/assets/game_settings/display_fullscreen.svg")
 	desc = "Toggle Fullscreen mode."
+	
+	value_type = TYPE_BOOL
+	default = false
 
 
-func set_current(value: bool) -> void:
-	current = value
-	update_save_file(value)
-
-
-func apply(_value: bool) -> void:
-	pass
+func apply(value: bool) -> void:
+	var window_mode: DisplayServer.WindowMode
+	match value:
+		true:
+			window_mode = DisplayServer.WINDOW_MODE_FULLSCREEN
+		false:
+			window_mode = DisplayServer.WINDOW_MODE_WINDOWED
+	
+	DisplayServer.window_set_mode(window_mode)

@@ -35,7 +35,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = -226
+split_offset = -225
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
@@ -45,7 +45,7 @@ size_flags_horizontal = 3
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 441
+split_offset = 440
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]

@@ -33,7 +33,6 @@ func _load_list() -> void:
 
 func _on_item_selected() -> void:
 	var selected_setting: ggsSetting = get_selected().get_metadata(0)
-	selected_setting.update_current()
 	ggsUtils.get_editor_interface().inspect_object(selected_setting)
 	
 	GGS.setting_selected.emit(selected_setting)

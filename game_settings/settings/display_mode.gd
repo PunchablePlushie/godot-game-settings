@@ -3,22 +3,16 @@ extends ggsSetting
 
 enum DisplayMode {WINDOWED, BORDERLESS, FULLSCREEN}
 
-@export_category("Display Mode")
-@export var current: DisplayMode = DisplayMode.WINDOWED: set = set_current
-@export var default: DisplayMode = DisplayMode.WINDOWED
-
 
 func _init() -> void:
-	super()
-	
 	name = "Display Mode"
 	icon = preload("res://addons/ggs/assets/game_settings/display_mode.svg")
 	desc = "Set window mode to Windowed, Borderless Fullscreen, or Fullscreen."
-
-
-func set_current(value: DisplayMode) -> void:
-	current = value
-	update_save_file(value)
+	
+	value_type = TYPE_INT
+	value_hint = PROPERTY_HINT_ENUM
+	value_hint_string = "Windowed,Borderless,Fullscreen"
+	default = DisplayMode.WINDOWED
 
 
 func apply(_value: DisplayMode) -> void:

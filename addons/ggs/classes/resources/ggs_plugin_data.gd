@@ -2,18 +2,37 @@
 extends Resource
 class_name ggsPluginData
 
-@export_category("GGS Data")
-@export var categories: Dictionary
-@export var category_order: Array[ggsCategory]
-@export var recent_settings: Array[String]
+var categories: Dictionary
+var category_order: Array[ggsCategory]
+var recent_settings: Array[String]
 
-@export_group("Directories", "dir_")
-@export_dir var dir_settings: String = "res://game_settings/settings"
-@export_dir var dir_components: String = "res://game_settings/components"
+var dir_settings: String = "res://game_settings/settings"
+var dir_components: String = "res://game_settings/components"
 
-@export_group("Split Offset", "split_offset_")
-@export var split_offset_0: int = -225
-@export var split_offset_1: int = 440
+var split_offset_0: int = -225
+var split_offset_1: int = 440
+
+
+func _get_property_list() -> Array:
+	var usage: PropertyUsageFlags = PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY
+	
+	var properties: Array
+	properties.append_array([
+		{"name": "GGS Data", "type": TYPE_NIL, "usage": PROPERTY_USAGE_CATEGORY},
+		{"name": "categories", "type": TYPE_DICTIONARY, "usage": usage},
+		{"name": "category_order", "type": TYPE_ARRAY, "usage": usage},
+		{"name": "recent_settings", "type": TYPE_ARRAY, "usage": usage},
+		
+		{"name": "Directories", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
+		{"name": "dir_settings", "type": TYPE_STRING, "usage": usage},
+		{"name": "dir_components", "type": TYPE_STRING, "usage": usage},
+		
+		{"name": "Split Offset", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
+		{"name": "split_offset_0", "type": TYPE_INT, "usage": usage},
+		{"name": "split_offset_1", "type": TYPE_INT, "usage": usage},
+	])
+	
+	return properties
 
 
 func set_data(data: String, value: Variant) -> void:
@@ -33,6 +52,7 @@ func reset() -> void:
 	dir_components = "res://game_settings/components"
 	split_offset_0 = -225
 	split_offset_1 = 440
+	save()
 
 
 ### Categories

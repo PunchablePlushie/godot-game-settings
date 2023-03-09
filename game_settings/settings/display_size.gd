@@ -2,8 +2,8 @@
 extends ggsSetting
 
 @export_category("Window Size")
-var current: int = 0: set = set_current
-var default: int = 0
+#var current: int = 0: set = set_current
+#var default: int = 0
 var sizes: Array[Vector2]: set = set_sizes
 
 
@@ -40,9 +40,9 @@ func _get_property_list() -> Array:
 	]
 
 
-func set_current(value: int) -> void:
-	current = value
-	update_save_file(value)
+#func set_current(value: int) -> void:
+#	current = value
+#	update_save_file(value)
 
 
 func set_sizes(value: Array[Vector2]) -> void:

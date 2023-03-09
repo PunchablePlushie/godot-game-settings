@@ -2,8 +2,8 @@
 extends ggsSetting
 
 @export_category("Audio Mute")
-@export var current: bool = false: set = set_current
-@export var default: bool = false
+#@export var current: bool = false: set = set_current
+#@export var default: bool = false
 var bus_name: String
 
 
@@ -24,9 +24,9 @@ func _get_property_list() -> Array:
 	}]
 
 
-func set_current(value: bool) -> void:
-	current = value
-	update_save_file(value)
+#func set_current(value: bool) -> void:
+#	current = value
+#	update_save_file(value)
 
 
 func apply(_value: bool) -> void:

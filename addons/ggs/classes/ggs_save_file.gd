@@ -38,6 +38,9 @@ func delete_section(section: String) -> void:
 
 
 func rename_section(prev_name: String, new_name: String) -> void:
+	if not has_section(prev_name):
+		return
+	
 	var section_data: Dictionary = _get_section_data(prev_name)
 	erase_section(prev_name)
 	

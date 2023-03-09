@@ -1,57 +1,29 @@
 @tool
 extends ggsSetting
 
-@export_category("Window Scale")
-var current: int = 0: set = set_current
-var default: int = 0
-var scales: Array[int]: set = set_scales
+@export var scales: Array[int]: set = set_scales
 
 
 func _init() -> void:
 	name = "Window Scale"
 	icon = preload("res://addons/ggs/assets/game_settings/display_scale.svg")
 	desc = "Change window size by multiplying its width and height by a specific value."
-
-
-func _get_property_list() -> Array:
-	var hint_string: String = ",".join(_get_scales())
-	return [
-		{
-			"name": "current",
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": hint_string,
-		},
-		{
-			"name": "default",
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": hint_string,
-		},
-		{
-			"name": "scales",
-			"type": TYPE_ARRAY,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_TYPE_STRING,
-			"hint_string": "%s:"%[TYPE_INT],
-		},
-	]
-
-
-func set_current(value: int) -> void:
-	current = value
-	update_save_file(value)
-
-
-func set_scales(value: Array[int]) -> void:
-	scales = value
-	ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
+	
+	value_type = TYPE_INT
+	value_hint = PROPERTY_HINT_ENUM
+	value_hint_string = ",".join(_get_scales())
 
 
 func apply(_value: int) -> void:
 	pass
+
+
+### Scales
+
+func set_scales(value: Array[int]) -> void:
+	scales = value
+	value_hint_string = ",".join(_get_scales())
+	ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
 
 
 func _get_scales() -> PackedStringArray:

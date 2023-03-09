@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxwy2pg7ql8ay"]
-
-[ext_resource type="PackedScene" uid="uid://bkb482qf4rhnn" path="res://addons/ggs/misc_components/reset_btn/reset_btn.tscn" id="6_dytnw"]
+[gd_scene format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -14,9 +12,4 @@ offset_bottom = 40.0
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "test"
-
-[node name="ResetBtn" parent="HBoxContainer" instance=ExtResource("6_dytnw")]
-layout_mode = 2
-text = "Reset"
-group = "settings"
+text = "--->"

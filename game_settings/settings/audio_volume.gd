@@ -1,9 +1,6 @@
 @tool
 extends ggsSetting
 
-@export_category("Audio Volume")
-@export_range(0, 100) var current: float = 80: set = set_current
-@export_range(0, 100) var default: float = 80
 var bus_name: String
 
 
@@ -11,26 +8,32 @@ func _init() -> void:
 	name = "Audio Volume"
 	icon = preload("res://addons/ggs/assets/game_settings/audio_volume.svg")
 	desc = "Change volume of a specific audio bus."
+	
+	value_type = TYPE_FLOAT
+	value_hint = PROPERTY_HINT_RANGE
+	value_hint_string = "0,100"
+	default = 80.0
 
+
+func apply(_value: float) -> void:
+	pass
+
+
+### Bus Name
 
 func _get_property_list() -> Array:
-	var hint_string: String = ",".join(_get_audio_buses())
-	return [{
+	var hint_string = ",".join(_get_audio_buses())
+	
+	var properties: Array
+	properties.append({
 		"name": "bus_name",
 		"type": TYPE_STRING,
 		"usage": PROPERTY_USAGE_DEFAULT,
 		"hint": PROPERTY_HINT_ENUM,
 		"hint_string": hint_string,
-	}]
-
-
-func set_current(value: float) -> void:
-	current = value
-	update_save_file(value)
-
-
-func apply(_value: float) -> void:
-	print(_value)
+	})
+	
+	return properties
 
 
 func _get_audio_buses() -> PackedStringArray:

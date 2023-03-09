@@ -2,12 +2,15 @@
 extends Resource
 class_name ggsSetting
 
-@export_category("Setting")
-@export_group("Internal")
-@export var name: String: set = set_name
-@export var category: String
-@export var icon: Texture2D
-@export_multiline var desc: String
+var current: Variant: set = set_current, get = get_current
+var default: Variant: set = set_default
+var name: String: set = set_name
+var category: String
+var icon: Texture2D
+var desc: String
+var value_type: Variant.Type
+var value_hint: PropertyHint
+var value_hint_string: String
 
 
 func _init() -> void:
@@ -16,22 +19,61 @@ func _init() -> void:
 	desc = "No description available."
 
 
-func set_name(value: String) -> void:
-	name = value
-	resource_name = value
+func _get_property_list() -> Array:
+	var usage: PropertyUsageFlags =  PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY
+	var enum_string_types: String = ggsUtils.get_enum_string("Variant.Type")
+	var enum_string_property_hints: String = ggsUtils.get_enum_string("PropertyHint")
+	
+	var properties: Array
+	properties.append_array([
+		{"name": "Setting (%s)"%name, "type": TYPE_NIL, "usage": PROPERTY_USAGE_CATEGORY},
+		{"name": "current", "type": value_type, "usage": PROPERTY_USAGE_DEFAULT, "hint": value_hint, "hint_string": value_hint_string},
+		{"name": "default", "type": value_type, "usage": PROPERTY_USAGE_DEFAULT, "hint": value_hint, "hint_string": value_hint_string},
+		{"name": "Internal", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
+		{"name": "name", "type": TYPE_STRING, "usage": usage},
+		{"name": "category", "type": TYPE_STRING, "usage": usage},
+		{"name": "icon", "type": TYPE_OBJECT, "usage": usage, "hint": PROPERTY_HINT_RESOURCE_TYPE, "hint_string": "Texture2D"},
+		{"name": "desc", "type": TYPE_STRING, "usage": usage, "hint": PROPERTY_HINT_MULTILINE_TEXT},
+		{"name": "value_type", "type": TYPE_INT, "usage": usage, "hint": PROPERTY_HINT_ENUM, "hint_string": enum_string_types},
+		{"name": "value_hint", "type": TYPE_INT, "usage": usage, "hint": PROPERTY_HINT_ENUM, "hint_string": enum_string_property_hints},
+		{"name": "value_hint_string", "type": TYPE_STRING, "usage": usage},
+	])
+	
+	return properties
 
 
-func update_save_file(value: Variant) -> void:
+func set_current(value: Variant) -> void:
+	current = value
+	
+	if category.is_empty():
+		return
+	
 	ggsSaveFile.new().set_key(category, name, value)
 
 
-func update_current() -> void:
+func get_current() -> Variant:
 	var save_file: ggsSaveFile = ggsSaveFile.new()
-	var value: Variant
 	if save_file.has_section_key(category, name):
-		value = save_file.get_key(category, name)
+		return save_file.get_value(category, name)
 	else:
-		value = get("default")
-		save_file.set_key(category, name, value)
+		save_file.set_key(category, name, default)
+		return default
+
+
+func set_default(value: Variant) -> void:
+	default = value
 	
-	set("current", value)
+	if Engine.is_editor_hint():
+		var plugin_data: ggsPluginData = ggsUtils.get_plugin_data()
+		plugin_data.save()
+
+
+func set_name(value: String) -> void:
+	name = value
+	resource_name = value
+	notify_property_list_changed()
+
+
+func delete() -> void:
+	resource_name = ""
+	set_script(null)

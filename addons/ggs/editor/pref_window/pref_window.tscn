@@ -10,7 +10,6 @@
 [node name="PrefWindow" type="Window"]
 title = "GGS Preferences"
 size = Vector2i(813, 594)
-visible = false
 wrap_controls = true
 min_size = Vector2i(500, 0)
 script = ExtResource("1_ihv6i")
@@ -123,13 +122,13 @@ alignment = 0
 
 [node name="VersionBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
 layout_mode = 2
-tooltip_text = "View Changelog"
+tooltip_text = "View Release"
 text = "3.0"
 
-[node name="CommitBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+[node name="ChangelogBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
 layout_mode = 2
-tooltip_text = "View Release"
-text = "[01deca5]"
+tooltip_text = "View Changelog"
+text = "Changelog"
 
 [node name="BtnCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
 layout_mode = 2

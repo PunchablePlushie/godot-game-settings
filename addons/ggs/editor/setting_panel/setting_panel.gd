@@ -72,6 +72,7 @@ func _delete_setting(setting: ggsSetting) -> void:
 	GGS.active_category.remove_setting(setting)
 	ggsSaveFile.new().delete_key(setting.category, setting.name)
 	List.remove_item(List.get_selected())
+	setting.delete()
 
 
 func _on_Global_category_selected(category: ggsCategory) -> void:
