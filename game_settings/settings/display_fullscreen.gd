@@ -1,6 +1,8 @@
 @tool
 extends ggsSetting
 
+var size_setting: String
+
 
 func _init() -> void:
 	name = "Fullscreen Mode"
@@ -20,3 +22,41 @@ func apply(value: bool) -> void:
 			window_mode = DisplayServer.WINDOW_MODE_WINDOWED
 	
 	DisplayServer.window_set_mode(window_mode)
+	_apply_size_setting()
+
+
+func _apply_size_setting() -> void:
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var setting: ggsSetting = data.categories[category].settings[size_setting]
+	setting.apply(setting.current)
+
+
+### Size Setting
+
+func _get_property_list() -> Array:
+	var hint_string: String = ",".join(_get_other_settings())
+	
+	var properties: Array
+	properties.append({
+		"name": "size_setting",
+		"type": TYPE_STRING,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": hint_string,
+	})
+	
+	return properties
+
+
+func _get_other_settings() -> PackedStringArray:
+	var other_settings: PackedStringArray
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var settings: Dictionary = data.categories[category].settings
+	for setting in settings.values():
+		if setting.name == name:
+			continue
+		
+		other_settings.append(setting.name)
+	
+	return other_settings

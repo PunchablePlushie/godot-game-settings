@@ -52,3 +52,10 @@ static func get_enum_string(target_enum: String) -> String:
 			enum_string = ",".join(property_hints)
 	
 	return enum_string
+
+
+static func center_window() -> void:
+	var display_size: Vector2 = DisplayServer.screen_get_size()
+	var window_size: Vector2 = DisplayServer.window_get_size()
+	var target_pos: Vector2 = (display_size / 2) - (window_size / 2)
+	DisplayServer.window_set_position(target_pos)

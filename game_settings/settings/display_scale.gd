@@ -1,7 +1,7 @@
 @tool
 extends ggsSetting
 
-@export var scales: Array[int]: set = set_scales
+@export var scales: Array[float]: set = set_scales
 
 
 func _init() -> void:
@@ -14,16 +14,28 @@ func _init() -> void:
 	value_hint_string = ",".join(_get_scales())
 
 
-func apply(_value: int) -> void:
-	pass
+func apply(value: int) -> void:
+	var scale: float = scales[value]
+	var base_w: int = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var base_h: int = ProjectSettings.get_setting("display/window/size/viewport_height")
+	var size: Vector2 = Vector2(base_w * scale, base_h * scale)
+	
+	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect()
+	size.x = min(size.x, screen_size.size.x)
+	size.y = min(size.y, screen_size.size.y)
+	
+	DisplayServer.window_set_size(size)
+	ggsUtils.center_window()
 
 
 ### Scales
 
-func set_scales(value: Array[int]) -> void:
+func set_scales(value: Array[float]) -> void:
 	scales = value
-	value_hint_string = ",".join(_get_scales())
-	ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
+	
+	if Engine.is_editor_hint():
+		value_hint_string = ",".join(_get_scales())
+		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
 
 
 func _get_scales() -> PackedStringArray:
