@@ -25,6 +25,11 @@ buses/default_bus_layout=""
 
 GGS="*res://addons/ggs/classes/ggs_globals.gd"
 
+[debug]
+
+gdscript/warnings/unassigned_variable=0
+gdscript/warnings/unassigned_variable_op_assign=0
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/ggs/plugin.cfg")

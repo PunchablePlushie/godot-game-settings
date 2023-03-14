@@ -3,6 +3,7 @@ extends Control
 
 @onready var AddBtn: Button = %AddBtn
 @onready var DeleteBtn: Button = %DeleteBtn
+@onready var AssignBtn: Button = %AssignBtn
 @onready var List: Tree = %SettingList
 @onready var ASW: ConfirmationDialog = $AddSettingWindow
 @onready var DeleteConfirm: ConfirmationDialog = $DeleteConfirm
@@ -18,6 +19,8 @@ func _ready() -> void:
 	GGS.setting_selected.connect(_on_Global_setting_selected)
 	DeleteBtn.pressed.connect(_on_DeleteBtn_pressed)
 	DeleteConfirm.confirmed.connect(_on_DeleteConfirm_confirmed)
+	
+	AssignBtn.pressed.connect(_on_AssignBtn_pressed)
 
 
 
@@ -77,12 +80,14 @@ func _delete_setting(setting: ggsSetting) -> void:
 
 func _on_Global_category_selected(category: ggsCategory) -> void:
 	DeleteBtn.disabled = true
+	AssignBtn.disabled = true
 	
 	AddBtn.disabled = (category == null)
 
 
 func _on_Global_setting_selected(setting: ggsSetting) -> void:
 	DeleteBtn.disabled = (setting == null)
+	AssignBtn.disabled = (setting == null)
 
 
 func _on_DeleteBtn_pressed() -> void:
@@ -91,3 +96,23 @@ func _on_DeleteBtn_pressed() -> void:
 
 func _on_DeleteConfirm_confirmed() -> void:
 	_delete_setting(List.get_selected().get_metadata(0))
+
+
+### Assigning Settings
+
+func _on_AssignBtn_pressed() -> void:
+	var EI: EditorInterface = ggsUtils.get_editor_interface()
+	var ES: EditorSelection = EI.get_selection()
+	var selected_nodes: Array[Node] = ES.get_selected_nodes()
+	
+	if selected_nodes.size() != 1:
+		printerr("GGS - Assign to Component: Exactly 1 item in the scene tree must be selected.")
+		return
+	
+	var SelectedNode: Node = selected_nodes[0]
+	if not SelectedNode is ggsUIComponent:
+		printerr("GGS - Assign to Component: The selected node is not a GGS UI Component.")
+		return
+	
+	SelectedNode.setting = GGS.active_setting
+	EI.save_scene()

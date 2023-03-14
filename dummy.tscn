@@ -1,4 +1,22 @@
-[gd_scene format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=6 format=3 uid="uid://cxwy2pg7ql8ay"]
+
+[ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="1_7gihh"]
+[ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="2_d24dn"]
+[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_gy174"]
+[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="4_n4714"]
+
+[sub_resource type="Resource" id="Resource_pbyfj"]
+resource_name = "Fullscreen Mode"
+script = ExtResource("4_n4714")
+current = false
+default = false
+name = "Fullscreen Mode"
+category = "test"
+icon = ExtResource("3_gy174")
+desc = "Toggle Fullscreen mode."
+value_type = 1
+value_hint = 0
+value_hint_string = ""
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -6,10 +24,29 @@ anchors_preset = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 121.0
+offset_right = 205.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "--->"
+text = "Fullscreen Mode"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Switch" parent="HBoxContainer/HBoxContainer" instance=ExtResource("1_7gihh")]
+layout_mode = 2
+script = ExtResource("2_d24dn")
+setting = SubResource("Resource_pbyfj")
+
+[node name="Btn" parent="HBoxContainer/HBoxContainer/Switch" index="0"]
+layout_mode = 2
+
+[node name="CheckBox2" type="CheckBox" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[editable path="HBoxContainer/HBoxContainer/Switch"]

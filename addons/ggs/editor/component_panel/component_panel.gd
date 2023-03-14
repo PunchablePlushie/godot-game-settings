@@ -29,6 +29,8 @@ func _load_list() -> void:
 		var item_index: int = List.add_item(text, icon)
 		List.set_item_disabled(item_index, true)
 		List.set_item_metadata(item_index, meta)
+	
+	List.sort_items_by_text()
 
 
 func _get_comp_list() -> Array[Dictionary]:
@@ -87,7 +89,7 @@ func _on_List_item_activated(item_index: int) -> void:
 		return
 	
 	var item_meta: String = List.get_item_metadata(item_index)
-	var SelectedNode: Node = ES.get_selected_nodes()[0]
+	var SelectedNode: Node = selected_nodes[0]
 	var ESR: Node = EI.get_edited_scene_root()
 	
 	var comp_scene: PackedScene = load(item_meta)
@@ -96,6 +98,7 @@ func _on_List_item_activated(item_index: int) -> void:
 	Component.apply_on_change = ApplyBtn.button_pressed
 	
 	SelectedNode.add_child(Component, true)
+	SelectedNode.set_editable_instance(Component, true)
 	Component.owner = ESR
 	
 	if not GroupField.text.strip_edges().is_empty():
