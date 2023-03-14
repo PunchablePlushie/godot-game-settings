@@ -15,7 +15,6 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	_remove_editor_interface_singleton()
-	_remove_plugin_singleton()
 	_remove_editor()
 
 
@@ -34,11 +33,6 @@ func _remove_editor_interface_singleton() -> void:
 func _add_plugin_singleton() -> void:
 	if not ProjectSettings.has_setting("autoload/GGS"):
 		add_autoload_singleton("GGS", "res://addons/ggs/classes/ggs_globals.gd")
-
-
-func _remove_plugin_singleton() -> void:
-	if ProjectSettings.has_setting("autoload/GGS"):
-		remove_autoload_singleton("GGS")
 
 
 ### Main Editor

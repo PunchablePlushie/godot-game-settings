@@ -16,7 +16,7 @@ categories = {
 "test": SubResource("Resource_b3itl")
 }
 category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_b3itl")])
-recent_settings = Array[String](["display_fullscreen.gd", "display_scale.gd", "display_mode.gd", "audio_volume.gd"])
+recent_settings = Array[String](["display_fullscreen.gd", "display_scale.gd", "audio_volume.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -225

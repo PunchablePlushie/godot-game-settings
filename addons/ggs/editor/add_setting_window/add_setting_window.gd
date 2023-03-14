@@ -79,7 +79,13 @@ func _populate_list(list: ItemList) -> void:
 		setting_files= PackedStringArray(data.recent_settings)
 	
 	for setting_file in setting_files:
-		var script: Script = load(base_path.path_join(setting_file))
+		var path: String = base_path.path_join(setting_file)
+		if not FileAccess.file_exists(path):
+			data.recent_settings.erase(setting_file)
+			data.save()
+			continue
+		
+		var script: Script = load(path)
 		var setting: ggsSetting = script.new()
 		
 		var text: String = setting.name
