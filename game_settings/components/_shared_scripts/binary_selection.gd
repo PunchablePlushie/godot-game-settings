@@ -6,9 +6,6 @@ extends Button
 
 var setting_value: bool
 
-@onready var save_section: String = setting.category
-@onready var save_key: String = setting.name
-
 
 func _ready() -> void:
 	toggled.connect(_on_toggled)
@@ -17,7 +14,7 @@ func _ready() -> void:
 
 
 func _init_value() -> void:
-	setting_value = ggsSaveFile.new().get_key(save_section, save_key)
+	setting_value = setting.current
 	set_pressed_no_signal(setting_value)
 
 

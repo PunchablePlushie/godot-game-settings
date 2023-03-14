@@ -45,7 +45,7 @@ func _get_property_list() -> Array:
 func set_current(value: Variant) -> void:
 	current = value
 	
-	if category.is_empty():
+	if category.is_empty() or name == "[Deleted Setting]":
 		return
 	
 	ggsSaveFile.new().set_key(category, name, value)
@@ -65,7 +65,9 @@ func set_default(value: Variant) -> void:
 	
 	if Engine.is_editor_hint():
 		var plugin_data: ggsPluginData = ggsUtils.get_plugin_data()
-		plugin_data.save()
+		
+		if plugin_data != null:
+			plugin_data.save()
 
 
 func set_name(value: String) -> void:
@@ -75,5 +77,5 @@ func set_name(value: String) -> void:
 
 
 func delete() -> void:
-	resource_name = ""
-	set_script(null)
+	set_script(load("res://addons/ggs/classes/resources/ggs_setting.gd"))
+	name = "[Deleted Setting]"

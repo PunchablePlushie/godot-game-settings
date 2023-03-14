@@ -99,7 +99,6 @@ func _on_List_item_activated(item_index: int) -> void:
 	Component.owner = ESR
 	
 	if not GroupField.text.strip_edges().is_empty():
-		print(GroupField.text.strip_edges())
 		Component.add_to_group(GroupField.text.strip_edges(), true)
 	
 	EI.save_scene()

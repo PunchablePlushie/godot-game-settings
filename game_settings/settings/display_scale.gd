@@ -27,11 +27,11 @@ func set_scales(value: Array[int]) -> void:
 
 
 func _get_scales() -> PackedStringArray:
-	var arr0: PackedStringArray
+	var arr0: PackedStringArray = []
 	for scale in scales:
 		arr0.append(str(scale))
 	
-	var arr1: PackedStringArray
+	var arr1: PackedStringArray = []
 	for scale in arr0:
 		arr1.append("x%s"%scale)
 	

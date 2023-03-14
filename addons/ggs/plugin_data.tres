@@ -1,39 +1,22 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=7 format=3 uid="uid://dpk53al471l8m"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=4 format=3 uid="uid://dpk53al471l8m"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
-[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_ggtid"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
-[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="2_bnsew"]
 
-[sub_resource type="Resource" id="Resource_vqti5"]
-resource_name = "Fullscreen Mode"
-script = ExtResource("2_bnsew")
-current = true
-default = false
-name = "Fullscreen Mode"
-category = "test"
-icon = ExtResource("1_ggtid")
-desc = "Toggle Fullscreen mode."
-value_type = 1
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_fqai7"]
+[sub_resource type="Resource" id="Resource_b3itl"]
 resource_name = "test"
 script = ExtResource("1_bswtd")
 name = "test"
-settings = {
-"Fullscreen Mode": SubResource("Resource_vqti5")
-}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_vqti5")])
+settings = {}
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
 
 [resource]
 script = ExtResource("1_wabe0")
 categories = {
-"test": SubResource("Resource_fqai7")
+"test": SubResource("Resource_b3itl")
 }
-category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_fqai7")])
-recent_settings = Array[String](["display_mode.gd", "audio_volume.gd", "display_scale.gd", "display_fullscreen.gd"])
+category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_b3itl")])
+recent_settings = Array[String](["display_fullscreen.gd", "display_scale.gd", "display_mode.gd", "audio_volume.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -225
