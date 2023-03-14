@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=18 format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="1_pyof7"]
 [ext_resource type="Script" path="res://game_settings/components/option_list/option_list.gd" id="2_ku0wu"]
@@ -10,20 +10,10 @@
 [ext_resource type="Script" path="res://game_settings/settings/display_size.gd" id="6_564ca"]
 [ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/reset_btn/reset_btn.tscn" id="6_hr5ah"]
 [ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="7_mdxc3"]
-
-[sub_resource type="Resource" id="Resource_hpdo1"]
-resource_name = "Window Size"
-script = ExtResource("6_564ca")
-sizes = Array[Vector2]([Vector2(1280, 720), Vector2(1360, 866)])
-current = 0
-default = 0
-name = "Window Size"
-category = "test"
-icon = ExtResource("5_mpjr1")
-desc = "Change window size by setting its width and height to specific values."
-value_type = 2
-value_hint = 2
-value_hint_string = "1280 x 720,1360 x 866"
+[ext_resource type="PackedScene" uid="uid://d10row618jwcs" path="res://game_settings/components/toggle_btn/toggle_btn.tscn" id="9_gl07d"]
+[ext_resource type="Texture2D" uid="uid://dbtn4d6130bdj" path="res://addons/ggs/assets/game_settings/audio_mute.svg" id="11_xcd5r"]
+[ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
+[ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="12_ciqq7"]
 
 [sub_resource type="Resource" id="Resource_xo3gb"]
 resource_name = "Fullscreen Mode"
@@ -32,9 +22,37 @@ size_setting = "Window Size"
 current = false
 default = false
 name = "Fullscreen Mode"
-category = "test"
+category = "Display"
 icon = ExtResource("3_rws6w")
 desc = "Toggle Fullscreen mode."
+value_type = 1
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_hpdo1"]
+resource_name = "Window Size"
+script = ExtResource("6_564ca")
+sizes = Array[Vector2]([Vector2(1280, 720), Vector2(1360, 866)])
+current = 0
+default = 0
+name = "Window Size"
+category = "Display"
+icon = ExtResource("5_mpjr1")
+desc = "Change window size by setting its width and height to specific values."
+value_type = 2
+value_hint = 2
+value_hint_string = "1280 x 720,1360 x 866"
+
+[sub_resource type="Resource" id="Resource_ubm64"]
+resource_name = "Audio Mute"
+script = ExtResource("12_ciqq7")
+bus_name = "Master"
+current = false
+default = false
+name = "Audio Mute"
+category = "Audio"
+icon = ExtResource("11_xcd5r")
+desc = "Toggle mute state of a specific audio bus."
 value_type = 1
 value_hint = 0
 value_hint_string = ""
@@ -43,33 +61,45 @@ value_hint_string = ""
 layout_mode = 3
 anchors_preset = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 205.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="FullscreenCtnr" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/FullscreenCtnr"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fullscreen Mode"
 
-[node name="ApplyBtn" parent="HBoxContainer" instance=ExtResource("5_v56y8")]
+[node name="FullscreenBtn" parent="VBox/FullscreenCtnr" groups=["settings"] instance=ExtResource("7_mdxc3")]
 layout_mode = 2
-text = "Apply"
-group = "settings"
+script = ExtResource("4_3pasg")
+setting = SubResource("Resource_xo3gb")
+apply_on_change = true
 
-[node name="ResetBtn" parent="HBoxContainer" instance=ExtResource("6_hr5ah")]
+[node name="Btn" parent="VBox/FullscreenCtnr/FullscreenBtn" index="0"]
 layout_mode = 2
-text = "Reset"
-group = "settings"
 
-[node name="OptionList" parent="HBoxContainer" groups=["settings"] instance=ExtResource("1_pyof7")]
+[node name="WindowSizeCtnr" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/WindowSizeCtnr"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window Size"
+
+[node name="WindowSize" parent="VBox/WindowSizeCtnr" groups=["settings"] instance=ExtResource("1_pyof7")]
 layout_mode = 2
 script = ExtResource("2_ku0wu")
 setting = SubResource("Resource_hpdo1")
 apply_on_change = true
 
-[node name="Btn" parent="HBoxContainer/OptionList" index="0"]
+[node name="Btn" parent="VBox/WindowSizeCtnr/WindowSize" index="0"]
 layout_mode = 2
 item_count = 2
 popup/item_0/text = "1280x720"
@@ -77,14 +107,58 @@ popup/item_0/id = 0
 popup/item_1/text = "1360x866"
 popup/item_1/id = 1
 
-[node name="Switch" parent="HBoxContainer" groups=["settings"] instance=ExtResource("7_mdxc3")]
+[node name="AudioSep" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="LeftSep" type="HSeparator" parent="VBox/AudioSep"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBox/AudioSep"]
+layout_mode = 2
+text = "Audio"
+
+[node name="RightSep" type="HSeparator" parent="VBox/AudioSep"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicCtnr" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/MusicCtnr"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music"
+
+[node name="ToggleBtn" parent="VBox/MusicCtnr" groups=["settings"] instance=ExtResource("9_gl07d")]
 layout_mode = 2
 script = ExtResource("4_3pasg")
-setting = SubResource("Resource_xo3gb")
+setting = SubResource("Resource_ubm64")
 apply_on_change = true
 
-[node name="Btn" parent="HBoxContainer/Switch" index="0"]
+[node name="Btn" parent="VBox/MusicCtnr/ToggleBtn" index="0"]
+layout_mode = 2
+toggle_mode = true
+text = "Mute"
+
+[node name="HSep" type="HSeparator" parent="VBox"]
 layout_mode = 2
 
-[editable path="HBoxContainer/OptionList"]
-[editable path="HBoxContainer/Switch"]
+[node name="ApplyBtn" parent="VBox" instance=ExtResource("5_v56y8")]
+layout_mode = 2
+text = "Apply"
+group = "settings"
+
+[node name="ResetBtn" parent="VBox" instance=ExtResource("6_hr5ah")]
+layout_mode = 2
+text = "Reset"
+group = "settings"
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_y03a7")
+autoplay = true
+
+[editable path="VBox/FullscreenCtnr/FullscreenBtn"]
+[editable path="VBox/WindowSizeCtnr/WindowSize"]
+[editable path="VBox/MusicCtnr/ToggleBtn"]

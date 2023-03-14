@@ -1,17 +1,24 @@
 @tool
 extends ggsSetting
 
-@export_category("Audio Mute")
-#@export var current: bool = false: set = set_current
-#@export var default: bool = false
-var bus_name: String
+var bus_name: String = "[NONE]"
 
 
 func _init() -> void:
 	name = "Audio Mute"
 	icon = preload("res://addons/ggs/assets/game_settings/audio_mute.svg")
 	desc = "Toggle mute state of a specific audio bus."
+	
+	value_type = TYPE_BOOL
+	default = false
 
+
+func apply(value: bool) -> void:
+	var bus_index: int = AudioServer.get_bus_index(bus_name)
+	AudioServer.set_bus_mute(bus_index, value)
+
+
+### Bus Name
 
 func _get_property_list() -> Array:
 	var hint_string: String = ",".join(_get_audio_buses())
@@ -24,19 +31,10 @@ func _get_property_list() -> Array:
 	}]
 
 
-#func set_current(value: bool) -> void:
-#	current = value
-#	update_save_file(value)
-
-
-func apply(_value: bool) -> void:
-	pass
-
-
 func _get_audio_buses() -> PackedStringArray:
-	var buses: PackedStringArray
+	var buses: PackedStringArray = ["[NONE]"]
 	for bus_index in range(AudioServer.bus_count):
-		var bus_name: String = AudioServer.get_bus_name(bus_index)
-		buses.append(bus_name)
+		var bus: String = AudioServer.get_bus_name(bus_index)
+		buses.append(bus)
 	
 	return buses
