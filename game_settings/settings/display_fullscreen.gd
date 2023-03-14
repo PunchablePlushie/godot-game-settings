@@ -1,7 +1,7 @@
 @tool
 extends ggsSetting
 
-var size_setting: String = "[NONE]"
+var size_setting: String = "[NONE]": set = set_size_setting
 
 
 func _init() -> void:
@@ -32,6 +32,13 @@ func _apply_size_setting() -> void:
 
 
 ### Size Setting
+
+func set_size_setting(value: String) -> void:
+	size_setting = value
+	
+	if Engine.is_editor_hint():
+		ggsUtils.get_plugin_data().save()
+
 
 func _get_property_list() -> Array:
 	var hint_string: String = ",".join(_get_other_settings())

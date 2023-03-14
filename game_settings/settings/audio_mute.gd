@@ -1,7 +1,7 @@
 @tool
 extends ggsSetting
 
-var bus_name: String = "[NONE]"
+var bus_name: String = "[NONE]": set = set_bus_name
 
 
 func _init() -> void:
@@ -19,6 +19,12 @@ func apply(value: bool) -> void:
 
 
 ### Bus Name
+
+func set_bus_name(value: String) -> void:
+	bus_name = value
+	
+	if Engine.is_editor_hint():
+		ggsUtils.get_plugin_data().save()
 
 func _get_property_list() -> Array:
 	var hint_string: String = ",".join(_get_audio_buses())

@@ -1,6 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=23 format=3 uid="uid://cxwy2pg7ql8ay"]
 
+[ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_4ov2t"]
 [ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="1_pyof7"]
+[ext_resource type="Script" path="res://game_settings/components/slider/slider.gd" id="2_3iyjn"]
 [ext_resource type="Script" path="res://game_settings/components/option_list/option_list.gd" id="2_ku0wu"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_rws6w"]
 [ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="4_3pasg"]
@@ -14,15 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://dbtn4d6130bdj" path="res://addons/ggs/assets/game_settings/audio_mute.svg" id="11_xcd5r"]
 [ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="12_ciqq7"]
+[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="14_smw0q"]
+[ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="15_x7bks"]
 
 [sub_resource type="Resource" id="Resource_xo3gb"]
-resource_name = "Fullscreen Mode"
+resource_name = "fullscreen_mode"
 script = ExtResource("4_cwrjq")
-size_setting = "Window Size"
+size_setting = "window_size"
 current = false
 default = false
-name = "Fullscreen Mode"
-category = "Display"
+name = "fullscreen_mode"
+category = "display"
 icon = ExtResource("3_rws6w")
 desc = "Toggle Fullscreen mode."
 value_type = 1
@@ -30,32 +34,46 @@ value_hint = 0
 value_hint_string = ""
 
 [sub_resource type="Resource" id="Resource_hpdo1"]
-resource_name = "Window Size"
+resource_name = "window_size"
 script = ExtResource("6_564ca")
 sizes = Array[Vector2]([Vector2(1280, 720), Vector2(1360, 866)])
 current = 0
 default = 0
-name = "Window Size"
-category = "Display"
+name = "window_size"
+category = "display"
 icon = ExtResource("5_mpjr1")
 desc = "Change window size by setting its width and height to specific values."
 value_type = 2
 value_hint = 2
 value_hint_string = "1280 x 720,1360 x 866"
 
-[sub_resource type="Resource" id="Resource_ubm64"]
-resource_name = "Audio Mute"
+[sub_resource type="Resource" id="Resource_d8304"]
+resource_name = "music_mute"
 script = ExtResource("12_ciqq7")
 bus_name = "Master"
 current = false
 default = false
-name = "Audio Mute"
-category = "Audio"
+name = "music_mute"
+category = "audio"
 icon = ExtResource("11_xcd5r")
 desc = "Toggle mute state of a specific audio bus."
 value_type = 1
 value_hint = 0
 value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_huot6"]
+resource_name = "music_volume"
+script = ExtResource("15_x7bks")
+bus_name = "Master"
+current = 80.0
+default = 80.0
+name = "music_volume"
+category = "audio"
+icon = ExtResource("14_smw0q")
+desc = "Change volume of a specific audio bus."
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
 
 [node name="Dummy" type="Control"]
 layout_mode = 3
@@ -134,13 +152,25 @@ text = "Music"
 [node name="ToggleBtn" parent="VBox/MusicCtnr" groups=["settings"] instance=ExtResource("9_gl07d")]
 layout_mode = 2
 script = ExtResource("4_3pasg")
-setting = SubResource("Resource_ubm64")
+setting = SubResource("Resource_d8304")
 apply_on_change = true
 
 [node name="Btn" parent="VBox/MusicCtnr/ToggleBtn" index="0"]
 layout_mode = 2
 toggle_mode = true
 text = "Mute"
+
+[node name="Slider" parent="VBox/MusicCtnr" groups=["settings"] instance=ExtResource("1_4ov2t")]
+layout_mode = 2
+script = ExtResource("2_3iyjn")
+setting = SubResource("Resource_huot6")
+apply_on_change = true
+
+[node name="Slider" parent="VBox/MusicCtnr/Slider" index="0"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="HSep" type="HSeparator" parent="VBox"]
 layout_mode = 2
@@ -162,3 +192,4 @@ autoplay = true
 [editable path="VBox/FullscreenCtnr/FullscreenBtn"]
 [editable path="VBox/WindowSizeCtnr/WindowSize"]
 [editable path="VBox/MusicCtnr/ToggleBtn"]
+[editable path="VBox/MusicCtnr/Slider"]
