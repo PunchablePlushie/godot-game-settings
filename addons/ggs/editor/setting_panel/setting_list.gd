@@ -39,7 +39,9 @@ func _on_item_selected() -> void:
 
 
 func _on_Global_category_selected(category: ggsCategory) -> void:
-	if not category == null:
+	if category == null:
+		clear()
+	else:
 		_load_list()
 
 

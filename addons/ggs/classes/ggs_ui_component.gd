@@ -5,7 +5,7 @@ class_name ggsUIComponent
 @export var setting: ggsSetting
 @export var apply_on_change: bool
 
-var setting_value: bool
+var setting_value: Variant
 
 
 func _ready() -> void:

@@ -1,31 +1,23 @@
-extends HBoxContainer
+extends ggsUIComponent
 signal option_selected(option_index: int)
 
-@export_category("GGS UI Component")
-@export var setting: ggsSetting
-@export var apply_on_change: bool
+@export_category("ArrowList")
 @export var options: Array[String]
 
-var setting_value: int
-
-@onready var save_section: String = setting.category
-@onready var save_key: String = setting.name
-
-@onready var LeftBtn: Button = $LeftBtn
-@onready var OptionLabel: Label = $OptionLabel
-@onready var RightBtn: Button = $RightBtn
+@onready var LeftBtn: Button = $HBox/LeftBtn
+@onready var OptionLabel: Label = $HBox/OptionLabel
+@onready var RightBtn: Button = $HBox/RightBtn
 
 
 func _ready() -> void:
+	super()
 	option_selected.connect(_on_option_selected)
 	LeftBtn.pressed.connect(_on_LeftBtn_pressed)
 	RightBtn.pressed.connect(_on_RightBtn_pressed)
-	
-	_init_value()
 
 
-func _init_value() -> void:
-	setting_value = ggsSaveFile.new().get_key(save_section, save_key)
+func init_value() -> void:
+	super()
 	select(setting_value, false)
 
 
@@ -55,11 +47,6 @@ func _on_RightBtn_pressed() -> void:
 
 
 ### Setting
-
-func apply_setting() -> void:
-	setting.current = setting_value
-	setting.apply(setting_value)
-
 
 func reset_setting() -> void:
 	select(setting.default)

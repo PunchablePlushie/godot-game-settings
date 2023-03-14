@@ -2,19 +2,25 @@
 
 [ext_resource type="Script" path="res://game_settings/components/arrow_list/arrow_list.gd" id="1_cifu3"]
 
-[node name="ArrowList" type="HBoxContainer"]
-offset_right = 40.0
+[node name="ArrowList" type="MarginContainer"]
+offset_left = 143.0
+offset_right = 143.0
 offset_bottom = 40.0
 script = ExtResource("1_cifu3")
+options = null
+apply_on_change = null
 
-[node name="LeftBtn" type="Button" parent="."]
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LeftBtn" type="Button" parent="HBox"]
 layout_mode = 2
 text = "<"
 
-[node name="OptionLabel" type="Label" parent="."]
+[node name="OptionLabel" type="Label" parent="HBox"]
 layout_mode = 2
 text = "OptionLabel"
 
-[node name="RightBtn" type="Button" parent="."]
+[node name="RightBtn" type="Button" parent="HBox"]
 layout_mode = 2
 text = ">"

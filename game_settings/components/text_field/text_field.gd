@@ -1,24 +1,19 @@
-extends LineEdit
+extends ggsUIComponent
 
-@export_category("GGS UI Component")
-@export var setting: ggsSetting
-@export var apply_on_change: bool
-
-var setting_value: String
+@onready var TextField: LineEdit = $TextField
 
 
 func _ready() -> void:
-	text_submitted.connect(_on_text_submitted)
-	
-	_init_value()
+	super()
+	TextField.text_submitted.connect(_on_TextField_text_submitted)
 
 
-func _init_value() -> void:
-	setting_value = setting.current
-	text = setting_value
+func init_value() -> void:
+	super()
+	TextField.text = setting_value
 
 
-func _on_text_submitted(submitted_text: String) -> void:
+func _on_TextField_text_submitted(submitted_text: String) -> void:
 	setting_value = submitted_text
 	if apply_on_change:
 		apply_setting()
@@ -26,12 +21,6 @@ func _on_text_submitted(submitted_text: String) -> void:
 
 ### Setting
 
-func apply_setting() -> void:
-	setting.current = setting_value
-	setting.apply(setting_value)
-
-
 func reset_setting() -> void:
-	setting_value = setting.default
-	text = setting_value
-	apply_setting()
+	super()
+	TextField.text = setting_value
