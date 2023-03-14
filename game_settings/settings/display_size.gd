@@ -1,57 +1,35 @@
 @tool
 extends ggsSetting
 
-@export_category("Window Size")
-#var current: int = 0: set = set_current
-#var default: int = 0
-var sizes: Array[Vector2]: set = set_sizes
+@export var sizes: Array[Vector2]: set = set_sizes
 
 
 func _init() -> void:
 	name = "Window Size"
 	icon = preload("res://addons/ggs/assets/game_settings/display_size.svg")
 	desc = "Change window size by setting its width and height to specific values."
+	
+	value_type = TYPE_INT
+	value_hint = PROPERTY_HINT_ENUM
+	value_hint_string = ",".join(_get_sizes())
 
 
-func _get_property_list() -> Array:
-	var hint_string: String = ",".join(_get_sizes())
-	return [
-		{
-			"name": "current",
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": hint_string,
-		},
-		{
-			"name": "default",
-			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": hint_string,
-		},
-		{
-			"name": "sizes",
-			"type": TYPE_ARRAY,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_TYPE_STRING,
-			"hint_string": "%s:"%[TYPE_VECTOR2],
-		},
-	]
+func apply(value: int) -> void:
+	var size: Vector2 = sizes[value]
+	size = ggsUtils.window_clamp_to_screen(size)
+	
+	DisplayServer.window_set_size(size)
+	ggsUtils.center_window()
 
 
-#func set_current(value: int) -> void:
-#	current = value
-#	update_save_file(value)
-
+### Sizes
 
 func set_sizes(value: Array[Vector2]) -> void:
 	sizes = value
-	ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
-
-
-func apply(_value: int) -> void:
-	pass
+	
+	if Engine.is_editor_hint():
+		value_hint_string = ",".join(_get_sizes())
+		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
 
 
 func _get_sizes() -> PackedStringArray:

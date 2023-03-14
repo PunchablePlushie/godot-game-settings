@@ -54,6 +54,16 @@ static func get_enum_string(target_enum: String) -> String:
 	return enum_string
 
 
+### Window
+
+static func window_clamp_to_screen(size: Vector2) -> Vector2:
+	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect()
+	size.x = min(size.x, screen_size.size.x)
+	size.y = min(size.y, screen_size.size.y)
+	
+	return size
+
+
 static func center_window() -> void:
 	var display_size: Vector2 = DisplayServer.screen_get_size()
 	var window_size: Vector2 = DisplayServer.window_get_size()

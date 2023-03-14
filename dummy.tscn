@@ -5,30 +5,30 @@
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_rws6w"]
 [ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="4_3pasg"]
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="4_cwrjq"]
-[ext_resource type="Texture2D" uid="uid://dimhb46k7ud10" path="res://addons/ggs/assets/game_settings/display_scale.svg" id="5_fttw8"]
+[ext_resource type="Texture2D" uid="uid://dlvhau28nu82n" path="res://addons/ggs/assets/game_settings/display_size.svg" id="5_mpjr1"]
 [ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/apply_btn/apply_btn.tscn" id="5_v56y8"]
-[ext_resource type="Script" path="res://game_settings/settings/display_scale.gd" id="6_ao1wq"]
+[ext_resource type="Script" path="res://game_settings/settings/display_size.gd" id="6_564ca"]
 [ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/reset_btn/reset_btn.tscn" id="6_hr5ah"]
 [ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="7_mdxc3"]
 
-[sub_resource type="Resource" id="Resource_owme7"]
-resource_name = "Window Scale"
-script = ExtResource("6_ao1wq")
-scales = Array[float]([0.5, 1.0, 2.0])
-current = 1
-default = 1
-name = "Window Scale"
+[sub_resource type="Resource" id="Resource_hpdo1"]
+resource_name = "Window Size"
+script = ExtResource("6_564ca")
+sizes = Array[Vector2]([Vector2(1280, 720), Vector2(1360, 866)])
+current = 0
+default = 0
+name = "Window Size"
 category = "test"
-icon = ExtResource("5_fttw8")
-desc = "Change window size by multiplying its width and height by a specific value."
+icon = ExtResource("5_mpjr1")
+desc = "Change window size by setting its width and height to specific values."
 value_type = 2
 value_hint = 2
-value_hint_string = "x0.5,x1,x2"
+value_hint_string = "1280 x 720,1360 x 866"
 
 [sub_resource type="Resource" id="Resource_xo3gb"]
 resource_name = "Fullscreen Mode"
 script = ExtResource("4_cwrjq")
-size_setting = "Window Scale"
+size_setting = "Window Size"
 current = false
 default = false
 name = "Fullscreen Mode"
@@ -66,18 +66,16 @@ group = "settings"
 [node name="OptionList" parent="HBoxContainer" groups=["settings"] instance=ExtResource("1_pyof7")]
 layout_mode = 2
 script = ExtResource("2_ku0wu")
-setting = SubResource("Resource_owme7")
+setting = SubResource("Resource_hpdo1")
 apply_on_change = true
 
 [node name="Btn" parent="HBoxContainer/OptionList" index="0"]
 layout_mode = 2
-item_count = 3
-popup/item_0/text = "x0.5"
+item_count = 2
+popup/item_0/text = "1280x720"
 popup/item_0/id = 0
-popup/item_1/text = "x1"
+popup/item_1/text = "1360x866"
 popup/item_1/id = 1
-popup/item_2/text = "x2"
-popup/item_2/id = 2
 
 [node name="Switch" parent="HBoxContainer" groups=["settings"] instance=ExtResource("7_mdxc3")]
 layout_mode = 2

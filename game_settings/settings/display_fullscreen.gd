@@ -1,7 +1,7 @@
 @tool
 extends ggsSetting
 
-var size_setting: String
+var size_setting: String = "[NONE]"
 
 
 func _init() -> void:
@@ -49,7 +49,7 @@ func _get_property_list() -> Array:
 
 
 func _get_other_settings() -> PackedStringArray:
-	var other_settings: PackedStringArray
+	var other_settings: PackedStringArray = ["[NONE]"]
 	
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	var settings: Dictionary = data.categories[category].settings
