@@ -27,7 +27,10 @@ func set_bus_name(value: String) -> void:
 	bus_name = value
 	
 	if Engine.is_editor_hint():
-		ggsUtils.get_plugin_data().save()
+		var data: ggsPluginData = ggsUtils.get_plugin_data()
+		
+		if data != null:
+			data.save()
 
 
 func _get_property_list() -> Array:

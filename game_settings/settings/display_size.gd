@@ -30,7 +30,10 @@ func set_sizes(value: Array[Vector2]) -> void:
 	if Engine.is_editor_hint():
 		value_hint_string = ",".join(_get_sizes())
 		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
-		ggsUtils.get_plugin_data().save()
+		
+		var data: ggsPluginData = ggsUtils.get_plugin_data()
+		if data != null:
+			data.save()
 
 
 func _get_sizes() -> PackedStringArray:

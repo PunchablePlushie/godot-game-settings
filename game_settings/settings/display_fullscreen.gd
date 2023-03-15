@@ -37,7 +37,10 @@ func set_size_setting(value: String) -> void:
 	size_setting = value
 	
 	if Engine.is_editor_hint():
-		ggsUtils.get_plugin_data().save()
+		var data: ggsPluginData = ggsUtils.get_plugin_data()
+		
+		if data != null:
+			data.save()
 
 
 func _get_property_list() -> Array:
