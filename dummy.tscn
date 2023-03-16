@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=26 format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_4ov2t"]
+[ext_resource type="Script" path="res://dummy.gd" id="1_b1ot8"]
 [ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="1_pyof7"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_rws6w"]
 [ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="4_cwrjq"]
@@ -52,7 +53,7 @@ value_hint_string = "1280 x 720,1360 x 866"
 resource_name = "music_mute"
 script = ExtResource("12_ciqq7")
 bus_name = "Master"
-current = false
+current = true
 default = false
 name = "music_mute"
 category = "audio"
@@ -93,6 +94,7 @@ value_hint_string = ""
 [node name="Dummy" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_b1ot8")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 0

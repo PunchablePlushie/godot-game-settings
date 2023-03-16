@@ -14,7 +14,14 @@ func _init() -> void:
 
 
 func apply(value: String) -> void:
-	print(value)
+	var handler: ggsInputHandler = ggsInputHandler.new()
+	var new_input: InputEvent = handler.parse_input_string(value)
+	
+	for event in InputMap.action_get_events(action):
+		if (event is InputEventKey) or (event is InputEventMouseButton):
+			InputMap.action_erase_event(action, event)
+	
+	InputMap.action_add_event(action, new_input)
 
 
 ### Action

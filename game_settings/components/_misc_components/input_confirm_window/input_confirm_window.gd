@@ -1,6 +1,8 @@
 extends ConfirmationDialog
 signal input_selected(chosen_input: InputEvent)
 
+enum Type {KEYBOARD, GAMEPAD}
+
 @export var listening_wait_time: float = 0.5
 @export var show_progress_bar: bool = true
 @export_group("Text")
@@ -11,6 +13,8 @@ signal input_selected(chosen_input: InputEvent)
 
 var chosen_input: InputEvent
 var src: ggsUIComponent
+var accept_mouse: bool
+var type: Type
 
 @onready var ListenBtn: Button = $MainCtnr/ListenBtn
 @onready var OkBtn: Button = get_ok_button()
@@ -67,12 +71,20 @@ func _input(event: InputEvent) -> void:
 
 
 func _event_is_valid(event: InputEvent) -> bool:
-	var type_is_valid: bool = (
-		event is InputEventKey or
-		event is InputEventMouseButton or
-		event is InputEventJoypadButton or
-		event is InputEventJoypadMotion
-	)
+	var type_is_valid: bool
+	if type == Type.KEYBOARD:
+		if accept_mouse:
+			type_is_valid = (
+				event is InputEventKey or
+				event is InputEventMouseButton
+			)
+		else:
+			type_is_valid = (event is InputEventKey)
+	else:
+		type_is_valid = (
+			event is InputEventJoypadButton or
+			event is InputEventJoypadMotion
+		)
 	
 	var double_click: bool = false
 	if event is InputEventMouseButton:
