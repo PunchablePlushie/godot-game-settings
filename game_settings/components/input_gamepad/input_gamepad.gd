@@ -1,7 +1,6 @@
 extends ggsUIComponent
 
 @export_node_path("ConfirmationDialog") var icw: NodePath
-@export var accept_mouse: bool = true
 
 @onready var Btn: Button = $Btn
 @onready var ICW: ConfirmationDialog = get_node(icw)
@@ -21,17 +20,12 @@ func init_value() -> void:
 
 
 func _set_btn_text(event: InputEvent) -> void:
-	if event is InputEventKey:
-		Btn.text = OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
-	
-	if event is InputEventMouseButton:
-		Btn.text = input_handler.get_mouse_event_string_abbr(event)
+	Btn.text = input_handler.get_gp_event_string(event)
 
 
 func _on_Btn_pressed() -> void:
 	ICW.src = self
-	ICW.accept_mouse = accept_mouse
-	ICW.type = ICW.Type.KEYBOARD
+	ICW.type = ICW.Type.GAMEPAD
 	ICW.popup_centered()
 
 

@@ -54,6 +54,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		ListenBtn.text = input_handler.get_mouse_event_string_abbr(event)
 	
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		ListenBtn.text = input_handler.get_gp_event_string(event)
+	
 	var input_already_exists: Array = input_handler.input_already_exists(event, src.setting.action)
 	if input_already_exists[0]:
 		AlreadyExistsLabel.text = already_exists_msg.format({"action": input_already_exists[1].capitalize()})
