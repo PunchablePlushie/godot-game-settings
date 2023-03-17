@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=29 format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_4ov2t"]
 [ext_resource type="Script" path="res://dummy.gd" id="1_b1ot8"]
@@ -15,11 +15,11 @@
 [ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="12_ciqq7"]
 [ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="14_smw0q"]
+[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="15_8fm8h"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="15_x7bks"]
 [ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="16_a2wad"]
-[ext_resource type="Script" path="res://game_settings/components/input_btn/input_btn.gd" id="17_r6k61"]
-[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="18_834cm"]
-[ext_resource type="Script" path="res://game_settings/settings/input.gd" id="19_jr2s3"]
+[ext_resource type="Script" path="res://game_settings/settings/input.gd" id="16_wvbk1"]
+[ext_resource type="Script" path="res://game_settings/components/input_btn/input_btn.gd" id="19_fu7rq"]
 [ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="19_kyps1"]
 
 [sub_resource type="Resource" id="Resource_xo3gb"]
@@ -78,16 +78,46 @@ value_type = 3
 value_hint = 1
 value_hint_string = "0,100"
 
-[sub_resource type="Resource" id="Resource_v4xoa"]
+[sub_resource type="Resource" id="Resource_ve66q"]
 resource_name = "move_right_kb"
-script = ExtResource("19_jr2s3")
+script = ExtResource("16_wvbk1")
 action = "move_right"
 type = 0
 current = "d"
 default = "d"
 name = "move_right_kb"
 category = "input"
-icon = ExtResource("18_834cm")
+icon = ExtResource("15_8fm8h")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_mjpou"]
+resource_name = "move_right_gp"
+script = ExtResource("16_wvbk1")
+action = "move_right"
+type = 1
+current = "bot"
+default = "dright"
+name = "move_right_gp"
+category = "input"
+icon = ExtResource("15_8fm8h")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_yvcf2"]
+resource_name = "move_left_kb"
+script = ExtResource("16_wvbk1")
+action = "move_left"
+type = 0
+current = "a"
+default = "a"
+name = "move_left_kb"
+category = "input"
+icon = ExtResource("15_8fm8h")
 desc = "Rebind keyboard or gamepad input of a specific input action."
 value_type = 4
 value_hint = 0
@@ -177,29 +207,25 @@ apply_on_change = true
 
 [node name="MoveRightKb" parent="VBox" instance=ExtResource("16_a2wad")]
 layout_mode = 2
-script = ExtResource("17_r6k61")
 icw = NodePath("../../InputConfirmWindow")
-type = null
-accept_mouse = null
-accept_modifiers = null
-setting = SubResource("Resource_v4xoa")
+setting = SubResource("Resource_ve66q")
 apply_on_change = true
-
-[node name="Btn" parent="VBox/MoveRightKb" index="0"]
-layout_mode = 2
-icon_alignment = 1
 
 [node name="MoveRightGp" parent="VBox" instance=ExtResource("16_a2wad")]
 layout_mode = 2
-script = ExtResource("17_r6k61")
 icw = NodePath("../../InputConfirmWindow")
 type = 1
-accept_mouse = null
-accept_modifiers = null
-setting = SubResource("Resource_v4xoa")
+setting = SubResource("Resource_mjpou")
 apply_on_change = true
 
-[node name="Btn" parent="VBox/MoveRightGp" index="0"]
+[node name="MoveLeftKb" parent="VBox" instance=ExtResource("16_a2wad")]
+layout_mode = 2
+script = ExtResource("19_fu7rq")
+icw = NodePath("../../InputConfirmWindow")
+setting = SubResource("Resource_yvcf2")
+apply_on_change = true
+
+[node name="Btn" parent="VBox/MoveLeftKb" index="0"]
 layout_mode = 2
 icon_alignment = 1
 
@@ -217,12 +243,6 @@ text = "Reset"
 group = "settings"
 
 [node name="InputConfirmWindow" parent="." instance=ExtResource("19_kyps1")]
-listening_wait_time = null
-show_progress_bar = null
-btn_listening = null
-title_listening = null
-title_confirm = null
-already_exists_msg = null
 
 [node name="BgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_y03a7")
@@ -234,3 +254,4 @@ autoplay = true
 [editable path="VBox/MusicCtnr/Slider"]
 [editable path="VBox/MoveRightKb"]
 [editable path="VBox/MoveRightGp"]
+[editable path="VBox/MoveLeftKb"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=22 format=3 uid="uid://dpk53al471l8m"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=23 format=3 uid="uid://dpk53al471l8m"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_du00a"]
@@ -89,7 +89,22 @@ settings = {
 }
 item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_xo3gb"), SubResource("Resource_hpdo1")])
 
-[sub_resource type="Resource" id="Resource_aeixb"]
+[sub_resource type="Resource" id="Resource_ve66q"]
+resource_name = "move_right_kb"
+script = ExtResource("11_y8cs8")
+action = "move_right"
+type = 0
+current = "rmb"
+default = "d"
+name = "move_right_kb"
+category = "input"
+icon = ExtResource("10_bpbpw")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_mjpou"]
 resource_name = "move_right_gp"
 script = ExtResource("11_y8cs8")
 action = "move_right"
@@ -104,14 +119,14 @@ value_type = 4
 value_hint = 0
 value_hint_string = ""
 
-[sub_resource type="Resource" id="Resource_v4xoa"]
-resource_name = "move_right_kb"
+[sub_resource type="Resource" id="Resource_yvcf2"]
+resource_name = "move_left_kb"
 script = ExtResource("11_y8cs8")
-action = "move_right"
+action = "move_left"
 type = 0
-current = "d"
-default = "d"
-name = "move_right_kb"
+current = "a"
+default = "a"
+name = "move_left_kb"
 category = "input"
 icon = ExtResource("10_bpbpw")
 desc = "Rebind keyboard or gamepad input of a specific input action."
@@ -119,24 +134,25 @@ value_type = 4
 value_hint = 0
 value_hint_string = ""
 
-[sub_resource type="Resource" id="Resource_cshih"]
+[sub_resource type="Resource" id="Resource_dfen3"]
 resource_name = "input"
 script = ExtResource("1_bswtd")
 name = "input"
 settings = {
-"move_right_gp": SubResource("Resource_aeixb"),
-"move_right_kb": SubResource("Resource_v4xoa")
+"move_left_kb": SubResource("Resource_yvcf2"),
+"move_right_gp": SubResource("Resource_mjpou"),
+"move_right_kb": SubResource("Resource_ve66q")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_ve66q"), SubResource("Resource_mjpou"), SubResource("Resource_yvcf2")])
 
 [resource]
 script = ExtResource("1_wabe0")
 categories = {
 "audio": SubResource("Resource_53cr0"),
 "display": SubResource("Resource_qg0w5"),
-"input": SubResource("Resource_cshih")
+"input": SubResource("Resource_dfen3")
 }
-category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_cshih"), SubResource("Resource_qg0w5"), SubResource("Resource_53cr0")])
+category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_dfen3"), SubResource("Resource_qg0w5"), SubResource("Resource_53cr0")])
 recent_settings = Array[String](["input.gd", "audio_volume.gd", "audio_mute.gd", "display_fullscreen.gd", "display_scale.gd", "display_size.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"

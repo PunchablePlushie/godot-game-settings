@@ -2,75 +2,75 @@
 extends RefCounted
 class_name ggsInputHelper
 
-enum GPDevice {XBOX, PS, SWITCH, OTHER}
-
 var keywords: Dictionary = {
 	"mouse": [
 		"lmb", "rmb", "mmb", "mw_up", "mw_down", "mw_left", "mw_right", "mb1", "mb2"
-	]
+	],
+	
+	"gamepad_btn": [
+		"bot", "right", "left", "top", "back", "guide", "start",
+		"left_stick", "right_stick", "left_shoulder", "right_shoulder",
+		"dup", "ddown", "dleft", "dright", "misc", "pad1", "pad2", "pad3", "pad4",
+		"touch"
+	],
+	
+	"gamepad_motion": [
+		{"-": "ls_left", "+": "ls_right"},
+		{"-": "ls_up", "+": "ls_down"},
+		{"-": "rs_left", "+": "rs_right"},
+		{"-": "rs_up", "+": "rs_down"},
+		{"+": "left_trigger"},
+		{"+": "right_trigger"}
+	],
+	
+	"gamepad_motion_no_direction": [
+		"ls_left", "ls_right", "ls_up", "ls_down", "rs_left", "rs_right",
+		"rs_up", "rs_down", "left_trigger", "right_trigger"
+	],
 }
 
-#const MOUSE_INPUT: PackedStringArray = [
-#	"lmb", "rmb", "mmb", "mw up", "mw down", "mw left", "mw right", "mb1", "mb2"
-#]
+var gamepad_devices: Dictionary = {
+	"XInput Gamepad": "xbox",
+	"Xbox Series Controller": "xbox",
+	"Sony DualSense": "ps",
+	"PS5 Controller": "ps",
+	"PS4 Controller": "ps",
+	"Switch": "switch",
+} 
 
-const GP_BTN_INPUT: PackedStringArray = [
-	"bot", "right", "left", "top", "back", "guide", "start",
-	"left_stick", "right_stick", "left_shoulder", "right_shoulder",
-	"dup", "ddown", "dleft", "dright", "misc", "pad1", "pad2", "pad3", "pad4",
-	"touch"
-]
-
-const GP_MOTION_INPUT_VALUES: PackedStringArray = [
-	"ls_left", "ls_right", "ls_up", "ls_down", "rs_left", "rs_right",
-	"rs_up", "rs_down", "left_trigger", "right_trigger"
-]
-
-const GP_MOTION_INPUT: Array[Dictionary] = [
-	{"-": "ls_left", "+": "ls_right"},
-	{"-": "ls_up", "+": "ls_down"},
-	{"-": "rs_left", "+": "rs_right"},
-	{"-": "rs_up", "+": "rs_down"},
-	{"+": "left_trigger"}, {"+": "right_trigger"}
-]
-
-const GP_DEVICES: Dictionary = {
-	"XInput Gamepad": GPDevice.XBOX,
-	"Xbox Series Controller": GPDevice.XBOX,
-	"Sony DualSense": GPDevice.PS,
-	"PS5 Controller": GPDevice.PS,
-	"PS4 Controller": GPDevice.PS,
-	"Switch": GPDevice.SWITCH,
+var gamepad_labels: Dictionary = {
+	"xbox": [
+		"A", "B", "X", "Y", "Back", "Home", "Start", "L", "R", "LB", "RB",
+		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Share"
+	],
+	
+	"ps": [
+		"Cross", "Circle", "Square", "Triangle", "Select", "PS", "Start",
+		"L3", "R3", "L1", "R1", "DPad Up", "DPad Down", "DPad Left",
+		"DPad Right", "Microphone"
+	],
+	
+	"switch": [
+		"B", "A", "Y", "X", "Minus", "", "Plus", "", "", "", "",
+		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Capture"
+	],
+	
+	"other": [
+		"Bottom Action", "Right Action", "Top Action", "Left Action", "Back",
+		"Guide", "Start", "Left Stick", "Right Stick", "Left Shoulder",
+		"Right Shoulder", "DPad Up", "DPad Down", "DPad Left", "DPad Right",
+		"Misc Button", "Paddle 1", "Paddle 2", "Paddle 3", "Paddle 4", "Touch"
+	],
+	
+	"motion": [
+		{"-": "LStick Left", "+": "LStick Right"},
+		{"-": "LStick Up", "+": "LStick Down"},
+		{"-": "RStick Left", "+": "RStick Right"},
+		{"-": "RStick Up", "+": "RStick Down"},
+		{"+": "Left Trigger"},
+		{"+": "Right Trigger"}
+	],
 }
-
-const GP_XBOX_LABELS: PackedStringArray = [
-	"A", "B", "X", "Y", "Back", "Home", "Start", "L", "R", "LB", "RB",
-	"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Share"
-]
-
-const GP_PS_LABELS: PackedStringArray = [
-	"Cross", "Circle", "Square", "Triangle", "Select", "PS", "Start", "L3", "R3",
-	"L1", "R1", "DPad Up", "DPad Down", "DPad Left", "DPad Right", "Microphone"
-]
-
-const GP_SWITCH_LABELS: PackedStringArray = [
-	"B", "A", "Y", "X", "Minus", "", "Plus", "", "", "", "",
-	"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Capture"
-]
-
-const GP_OTHER_LABELS: PackedStringArray = [
-	"Down Btn", "Right Btn", "Up Btn", "Left Btn", "Back", "Guide", "Start",
-	"Left Stick", "Right Stick", "Left Shoulder", "Right Shoulder",
-	"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Microphone"
-]
-
-const GP_MOTION_LABELS: Array[Dictionary] = [
-	{"-": "LStick Left", "+": "LStick Right"},
-	{"-": "LStick Up", "+": "LStick Down"},
-	{"-": "RStick Left", "+": "RStick Right"},
-	{"-": "RStick Up", "+": "RStick Down"},
-	{"+": "Left Trigger"}, {"+": "Right Trigger"}
-]
 
 
 func get_event_from_string(string: String) -> InputEvent:
@@ -107,6 +107,12 @@ func get_event_as_text(event: InputEvent) -> String:
 	if event is InputEventMouseButton:
 		return _get_mouse_event_as_text(event)
 	
+	if event is InputEventJoypadButton:
+		return _get_gp_btn_event_as_text(event)
+	
+	if event is InputEventJoypadMotion:
+		return _get_gp_motion_event_as_text(event)
+	
 	return ""
 
 
@@ -128,13 +134,18 @@ func _get_modifiers_string(event: InputEventWithModifiers, use_plus: bool = fals
 	var result: PackedStringArray
 	
 	if event.shift_pressed:
-		result.append("Shift")
+		result.append("shift")
 	if event.alt_pressed:
-		result.append("Alt")
+		result.append("alt")
 	if event.ctrl_pressed:
-		result.append("Ctrl")
+		result.append("ctrl")
 	
 	if use_plus:
+		var index: int = 0
+		for element in result:
+			result.set(index, element.capitalize())
+			index += 1
+		
 		return "+".join(result)
 	else:
 		return ",".join(result)
@@ -160,15 +171,16 @@ func _create_kb_event(modifiers: PackedStringArray, key: String) -> InputEventKe
 func _get_kb_event_string(event: InputEventKey) -> String:
 	var modifiers: String = _get_modifiers_string(event)
 	var key: String = OS.get_keycode_string(event.get_physical_keycode()).to_lower()
+	var result: String = "%s"%key if modifiers.is_empty() else "%s,%s"%[modifiers, key]
 	
-	return "%s,%s"%[modifiers, key]
+	return result
 
 
 ### Mouse
 
 func _get_mouse_event_as_text(event: InputEventMouseButton) -> String:
-	var modifiers: String = _get_modifiers_string(event)
-	var btn: String = keywords["mouse"][event.button_index].to_upper()
+	var modifiers: String = _get_modifiers_string(event, true)
+	var btn: String = keywords["mouse"][event.button_index - 1].to_upper()
 	var result: String = "%s"%btn if modifiers.is_empty() else "%s+%s"%[modifiers, btn]
 	return result
 
@@ -183,90 +195,99 @@ func _create_mouse_event(modifiers: PackedStringArray, btn: String) -> InputEven
 
 func _get_mouse_event_string(event: InputEventMouseButton) -> String:
 	var modifiers: String = _get_modifiers_string(event)
-	var btn: String = keywords["mouse"][event.button_index]
+	var btn: String = keywords["mouse"][event.button_index - 1]
+	var result: String = "%s"%btn if modifiers.is_empty() else "%s,%s"%[modifiers, btn]
 	
-	return "%s,%s"%[modifiers, btn]
+	return result
 
 
-func _string_is_for_mouse(key: String) -> bool:
-	return keywords["mouse"].has(key)
+func _string_is_for_mouse(btn: String) -> bool:
+	return keywords["mouse"].has(btn)
 
 
 ### Gamepad
 
-func get_gp_event_string(event: InputEvent) -> String:
+func _get_gp_btn_event_as_text(event: InputEventJoypadButton) -> String:
 	var device_name: String = Input.get_joy_name(event.device)
-	var device_type = _get_gp_device_type(device_name)
-	
-	if event is InputEventJoypadButton:
-		match device_type:
-			GPDevice.XBOX:
-				return GP_XBOX_LABELS[event.button_index]
-			GPDevice.PS:
-				return GP_PS_LABELS[event.button_index]
-			GPDevice.SWITCH:
-				return GP_SWITCH_LABELS[event.button_index]
-			GPDevice.OTHER:
-				return GP_OTHER_LABELS[event.button_index]
+	device_name = _get_joy_name_shortened(device_name)
+	return gamepad_labels[device_name][event.button_index]
+
+
+func _get_gp_motion_event_as_text(event: InputEventJoypadMotion) -> String:
+	var device_name: String = Input.get_joy_name(event.device)
+	device_name = _get_joy_name_shortened(device_name)
 	
 	var axis_value: String = "-" if event.axis_value < 0 else "+"
-	return GP_MOTION_LABELS[event.axis][axis_value]
+	return gamepad_labels["motion"][event.axis][axis_value]
 
 
-func _get_gp_device_type(name: String) -> int:
-	if GP_DEVICES.has(name):
-		return GP_DEVICES[name]
+func _get_joy_name_shortened(name: String) -> String:
+	if gamepad_devices.has(name):
+		return gamepad_devices[name]
 	else:
-		return GPDevice.OTHER
+		return "other"
 
 
-func _create_gp_event(key: String) -> InputEvent:
+func _create_gp_event(btn: String) -> InputEvent:
 	var event: InputEvent
 	
-	var is_motion: bool = GP_MOTION_INPUT_VALUES.has(key)
+	var is_motion: bool = keywords["gamepad_motion_no_direction"].has(btn)
 	if is_motion:
-		event = InputEventJoypadMotion.new()
-		
-		if key == "left_trigger":
+		event = _create_gp_motion_event(btn)
+	else:
+		event = InputEventJoypadButton.new()
+		event.button_index = keywords["gamepad_btn"].find(btn)
+	
+	return event
+
+
+func _create_gp_motion_event(btn: String) -> InputEventJoypadMotion:
+	var event: InputEventJoypadMotion = InputEventJoypadMotion.new()
+	
+	match btn:
+		"left_trigger":
 			event.axis = JOY_AXIS_TRIGGER_LEFT
 			event.axis_value = 1
-		elif key == "right_trigger":
+		"right_trigger":
 			event.axis = JOY_AXIS_TRIGGER_RIGHT
 			event.axis_value = 1
-		else:
-			var elements: PackedStringArray = key.split("_")
+		_:
+			var elements: PackedStringArray = btn.split("_")
 			var stick: String = elements[0]
 			var dir: String = elements[1]
 			
-			if stick == "ls":
-				if dir == "left" or dir == "right":
-					event.axis = JOY_AXIS_LEFT_X
-				else:
-					event.axis = JOY_AXIS_LEFT_Y
-			else:
-				if dir == "left" or dir == "right":
-					event.axis = JOY_AXIS_RIGHT_X
-				else:
-					event.axis = JOY_AXIS_RIGHT_Y
+			# Determine Axis
+			match stick:
+				"ls":
+					match dir:
+						"left", "right":
+							event.axis = JOY_AXIS_LEFT_X
+						"up", "down":
+							event.axis = JOY_AXIS_LEFT_Y
+				"rs":
+					match dir:
+						"left", "right":
+							event.axis = JOY_AXIS_RIGHT_X
+						"up", "down":
+							event.axis = JOY_AXIS_RIGHT_Y
 			
-			if dir == "left" or dir == "up":
-				event.axis_value = -1
-			else:
-				event.axis_value = 1
-	else:
-		event = InputEventJoypadButton.new()
-		event.button_index = GP_BTN_INPUT.find(key)
+			# Determine Axis Value
+			match dir:
+				"left", "up":
+					event.axis_value = -1
+				"right", "down":
+					event.axis_value = 1
 	
 	return event
 
 
 func _get_gp_event_string(event: InputEvent) -> String:
 	if event is InputEventJoypadButton:
-		return GP_BTN_INPUT[event.button_index]
+		return keywords["gamepad_btn"][event.button_index]
 	else:
 		var axis_value: String = "-" if event.axis_value < 0 else "+"
-		return GP_MOTION_INPUT[event.axis][axis_value]
+		return keywords["gamepad_motion"][event.axis][axis_value]
 
 
-func _string_is_for_gp(key: String) -> bool:
-	return GP_BTN_INPUT.has(key) or GP_MOTION_INPUT_VALUES.has(key)
+func _string_is_for_gp(btn: String) -> bool:
+	return keywords["gamepad_btn"].has(btn) or keywords["gamepad_motion_no_direction"].has(btn)

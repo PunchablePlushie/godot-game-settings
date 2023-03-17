@@ -15,7 +15,7 @@ var chosen_input: InputEvent
 var src: ggsUIComponent
 var type: Type
 var accept_mouse: bool
-var accept_modifier: bool
+var accept_modifiers: bool
 
 @onready var OkBtn: Button = get_ok_button()
 @onready var CancelBtn: Button = get_cancel_button()
@@ -24,7 +24,7 @@ var accept_modifier: bool
 @onready var ListenProgress: ProgressBar = $MainCtnr/ListenProgress
 @onready var AlreadyExistsLabel: Label = $MainCtnr/AlreadyExistsLabel
 
-@onready var input_handler: ggsInputHelper = ggsInputHelper.new()
+@onready var input_helper: ggsInputHelper = ggsInputHelper.new()
 
 
 func _ready() -> void:
@@ -49,16 +49,9 @@ func _input(event: InputEvent) -> void:
 	if not _event_is_valid(event):
 		return
 	
-	if event is InputEventKey:
-		ListenBtn.text = OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+	ListenBtn.text = input_helper.get_event_as_text(event)
 	
-	if event is InputEventMouseButton:
-		ListenBtn.text = input_handler.get_mouse_event_string_abbr(event)
-	
-	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		ListenBtn.text = input_handler.get_gp_event_string(event)
-	
-	var input_already_exists: Array = input_handler.input_already_exists(event, src.setting.action)
+	var input_already_exists: Array = input_helper.input_already_exists(event, src.setting.action)
 	if input_already_exists[0]:
 		AlreadyExistsLabel.text = already_exists_msg.format({"action": input_already_exists[1].capitalize()})
 		
@@ -156,6 +149,7 @@ func _on_visibility_changed() -> void:
 		OkBtn.release_focus()
 		chosen_input = null
 		_start_listening()
+		print(type)
 
 
 func _on_confirmed() -> void:

@@ -28,7 +28,7 @@ func apply(value: String) -> void:
 
 
 func _event_is_type(event: InputEvent) -> bool:
-	match Type:
+	match type:
 		Type.KEYBOARD:
 			return (event is InputEventKey) or (event is InputEventMouseButton)
 		Type.GAMEPAD:
