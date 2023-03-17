@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8awyvggcb6jl"
-path="res://.godot/imported/input_gp.svg-9c19a159a08270706091fe53bdb60bd0.ctex"
+uid="uid://c4vunn2rkqj83"
+path="res://.godot/imported/input_setting.svg-9d5962c811542d292e3aa4834a83e6e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/game_settings/input_gp.svg"
-dest_files=["res://.godot/imported/input_gp.svg-9c19a159a08270706091fe53bdb60bd0.ctex"]
+source_file="res://addons/ggs/assets/game_settings/input_setting.svg"
+dest_files=["res://.godot/imported/input_setting.svg-9d5962c811542d292e3aa4834a83e6e3.ctex"]
 
 [params]
 

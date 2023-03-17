@@ -29,14 +29,11 @@ func apply(value: int) -> void:
 
 func set_scales(value: Array[float]) -> void:
 	scales = value
+	save_plugin_data()
 	
 	if Engine.is_editor_hint():
 		value_hint_string = ",".join(_get_scales())
 		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
-		
-		var data: ggsPluginData = ggsUtils.get_plugin_data()
-		if data != null:
-			data.save()
 
 
 func _get_scales() -> PackedStringArray:

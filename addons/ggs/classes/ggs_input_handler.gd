@@ -1,12 +1,18 @@
 @tool
 extends RefCounted
-class_name ggsInputHandler
+class_name ggsInputHelper
 
 enum GPDevice {XBOX, PS, SWITCH, OTHER}
 
-const MOUSE_INPUT: PackedStringArray = [
-	"lmb", "rmb", "mmb", "mw up", "mw down", "mw left", "mw right", "mb1", "mb2"
-]
+var keywords: Dictionary = {
+	"mouse": [
+		"lmb", "rmb", "mmb", "mw_up", "mw_down", "mw_left", "mw_right", "mb1", "mb2"
+	]
+}
+
+#const MOUSE_INPUT: PackedStringArray = [
+#	"lmb", "rmb", "mmb", "mw up", "mw down", "mw left", "mw right", "mb1", "mb2"
+#]
 
 const GP_BTN_INPUT: PackedStringArray = [
 	"bot", "right", "left", "top", "back", "guide", "start",
@@ -67,29 +73,39 @@ const GP_MOTION_LABELS: Array[Dictionary] = [
 ]
 
 
-func parse_input_string(string: String) -> InputEvent:
+func get_event_from_string(string: String) -> InputEvent:
 	var elements: PackedStringArray = string.split(",")
 	var modifiers: PackedStringArray = elements.slice(0, -1)
-	var key: String = elements[-1]
+	var main: String = elements[-1]
 	
-	if _is_mouse_input(key):
-		return _create_mouse_input(modifiers, key)
+	if _string_is_for_mouse(main):
+		return _create_mouse_event(modifiers, main)
 	
-	if _is_gamepad_input(key):
-		return _create_gp_input(key)
+	if _string_is_for_gp(main):
+		return _create_gp_event(main)
 	
-	return _create_kb_input(modifiers, key)
+	return _create_kb_event(modifiers, main)
 
 
-func get_input_string_from_event(event: InputEvent) -> String:
+func get_string_from_event(event: InputEvent) -> String:
 	if event is InputEventKey:
-		return _get_input_string_from_kb(event)
+		return _get_kb_event_string(event)
 	
 	if event is InputEventMouseButton:
-		return _get_input_string_from_mouse(event)
+		return _get_mouse_event_string(event)
 	
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		return _get_input_string_from_gamepad(event)
+		return _get_gp_event_string(event)
+	
+	return ""
+
+
+func get_event_as_text(event: InputEvent) -> String:
+	if event is InputEventKey:
+		return OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+	
+	if event is InputEventMouseButton:
+		return _get_mouse_event_as_text(event)
 	
 	return ""
 
@@ -108,46 +124,7 @@ func input_already_exists(event: InputEvent, self_action: String) -> Array:
 	return [false, ""]
 
 
-### Keyboard
-
-func _create_kb_input(modifiers: PackedStringArray, key: String) -> InputEventKey:
-	var event: InputEventKey = InputEventKey.new()
-	
-	event.shift_pressed = modifiers.has("shift")
-	event.alt_pressed = modifiers.has("alt")
-	event.ctrl_pressed = modifiers.has("ctrl")
-	
-	event.physical_keycode = OS.find_keycode_from_string(key.capitalize())
-	
-	return event
-
-
-func _get_input_string_from_kb(event: InputEventKey) -> String:
-	var elements: PackedStringArray
-	
-	if event.shift_pressed:
-		elements.append("shift")
-	if event.alt_pressed:
-		elements.append("alt")
-	if event.ctrl_pressed:
-		elements.append("ctrl")
-	
-	var key: String = OS.get_keycode_string(event.get_physical_keycode()).to_lower()
-	elements.append(key)
-	
-	return ",".join(elements)
-
-
-### Mouse
-
-func get_mouse_event_string_abbr(event: InputEventMouseButton) -> String:
-	var modifiers: String = _get_modifier_string(event)
-	var btn: String = MOUSE_INPUT[event.button_index].to_upper()
-	var result: String = "%s"%btn if modifiers.is_empty() else "%s+%s"%[modifiers, btn]
-	return result
-
-
-func _get_modifier_string(event: InputEventWithModifiers) -> String:
+func _get_modifiers_string(event: InputEventWithModifiers, use_plus: bool = false) -> String:
 	var result: PackedStringArray
 	
 	if event.shift_pressed:
@@ -157,39 +134,62 @@ func _get_modifier_string(event: InputEventWithModifiers) -> String:
 	if event.ctrl_pressed:
 		result.append("Ctrl")
 	
-	return "+".join(result)
+	if use_plus:
+		return "+".join(result)
+	else:
+		return ",".join(result)
 
 
-func _create_mouse_input(modifiers: PackedStringArray, key: String) -> InputEventMouseButton:
-	var event: InputEventMouseButton = InputEventMouseButton.new()
-	
+func _set_event_modifiers(event: InputEventWithModifiers, modifiers: PackedStringArray) -> InputEventWithModifiers:
 	event.shift_pressed = modifiers.has("shift")
 	event.alt_pressed = modifiers.has("alt")
 	event.ctrl_pressed = modifiers.has("ctrl")
-	
-	event.button_index = MOUSE_INPUT.find(key) + 1
+	return event
+
+
+### Keyboard
+
+func _create_kb_event(modifiers: PackedStringArray, key: String) -> InputEventKey:
+	var event: InputEventKey = InputEventKey.new()
+	event = _set_event_modifiers(event, modifiers)
+	event.physical_keycode = OS.find_keycode_from_string(key.capitalize())
 	
 	return event
 
 
-func _get_input_string_from_mouse(event: InputEventMouseButton) -> String:
-	var elements: PackedStringArray
+func _get_kb_event_string(event: InputEventKey) -> String:
+	var modifiers: String = _get_modifiers_string(event)
+	var key: String = OS.get_keycode_string(event.get_physical_keycode()).to_lower()
 	
-	if event.shift_pressed:
-		elements.append("shift")
-	if event.alt_pressed:
-		elements.append("alt")
-	if event.ctrl_pressed:
-		elements.append("ctrl")
-	
-	var btn: String = MOUSE_INPUT[event.button_index]
-	elements.append(btn)
-	
-	return ",".join(elements)
+	return "%s,%s"%[modifiers, key]
 
 
-func _is_mouse_input(key: String) -> bool:
-	return MOUSE_INPUT.has(key)
+### Mouse
+
+func _get_mouse_event_as_text(event: InputEventMouseButton) -> String:
+	var modifiers: String = _get_modifiers_string(event)
+	var btn: String = keywords["mouse"][event.button_index].to_upper()
+	var result: String = "%s"%btn if modifiers.is_empty() else "%s+%s"%[modifiers, btn]
+	return result
+
+
+func _create_mouse_event(modifiers: PackedStringArray, btn: String) -> InputEventMouseButton:
+	var event: InputEventMouseButton = InputEventMouseButton.new()
+	event = _set_event_modifiers(event, modifiers)
+	event.button_index = keywords["mouse"].find(btn) + 1
+	
+	return event
+
+
+func _get_mouse_event_string(event: InputEventMouseButton) -> String:
+	var modifiers: String = _get_modifiers_string(event)
+	var btn: String = keywords["mouse"][event.button_index]
+	
+	return "%s,%s"%[modifiers, btn]
+
+
+func _string_is_for_mouse(key: String) -> bool:
+	return keywords["mouse"].has(key)
 
 
 ### Gamepad
@@ -220,7 +220,7 @@ func _get_gp_device_type(name: String) -> int:
 		return GPDevice.OTHER
 
 
-func _create_gp_input(key: String) -> InputEvent:
+func _create_gp_event(key: String) -> InputEvent:
 	var event: InputEvent
 	
 	var is_motion: bool = GP_MOTION_INPUT_VALUES.has(key)
@@ -260,7 +260,7 @@ func _create_gp_input(key: String) -> InputEvent:
 	return event
 
 
-func _get_input_string_from_gamepad(event: InputEvent) -> String:
+func _get_gp_event_string(event: InputEvent) -> String:
 	if event is InputEventJoypadButton:
 		return GP_BTN_INPUT[event.button_index]
 	else:
@@ -268,5 +268,5 @@ func _get_input_string_from_gamepad(event: InputEvent) -> String:
 		return GP_MOTION_INPUT[event.axis][axis_value]
 
 
-func _is_gamepad_input(key: String) -> bool:
+func _string_is_for_gp(key: String) -> bool:
 	return GP_BTN_INPUT.has(key) or GP_MOTION_INPUT_VALUES.has(key)

@@ -13,17 +13,18 @@ enum Type {KEYBOARD, GAMEPAD}
 
 var chosen_input: InputEvent
 var src: ggsUIComponent
-var accept_mouse: bool
 var type: Type
+var accept_mouse: bool
+var accept_modifier: bool
 
-@onready var ListenBtn: Button = $MainCtnr/ListenBtn
 @onready var OkBtn: Button = get_ok_button()
 @onready var CancelBtn: Button = get_cancel_button()
+@onready var ListenBtn: Button = $MainCtnr/ListenBtn
 @onready var ListenTimer: Timer = $ListenTimer
 @onready var ListenProgress: ProgressBar = $MainCtnr/ListenProgress
 @onready var AlreadyExistsLabel: Label = $MainCtnr/AlreadyExistsLabel
 
-@onready var input_handler: ggsInputHandler = ggsInputHandler.new()
+@onready var input_handler: ggsInputHelper = ggsInputHelper.new()
 
 
 func _ready() -> void:

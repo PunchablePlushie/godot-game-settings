@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=27 format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_4ov2t"]
 [ext_resource type="Script" path="res://dummy.gd" id="1_b1ot8"]
@@ -15,15 +15,12 @@
 [ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="12_ciqq7"]
 [ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="14_smw0q"]
-[ext_resource type="PackedScene" uid="uid://c3ajuvwfrcj0q" path="res://game_settings/components/input_keyboard/input_keyboard.tscn" id="15_ujrs4"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="15_x7bks"]
-[ext_resource type="Texture2D" uid="uid://70aa86pl065r" path="res://addons/ggs/assets/game_settings/input_kb.svg" id="17_rowul"]
-[ext_resource type="Script" path="res://game_settings/settings/input_keyboard.gd" id="18_iwunu"]
+[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="16_a2wad"]
+[ext_resource type="Script" path="res://game_settings/components/input_btn/input_btn.gd" id="17_r6k61"]
+[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="18_834cm"]
+[ext_resource type="Script" path="res://game_settings/settings/input.gd" id="19_jr2s3"]
 [ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="19_kyps1"]
-[ext_resource type="Texture2D" uid="uid://8awyvggcb6jl" path="res://addons/ggs/assets/game_settings/input_gp.svg" id="19_oo66r"]
-[ext_resource type="Script" path="res://game_settings/settings/input_gamepad.gd" id="20_3ac22"]
-[ext_resource type="PackedScene" uid="uid://cu74504e6ivve" path="res://game_settings/components/input_gamepad/input_gamepad.tscn" id="21_au7a1"]
-[ext_resource type="Script" path="res://game_settings/components/input_gamepad/input_gamepad.gd" id="22_7vclu"]
 
 [sub_resource type="Resource" id="Resource_xo3gb"]
 resource_name = "fullscreen_mode"
@@ -71,7 +68,7 @@ value_hint_string = ""
 resource_name = "music_volume"
 script = ExtResource("15_x7bks")
 bus_name = "Master"
-current = 49.0
+current = 80.0
 default = 80.0
 name = "music_volume"
 category = "audio"
@@ -81,30 +78,17 @@ value_type = 3
 value_hint = 1
 value_hint_string = "0,100"
 
-[sub_resource type="Resource" id="Resource_cj2u4"]
+[sub_resource type="Resource" id="Resource_v4xoa"]
 resource_name = "move_right_kb"
-script = ExtResource("18_iwunu")
+script = ExtResource("19_jr2s3")
 action = "move_right"
+type = 0
 current = "d"
 default = "d"
 name = "move_right_kb"
 category = "input"
-icon = ExtResource("17_rowul")
-desc = "Remap keyboard/mouse input for a specific input action."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_lapex"]
-resource_name = "move_right_gp"
-script = ExtResource("20_3ac22")
-action = "move_right"
-current = "dright"
-default = "dright"
-name = "move_right_gp"
-category = "input"
-icon = ExtResource("19_oo66r")
-desc = "Remap gamepad input for a specific input action."
+icon = ExtResource("18_834cm")
+desc = "Rebind keyboard or gamepad input of a specific input action."
 value_type = 4
 value_hint = 0
 value_hint_string = ""
@@ -191,20 +175,31 @@ layout_mode = 2
 setting = SubResource("Resource_huot6")
 apply_on_change = true
 
-[node name="InputKeyboard" parent="VBox" groups=["settings"] instance=ExtResource("15_ujrs4")]
+[node name="MoveRightKb" parent="VBox" instance=ExtResource("16_a2wad")]
 layout_mode = 2
+script = ExtResource("17_r6k61")
 icw = NodePath("../../InputConfirmWindow")
-setting = SubResource("Resource_cj2u4")
+type = null
+accept_mouse = null
+accept_modifiers = null
+setting = SubResource("Resource_v4xoa")
 apply_on_change = true
 
-[node name="InputGamepad" parent="VBox" groups=["settings"] instance=ExtResource("21_au7a1")]
+[node name="Btn" parent="VBox/MoveRightKb" index="0"]
 layout_mode = 2
-script = ExtResource("22_7vclu")
+icon_alignment = 1
+
+[node name="MoveRightGp" parent="VBox" instance=ExtResource("16_a2wad")]
+layout_mode = 2
+script = ExtResource("17_r6k61")
 icw = NodePath("../../InputConfirmWindow")
-setting = SubResource("Resource_lapex")
+type = 1
+accept_mouse = null
+accept_modifiers = null
+setting = SubResource("Resource_v4xoa")
 apply_on_change = true
 
-[node name="Btn" parent="VBox/InputGamepad" index="0"]
+[node name="Btn" parent="VBox/MoveRightGp" index="0"]
 layout_mode = 2
 icon_alignment = 1
 
@@ -222,6 +217,12 @@ text = "Reset"
 group = "settings"
 
 [node name="InputConfirmWindow" parent="." instance=ExtResource("19_kyps1")]
+listening_wait_time = null
+show_progress_bar = null
+btn_listening = null
+title_listening = null
+title_confirm = null
+already_exists_msg = null
 
 [node name="BgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_y03a7")
@@ -231,5 +232,5 @@ autoplay = true
 [editable path="VBox/WindowSizeCtnr/WindowSize"]
 [editable path="VBox/MusicCtnr/ToggleBtn"]
 [editable path="VBox/MusicCtnr/Slider"]
-[editable path="VBox/InputKeyboard"]
-[editable path="VBox/InputGamepad"]
+[editable path="VBox/MoveRightKb"]
+[editable path="VBox/MoveRightGp"]

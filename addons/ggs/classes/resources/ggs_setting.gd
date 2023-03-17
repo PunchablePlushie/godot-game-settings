@@ -79,3 +79,12 @@ func set_name(value: String) -> void:
 func delete() -> void:
 	set_script(load("res://addons/ggs/classes/resources/ggs_setting.gd"))
 	name = "[Deleted Setting]"
+
+
+func save_plugin_data() -> void:
+	if not Engine.is_editor_hint():
+		return
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	if data != null:
+		data.save()

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=24 format=3 uid="uid://dpk53al471l8m"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=22 format=3 uid="uid://dpk53al471l8m"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
 [ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="1_du00a"]
@@ -10,10 +10,8 @@
 [ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="6_krqrh"]
 [ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="8_2nw62"]
 [ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="9_hwt6t"]
-[ext_resource type="Texture2D" uid="uid://70aa86pl065r" path="res://addons/ggs/assets/game_settings/input_kb.svg" id="10_bqkp0"]
-[ext_resource type="Script" path="res://game_settings/settings/input_keyboard.gd" id="11_2y72g"]
-[ext_resource type="Texture2D" uid="uid://8awyvggcb6jl" path="res://addons/ggs/assets/game_settings/input_gp.svg" id="12_sc8c6"]
-[ext_resource type="Script" path="res://game_settings/settings/input_gamepad.gd" id="13_fwalp"]
+[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="10_bpbpw"]
+[ext_resource type="Script" path="res://game_settings/settings/input.gd" id="11_y8cs8"]
 
 [sub_resource type="Resource" id="Resource_d8304"]
 resource_name = "music_mute"
@@ -33,7 +31,7 @@ value_hint_string = ""
 resource_name = "music_volume"
 script = ExtResource("9_hwt6t")
 bus_name = "Master"
-current = 46.0
+current = 80.0
 default = 80.0
 name = "music_volume"
 category = "audio"
@@ -91,30 +89,32 @@ settings = {
 }
 item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_xo3gb"), SubResource("Resource_hpdo1")])
 
-[sub_resource type="Resource" id="Resource_cj2u4"]
-resource_name = "move_right_kb"
-script = ExtResource("11_2y72g")
-action = "move_right"
-current = "d"
-default = "d"
-name = "move_right_kb"
-category = "input"
-icon = ExtResource("10_bqkp0")
-desc = "Remap keyboard/mouse input for a specific input action."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_lapex"]
+[sub_resource type="Resource" id="Resource_aeixb"]
 resource_name = "move_right_gp"
-script = ExtResource("13_fwalp")
+script = ExtResource("11_y8cs8")
 action = "move_right"
+type = 1
 current = "dright"
 default = "dright"
 name = "move_right_gp"
 category = "input"
-icon = ExtResource("12_sc8c6")
-desc = "Remap gamepad input for a specific input action."
+icon = ExtResource("10_bpbpw")
+desc = "Rebind keyboard or gamepad input of a specific input action."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_v4xoa"]
+resource_name = "move_right_kb"
+script = ExtResource("11_y8cs8")
+action = "move_right"
+type = 0
+current = "d"
+default = "d"
+name = "move_right_kb"
+category = "input"
+icon = ExtResource("10_bpbpw")
+desc = "Rebind keyboard or gamepad input of a specific input action."
 value_type = 4
 value_hint = 0
 value_hint_string = ""
@@ -124,10 +124,10 @@ resource_name = "input"
 script = ExtResource("1_bswtd")
 name = "input"
 settings = {
-"move_right_gp": SubResource("Resource_lapex"),
-"move_right_kb": SubResource("Resource_cj2u4")
+"move_right_gp": SubResource("Resource_aeixb"),
+"move_right_kb": SubResource("Resource_v4xoa")
 }
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_cj2u4"), SubResource("Resource_lapex")])
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
 
 [resource]
 script = ExtResource("1_wabe0")
@@ -137,7 +137,7 @@ categories = {
 "input": SubResource("Resource_cshih")
 }
 category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_cshih"), SubResource("Resource_qg0w5"), SubResource("Resource_53cr0")])
-recent_settings = Array[String](["input_keyboard.gd", "input_gamepad.gd", "audio_volume.gd", "audio_mute.gd", "display_fullscreen.gd", "display_scale.gd", "display_size.gd"])
+recent_settings = Array[String](["input.gd", "audio_volume.gd", "audio_mute.gd", "display_fullscreen.gd", "display_scale.gd", "display_size.gd"])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
 split_offset_0 = -220
