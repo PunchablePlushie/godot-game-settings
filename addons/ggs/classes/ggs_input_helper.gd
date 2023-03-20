@@ -116,6 +116,16 @@ func get_event_as_text(event: InputEvent) -> String:
 	return ""
 
 
+func get_event_as_icon(event: InputEvent, icon_db: ggsGPIconDB) -> Texture2D:
+	if event is InputEventJoypadButton:
+		return _get_gp_btn_event_as_icon(event, icon_db)
+	
+	if event is InputEventJoypadMotion:
+		return _get_gp_motion_event_as_icon(event, icon_db)
+	
+	return null
+
+
 func input_already_exists(event: InputEvent, self_action: String) -> Array:
 	for action in InputMap.get_actions():
 		if action.begins_with("ui_"):
@@ -219,6 +229,26 @@ func _get_gp_motion_event_as_text(event: InputEventJoypadMotion) -> String:
 	
 	var axis_value: String = "-" if event.axis_value < 0 else "+"
 	return gamepad_labels["motion"][event.axis][axis_value]
+
+
+func _get_gp_btn_event_as_icon(event: InputEventJoypadButton, icon_db: ggsGPIconDB) -> Texture2D:
+	var device_name: String = Input.get_joy_name(event.device)
+	device_name = _get_joy_name_shortened(device_name)
+	
+	var event_string: String = _get_gp_event_string(event)
+	var icon: Texture2D = icon_db.get_btn_texture(device_name, event_string)
+	
+	return icon
+
+
+func _get_gp_motion_event_as_icon(event: InputEventJoypadMotion, icon_db: ggsGPIconDB) -> Texture2D:
+	var device_name: String = Input.get_joy_name(event.device)
+	device_name = _get_joy_name_shortened(device_name)
+	
+	var event_string: String = _get_gp_event_string(event)
+	var icon: Texture2D = icon_db.get_motion_texture(device_name, event_string)
+	
+	return icon
 
 
 func _get_joy_name_shortened(name: String) -> String:

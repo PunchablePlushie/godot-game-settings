@@ -10,7 +10,9 @@
 [node name="PrefWindow" type="Window"]
 title = "GGS Preferences"
 size = Vector2i(813, 594)
+visible = false
 wrap_controls = true
+exclusive = true
 min_size = Vector2i(500, 0)
 script = ExtResource("1_ihv6i")
 

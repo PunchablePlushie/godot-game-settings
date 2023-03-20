@@ -16,6 +16,7 @@ var src: ggsUIComponent
 var type: Type
 var accept_mouse: bool
 var accept_modifiers: bool
+var use_icons: bool
 
 @onready var OkBtn: Button = get_ok_button()
 @onready var CancelBtn: Button = get_cancel_button()
@@ -49,7 +50,7 @@ func _input(event: InputEvent) -> void:
 	if not _event_is_valid(event):
 		return
 	
-	ListenBtn.text = input_helper.get_event_as_text(event)
+	_set_btn_text_or_icon(event)
 	
 	var input_already_exists: Array = input_helper.input_already_exists(event, src.setting.action)
 	if input_already_exists[0]:
@@ -83,22 +84,46 @@ func _event_is_valid(event: InputEvent) -> bool:
 			event is InputEventJoypadMotion
 		)
 	
-	var double_click: bool = false
-	if event is InputEventMouseButton:
-		double_click = event.double_click
+	var has_modifier: bool = false
+	if event is InputEventWithModifiers:
+		has_modifier = (event.shift_pressed or event.alt_pressed or event.ctrl_pressed)
 	
-	return (
+	var is_double_click: bool = false
+	if event is InputEventMouseButton:
+		is_double_click = event.double_click
+	
+	var is_valid: bool
+	if accept_modifiers:
+		is_valid = (
 		type_is_valid and
 		event.is_pressed() and
 		not event.is_echo() and
-		not double_click
-	)
+		not is_double_click)
+	else:
+		is_valid = (
+		type_is_valid and
+		event.is_pressed() and
+		not event.is_echo() and
+		not is_double_click and 
+		not has_modifier)
+	
+	return is_valid
 
 
 ### Input Listening
 
-func _on_ListenBtn_pressed() -> void:
-	_start_listening()
+func _set_btn_text_or_icon(event: InputEvent) -> void:
+	if use_icons and type == Type.GAMEPAD:
+		ListenBtn.icon = input_helper.get_event_as_icon(event, src.icon_db)
+		
+		if ListenBtn.icon == null:
+			ListenBtn.text = input_helper.get_event_as_text(event)
+		else:
+			ListenBtn.text = ""
+		return
+	
+	ListenBtn.icon = null
+	ListenBtn.text = input_helper.get_event_as_text(event)
 
 
 func _start_listening() -> void:
@@ -136,6 +161,10 @@ func _stop_listening() -> void:
 	
 	set_process_input(false)
 	set_process(false)
+
+
+func _on_ListenBtn_pressed() -> void:
+	_start_listening()
 
 
 func _on_ListenTimer_timeout() -> void:

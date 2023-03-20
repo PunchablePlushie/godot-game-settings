@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=13 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bqdur8f3jt437" path="res://addons/ggs/assets/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/save_file_menu.gd" id="7_guojl"]
 [ext_resource type="Texture2D" uid="uid://yguv4c22h711" path="res://addons/ggs/assets/save_file.svg" id="8_3r2nn"]
+[ext_resource type="Texture2D" uid="uid://cusqexy4w3ncq" path="res://addons/ggs/assets/docs.svg" id="8_mdi0r"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/pref_btn.gd" id="9_oodag"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/docs_btn.gd" id="9_qwavr"]
 [ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/pref_window/pref_window.tscn" id="10_ir36c"]
 
 [node name="MainPanel" type="Control"]
@@ -35,7 +37,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = -225
+split_offset = -220
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
@@ -45,7 +47,7 @@ size_flags_horizontal = 3
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 440
+split_offset = 419
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
@@ -75,7 +77,19 @@ popup/item_2/text = "Reset to Default"
 popup/item_2/id = 1
 script = ExtResource("7_guojl")
 
-[node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr"]
+[node name="BotCtnr" type="VBoxContainer" parent="MainCtnr/BtnCtnr"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="DocsBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
+layout_mode = 2
+size_flags_vertical = 10
+tooltip_text = "View Online Documentation"
+icon = ExtResource("8_mdi0r")
+flat = true
+script = ExtResource("9_qwavr")
+
+[node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
 tooltip_text = "Preferences"
@@ -85,4 +99,3 @@ script = ExtResource("9_oodag")
 
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true
-visible = false

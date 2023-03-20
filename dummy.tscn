@@ -1,122 +1,25 @@
-[gd_scene load_steps=29 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=10 format=3 uid="uid://cxwy2pg7ql8ay"]
 
-[ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="1_4ov2t"]
 [ext_resource type="Script" path="res://dummy.gd" id="1_b1ot8"]
-[ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="1_pyof7"]
-[ext_resource type="Texture2D" uid="uid://7rnrnfes2clm" path="res://addons/ggs/assets/game_settings/display_fullscreen.svg" id="3_rws6w"]
-[ext_resource type="Script" path="res://game_settings/settings/display_fullscreen.gd" id="4_cwrjq"]
-[ext_resource type="Texture2D" uid="uid://dlvhau28nu82n" path="res://addons/ggs/assets/game_settings/display_size.svg" id="5_mpjr1"]
-[ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/apply_btn/apply_btn.tscn" id="5_v56y8"]
-[ext_resource type="Script" path="res://game_settings/settings/display_size.gd" id="6_564ca"]
-[ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/reset_btn/reset_btn.tscn" id="6_hr5ah"]
-[ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="7_mdxc3"]
-[ext_resource type="PackedScene" uid="uid://d10row618jwcs" path="res://game_settings/components/toggle_btn/toggle_btn.tscn" id="9_gl07d"]
-[ext_resource type="Texture2D" uid="uid://dbtn4d6130bdj" path="res://addons/ggs/assets/game_settings/audio_mute.svg" id="11_xcd5r"]
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_gp_icon_db.gd" id="3_ywq4b"]
 [ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
-[ext_resource type="Script" path="res://game_settings/settings/audio_mute.gd" id="12_ciqq7"]
-[ext_resource type="Texture2D" uid="uid://buotak2dk5n0x" path="res://addons/ggs/assets/game_settings/audio_volume.svg" id="14_smw0q"]
 [ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="15_8fm8h"]
-[ext_resource type="Script" path="res://game_settings/settings/audio_volume.gd" id="15_x7bks"]
 [ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="16_a2wad"]
 [ext_resource type="Script" path="res://game_settings/settings/input.gd" id="16_wvbk1"]
-[ext_resource type="Script" path="res://game_settings/components/input_btn/input_btn.gd" id="19_fu7rq"]
 [ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="19_kyps1"]
 
-[sub_resource type="Resource" id="Resource_xo3gb"]
-resource_name = "fullscreen_mode"
-script = ExtResource("4_cwrjq")
-size_setting = "window_size"
-current = false
-default = false
-name = "fullscreen_mode"
-category = "display"
-icon = ExtResource("3_rws6w")
-desc = "Toggle Fullscreen mode."
-value_type = 1
-value_hint = 0
-value_hint_string = ""
+[sub_resource type="Resource" id="Resource_yktoy"]
+script = ExtResource("3_ywq4b")
 
-[sub_resource type="Resource" id="Resource_hpdo1"]
-resource_name = "window_size"
-script = ExtResource("6_564ca")
-sizes = Array[Vector2]([Vector2(1280, 720), Vector2(1360, 866)])
-current = 0
-default = 0
-name = "window_size"
-category = "display"
-icon = ExtResource("5_mpjr1")
-desc = "Change window size by setting its width and height to specific values."
-value_type = 2
-value_hint = 2
-value_hint_string = "1280 x 720,1360 x 866"
-
-[sub_resource type="Resource" id="Resource_d8304"]
-resource_name = "music_mute"
-script = ExtResource("12_ciqq7")
-bus_name = "Master"
-current = true
-default = false
-name = "music_mute"
-category = "audio"
-icon = ExtResource("11_xcd5r")
-desc = "Toggle mute state of a specific audio bus."
-value_type = 1
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_huot6"]
-resource_name = "music_volume"
-script = ExtResource("15_x7bks")
-bus_name = "Master"
-current = 80.0
-default = 80.0
-name = "music_volume"
-category = "audio"
-icon = ExtResource("14_smw0q")
-desc = "Change volume of a specific audio bus."
-value_type = 3
-value_hint = 1
-value_hint_string = "0,100"
-
-[sub_resource type="Resource" id="Resource_ve66q"]
-resource_name = "move_right_kb"
-script = ExtResource("16_wvbk1")
-action = "move_right"
-type = 0
-current = "d"
-default = "d"
-name = "move_right_kb"
-category = "input"
-icon = ExtResource("15_8fm8h")
-desc = "Rebind keyboard or gamepad input of a specific input action."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_mjpou"]
-resource_name = "move_right_gp"
+[sub_resource type="Resource" id="Resource_4c5xr"]
+resource_name = "Input Binding"
 script = ExtResource("16_wvbk1")
 action = "move_right"
 type = 1
-current = "bot"
+current = "right"
 default = "dright"
-name = "move_right_gp"
-category = "input"
-icon = ExtResource("15_8fm8h")
-desc = "Rebind keyboard or gamepad input of a specific input action."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_yvcf2"]
-resource_name = "move_left_kb"
-script = ExtResource("16_wvbk1")
-action = "move_left"
-type = 0
-current = "a"
-default = "a"
-name = "move_left_kb"
-category = "input"
+name = "Input Binding"
+category = "dsa"
 icon = ExtResource("15_8fm8h")
 desc = "Rebind keyboard or gamepad input of a specific input action."
 value_type = 4
@@ -128,130 +31,23 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_b1ot8")
 
-[node name="VBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 205.0
-offset_bottom = 40.0
-
-[node name="FullscreenCtnr" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/FullscreenCtnr"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Fullscreen Mode"
-
-[node name="FullscreenBtn" parent="VBox/FullscreenCtnr" groups=["settings"] instance=ExtResource("7_mdxc3")]
-layout_mode = 2
-setting = SubResource("Resource_xo3gb")
-apply_on_change = true
-
-[node name="WindowSizeCtnr" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/WindowSizeCtnr"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Window Size"
-
-[node name="WindowSize" parent="VBox/WindowSizeCtnr" groups=["settings"] instance=ExtResource("1_pyof7")]
-layout_mode = 2
-setting = SubResource("Resource_hpdo1")
-apply_on_change = true
-
-[node name="Btn" parent="VBox/WindowSizeCtnr/WindowSize" index="0"]
-item_count = 2
-popup/item_0/text = "1280x720"
-popup/item_0/id = 0
-popup/item_1/text = "1360x866"
-popup/item_1/id = 1
-
-[node name="AudioSep" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="LeftSep" type="HSeparator" parent="VBox/AudioSep"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBox/AudioSep"]
-layout_mode = 2
-text = "Audio"
-
-[node name="RightSep" type="HSeparator" parent="VBox/AudioSep"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MusicCtnr" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBox/MusicCtnr"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Music"
-
-[node name="ToggleBtn" parent="VBox/MusicCtnr" groups=["settings"] instance=ExtResource("9_gl07d")]
-layout_mode = 2
-setting = SubResource("Resource_d8304")
-apply_on_change = true
-
-[node name="Btn" parent="VBox/MusicCtnr/ToggleBtn" index="0"]
-text = "Mute"
-
-[node name="Slider" parent="VBox/MusicCtnr" groups=["settings"] instance=ExtResource("1_4ov2t")]
-layout_mode = 2
-setting = SubResource("Resource_huot6")
-apply_on_change = true
-
-[node name="MoveRightKb" parent="VBox" instance=ExtResource("16_a2wad")]
-layout_mode = 2
-icw = NodePath("../../InputConfirmWindow")
-setting = SubResource("Resource_ve66q")
-apply_on_change = true
-
-[node name="MoveRightGp" parent="VBox" instance=ExtResource("16_a2wad")]
-layout_mode = 2
-icw = NodePath("../../InputConfirmWindow")
+[node name="InputBtn" parent="." instance=ExtResource("16_a2wad")]
+layout_mode = 1
+offset_left = 15.0
+offset_top = 25.0
+offset_right = 83.0
+offset_bottom = 57.0
+icw = NodePath("../InputConfirmWindow")
 type = 1
-setting = SubResource("Resource_mjpou")
+use_icons = true
+icon_db = SubResource("Resource_yktoy")
+setting = SubResource("Resource_4c5xr")
 apply_on_change = true
-
-[node name="MoveLeftKb" parent="VBox" instance=ExtResource("16_a2wad")]
-layout_mode = 2
-script = ExtResource("19_fu7rq")
-icw = NodePath("../../InputConfirmWindow")
-setting = SubResource("Resource_yvcf2")
-apply_on_change = true
-
-[node name="Btn" parent="VBox/MoveLeftKb" index="0"]
-layout_mode = 2
-icon_alignment = 1
-
-[node name="HSep" type="HSeparator" parent="VBox"]
-layout_mode = 2
-
-[node name="ApplyBtn" parent="VBox" instance=ExtResource("5_v56y8")]
-layout_mode = 2
-text = "Apply"
-group = "settings"
-
-[node name="ResetBtn" parent="VBox" instance=ExtResource("6_hr5ah")]
-layout_mode = 2
-text = "Reset"
-group = "settings"
 
 [node name="InputConfirmWindow" parent="." instance=ExtResource("19_kyps1")]
+listening_wait_time = 0.2
 
 [node name="BgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_y03a7")
-autoplay = true
 
-[editable path="VBox/FullscreenCtnr/FullscreenBtn"]
-[editable path="VBox/WindowSizeCtnr/WindowSize"]
-[editable path="VBox/MusicCtnr/ToggleBtn"]
-[editable path="VBox/MusicCtnr/Slider"]
-[editable path="VBox/MoveRightKb"]
-[editable path="VBox/MoveRightGp"]
-[editable path="VBox/MoveLeftKb"]
+[editable path="InputBtn"]
