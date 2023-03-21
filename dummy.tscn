@@ -1,25 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxwy2pg7ql8ay"]
+[gd_scene load_steps=8 format=3 uid="uid://cxwy2pg7ql8ay"]
 
 [ext_resource type="Script" path="res://dummy.gd" id="1_b1ot8"]
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_gp_icon_db.gd" id="3_ywq4b"]
 [ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://shining_force_2_town.mp3" id="11_y03a7"]
 [ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="15_8fm8h"]
 [ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="16_a2wad"]
 [ext_resource type="Script" path="res://game_settings/settings/input.gd" id="16_wvbk1"]
 [ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="19_kyps1"]
 
-[sub_resource type="Resource" id="Resource_yktoy"]
-script = ExtResource("3_ywq4b")
-
-[sub_resource type="Resource" id="Resource_4c5xr"]
+[sub_resource type="Resource" id="Resource_dy64i"]
 resource_name = "Input Binding"
 script = ExtResource("16_wvbk1")
 action = "move_right"
-type = 1
-current = "right"
-default = "dright"
+type = 0
+current = "d"
+default = "d"
 name = "Input Binding"
-category = "dsa"
+category = "a"
 icon = ExtResource("15_8fm8h")
 desc = "Rebind keyboard or gamepad input of a specific input action."
 value_type = 4
@@ -38,10 +34,7 @@ offset_top = 25.0
 offset_right = 83.0
 offset_bottom = 57.0
 icw = NodePath("../InputConfirmWindow")
-type = 1
-use_icons = true
-icon_db = SubResource("Resource_yktoy")
-setting = SubResource("Resource_4c5xr")
+setting = SubResource("Resource_dy64i")
 apply_on_change = true
 
 [node name="InputConfirmWindow" parent="." instance=ExtResource("19_kyps1")]

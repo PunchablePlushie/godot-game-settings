@@ -6,9 +6,11 @@ extends Window
 
 @onready var SDF: LineEdit = %SettingDirField
 @onready var CDF: LineEdit = %CompDirField
+@onready var SFDF: LineEdit = %SaveFileDirField
 
 @onready var SDB: Button = %SettingDirBtn
 @onready var CDB: Button = %CompDirBtn
+@onready var SFDB: Button = %SaveFileDirBtn
 @onready var DSW: FileDialog = $DirSelectionWndw
 
 @onready var ResetBtn: Button = %ResetBtn
@@ -23,7 +25,9 @@ func _ready() -> void:
 	
 	SDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(SDB))
 	CDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(CDB))
-	DSW.dir_selected.connect(_on_DWS_dir_selected)
+	SFDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(SFDB))
+	DSW.dir_selected.connect(_on_DSW_dir_selected)
+	DSW.file_selected.connect(_on_DSW_file_selected)
 	
 	ResetBtn.pressed.connect(_on_ResetBtn_pressed)
 	CRW.confirmed.connect(_on_CRW_confirmed)
@@ -37,23 +41,29 @@ func _init_fields() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	SDF.text = data.dir_settings
 	CDF.text = data.dir_components
+	SFDF.text = data.dir_save_file
 
 
 func _on_AnyDirectoryBtn_pressed(src: Button) -> void:
 	var target: String
 	match src:
 		SDB:
-			target = "Settings"
+			DSW.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			DSW.access = FileDialog.ACCESS_RESOURCES
+			DSW.set_meta("Target", "Settings")
 		CDB:
-			target = "Components"
+			DSW.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			DSW.access = FileDialog.ACCESS_RESOURCES
+			DSW.set_meta("Target", "Components")
+		SFDB:
+			DSW.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+			DSW.access = FileDialog.ACCESS_USERDATA
 	
-	DSW.set_meta("Target", target)
 	DSW.invalidate()
-	DSW.current_dir = "res://"
 	DSW.popup_centered()
 
 
-func _on_DWS_dir_selected(dir: String) -> void:
+func _on_DSW_dir_selected(dir: String) -> void:
 	var target_field: LineEdit
 	match DSW.get_meta("Target"):
 		"Settings":
@@ -62,6 +72,10 @@ func _on_DWS_dir_selected(dir: String) -> void:
 			target_field = CDF
 	
 	target_field.text = dir
+
+
+func _on_DSW_file_selected(file: String) -> void:
+	SFDF.text = file
 
 
 ### Reseting
@@ -90,4 +104,5 @@ func _on_OkBtn_pressed() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	data.set_data("dir_settings", SDF.text)
 	data.set_data("dir_components", CDF.text)
+	data.set_data("dir_save_file", SFDF.text)
 	hide()

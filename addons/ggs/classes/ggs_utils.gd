@@ -4,7 +4,7 @@ class_name ggsUtils
 
 
 static func get_editor_interface() -> EditorInterface:
-	return Engine.get_singleton("EI")
+	return Engine.get_singleton("ggsEI")
 
 
 static func get_plugin_data() -> ggsPluginData:

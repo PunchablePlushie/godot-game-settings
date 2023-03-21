@@ -78,6 +78,26 @@ unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("2_qx4su")
 
+[node name="SaveFileDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+layout_mode = 2
+
+[node name="SaveFileDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Components Directory:"
+
+[node name="SaveFileDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SaveFileDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_qx4su")
+
 [node name="ResetBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
 unique_name_in_owner = true
 layout_mode = 2

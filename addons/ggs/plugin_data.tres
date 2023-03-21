@@ -1,42 +1,14 @@
-[gd_resource type="Resource" script_class="ggsPluginData" load_steps=7 format=3 uid="uid://dpk53al471l8m"]
+[gd_resource type="Resource" script_class="ggsPluginData" load_steps=2 format=3 uid="uid://dpk53al471l8m"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_category.gd" id="1_bswtd"]
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
-[ext_resource type="Texture2D" uid="uid://c4vunn2rkqj83" path="res://addons/ggs/assets/game_settings/input_setting.svg" id="10_bpbpw"]
-[ext_resource type="Script" path="res://game_settings/settings/input.gd" id="11_y8cs8"]
-
-[sub_resource type="Resource" id="Resource_4c5xr"]
-resource_name = "Input Binding"
-script = ExtResource("11_y8cs8")
-action = "move_right"
-type = 1
-current = "right"
-default = "dright"
-name = "Input Binding"
-category = "dsa"
-icon = ExtResource("10_bpbpw")
-desc = "Rebind keyboard or gamepad input of a specific input action."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_735cb"]
-resource_name = "dsa"
-script = ExtResource("1_bswtd")
-name = "dsa"
-settings = {
-"Input Binding": SubResource("Resource_4c5xr")
-}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_4c5xr")])
 
 [resource]
 script = ExtResource("1_wabe0")
-categories = {
-"dsa": SubResource("Resource_735cb")
-}
-category_order = Array[ExtResource("1_bswtd")]([SubResource("Resource_735cb")])
-recent_settings = Array[String](["input.gd"])
+categories = {}
+category_order = Array[Resource("res://addons/ggs/classes/resources/ggs_category.gd")]([])
+recent_settings = Array[String]([])
 dir_settings = "res://game_settings/settings"
 dir_components = "res://game_settings/components"
+dir_save_file = "user://settings.cfg"
 split_offset_0 = -225
 split_offset_1 = 440

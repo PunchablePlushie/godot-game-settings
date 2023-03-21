@@ -8,6 +8,7 @@ var recent_settings: Array[String]
 
 var dir_settings: String = "res://game_settings/settings"
 var dir_components: String = "res://game_settings/components"
+var dir_save_file: String = "user://setting.cfg"
 
 var split_offset_0: int = -225
 var split_offset_1: int = 440
@@ -26,6 +27,7 @@ func _get_property_list() -> Array:
 		{"name": "Directories", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
 		{"name": "dir_settings", "type": TYPE_STRING, "usage": usage},
 		{"name": "dir_components", "type": TYPE_STRING, "usage": usage},
+		{"name": "dir_save_file", "type": TYPE_STRING, "usage": usage},
 		
 		{"name": "Split Offset", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
 		{"name": "split_offset_0", "type": TYPE_INT, "usage": usage},
@@ -50,6 +52,7 @@ func reset() -> void:
 	recent_settings.clear()
 	dir_settings = "res://game_settings/settings"
 	dir_components = "res://game_settings/components"
+	dir_save_file = "user://settings.cfg"
 	split_offset_0 = -225
 	split_offset_1 = 440
 	save()

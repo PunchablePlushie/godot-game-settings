@@ -2,7 +2,7 @@
 extends ConfigFile
 class_name ggsSaveFile
 
-var path: String = "user://settings.cfg"
+var path: String = ggsUtils.get_plugin_data().dir_save_file
 
 
 func _init() -> void:

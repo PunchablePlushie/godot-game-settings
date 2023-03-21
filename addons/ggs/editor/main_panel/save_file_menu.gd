@@ -23,8 +23,11 @@ func _add_menu_items() -> void:
 ### Functionality
 
 func _open_save_file() -> void:
-	var path: String = ProjectSettings.globalize_path("user://settings.cfg")
-	OS.shell_open(path)
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var path: String = ProjectSettings.globalize_path(data.dir_save_file)
+	var err: Error = OS.shell_open(path)
+	if err != OK:
+		printerr("GGS - Open Save File: An error has occured while opening the file. Code: %d"%err)
 
 
 func _reset_save_file() -> void:
