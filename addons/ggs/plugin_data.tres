@@ -147,7 +147,7 @@ value_hint_string = "640 x 480,800 x 600,1280 x 720,1366 x 768"
 [sub_resource type="Resource" id="Resource_4y2ev"]
 resource_name = "vsync_mode"
 script = ExtResource("10_pxjbk")
-current = 1
+current = true
 default = true
 name = "vsync_mode"
 category = "display"
