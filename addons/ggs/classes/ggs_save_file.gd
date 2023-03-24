@@ -64,6 +64,8 @@ func rename_key(section: String, prev_name: String, new_name: String) -> void:
 
 
 func reset() -> void:
+	clear()
+	
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	for category in data.categories.values():
 		for setting in category.settings.values():
