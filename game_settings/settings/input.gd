@@ -41,9 +41,14 @@ func _event_is_type(event: InputEvent) -> bool:
 
 func set_action(value: String) -> void:
 	action = value
-	save_plugin_data()
+	
+	if is_added():
+		save_plugin_data()
 
 
 func set_type(value: Type) -> void:
 	type = value
-	save_plugin_data()
+	
+	if is_added():
+		print("test")
+		save_plugin_data()

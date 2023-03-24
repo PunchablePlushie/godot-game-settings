@@ -6,11 +6,9 @@ signal setting_selected(setting: ggsSetting)
 @onready var RecentList: ItemList = %RecentList
 @onready var DescField: RichTextLabel = %DescField
 @onready var FilterField: LineEdit = %FilterField
+@onready var ReloadBtn: Button = %ReloadBtn
+@onready var ClearRecentBtn: Button = %ClearRecentBtn
 @onready var OkBtn: Button = get_ok_button()
-
-
-func _init() -> void:
-	hide()
 
 
 func _ready() -> void:
@@ -24,6 +22,8 @@ func _ready() -> void:
 	RecentList.item_activated.connect(_on_AnyList_item_activated.bind(RecentList))
 	
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
+	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
+	ClearRecentBtn.pressed.connect(_on_ClearRecentBtn_pressed)
 
 
 func _confirm() -> void:
@@ -41,7 +41,7 @@ func _confirm() -> void:
 	if selected_setting == null:
 		return
 	
-	setting_selected.emit(selected_setting)
+	setting_selected.emit(selected_setting.duplicate())
 	
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	data.add_recent_setting(selected_setting)
@@ -51,8 +51,8 @@ func _on_about_to_popup() -> void:
 	OkBtn.disabled = true
 	DescField.clear_content()
 	FilterField.clear()
-	_populate_list(SettingList)
-	_populate_list(RecentList)
+	_load_settings()
+	_load_recent()
 
 
 func _on_visibility_changed() -> void:
@@ -66,33 +66,72 @@ func _on_confirmed() -> void:
 
 ### List/General
 
-func _populate_list(list: ItemList) -> void:
-	list.clear()
+func _load_settings() -> void:
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	if data.setting_list_cache.is_empty():
+		_load_from_filesystem()
+	else:
+		_load_from_cache()
+
+
+func _load_from_cache() -> void:
+	SettingList.clear()
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	var cache: Array[ggsSetting] = data.setting_list_cache
+	
+	for setting in cache:
+		var text: String = setting.name
+		var icon: Texture2D = setting.icon
+		
+		var item_index: int = SettingList.add_item(text, icon)
+		SettingList.set_item_metadata(item_index, setting) 
+
+
+func _load_from_filesystem() -> void:
+	SettingList.clear()
 	
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	var base_path: String = data.dir_settings
 	
-	var setting_files: PackedStringArray
-	if list == SettingList:
-		setting_files = DirAccess.get_files_at(base_path)
-	else:
-		setting_files= PackedStringArray(data.recent_settings)
+	var setting_files: PackedStringArray = DirAccess.get_files_at(base_path)
 	
+	var cache: Array[ggsSetting]
 	for setting_file in setting_files:
 		var path: String = base_path.path_join(setting_file)
-		if not FileAccess.file_exists(path):
-			data.recent_settings.erase(setting_file)
-			data.save()
-			continue
-		
 		var script: Script = load(path)
 		var setting: ggsSetting = script.new()
 		
 		var text: String = setting.name
 		var icon: Texture2D = setting.icon
 		
-		var item_index: int = list.add_item(text, icon)
-		list.set_item_metadata(item_index, setting)
+		var item_index: int = SettingList.add_item(text, icon)
+		SettingList.set_item_metadata(item_index, setting)
+		
+		cache.append(setting)
+	
+	data.set_data("setting_list_cache", cache)
+
+
+func _load_recent() -> void:
+	RecentList.clear()
+	
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	
+	var settings: Array[ggsSetting] = data.recent_settings
+	for setting in settings:
+		var script: Script = setting.get_script()
+		var path: String = script.resource_path
+		if not FileAccess.file_exists(path):
+			data.recent_settings.erase(setting)
+			data.save()
+			continue
+		
+		var text: String = setting.name
+		var icon: Texture2D = setting.icon
+		
+		var item_index: int = RecentList.add_item(text, icon)
+		RecentList.set_item_metadata(item_index, setting)
 
 
 func _deselect_other_list(list: ItemList) -> void:
@@ -113,11 +152,21 @@ func _on_AnyList_item_activated(index: int, list: ItemList) -> void:
 	hide()
 
 
+func _on_ReloadBtn_pressed() -> void:
+	_load_from_filesystem()
+
+
+func _on_ClearRecentBtn_pressed() -> void:
+	var data: ggsPluginData = ggsUtils.get_plugin_data()
+	data.clear_recent_settings()
+	_load_recent()
+
+
 ### SettingList/Filtering
 
 func _filter_setting_list(filter: String) -> void:
 	var to_remove: Array[int]
-	_populate_list(SettingList)
+	_load_settings()
 	
 	for item_index in range(SettingList.item_count):
 		var item_text: String = SettingList.get_item_text(item_index).to_lower()

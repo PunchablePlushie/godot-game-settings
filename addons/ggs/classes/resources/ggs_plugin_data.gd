@@ -4,7 +4,8 @@ class_name ggsPluginData
 
 var categories: Dictionary
 var category_order: Array[ggsCategory]
-var recent_settings: Array[String]
+var recent_settings: Array[ggsSetting]
+var setting_list_cache: Array[ggsSetting]
 
 var dir_settings: String = "res://game_settings/settings"
 var dir_components: String = "res://game_settings/components"
@@ -23,6 +24,7 @@ func _get_property_list() -> Array:
 		{"name": "categories", "type": TYPE_DICTIONARY, "usage": usage},
 		{"name": "category_order", "type": TYPE_ARRAY, "usage": usage},
 		{"name": "recent_settings", "type": TYPE_ARRAY, "usage": usage},
+		{"name": "setting_list_cache", "type": TYPE_ARRAY, "usage": usage},
 		
 		{"name": "Directories", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
 		{"name": "dir_settings", "type": TYPE_STRING, "usage": usage},
@@ -50,6 +52,7 @@ func reset() -> void:
 	categories.clear()
 	category_order.clear()
 	recent_settings.clear()
+	setting_list_cache.clear()
 	dir_settings = "res://game_settings/settings"
 	dir_components = "res://game_settings/components"
 	dir_save_file = "user://settings.cfg"
@@ -95,18 +98,16 @@ func update_category_order(new_order: Array[ggsCategory]) -> void:
 ### Recent Settings
 
 func add_recent_setting(setting: ggsSetting) -> void:
-	var script_name: String = setting.get_script().resource_path.get_file()
-	
-	if recent_settings.has(script_name):
-		_bring_to_front(script_name)
+	if recent_settings.has(setting):
+		_bring_to_front(setting)
 	else:
-		recent_settings.push_front(script_name)
+		recent_settings.push_front(setting)
 	
 	_limit_size()
 	save()
 
 
-func _bring_to_front(element: String) -> void:
+func _bring_to_front(element: ggsSetting) -> void:
 	recent_settings.erase(element)
 	recent_settings.push_front(element)
 
@@ -114,3 +115,8 @@ func _bring_to_front(element: String) -> void:
 func _limit_size() -> void:
 	if recent_settings.size() > 10:
 		recent_settings.pop_back()
+
+
+func clear_recent_settings() -> void:
+	recent_settings.clear()
+	save()

@@ -29,6 +29,10 @@ func apply(value: int) -> void:
 
 func set_scales(value: Array[float]) -> void:
 	scales = value
+	
+	if not is_added():
+		return
+	
 	save_plugin_data()
 	
 	if Engine.is_editor_hint():
