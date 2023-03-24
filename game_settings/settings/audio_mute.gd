@@ -22,10 +22,15 @@ func apply(value: bool) -> void:
 
 func set_bus_name(value: String) -> void:
 	bus_name = value
-	save_plugin_data()
+	
+	if is_added():
+		save_plugin_data()
 
 
 func _get_property_list() -> Array:
+	if not is_added():
+		return []
+	
 	var hint_string: String = ",".join(_get_audio_buses())
 	return [{
 		"name": "bus_name",

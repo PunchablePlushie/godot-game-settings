@@ -37,10 +37,15 @@ func _apply_size_setting() -> void:
 
 func set_size_setting(value: String) -> void:
 	size_setting = value
-	save_plugin_data()
+	
+	if is_added():
+		save_plugin_data()
 
 
 func _get_property_list() -> Array:
+	if not is_added():
+		return []
+	
 	var hint_string: String = ",".join(_get_other_settings())
 	
 	var properties: Array

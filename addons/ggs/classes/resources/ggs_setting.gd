@@ -76,6 +76,8 @@ func set_name(value: String) -> void:
 	notify_property_list_changed()
 
 
+### Public Methods
+
 func delete() -> void:
 	set_script(load("res://addons/ggs/classes/resources/ggs_setting.gd"))
 	name = "[Deleted Setting]"
@@ -88,3 +90,7 @@ func save_plugin_data() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	if data != null:
 		data.save()
+
+
+func is_added() -> bool:
+	return not category.is_empty()

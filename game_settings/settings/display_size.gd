@@ -26,6 +26,10 @@ func apply(value: int) -> void:
 
 func set_sizes(value: Array[Vector2]) -> void:
 	sizes = value
+	
+	if not is_added():
+		return
+	
 	save_plugin_data()
 	
 	if Engine.is_editor_hint():
