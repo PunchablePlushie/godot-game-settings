@@ -1,5 +1,2 @@
-# GGS 3.0 Major Update
-GGS 3.0 aims to bring a more robust experience to the user by having a better and more polished UI in addition to new features.
-<p align="center">
-  <img src="https://i.postimg.cc/rpKvBkSk/ggs-icon-nobg.png" alt="demo preview">
-</p>
+# GGS 3.0 Demo
+A demo that showcases what a completed GGS project might look like. You can pull the branch with git or simply use something like [DownGit](https://minhaskamal.github.io/DownGit/#/home) to download the branch.

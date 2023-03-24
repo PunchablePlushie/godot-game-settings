@@ -50,7 +50,7 @@ value_hint_string = "0,100"
 resource_name = "music_mute"
 script = ExtResource("9_ocrp1")
 bus_name = "Music"
-current = true
+current = false
 default = false
 name = "music_mute"
 category = "audio"
@@ -167,6 +167,56 @@ settings = {
 "window_size": SubResource("Resource_gld21")
 }
 item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_33mpe"), SubResource("Resource_gld21"), SubResource("Resource_4y2ev")])
+
+[sub_resource type="Resource" id="Resource_wxccr"]
+resource_name = "player_name"
+script = ExtResource("14_0iogi")
+current = "Joe Musashi"
+default = "Joe Musashi"
+name = "player_name"
+category = "gameplay"
+icon = ExtResource("10_fujn2")
+desc = "No description available."
+value_type = 4
+value_hint = 0
+value_hint_string = ""
+
+[sub_resource type="Resource" id="Resource_mwxob"]
+resource_name = "difficulty"
+script = ExtResource("15_uagmt")
+current = 1
+default = 1
+name = "difficulty"
+category = "gameplay"
+icon = ExtResource("10_fujn2")
+desc = "No description available."
+value_type = 2
+value_hint = 2
+value_hint_string = "Easy,Medium,Hard"
+
+[sub_resource type="Resource" id="Resource_pykky"]
+resource_name = "shuriken_count"
+script = ExtResource("16_fd5k1")
+current = 50
+default = 50
+name = "shuriken_count"
+category = "gameplay"
+icon = ExtResource("10_fujn2")
+desc = "No description available."
+value_type = 2
+value_hint = 1
+value_hint_string = "0, 100, 5"
+
+[sub_resource type="Resource" id="Resource_o2xd4"]
+resource_name = "gameplay"
+script = ExtResource("1_y3hvp")
+name = "gameplay"
+settings = {
+"difficulty": SubResource("Resource_mwxob"),
+"player_name": SubResource("Resource_wxccr"),
+"shuriken_count": SubResource("Resource_pykky")
+}
+item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_wxccr"), SubResource("Resource_mwxob"), SubResource("Resource_pykky")])
 
 [sub_resource type="Resource" id="Resource_51pmh"]
 resource_name = "move_right_kb"
@@ -303,56 +353,6 @@ settings = {
 "move_up_kb": SubResource("Resource_78fxk")
 }
 item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_51pmh"), SubResource("Resource_snnjy"), SubResource("Resource_gk1n0"), SubResource("Resource_mfe7a"), SubResource("Resource_78fxk"), SubResource("Resource_tf0jy"), SubResource("Resource_2nwnk"), SubResource("Resource_mpg30")])
-
-[sub_resource type="Resource" id="Resource_wxccr"]
-resource_name = "player_name"
-script = ExtResource("14_0iogi")
-current = "Kiwi"
-default = "Joe Musashi"
-name = "player_name"
-category = "gameplay"
-icon = ExtResource("10_fujn2")
-desc = "No description available."
-value_type = 4
-value_hint = 0
-value_hint_string = ""
-
-[sub_resource type="Resource" id="Resource_mwxob"]
-resource_name = "difficulty"
-script = ExtResource("15_uagmt")
-current = 1
-default = 1
-name = "difficulty"
-category = "gameplay"
-icon = ExtResource("10_fujn2")
-desc = "No description available."
-value_type = 2
-value_hint = 2
-value_hint_string = "Easy,Medium,Hard"
-
-[sub_resource type="Resource" id="Resource_pykky"]
-resource_name = "shuriken_count"
-script = ExtResource("16_fd5k1")
-current = 50
-default = 50
-name = "shuriken_count"
-category = "gameplay"
-icon = ExtResource("10_fujn2")
-desc = "No description available."
-value_type = 2
-value_hint = 1
-value_hint_string = "0, 100, 5"
-
-[sub_resource type="Resource" id="Resource_o2xd4"]
-resource_name = "gameplay"
-script = ExtResource("1_y3hvp")
-name = "gameplay"
-settings = {
-"difficulty": SubResource("Resource_mwxob"),
-"player_name": SubResource("Resource_wxccr"),
-"shuriken_count": SubResource("Resource_pykky")
-}
-item_order = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([SubResource("Resource_wxccr"), SubResource("Resource_mwxob"), SubResource("Resource_pykky")])
 
 [resource]
 script = ExtResource("1_wabe0")
