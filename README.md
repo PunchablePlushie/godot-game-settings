@@ -18,7 +18,7 @@ GGS has been completely reworked so it can provide a much better experience for 
 * The entire UI has been redesigned to make it easier and more intuitive to work with.
 * Save data is handled via config files instead of JSON files.
 * The way settings are created and handled has been completely reworked.
-* The way UI component are added and handled has been completely reworked.
+* The way UI components are added and handled has been completely reworked.
 
 ### Settings
 * Users should now have more freedom and flexibility when creating custom settings.
