@@ -57,7 +57,8 @@ func reset() -> void:
 	dir_components = "res://game_settings/components"
 	dir_save_file = "user://settings.cfg"
 	split_offset_0 = -225
-	split_offset_1 = 440
+	split_offset_1 = 420
+	
 	save()
 
 

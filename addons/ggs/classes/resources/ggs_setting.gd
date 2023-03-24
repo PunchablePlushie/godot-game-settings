@@ -45,7 +45,7 @@ func _get_property_list() -> Array:
 func set_current(value: Variant) -> void:
 	current = value
 	
-	if category.is_empty() or name == "[Deleted Setting]":
+	if not is_added() or name == "[Deleted Setting]":
 		return
 	
 	ggsSaveFile.new().set_key(category, name, value)
