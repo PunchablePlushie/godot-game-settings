@@ -3,12 +3,14 @@ signal input_selected(chosen_input: InputEvent)
 
 enum Type {KEYBOARD, GAMEPAD}
 
-@export var listening_wait_time: float = 0.5
+@export var listening_wait_time: float = 0.35
+@export var listening_max_time: float = 5
 @export var show_progress_bar: bool = true
 @export_group("Text")
 @export var btn_listening: String = ". . ."
 @export var title_listening: String = "Listening for Input"
 @export var title_confirm: String = "Confirm Input"
+@export var timeout_text: String = "Timed Out"
 @export var already_exists_msg: String = "Input already exists ({action})"
 
 var chosen_input: InputEvent
@@ -22,6 +24,7 @@ var use_icons: bool
 @onready var CancelBtn: Button = get_cancel_button()
 @onready var ListenBtn: Button = $MainCtnr/ListenBtn
 @onready var ListenTimer: Timer = $ListenTimer
+@onready var MaxListenTimer: Timer = $MaxListenTimer
 @onready var ListenProgress: ProgressBar = $MainCtnr/ListenProgress
 @onready var AlreadyExistsLabel: Label = $MainCtnr/AlreadyExistsLabel
 
@@ -34,12 +37,14 @@ func _ready() -> void:
 	
 	ListenBtn.pressed.connect(_on_ListenBtn_pressed)
 	ListenTimer.timeout.connect(_on_ListenTimer_timeout)
+	MaxListenTimer.timeout.connect(_on_MaxListenTimer_timeout)
 	
 	ListenBtn.focus_neighbor_bottom = OkBtn.get_path()
 	OkBtn.focus_neighbor_top = ListenBtn.get_path()
 	CancelBtn.focus_neighbor_top = ListenBtn.get_path()
 	
 	ListenTimer.wait_time = listening_wait_time
+	MaxListenTimer.wait_time = listening_max_time
 
 
 func _process(_delta: float) -> void:
@@ -59,11 +64,13 @@ func _input(event: InputEvent) -> void:
 		ListenProgress.hide()
 		AlreadyExistsLabel.show()
 		ListenTimer.stop()
+		MaxListenTimer.start()
 		return
 	
 	ListenProgress.show()
 	AlreadyExistsLabel.hide()
 	ListenTimer.start()
+	MaxListenTimer.start()
 	
 	chosen_input = event
 
@@ -128,6 +135,7 @@ func _set_btn_text_or_icon(event: InputEvent) -> void:
 
 func _start_listening() -> void:
 	ListenBtn.text = btn_listening
+	ListenBtn.icon = null
 	title = title_listening
 	
 	OkBtn.release_focus()
@@ -145,22 +153,31 @@ func _start_listening() -> void:
 	
 	set_process_input(true)
 	set_process(true)
+	MaxListenTimer.start()
 
 
-func _stop_listening() -> void:
+func _stop_listening(timed_out: bool = false) -> void:
 	title = title_confirm
 	
-	OkBtn.focus_mode = Control.FOCUS_ALL
-	OkBtn.disabled = false
+	if not timed_out:
+		OkBtn.focus_mode = Control.FOCUS_ALL
+		OkBtn.disabled = false
 	
 	ListenBtn.focus_mode = Control.FOCUS_ALL
 	ListenBtn.disabled = false
 	ListenBtn.grab_focus()
 	
+	if timed_out:
+		ListenBtn.text = timeout_text
+		ListenBtn.icon = null
+		CancelBtn.grab_focus()
+	
 	ListenProgress.hide()
+	AlreadyExistsLabel.hide()
 	
 	set_process_input(false)
 	set_process(false)
+	MaxListenTimer.stop()
 
 
 func _on_ListenBtn_pressed() -> void:
@@ -171,6 +188,10 @@ func _on_ListenTimer_timeout() -> void:
 	_stop_listening()
 
 
+func _on_MaxListenTimer_timeout() -> void:
+	_stop_listening(true)
+
+
 ### Window
 
 func _on_visibility_changed() -> void:
@@ -178,7 +199,6 @@ func _on_visibility_changed() -> void:
 		OkBtn.release_focus()
 		chosen_input = null
 		_start_listening()
-		print(type)
 
 
 func _on_confirmed() -> void:

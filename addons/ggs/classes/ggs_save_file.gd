@@ -51,6 +51,9 @@ func rename_section(prev_name: String, new_name: String) -> void:
 
 
 func rename_key(section: String, prev_name: String, new_name: String) -> void:
+	if not has_section_key(section, prev_name):
+		return
+	
 	var key_value: Variant = get_value(section, prev_name)
 	erase_section_key(section, prev_name)
 	set_value(section, new_name, key_value)

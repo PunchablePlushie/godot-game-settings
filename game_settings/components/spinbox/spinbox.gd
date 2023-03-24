@@ -7,6 +7,7 @@ extends ggsUIComponent
 func _ready() -> void:
 	super()
 	spin_box.value_changed.connect(_on_SpinBox_value_changed)
+	Field.context_menu_enabled = false
 
 
 func init_value() -> void:

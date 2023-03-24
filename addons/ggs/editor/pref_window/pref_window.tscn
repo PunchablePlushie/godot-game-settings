@@ -114,7 +114,8 @@ mouse_filter = 2
 theme_override_constants/h_separation = 5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ki5am")
 disabled = true
-text = "※ All changes take effect after a plugin restart."
+text = "※ All changes take effect after a plugin restart.
+※ If confirmed, the plugin will be disabled automatically."
 flat = true
 alignment = 0
 
@@ -184,4 +185,6 @@ title = "Clear Plugin Data"
 size = Vector2i(497, 135)
 ok_button_text = "Reset"
 dialog_text = "Are you sure you want to clear ALL plugin data? This includes all categories and settings. NO UNDO.
-A plugin restart is required for the changes to take effect."
+• A plugin restart is required for the changes to take effect. 
+• If confirmed, the plugin will be disabled automatically.
+• Please don't forget to update your instantiated UI components as GGS does not automatically update those."

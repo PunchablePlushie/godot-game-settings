@@ -77,4 +77,4 @@ func _on_Input_joy_connection_changed(_device: int, _connected: bool) -> void:
 func reset_setting() -> void:
 	super()
 	var event: InputEvent = input_helper.get_event_from_string(setting_value)
-	Btn.text = input_helper.get_event_as_text(event)
+	_set_btn_text_or_icon(event)

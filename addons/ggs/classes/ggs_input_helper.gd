@@ -56,10 +56,9 @@ var gamepad_labels: Dictionary = {
 	],
 	
 	"other": [
-		"Bottom Action", "Right Action", "Top Action", "Left Action", "Back",
-		"Guide", "Start", "Left Stick", "Right Stick", "Left Shoulder",
-		"Right Shoulder", "DPad Up", "DPad Down", "DPad Left", "DPad Right",
-		"Misc Button", "Paddle 1", "Paddle 2", "Paddle 3", "Paddle 4", "Touch"
+		"A", "B", "X", "Y", "Back", "Home", "Start", "L", "R", "LB", "RB",
+		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Share",
+		"Paddle 1", "Paddle 2", "Paddle 3", "Paddle 4", "Touch"
 	],
 	
 	"motion": [

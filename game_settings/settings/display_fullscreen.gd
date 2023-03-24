@@ -22,7 +22,9 @@ func apply(value: bool) -> void:
 			window_mode = DisplayServer.WINDOW_MODE_WINDOWED
 	
 	DisplayServer.window_set_mode(window_mode)
-	_apply_size_setting()
+	
+	if size_setting != "[NONE]":
+		_apply_size_setting()
 
 
 func _apply_size_setting() -> void:

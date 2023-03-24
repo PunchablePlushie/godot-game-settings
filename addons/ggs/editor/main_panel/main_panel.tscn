@@ -86,14 +86,6 @@ script = ExtResource("7_guojl")
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
-layout_mode = 2
-size_flags_vertical = 10
-tooltip_text = "Preferences"
-icon = ExtResource("6_t7de8")
-flat = true
-script = ExtResource("9_oodag")
-
 [node name="DocsBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -109,6 +101,14 @@ tooltip_text = "Report an Issue"
 icon = ExtResource("10_rly1w")
 flat = true
 script = ExtResource("11_2ygfj")
+
+[node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
+layout_mode = 2
+size_flags_vertical = 10
+tooltip_text = "Preferences"
+icon = ExtResource("6_t7de8")
+flat = true
+script = ExtResource("9_oodag")
 
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true

@@ -19,7 +19,10 @@ theme_override_constants/separation = 0
 
 [node name="ListenBtn" type="Button" parent="MainCtnr"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "ddd"
+icon_alignment = 1
+expand_icon = true
 
 [node name="ListenProgress" type="ProgressBar" parent="MainCtnr"]
 visible = false
@@ -33,4 +36,7 @@ layout_mode = 2
 horizontal_alignment = 1
 
 [node name="ListenTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MaxListenTimer" type="Timer" parent="."]
 one_shot = true

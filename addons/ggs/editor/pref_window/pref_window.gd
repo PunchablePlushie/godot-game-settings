@@ -88,6 +88,7 @@ func _on_CRW_confirmed() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	data.reset()
 	hide()
+	ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
 
 
 ### Window Functionalities
@@ -106,3 +107,4 @@ func _on_OkBtn_pressed() -> void:
 	data.set_data("dir_components", CDF.text)
 	data.set_data("dir_save_file", SFDF.text)
 	hide()
+	ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)

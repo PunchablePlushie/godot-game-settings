@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://1fwfpy1gepar"]
+
+[ext_resource type="Script" path="res://demo/src/setting_btn.gd" id="1_1cyp5"]
+[ext_resource type="PackedScene" uid="uid://b7grj0uvaid7s" path="res://demo/src/demo.tscn" id="2_gps3e"]
+[ext_resource type="AudioStream" uid="uid://cs1hap46ms4l4" path="res://demo/assets/shining_force_2_town.mp3" id="3_vws5d"]
+
+[node name="StartScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsBtn" type="Button" parent="Center"]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("1_1cyp5")
+settings = ExtResource("2_gps3e")
+
+[node name="CreditCtnr" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 247.0
+grow_vertical = 0
+
+[node name="GpIcons" type="LinkButton" parent="CreditCtnr"]
+layout_mode = 2
+text = "Gamepad Icons: greatdocbrown"
+uri = "https://greatdocbrown.itch.io/gamepad-ui"
+
+[node name="Music" type="LinkButton" parent="CreditCtnr"]
+layout_mode = 2
+text = "Music: Shining Force II - Town"
+uri = "https://www.youtube.com/watch?v=8rGnJiBLmqA"
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vws5d")
+autoplay = true
+bus = &"Music"
