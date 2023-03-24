@@ -10,15 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Godot Game Settings - Demo"
-config/description="A demo for the plugin Godot Game Settings."
-run/main_scene="res://demo/src/start_scn.tscn"
+config/name="Godot Game Settings"
+config/description="Create and manage game settings in Godot Engine."
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://demo/default_bus_layout.tres"
+buses/default_bus_layout=""
 
 [autoload]
 
@@ -70,6 +69,10 @@ move_down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translation_remaps={}
 
 [rendering]
 
