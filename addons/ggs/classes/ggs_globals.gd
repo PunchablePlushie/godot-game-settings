@@ -9,7 +9,6 @@ signal setting_selected(setting: ggsSetting)
 
 ### Variables
 
-var editor_interface: EditorInterface
 var active_category: ggsCategory
 var active_setting: ggsSetting
 
