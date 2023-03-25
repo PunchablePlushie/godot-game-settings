@@ -3,7 +3,7 @@ extends RefCounted
 class_name ggsUtils
 
 
-static func get_editor_interface() -> EditorInterface:
+static func get_editor_interface(): #!
 	return Engine.get_singleton("ggsEI")
 
 
@@ -69,3 +69,7 @@ static func center_window() -> void:
 	var window_size: Vector2 = DisplayServer.window_get_size()
 	var target_pos: Vector2 = (display_size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
+
+
+#! Do not specify method return class (EditorInterface) as it causes error when
+ # when the game is exported.
