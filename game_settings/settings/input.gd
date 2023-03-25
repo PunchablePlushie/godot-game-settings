@@ -50,5 +50,4 @@ func set_type(value: Type) -> void:
 	type = value
 	
 	if is_added():
-		print("test")
 		save_plugin_data()
