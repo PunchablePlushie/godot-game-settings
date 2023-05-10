@@ -65,9 +65,11 @@ static func window_clamp_to_screen(size: Vector2) -> Vector2:
 
 
 static func center_window() -> void:
-	var display_size: Vector2 = DisplayServer.screen_get_size()
+	var screen = DisplayServer.window_get_current_screen()
+	var display_size: Vector2 = DisplayServer.screen_get_size(screen)
 	var window_size: Vector2 = DisplayServer.window_get_size()
-	var target_pos: Vector2 = (display_size / 2) - (window_size / 2)
+	var origin = Vector2(DisplayServer.screen_get_position(screen))
+	var target_pos: Vector2 = origin + (display_size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
 
 
