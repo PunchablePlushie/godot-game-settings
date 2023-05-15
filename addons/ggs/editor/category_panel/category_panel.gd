@@ -106,6 +106,19 @@ func _on_DeleteConfirm_confirmed() -> void:
 	_delete_category(List.get_selected().get_metadata(0))
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_MIDDLE:
+			var mouse_pos = List.get_local_mouse_position()
+			var item = List.get_item_at_position(mouse_pos)
+
+			if not is_instance_valid(item):
+				return
+
+			List.set_selected(item, 0)
+			DeleteConfirm.popup_centered()
+
+
 # Category Inspection
 func _inspect_category(category: ggsCategory) -> void:
 	ggsUtils.get_editor_interface().inspect_object(category)
