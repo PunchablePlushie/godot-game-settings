@@ -189,12 +189,6 @@ func _get_kb_event_string(event: InputEventKey) -> String:
 
 func _get_mouse_event_as_text(event: InputEventMouseButton) -> String:
 	var modifiers: String = _get_modifiers_string(event, true)
-	
-	var btn_index: int = event.button_index - 1
-	
-	if not _button_index_is_valid(event.button_index):
-		return "Unknown Mouse Button"
-	
 	var btn: String = keywords["mouse"][event.button_index - 1].to_upper()
 	var result: String = "%s"%btn if modifiers.is_empty() else "%s+%s"%[modifiers, btn]
 	return result
@@ -210,10 +204,6 @@ func _create_mouse_event(modifiers: PackedStringArray, btn: String) -> InputEven
 
 func _get_mouse_event_string(event: InputEventMouseButton) -> String:
 	var modifiers: String = _get_modifiers_string(event)
-	
-	if not _button_index_is_valid(event.button_index):
-		return "unknown_mb"
-	
 	var btn: String = keywords["mouse"][event.button_index - 1]
 	var result: String = "%s"%btn if modifiers.is_empty() else "%s,%s"%[modifiers, btn]
 	
@@ -223,9 +213,6 @@ func _get_mouse_event_string(event: InputEventMouseButton) -> String:
 func _string_is_for_mouse(btn: String) -> bool:
 	return keywords["mouse"].has(btn)
 
-
-func _button_index_is_valid(btn_index: int) -> bool:
-	return btn_index >= 0 and btn_index <= 9
 
 
 ### Gamepad
