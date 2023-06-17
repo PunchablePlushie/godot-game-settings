@@ -214,6 +214,7 @@ func _string_is_for_mouse(btn: String) -> bool:
 	return keywords["mouse"].has(btn)
 
 
+
 ### Gamepad
 
 func _get_gp_btn_event_as_text(event: InputEventJoypadButton) -> String:
