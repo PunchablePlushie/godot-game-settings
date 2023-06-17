@@ -8,7 +8,7 @@ var keywords: Dictionary = {
 	],
 	
 	"gamepad_btn": [
-		"bot", "right", "left", "top", "back", "guide", "start",
+		"bbot", "bright", "bleft", "btop", "back", "guide", "start",
 		"left_stick", "right_stick", "left_shoulder", "right_shoulder",
 		"dup", "ddown", "dleft", "dright", "misc", "pad1", "pad2", "pad3", "pad4",
 		"touch"

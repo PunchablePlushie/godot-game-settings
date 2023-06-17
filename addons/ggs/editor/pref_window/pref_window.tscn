@@ -146,7 +146,7 @@ alignment = 0
 [node name="VersionBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
 layout_mode = 2
 tooltip_text = "View Release"
-text = "3.0"
+text = "3.0.0"
 
 [node name="ChangelogBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
 layout_mode = 2
