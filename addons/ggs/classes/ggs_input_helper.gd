@@ -8,7 +8,7 @@ var keywords: Dictionary = {
 	],
 	
 	"gamepad_btn": [
-		"bot", "right", "left", "top", "back", "guide", "start",
+		"bbot", "bright", "bleft", "btop", "back", "guide", "start",
 		"left_stick", "right_stick", "left_shoulder", "right_shoulder",
 		"dup", "ddown", "dleft", "dright", "misc", "pad1", "pad2", "pad3", "pad4",
 		"touch"
@@ -212,6 +212,7 @@ func _get_mouse_event_string(event: InputEventMouseButton) -> String:
 
 func _string_is_for_mouse(btn: String) -> bool:
 	return keywords["mouse"].has(btn)
+
 
 
 ### Gamepad

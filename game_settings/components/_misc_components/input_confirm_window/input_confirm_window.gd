@@ -96,8 +96,10 @@ func _event_is_valid(event: InputEvent) -> bool:
 		has_modifier = (event.shift_pressed or event.alt_pressed or event.ctrl_pressed)
 	
 	var is_double_click: bool = false
+	var mouse_button_is_valid: bool = true
 	if event is InputEventMouseButton:
 		is_double_click = event.double_click
+		mouse_button_is_valid = (event.button_index >= 0 and event.button_index <= 9)
 	
 	var is_valid: bool
 	if accept_modifiers:
@@ -105,13 +107,15 @@ func _event_is_valid(event: InputEvent) -> bool:
 		type_is_valid and
 		event.is_pressed() and
 		not event.is_echo() and
-		not is_double_click)
+		not is_double_click and
+		mouse_button_is_valid)
 	else:
 		is_valid = (
 		type_is_valid and
 		event.is_pressed() and
 		not event.is_echo() and
-		not is_double_click and 
+		not is_double_click and
+		mouse_button_is_valid and 
 		not has_modifier)
 	
 	return is_valid
