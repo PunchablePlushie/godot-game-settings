@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://vt5mwwxhtu3x"]
+[gd_scene load_steps=11 format=3 uid="uid://vt5mwwxhtu3x"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_panel.gd" id="1_2wlv0"]
+[ext_resource type="Texture2D" uid="uid://bny306r1okli1" path="res://addons/ggs/assets/collapse_all.svg" id="3_cwys1"]
 [ext_resource type="Texture2D" uid="uid://brtdsxn4swphc" path="res://addons/ggs/assets/add.svg" id="3_tdauq"]
+[ext_resource type="Texture2D" uid="uid://7yq12bcdob8k" path="res://addons/ggs/assets/expand_all.svg" id="4_6vxtj"]
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_list.gd" id="4_htr8u"]
-[ext_resource type="Texture2D" uid="uid://b7u0sjxctxinv" path="res://addons/ggs/assets/delete.svg" id="4_xcneu"]
+[ext_resource type="Texture2D" uid="uid://dkmion6u6aokv" path="res://addons/ggs/assets/reload.svg" id="4_j6whk"]
+[ext_resource type="Texture2D" uid="uid://betan6wm2eiuh" path="res://addons/ggs/assets/rename.svg" id="7_kf684"]
 [ext_resource type="PackedScene" uid="uid://111vt7wxn7lx" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
+[ext_resource type="Texture2D" uid="uid://b7u0sjxctxinv" path="res://addons/ggs/assets/delete.svg" id="8_wckvi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gogmd"]
+load_path = "res://.godot/imported/show_in_filesystem.svg-d8323cbcf62adb9529b12d5317dfd9e0.ctex"
 
 [node name="SettingPanel" type="Control"]
 custom_minimum_size = Vector2(300, 0)
@@ -27,45 +34,103 @@ grow_vertical = 2
 [node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="AddBtn" type="Button" parent="MainCtnr/TopBar" node_paths=PackedStringArray("shortcut_context")]
+[node name="AddBtn" type="Button" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Setting"
-shortcut_context = NodePath("")
-disabled = true
+tooltip_text = "New from Template"
 icon = ExtResource("3_tdauq")
 flat = true
 
-[node name="DeleteBtn" type="Button" parent="MainCtnr/TopBar" node_paths=PackedStringArray("shortcut_context")]
+[node name="NewSettingField" type="LineEdit" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Delete Setting"
-shortcut_context = NodePath("")
-disabled = true
-icon = ExtResource("4_xcneu")
+size_flags_horizontal = 3
+placeholder_text = "New Setting..."
+clear_button_enabled = true
+
+[node name="NewGroupField" type="LineEdit" parent="MainCtnr/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New Group..."
+clear_button_enabled = true
+
+[node name="VSep" type="VSeparator" parent="MainCtnr/TopBar"]
+layout_mode = 2
+
+[node name="CollapseAllBtn" type="Button" parent="MainCtnr/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Collapse All"
+icon = ExtResource("3_cwys1")
 flat = true
 
-[node name="AssignBtn" type="Button" parent="MainCtnr/TopBar"]
+[node name="ExpandAllBtn" type="Button" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 10
-tooltip_text = "Assign the selected setting to the currently selected component in the scene tree."
-disabled = true
-text = "Assign to Component"
+tooltip_text = "Expand All"
+icon = ExtResource("4_6vxtj")
+flat = true
+
+[node name="ReloadBtn" type="Button" parent="MainCtnr/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Reload List"
+icon = ExtResource("4_j6whk")
+flat = true
 
 [node name="SettingList" type="Tree" parent="MainCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_type_variation = &"BigTree"
 allow_reselect = true
-hide_folding = true
+allow_rmb_select = true
 hide_root = true
 script = ExtResource("4_htr8u")
 
+[node name="ContextMenu" type="PopupMenu" parent="MainCtnr/SettingList"]
+unique_name_in_owner = true
+size = Vector2i(196, 93)
+item_count = 4
+item_0/text = "Rename"
+item_0/icon = ExtResource("7_kf684")
+item_0/id = 0
+item_1/text = "Delete"
+item_1/icon = ExtResource("8_wckvi")
+item_1/id = 1
+item_2/text = ""
+item_2/id = 999
+item_2/separator = true
+item_3/text = "Show in File System"
+item_3/icon = SubResource("CompressedTexture2D_gogmd")
+item_3/id = 2
+
 [node name="AddSettingWindow" parent="." instance=ExtResource("7_o4e63")]
+visible = false
+
+[node name="InvalidName" type="AcceptDialog" parent="."]
+title = "Invalid Setting/Group Name"
+size = Vector2i(600, 109)
+unresizable = true
+max_size = Vector2i(700, 16384)
+dialog_text = "The setting/group name must be a valid file name and cannot start with an underscore (\"_\"), dot (\".\"), or hyphen(\"-\")."
+dialog_autowrap = true
+
+[node name="AlreadyExists" type="AcceptDialog" parent="."]
+title = "Setting/Group Already Exists"
+size = Vector2i(529, 100)
+unresizable = true
+max_size = Vector2i(700, 16384)
+dialog_text = "A setting/group with this name already exists in the current scope."
+dialog_autowrap = true
 
 [node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
-title = "Confirm Category Deletion"
+title = "Confirm Setting/Group Deletion"
+size = Vector2i(700, 135)
+unresizable = true
+max_size = Vector2i(700, 16384)
 ok_button_text = "Delete"
-dialog_text = "Are you sure you want to delete the selected category?
-This action cannot be undone."
+dialog_text = "Are you sure you want to delete the selected setting/group?
+Depending on your system configuration, the corresponding folder will either be moved to
+system trash or deleted permanently."

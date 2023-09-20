@@ -4,6 +4,7 @@ extends Node
 ### Signals
 
 signal category_selected(category: String)
+signal active_category_updated()
 signal setting_selected(setting: ggsSetting)
 
 
@@ -79,6 +80,7 @@ func _ready() -> void:
 
 func _on_category_selected(category: String) -> void:
 	active_category = category
+	active_category_updated.emit()
 
 
 func _on_setting_selected(setting: ggsSetting) -> void:

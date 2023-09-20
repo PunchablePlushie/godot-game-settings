@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/setting_panel/setting_panel.tscn" id="6_rabjj"]
 [ext_resource type="Texture2D" uid="uid://bqdur8f3jt437" path="res://addons/ggs/assets/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/save_file_menu.gd" id="7_guojl"]
+[ext_resource type="Texture2D" uid="uid://bqrfny4ip6psn" path="res://addons/ggs/assets/components/_default.svg" id="8_1r68j"]
 [ext_resource type="Texture2D" uid="uid://yguv4c22h711" path="res://addons/ggs/assets/save_file.svg" id="8_3r2nn"]
 [ext_resource type="Texture2D" uid="uid://cusqexy4w3ncq" path="res://addons/ggs/assets/docs.svg" id="8_mdi0r"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/update_theme_btn.gd" id="9_a3oxu"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/pref_btn.gd" id="9_oodag"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/docs_btn.gd" id="9_qwavr"]
 [ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/pref_window/pref_window.tscn" id="10_ir36c"]
@@ -85,6 +87,13 @@ script = ExtResource("7_guojl")
 [node name="BotCtnr" type="VBoxContainer" parent="MainCtnr/BtnCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
+
+[node name="UpdateThemeBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
+layout_mode = 2
+tooltip_text = "Update Theme"
+icon = ExtResource("8_1r68j")
+flat = true
+script = ExtResource("9_a3oxu")
 
 [node name="DocsBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2

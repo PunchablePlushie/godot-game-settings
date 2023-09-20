@@ -15,7 +15,6 @@ var value_hint_string: String
 
 func _init() -> void:
 	name = get_script().resource_path.get_file()
-	icon = preload("res://addons/ggs/assets/game_settings/_default.svg")
 	desc = "No description available."
 
 

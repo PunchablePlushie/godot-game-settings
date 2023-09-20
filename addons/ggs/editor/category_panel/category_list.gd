@@ -29,7 +29,7 @@ func remove_item(item: TreeItem) -> void:
 	OS.move_to_trash(path)
 	
 	item.free()
-#	GGS.category_selected.emit("")
+	GGS.category_selected.emit("")
 	ggsUtils.get_resource_file_system().scan()
 
 
@@ -50,11 +50,10 @@ func _update_from_file_system(path: String) -> void:
 		return
 	
 	load_list()
-#	GGS.category_selected.emit("")
+	GGS.category_selected.emit("")
 
 
 func _on_item_selected() -> void:
-	return
 	GGS.category_selected.emit(get_selected().get_text(0))
 
 

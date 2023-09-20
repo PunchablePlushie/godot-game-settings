@@ -33,7 +33,11 @@ func _create_category(cat_name: String) -> void:
 
 
 func _on_NCF_text_submitted(submitted_text: String) -> void:
-	if not submitted_text.is_valid_filename() or submitted_text.begins_with("_"):
+	if (
+		not submitted_text.is_valid_filename() or
+		submitted_text.begins_with("_") or
+		submitted_text.begins_with(".")
+	):
 		InvalidName.popup_centered()
 		return
 	
@@ -71,7 +75,11 @@ func _rename_category(new_name: String) -> void:
 	if new_name == item_prev_name:
 		return
 	
-	if not new_name.is_valid_filename() or new_name.begins_with("_"):
+	if (
+		not new_name.is_valid_filename() or
+		new_name.begins_with("_") or
+		new_name.begins_with(".")
+	):
 		InvalidName.popup_centered()
 		List.get_selected().set_text(0, item_prev_name)
 		return
@@ -85,6 +93,7 @@ func _rename_category(new_name: String) -> void:
 	dir.rename(item_prev_name, new_name)
 	List.load_list()
 	ggsUtils.get_resource_file_system().scan()
+	GGS.category_selected.emit("")
 
 
 func _on_List_item_activated() -> void:
