@@ -49,7 +49,7 @@ size_flags_horizontal = 3
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 440
+split_offset = 420
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]

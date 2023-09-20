@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buotak2dk5n0x"
-path="res://.godot/imported/audio_volume.svg-995d686ef4bd4e96bb3de0d0b53d12c1.ctex"
+uid="uid://b8bki8g646lvd"
+path="res://.godot/imported/show_in_filesystem.svg-d8323cbcf62adb9529b12d5317dfd9e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/game_settings/audio_volume.svg"
-dest_files=["res://.godot/imported/audio_volume.svg-995d686ef4bd4e96bb3de0d0b53d12c1.ctex"]
+source_file="res://addons/ggs/assets/show_in_filesystem.svg"
+dest_files=["res://.godot/imported/show_in_filesystem.svg-d8323cbcf62adb9529b12d5317dfd9e0.ctex"]
 
 [params]
 

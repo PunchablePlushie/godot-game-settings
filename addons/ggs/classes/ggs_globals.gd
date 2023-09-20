@@ -3,13 +3,13 @@ extends Node
 
 ### Signals
 
-signal category_selected(category: ggsCategory)
+signal category_selected(category: String)
 signal setting_selected(setting: ggsSetting)
 
 
 ### Variables
 
-var active_category: ggsCategory
+var active_category: String
 var active_setting: ggsSetting
 
 
@@ -77,7 +77,7 @@ func _ready() -> void:
 		_apply_settings()
 
 
-func _on_category_selected(category: ggsCategory) -> void:
+func _on_category_selected(category: String) -> void:
 	active_category = category
 
 

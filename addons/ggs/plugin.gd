@@ -1,8 +1,6 @@
 @tool
 extends EditorPlugin
 
-const ggs_globals_path: String = "res://addons/ggs/classes/ggs_globals.gd"
-
 var main_panel_scn: PackedScene = preload("./editor/main_panel/main_panel.tscn")
 var MainPanel: Control
 

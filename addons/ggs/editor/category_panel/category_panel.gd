@@ -2,110 +2,112 @@
 extends Control
 
 @onready var NCF: LineEdit = %NewCatField
-@onready var AddBtn: Button = %AddBtn
+@onready var ReloadBtn: Button = %ReloadBtn
 @onready var List: Tree = %CategoryList
 @onready var CMenu: PopupMenu = %ContextMenu
+@onready var InvalidName: AcceptDialog = $InvalidName
+@onready var AlreadyExists: AcceptDialog = $AlreadyExists
 @onready var DeleteConfirm: ConfirmationDialog = $DeleteConfirm
+
+var item_prev_name: String
 
 
 func _ready() -> void:
-	NCF.text_changed.connect(_on_NCF_text_changed)
 	NCF.text_submitted.connect(_on_NCF_text_submitted)
-	AddBtn.pressed.connect(_on_AddBtn_pressed)
-	
+	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
+
+	CMenu.id_pressed.connect(_on_CMenu_id_pressed)
 	List.item_edited.connect(_on_List_item_edited)
-	
-	CMenu.index_pressed.connect(_on_CMenu_index_pressed)
+	List.item_activated.connect(_on_List_item_activated)
 	DeleteConfirm.confirmed.connect(_on_DeleteConfirm_confirmed)
 
 
 ### Category Creation
 
-func _create_category_object(cat_name: String) -> ggsCategory:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var name_list: PackedStringArray = data.get_category_name_list()
-	cat_name = ggsUtils.get_unique_string(name_list, cat_name)
-	
-	var new_cat: ggsCategory = ggsCategory.new()
-	new_cat.name = cat_name
-	return new_cat
-
-
 func _create_category(cat_name: String) -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var category_obj: ggsCategory = _create_category_object(cat_name)
-	data.add_category(category_obj)
-	List.add_item(category_obj)
-	
-	AddBtn.disabled = true
+	var created_item: TreeItem = List.add_item(cat_name)
 	NCF.clear()
-
-
-func _is_name_valid(cat_name: String) -> bool:
-	return not cat_name.strip_edges().is_empty()
-
-
-func _on_NCF_text_changed(new_text: String) -> void:
-	AddBtn.disabled = not _is_name_valid(new_text)
+	
+	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_settings)
+	dir.make_dir(cat_name)
 
 
 func _on_NCF_text_submitted(submitted_text: String) -> void:
-	if _is_name_valid(submitted_text):
-		_create_category(submitted_text)
-
-
-func _on_AddBtn_pressed() -> void:
-	_create_category(NCF.text)
-
-
-### Category Renaming
-
-func _rename_category(tree_item: TreeItem) -> void:
-	var category: ggsCategory = tree_item.get_metadata(0)
-	var prev_name: String = category.name
-	var new_name: String = tree_item.get_text(0)
-	
-	if prev_name == new_name:
+	if not submitted_text.is_valid_filename() or submitted_text.begins_with("_"):
+		InvalidName.popup_centered()
 		return
 	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var name_list: PackedStringArray = data.get_category_name_list()
-	category.name = ggsUtils.get_unique_string(name_list, new_name)
+	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_settings)
+	if dir.dir_exists(submitted_text):
+		AlreadyExists.popup_centered()
+		return
 	
-	data.rename_category(prev_name, category)
-	ggsSaveFile.new().rename_section(prev_name, category.name)
-	
-	tree_item.set_text(0, category.name)
-	tree_item.set_editable(0, false)
+	_create_category(submitted_text)
+	ggsUtils.get_resource_file_system().scan()
+	List.load_list()
 
 
-func _on_List_item_edited() -> void:
-	_rename_category(List.get_edited())
+func _on_ReloadBtn_pressed() -> void:
+	List.load_list()
 
 
 ### Context Menu
 
-func _on_CMenu_index_pressed(index: int) -> void:
-	var category: ggsCategory = List.get_selected().get_metadata(0)
-	match index:
-		0:
+func _on_CMenu_id_pressed(id: int) -> void:
+	match id:
+		List.ContextMenu.RENAME:
+			item_prev_name = List.get_selected().get_text(0)
+			List.edit_selected(true)
+		
+		List.ContextMenu.DELETE:
 			DeleteConfirm.popup_centered()
-		1:
-			_inspect_category(category)
+		
+		List.ContextMenu.SHOW_IN_FILE_SYSTEM:
+			_show_category_folder(List.get_selected().get_text(0))
 
 
-# Category Deletion
-func _delete_category(category: ggsCategory) -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.remove_category(category)
-	ggsSaveFile.new().delete_section(category.name)
-	List.remove_item(List.get_selected())
+# Rename
+func _rename_category(new_name: String) -> void:
+	if new_name == item_prev_name:
+		return
+	
+	if not new_name.is_valid_filename() or new_name.begins_with("_"):
+		InvalidName.popup_centered()
+		List.get_selected().set_text(0, item_prev_name)
+		return
+	
+	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_settings)
+	if dir.dir_exists(new_name):
+		AlreadyExists.popup_centered()
+		List.get_selected().set_text(0, item_prev_name)
+		return
+	
+	dir.rename(item_prev_name, new_name)
+	List.load_list()
+	ggsUtils.get_resource_file_system().scan()
+
+
+func _on_List_item_activated() -> void:
+	item_prev_name = List.get_selected().get_text(0)
+	List.edit_selected(true)
+
+
+func _on_List_item_edited() -> void:
+	var edited_item: TreeItem = List.get_selected()
+	_rename_category(edited_item.get_text(0))
+
+
+# Delete
+func _delete_category(category: TreeItem) -> void:
+#	ggsSaveFile.new().delete_section(category.get_text(0))
+	List.remove_item(category)
 
 
 func _on_DeleteConfirm_confirmed() -> void:
-	_delete_category(List.get_selected().get_metadata(0))
+	_delete_category(List.get_selected())
 
 
-# Category Inspection
-func _inspect_category(category: ggsCategory) -> void:
-	ggsUtils.get_editor_interface().inspect_object(category)
+# Show In File System
+func _show_category_folder(cat_name: String) -> void:
+	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(cat_name)
+	ggsUtils.get_editor_interface().select_file(path)

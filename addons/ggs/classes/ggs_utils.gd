@@ -3,8 +3,16 @@ extends RefCounted
 class_name ggsUtils
 
 
-static func get_editor_interface(): #!
+static func get_editor_interface() -> EditorInterface:
 	return Engine.get_singleton("ggsEI")
+
+
+static func get_resource_file_system() -> EditorFileSystem:
+	return get_editor_interface().get_resource_filesystem()
+
+
+static func get_file_system_dock() -> FileSystemDock:
+	return get_editor_interface().get_file_system_dock()
 
 
 static func get_plugin_data() -> ggsPluginData:
@@ -52,6 +60,13 @@ static func get_enum_string(target_enum: String) -> String:
 			enum_string = ",".join(property_hints)
 	
 	return enum_string
+
+
+### Dir Paths
+
+static func is_dir_in_settings(path: String) -> bool:
+	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
+	return path.begins_with(dir_settings)
 
 
 ### Window
