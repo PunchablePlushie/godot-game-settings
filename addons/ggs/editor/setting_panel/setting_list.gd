@@ -12,6 +12,15 @@ func _ready() -> void:
 	GGS.active_category_updated.connect(_on_Global_active_category_updated)
 
 
+func _gui_input(event: InputEvent) -> void:
+	if (
+		event is InputEventMouseButton and
+		event.button_index == MOUSE_BUTTON_RIGHT and
+		event.is_pressed()
+	):
+		deselect_all()
+
+
 func add_item(setting: String, path: String) -> void:
 	var created_item: TreeItem = create_item(parent)
 	created_item.set_text(0, setting)
@@ -41,6 +50,15 @@ func load_list() -> void:
 			add_item(item, cur_path)
 	
 	GGS.setting_selected.emit(null)
+	
+	if ggsUtils.get_plugin_data().collapse_setting_list:
+		set_collapsed_all(true)
+
+
+func set_collapsed_all(collapsed: bool) -> void:
+	var children: Array[TreeItem] = root.get_children()
+	for child in children:
+		child.set_collapsed_recursive(collapsed)
 
 
 func _on_item_activated() -> void:
@@ -49,15 +67,19 @@ func _on_item_activated() -> void:
 
 
 func _on_item_selected() -> void:
-	return
 	var item_meta: Dictionary = get_selected().get_metadata(0)
 	if item_meta["is_group"]:
 		return
 	
 	var item_name: String = get_selected().get_text(0)
-	var setting_res: ggsSetting = load("%s/%s.tres"%[item_meta["path"], item_name])
+	var res_path: String = "%s/%s.tres"%[item_meta["path"], item_name]
+	if not FileAccess.file_exists(res_path):
+		printerr("GGS - Inspect Setting: The setting resource (%s.tres) could not be found."%item_name)
+		ggsUtils.get_editor_interface().inspect_object(null)
+		return
+	
+	var setting_res: ggsSetting = load(res_path)
 	ggsUtils.get_editor_interface().inspect_object(setting_res)
-#	GGS.setting_selected.emit("%s/%s.tres"%[item_meta, item_name])
 
 
 func _on_Global_active_category_updated() -> void:
@@ -70,7 +92,6 @@ func _on_Global_active_category_updated() -> void:
 ### Get Item List
 
 func _get_item_list() -> Array:
-#	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
 	cur_path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
 	var dir: DirAccess = DirAccess.open(cur_path)
 	var list: Array = Array(dir.get_directories()).filter(_remove_underscored)

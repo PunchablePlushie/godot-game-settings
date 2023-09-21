@@ -27,11 +27,11 @@ func _ready() -> void:
 ### Collapse/Expand Btns
 
 func _on_CollapseAllBtn_pressed() -> void:
-	pass
+	List.set_collapsed_all(true)
 
 
 func _on_ExpandAllBtn_pressed() -> void:
-	pass
+	List.set_collapsed_all(false)
 
 
 ### Reload Btn
