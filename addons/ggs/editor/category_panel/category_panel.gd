@@ -16,11 +16,10 @@ func _ready() -> void:
 ### Category Creation
 
 func _create_category(cat_name: String) -> void:
-	var created_item: TreeItem = List.add_item(cat_name)
-	NCF.clear()
-	
 	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_settings)
 	dir.make_dir(cat_name)
+	
+	NCF.clear()
 
 
 func _on_NCF_text_submitted(submitted_text: String) -> void:

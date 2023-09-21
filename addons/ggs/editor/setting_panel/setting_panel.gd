@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+const TEMPLATE_SCRIPT: GDScript = preload("res://addons/ggs/template.gd")
+
 @export var Notification: AcceptDialog
 
 @onready var AddBtn: Button = %AddBtn
@@ -17,11 +19,67 @@ func _ready() -> void:
 #	AddBtn.pressed.connect(_on_AddBtn_pressed)
 #	ASW.setting_selected.connect(_on_ASW_setting_selected)
 	
-#	GGS.category_selected.connect(_on_Global_category_selected)
+	NSF.text_submitted.connect(_on_NSF_text_submitted)
+	NGF.text_submitted.connect(_on_NGF_text_submitted)
 #	GGS.setting_selected.connect(_on_Global_setting_selected)
 	CollapseAllBtn.pressed.connect(_on_CollapseAllBtn_pressed)
 	ExpandAllBtn.pressed.connect(_on_ExpandAllBtn_pressed)
 	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
+
+
+### Setting Creation
+
+func _create_setting(setting_name: String, path: String) -> void:
+	var dir: DirAccess = DirAccess.open(path)
+	dir.make_dir(setting_name)
+	
+	var setting_dir: String = path.path_join(setting_name)
+	var script: GDScript = TEMPLATE_SCRIPT.duplicate()
+	var script_path: String = "%s/%s.gd"%[setting_dir, setting_name]
+	ResourceSaver.save(script, script_path)
+	
+	var resource: ggsSetting = ggsSetting.new()
+	script = load(script_path)
+	resource.set_script(script)
+	ResourceSaver.save(resource, "%s/%s.tres"%[setting_dir, setting_name])
+	
+	NSF.clear()
+
+
+func _on_NSF_text_submitted(submitted_text: String) -> void:
+	if (
+		not submitted_text.is_valid_filename() or
+		submitted_text.begins_with("_") or
+		submitted_text.begins_with(".") or
+		submitted_text.begins_with("-")
+	):
+		Notification.purpose = Notification.Purpose.INVALID
+		Notification.popup_centered()
+		return
+	
+	var path: String
+	var selected_item: TreeItem = List.get_selected()
+	if selected_item == null or not selected_item.get_metadata(0)["is_group"]:
+		path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
+	else:
+		path = selected_item.get_metadata(0)["path"]
+	
+	var dir: DirAccess = DirAccess.open(path)
+	if dir.dir_exists(submitted_text):
+		Notification.purpose = Notification.Purpose.ALREADY_EXISTS
+		Notification.popup_centered()
+		return
+	
+	_create_setting(submitted_text, path)
+	ggsUtils.get_resource_file_system().scan()
+	List.load_list()
+
+
+### Group Creation
+
+func _on_NGF_text_submitted(submitted_text: String) -> void:
+	pass
+
 
 
 ### Collapse/Expand Btns
@@ -39,77 +97,3 @@ func _on_ExpandAllBtn_pressed() -> void:
 func _on_ReloadBtn_pressed() -> void:
 	List.load_list()
 
-
-
-### Adding Settings
-#
-#func _add_setting(setting: ggsSetting) -> void:
-#	var name_list: PackedStringArray = GGS.active_category.get_setting_name_list()
-#	setting.name = ggsUtils.get_unique_string(name_list, setting.name)
-#	setting.category = GGS.active_category.name
-#	setting.current = setting.default
-#
-#	List.add_item(setting)
-#	GGS.active_category.add_setting(setting)
-#	ggsSaveFile.new().set_key(setting.category, setting.name, setting.default)
-#
-#
-#func _on_AddBtn_pressed() -> void:
-#	ASW.popup_centered()
-#
-#
-#func _on_ASW_setting_selected(selected_setting: ggsSetting) -> void:
-#	_add_setting(selected_setting)
-
-
-### Renaming Settings
-#
-#func _rename_setting(tree_item: TreeItem) -> void:
-#	var setting: ggsSetting = tree_item.get_metadata(0)
-#	var prev_name: String = setting.name
-#	var new_name: String = tree_item.get_text(0)
-#
-#	if prev_name == new_name:
-#		return
-#
-#	var name_list: PackedStringArray = GGS.active_category.get_setting_name_list()
-#	setting.name = ggsUtils.get_unique_string(name_list, new_name)
-#
-#	GGS.active_category.rename_setting(prev_name, setting)
-#	ggsSaveFile.new().rename_key(setting.category, prev_name, setting.name)
-#
-#	tree_item.set_text(0, setting.name)
-#	tree_item.set_editable(0, false)
-#
-#
-#func _on_List_item_edited() -> void:
-#	_rename_setting(List.get_edited())
-
-
-### Deleting Settings
-#
-#func _delete_setting(setting: ggsSetting) -> void:
-#	GGS.active_category.remove_setting(setting)
-#	ggsSaveFile.new().delete_key(setting.category, setting.name)
-#	List.remove_item(List.get_selected())
-#	setting.delete()
-#
-#
-#func _on_Global_category_selected(category: ggsCategory) -> void:
-#	DeleteBtn.disabled = true
-#	AssignBtn.disabled = true
-#
-#	AddBtn.disabled = (category == null)
-#
-#
-#func _on_Global_setting_selected(setting: ggsSetting) -> void:
-#	DeleteBtn.disabled = (setting == null)
-#	AssignBtn.disabled = (setting == null)
-#
-#
-#func _on_DeleteBtn_pressed() -> void:
-#	DeleteConfirm.popup_centered()
-#
-#
-#func _on_DeleteConfirm_confirmed() -> void:
-#	_delete_setting(List.get_selected().get_metadata(0))

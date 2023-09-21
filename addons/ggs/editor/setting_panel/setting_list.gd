@@ -21,14 +21,24 @@ func _gui_input(event: InputEvent) -> void:
 		deselect_all()
 
 
-func add_item(setting: String, path: String) -> void:
-	var created_item: TreeItem = create_item(parent)
+func add_item(setting: String, path: String, forced_parent: TreeItem = null) -> void:
+	var created_item: TreeItem
+	if forced_parent:
+		created_item = create_item(forced_parent)
+	else:
+		created_item = create_item(parent)
+	
 	created_item.set_text(0, setting)
 	created_item.set_metadata(0, {"is_group": false, "path": path})
 
 
-func add_group_item(setting: String, path: String) -> TreeItem:
-	var created_item: TreeItem = create_item(parent)
+func add_group_item(setting: String, path: String, forced_parent: TreeItem = null) -> TreeItem:
+	var created_item: TreeItem
+	if forced_parent:
+		created_item = create_item(forced_parent)
+	else:
+		created_item = create_item(parent)
+	
 	created_item.set_text(0, setting.trim_prefix("-"))
 	created_item.set_metadata(0, {"is_group": true, "path": path})
 	return created_item

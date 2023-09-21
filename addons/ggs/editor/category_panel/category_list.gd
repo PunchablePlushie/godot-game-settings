@@ -14,20 +14,20 @@ func _ready() -> void:
 	load_list()
 
 
-func add_item(category: String) -> void:
-	var created_item: TreeItem = create_item(root)
-	created_item.set_text(0, category)
-
-
 func load_list() -> void:
 	clear()
 	root = create_item()
 	
 	var category_list: Array = _get_category_list()
 	for category in category_list:
-		add_item(category)
+		_add_item(category)
 	
 	GGS.category_selected.emit("")
+
+
+func _add_item(category: String) -> void:
+	var created_item: TreeItem = create_item(root)
+	created_item.set_text(0, category)
 
 
 func _update_from_file_system(path: String) -> void:
