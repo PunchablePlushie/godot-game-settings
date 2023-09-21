@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ddbbpsxoho6ke"]
+
+[ext_resource type="Script" path="res://game_settings/settings/audio/-music/volume/volume.gd" id="1_qrxkt"]
+
+[resource]
+resource_name = "volume.gd"
+script = ExtResource("1_qrxkt")
+current = null
+default = null
+name = "volume.gd"
+category = ""
+desc = "No description available."
+value_type = 0
+value_hint = 0
+value_hint_string = ""

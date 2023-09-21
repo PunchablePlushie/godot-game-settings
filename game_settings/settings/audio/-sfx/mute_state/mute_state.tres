@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bcj6dqsfgb173"]
+
+[ext_resource type="Script" path="res://game_settings/settings/audio/-sfx/mute_state/mute_state.gd" id="1_cfnop"]
+
+[resource]
+resource_name = "mute_state.gd"
+script = ExtResource("1_cfnop")
+current = null
+default = null
+name = "mute_state.gd"
+category = ""
+desc = "No description available."
+value_type = 0
+value_hint = 0
+value_hint_string = ""

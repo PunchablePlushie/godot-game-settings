@@ -21,29 +21,6 @@ func _gui_input(event: InputEvent) -> void:
 		deselect_all()
 
 
-func add_item(setting: String, path: String, forced_parent: TreeItem = null) -> void:
-	var created_item: TreeItem
-	if forced_parent:
-		created_item = create_item(forced_parent)
-	else:
-		created_item = create_item(parent)
-	
-	created_item.set_text(0, setting)
-	created_item.set_metadata(0, {"is_group": false, "path": path})
-
-
-func add_group_item(setting: String, path: String, forced_parent: TreeItem = null) -> TreeItem:
-	var created_item: TreeItem
-	if forced_parent:
-		created_item = create_item(forced_parent)
-	else:
-		created_item = create_item(parent)
-	
-	created_item.set_text(0, setting.trim_prefix("-"))
-	created_item.set_metadata(0, {"is_group": true, "path": path})
-	return created_item
-
-
 func load_list() -> void:
 	clear()
 	root = create_item()
@@ -54,10 +31,10 @@ func load_list() -> void:
 		cur_path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category).path_join(item)
 		
 		if item.begins_with("-"):
-			parent = add_group_item(item, cur_path)
+			parent = _add_group_item(item, cur_path)
 			_load_group(item, parent)
 		else:
-			add_item(item, cur_path)
+			_add_item(item, cur_path)
 	
 	GGS.setting_selected.emit(null)
 	
@@ -69,6 +46,29 @@ func set_collapsed_all(collapsed: bool) -> void:
 	var children: Array[TreeItem] = root.get_children()
 	for child in children:
 		child.set_collapsed_recursive(collapsed)
+
+
+func _add_item(setting: String, path: String, forced_parent: TreeItem = null) -> void:
+	var created_item: TreeItem
+	if forced_parent:
+		created_item = create_item(forced_parent)
+	else:
+		created_item = create_item(parent)
+	
+	created_item.set_text(0, setting)
+	created_item.set_metadata(0, {"is_group": false, "path": path})
+
+
+func _add_group_item(setting: String, path: String, forced_parent: TreeItem = null) -> TreeItem:
+	var created_item: TreeItem
+	if forced_parent:
+		created_item = create_item(forced_parent)
+	else:
+		created_item = create_item(parent)
+	
+	created_item.set_text(0, "[ %s ]"%setting.trim_prefix("-"))
+	created_item.set_metadata(0, {"is_group": true, "path": path})
+	return created_item
 
 
 func _on_item_activated() -> void:
@@ -118,10 +118,10 @@ func _load_group(group: String, group_item: TreeItem) -> void:
 		cur_path = group_path.path_join(item)
 		
 		if item.begins_with("-"):
-			parent = add_group_item(item, cur_path)
+			parent = _add_group_item(item, cur_path)
 			_load_group(item, parent)
 		else:
-			add_item(item, cur_path)
+			_add_item(item, cur_path)
 
 
 func _remove_underscored(element: String) -> bool:
