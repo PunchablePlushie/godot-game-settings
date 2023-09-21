@@ -1,16 +1,13 @@
 @tool
 extends ggsTree
 
-enum ContextMenu {RENAME, DELETE, SHOW_IN_FILE_SYSTEM}
-
 var parent: TreeItem = root
-
-@onready var CMenu: PopupMenu = $ContextMenu
+var cur_path: String
 
 
 func _ready() -> void:
 	item_selected.connect(_on_item_selected)
-	item_mouse_selected.connect(_on_item_mouse_selected)
+	item_activated.connect(_on_item_activated)
 	
 	GGS.active_category_updated.connect(_on_Global_active_category_updated)
 
@@ -28,15 +25,6 @@ func add_group_item(setting: String, path: String) -> TreeItem:
 	return created_item
 
 
-func remove_item(item: TreeItem) -> void:
-	var path: String = ProjectSettings.globalize_path(item.get_metadata(0)["path"])
-	OS.move_to_trash(path)
-	
-	item.free()
-#	GGS.setting_selected.emit("")
-	ggsUtils.get_resource_file_system().scan()
-
-
 func load_list() -> void:
 	clear()
 	root = create_item()
@@ -44,18 +32,24 @@ func load_list() -> void:
 	var item_list: Array = _get_item_list()
 	for item in item_list:
 		parent = root
-		var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category).path_join(item)
+		cur_path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category).path_join(item)
 		
 		if item.begins_with("-"):
-			parent = add_group_item(item, path)
-			_load_group(item)
+			parent = add_group_item(item, cur_path)
+			_load_group(item, parent)
 		else:
-			add_item(item, path)
+			add_item(item, cur_path)
 	
 	GGS.setting_selected.emit(null)
 
 
+func _on_item_activated() -> void:
+	var path: String = get_selected().get_metadata(0)["path"]
+	ggsUtils.get_editor_interface().select_file(path)
+
+
 func _on_item_selected() -> void:
+	return
 	var item_meta: Dictionary = get_selected().get_metadata(0)
 	if item_meta["is_group"]:
 		return
@@ -76,31 +70,28 @@ func _on_Global_active_category_updated() -> void:
 ### Get Item List
 
 func _get_item_list() -> Array:
-	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
-	var dir: DirAccess = DirAccess.open(path)
+#	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
+	cur_path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
+	var dir: DirAccess = DirAccess.open(cur_path)
 	var list: Array = Array(dir.get_directories()).filter(_remove_underscored)
 	return list
 
 
-func _load_group(group: String) -> void:
-	var base_path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
-	var group_path: String = base_path.path_join(group)
-	var dir: DirAccess = DirAccess.open(base_path.path_join(group))
-	var list: Array = Array(dir.get_directories()).filter(_remove_underscored)
-	for item in list:
-		var path: String = group_path.path_join(item)
-		add_item(item, path)
+func _load_group(group: String, group_item: TreeItem) -> void:
+	var group_path: String = cur_path
+	var dir: DirAccess = DirAccess.open(cur_path)
+	var item_list: Array = Array(dir.get_directories()).filter(_remove_underscored)
+	
+	for item in item_list:
+		parent = group_item
+		cur_path = group_path.path_join(item)
+		
+		if item.begins_with("-"):
+			parent = add_group_item(item, cur_path)
+			_load_group(item, parent)
+		else:
+			add_item(item, cur_path)
 
 
 func _remove_underscored(element: String) -> bool:
 	return not element.begins_with("_")
-
-
-### Show Context Menu
-
-func _on_item_mouse_selected(pos: Vector2, mouse_btn: int) -> void:
-	if not mouse_btn == MOUSE_BUTTON_RIGHT:
-		return
-	
-	CMenu.position = DisplayServer.mouse_get_position()
-	CMenu.popup()

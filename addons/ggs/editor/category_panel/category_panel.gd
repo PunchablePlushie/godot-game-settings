@@ -7,14 +7,10 @@ extends Control
 @onready var ReloadBtn: Button = %ReloadBtn
 @onready var List: Tree = %CategoryList
 
-var item_prev_name: String
-
 
 func _ready() -> void:
 	NCF.text_submitted.connect(_on_NCF_text_submitted)
 	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
-	List.item_activated.connect(_on_List_item_activated)
-	List.item_selected.connect(_on_List_item_selected)
 
 
 ### Category Creation
@@ -53,16 +49,3 @@ func _on_NCF_text_submitted(submitted_text: String) -> void:
 
 func _on_ReloadBtn_pressed() -> void:
 	List.load_list()
-
-
-### List
-
-func _on_List_item_selected() -> void:
-	var item_name: String = List.get_selected().get_text(0)
-	GGS.category_selected.emit(item_name)
-
-
-func _on_List_item_activated() -> void:
-	var item_name: String = List.get_selected().get_text(0)
-	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(item_name)
-	ggsUtils.get_editor_interface().select_file(path)

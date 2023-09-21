@@ -5,6 +5,9 @@ extends ggsTree
 
 
 func _ready() -> void:
+	item_activated.connect(_on_item_activated)
+	item_selected.connect(_on_item_selected)
+	
 	FSD.folder_moved.connect(_on_FSD_folder_moved)
 	FSD.folder_removed.connect(_on_FSD_folder_removed)
 	
@@ -23,6 +26,8 @@ func load_list() -> void:
 	var category_list: Array = _get_category_list()
 	for category in category_list:
 		add_item(category)
+	
+	GGS.category_selected.emit("")
 
 
 func _update_from_file_system(path: String) -> void:
@@ -30,7 +35,17 @@ func _update_from_file_system(path: String) -> void:
 		return
 	
 	load_list()
-	GGS.category_selected.emit("")
+
+
+func _on_item_selected() -> void:
+	var item_name: String = get_selected().get_text(0)
+	GGS.category_selected.emit(item_name)
+
+
+func _on_item_activated() -> void:
+	var item_name: String = get_selected().get_text(0)
+	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(item_name)
+	ggsUtils.get_editor_interface().select_file(path)
 
 
 func _on_FSD_folder_moved(old_folder: String, _new_folder: String) -> void:
