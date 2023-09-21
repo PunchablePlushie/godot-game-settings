@@ -1,13 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=4 format=3 uid="uid://bkp77x1seytg7"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_panel.gd" id="1_yu7o4"]
 [ext_resource type="Texture2D" uid="uid://dkmion6u6aokv" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
-[ext_resource type="Texture2D" uid="uid://betan6wm2eiuh" path="res://addons/ggs/assets/rename.svg" id="4_k2lqb"]
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_list.gd" id="4_xqs08"]
-[ext_resource type="Texture2D" uid="uid://b7u0sjxctxinv" path="res://addons/ggs/assets/delete.svg" id="6_b7lqk"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xse2g"]
-load_path = "res://.godot/imported/show_in_filesystem.svg-d8323cbcf62adb9529b12d5317dfd9e0.ctex"
 
 [node name="CategoryPanel" type="Control"]
 custom_minimum_size = Vector2(250, 0)
@@ -53,50 +48,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
-allow_rmb_select = true
 hide_folding = true
 hide_root = true
 script = ExtResource("4_xqs08")
-
-[node name="ContextMenu" type="PopupMenu" parent="MainCtnr/CategoryList"]
-unique_name_in_owner = true
-size = Vector2i(196, 62)
-item_count = 4
-item_0/text = "Rename"
-item_0/icon = ExtResource("4_k2lqb")
-item_0/id = 0
-item_1/text = "Delete"
-item_1/icon = ExtResource("6_b7lqk")
-item_1/id = 1
-item_2/text = ""
-item_2/id = 999
-item_2/separator = true
-item_3/text = "Show in File System"
-item_3/icon = SubResource("CompressedTexture2D_xse2g")
-item_3/id = 2
-
-[node name="InvalidName" type="AcceptDialog" parent="."]
-title = "Invalid Category Name"
-size = Vector2i(687, 100)
-unresizable = true
-max_size = Vector2i(700, 16384)
-dialog_text = "The category name must be a valid file name and cannot start with an underscore (\"_\") or dot (\".\")."
-dialog_autowrap = true
-
-[node name="AlreadyExists" type="AcceptDialog" parent="."]
-title = "Category Already Exists"
-size = Vector2i(332, 100)
-unresizable = true
-max_size = Vector2i(700, 16384)
-dialog_text = "A category with this name already exists."
-dialog_autowrap = true
-
-[node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
-title = "Confirm Category Deletion"
-size = Vector2i(700, 135)
-unresizable = true
-max_size = Vector2i(700, 16384)
-ok_button_text = "Delete"
-dialog_text = "Are you sure you want to delete the selected category?
-Depending on your system configuration, the corresponding folder will either be moved to system trash or deleted permanently."
-dialog_autowrap = true

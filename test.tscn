@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://0gvjd2nxph5s"]
+[gd_scene load_steps=3 format=3 uid="uid://0gvjd2nxph5s"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/ggs_ui_component.gd" id="1_pdh06"]
-[ext_resource type="Resource" uid="uid://dv5yvxmm552kk" path="res://game_settings/settings/z/-spells/zzzz/zzzz.tres" id="2_m18iu"]
-[ext_resource type="ArrayMesh" uid="uid://c38wes6bfduff" path="res://ggg.tres" id="3_xak4e"]
+[ext_resource type="Resource" uid="uid://dv5yvxmm552kk" path="res://game_settings/settings/a/-spells/zzzz/zzzz.tres" id="2_qrx18"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -17,7 +16,4 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_pdh06")
-setting = ExtResource("2_m18iu")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-mesh = ExtResource("3_xak4e")
+setting = ExtResource("2_qrx18")

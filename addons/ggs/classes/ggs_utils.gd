@@ -19,16 +19,6 @@ static func get_plugin_data() -> ggsPluginData:
 	return load("res://addons/ggs/plugin_data.tres")
 
 
-static func get_unique_string(list: PackedStringArray, string: String) -> String:
-	var cur_string: String = string
-	var count: int = 2
-	while list.has(cur_string):
-		cur_string = "%s %d"%[string, count]
-		count += 1
-	
-	return cur_string
-
-
 static func get_enum_string(target_enum: String) -> String:
 	var types: PackedStringArray = [
 		"Nil","Bool","Int","Float","String","Vector2","Vector2i","Rect2",

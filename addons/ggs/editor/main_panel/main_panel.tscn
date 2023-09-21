@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=18 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/pref_window/pref_window.tscn" id="10_ir36c"]
 [ext_resource type="Texture2D" uid="uid://cl4uvu7k4yw3x" path="res://addons/ggs/assets/bug.svg" id="10_rly1w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/bug_btn.gd" id="11_2ygfj"]
+[ext_resource type="Script" path="res://addons/ggs/editor/category_panel/notification.gd" id="17_768tu"]
 
 [node name="MainPanel" type="Control"]
 custom_minimum_size = Vector2(0, 300)
@@ -44,9 +45,10 @@ size_flags_vertical = 3
 split_offset = -225
 script = ExtResource("4_mplwh")
 
-[node name="CategoryPanel" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
+[node name="CategoryPanel" parent="MainCtnr/HSplit_0" node_paths=PackedStringArray("Notification") instance=ExtResource("4_4p007")]
 layout_mode = 2
 size_flags_horizontal = 3
+Notification = NodePath("../../../Notification")
 
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
@@ -121,3 +123,14 @@ script = ExtResource("9_oodag")
 
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true
+
+[node name="Notification" type="AcceptDialog" parent="."]
+size = Vector2i(687, 100)
+unresizable = true
+max_size = Vector2i(700, 16384)
+dialog_autowrap = true
+script = ExtResource("17_768tu")
+title_invalid = "Invalid Item Name"
+title_already_exists = "Item Already Exists"
+msg_invalid = "The item name must be a valid file name and cannot start with an underscore (\"_\") , dot (\".\") or hyphen (\"-\")."
+msg_already_exists = "An item with this name already exists."
