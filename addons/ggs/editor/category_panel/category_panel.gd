@@ -67,7 +67,7 @@ func _on_CMenu_id_pressed(id: int) -> void:
 			DeleteConfirm.popup_centered()
 		
 		List.ContextMenu.SHOW_IN_FILE_SYSTEM:
-			_show_category_folder(List.get_selected().get_text(0))
+			_show_in_file_system(List.get_selected().get_text(0))
 
 
 # Rename
@@ -107,16 +107,12 @@ func _on_List_item_edited() -> void:
 
 
 # Delete
-func _delete_category(category: TreeItem) -> void:
-#	ggsSaveFile.new().delete_section(category.get_text(0))
-	List.remove_item(category)
-
-
 func _on_DeleteConfirm_confirmed() -> void:
-	_delete_category(List.get_selected())
+#	ggsSaveFile.new().delete_section(category.get_text(0))
+	List.remove_item(List.get_selected())
 
 
 # Show In File System
-func _show_category_folder(cat_name: String) -> void:
+func _show_in_file_system(cat_name: String) -> void:
 	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(cat_name)
 	ggsUtils.get_editor_interface().select_file(path)

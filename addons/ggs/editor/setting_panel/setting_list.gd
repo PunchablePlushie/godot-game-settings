@@ -18,24 +18,22 @@ func _ready() -> void:
 func add_item(setting: String, path: String) -> void:
 	var created_item: TreeItem = create_item(parent)
 	created_item.set_text(0, setting)
-	created_item.set_metadata(0, path)
+	created_item.set_metadata(0, {"is_group": false, "path": path})
 
 
-func add_group_item(setting: String) -> TreeItem:
+func add_group_item(setting: String, path: String) -> TreeItem:
 	var created_item: TreeItem = create_item(parent)
 	created_item.set_text(0, setting.trim_prefix("-"))
-	created_item.set_metadata(0, "")
+	created_item.set_metadata(0, {"is_group": true, "path": path})
 	return created_item
 
 
 func remove_item(item: TreeItem) -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var item_name: String = item.get_text(0)
-	var path: String = ProjectSettings.globalize_path(data.dir_settings.path_join(item_name))
+	var path: String = ProjectSettings.globalize_path(item.get_metadata(0)["path"])
 	OS.move_to_trash(path)
 	
 	item.free()
-	GGS.setting_selected.emit("")
+#	GGS.setting_selected.emit("")
 	ggsUtils.get_resource_file_system().scan()
 
 
@@ -46,24 +44,24 @@ func load_list() -> void:
 	var item_list: Array = _get_item_list()
 	for item in item_list:
 		parent = root
+		var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category).path_join(item)
 		
 		if item.begins_with("-"):
-			parent = add_group_item(item)
+			parent = add_group_item(item, path)
 			_load_group(item)
 		else:
-			var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category).path_join(item)
 			add_item(item, path)
 	
 	GGS.setting_selected.emit(null)
 
 
 func _on_item_selected() -> void:
-	var item_meta: String = get_selected().get_metadata(0)
-	if item_meta.is_empty():
+	var item_meta: Dictionary = get_selected().get_metadata(0)
+	if item_meta["is_group"]:
 		return
 	
 	var item_name: String = get_selected().get_text(0)
-	var setting_res: ggsSetting = load("%s/%s.tres"%[item_meta, item_name])
+	var setting_res: ggsSetting = load("%s/%s.tres"%[item_meta["path"], item_name])
 	ggsUtils.get_editor_interface().inspect_object(setting_res)
 #	GGS.setting_selected.emit("%s/%s.tres"%[item_meta, item_name])
 

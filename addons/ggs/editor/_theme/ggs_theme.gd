@@ -11,6 +11,7 @@ func update() -> void:
 	_set_tree()
 	_set_big_tree()
 	_set_window_bg()
+	ResourceSaver.save(self, resource_path)
 
 
 func _set_tree() -> void:

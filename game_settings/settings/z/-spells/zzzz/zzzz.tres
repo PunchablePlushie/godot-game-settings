@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://dv5yvxmm552kk"]
 
-[ext_resource type="Script" path="res://game_settings/settings/a/health/health.gd" id="1_es5ok"]
+[ext_resource type="Script" path="res://game_settings/settings/z/-spells/zzzz/zzzz.gd" id="1_8jupx"]
 
 [resource]
 resource_name = "ggs_setting.gd"
-script = ExtResource("1_es5ok")
+script = ExtResource("1_8jupx")
 current = null
 default = null
 name = "ggs_setting.gd"
