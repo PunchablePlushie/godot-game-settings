@@ -5,7 +5,7 @@ extends ggsTree
 func _ready() -> void:
 	item_selected.connect(_on_item_selected)
 	item_activated.connect(_on_item_activated)
-	GGS.category_selected.connect(_on_Global_category_selected)
+	GGS.category_changed.connect(_on_Global_category_selected)
 
 
 func add_item(setting: ggsSetting) -> void:
