@@ -5,10 +5,6 @@ var size_setting: String = "[NONE]": set = set_size_setting
 
 
 func _init() -> void:
-	name = "Fullscreen Mode"
-	icon = preload("res://addons/ggs/assets/game_settings/display_fullscreen.svg")
-	desc = "Toggle Fullscreen mode."
-	
 	value_type = TYPE_BOOL
 	default = false
 

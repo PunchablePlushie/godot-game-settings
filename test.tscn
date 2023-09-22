@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0gvjd2nxph5s"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/ggs_ui_component.gd" id="1_pdh06"]
-[ext_resource type="Resource" uid="uid://dv5yvxmm552kk" path="res://game_settings/settings/a/-spells/zzzz/zzzz.tres" id="2_qrx18"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,10 +9,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ggsUIComponent" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_pdh06")
-setting = ExtResource("2_qrx18")

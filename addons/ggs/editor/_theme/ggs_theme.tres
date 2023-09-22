@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5yxrv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fji6x"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -17,7 +17,7 @@ corner_detail = 3
 expand_margin_left = 12.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55ejl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81o7k"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -32,7 +32,7 @@ corner_detail = 3
 expand_margin_left = 6.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aonjg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sauhg"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -47,10 +47,10 @@ anti_aliasing = false
 
 [resource]
 BigTree/base_type = &"Tree"
-BigTree/styles/selected = SubResource("StyleBoxFlat_5yxrv")
-BigTree/styles/selected_focus = SubResource("StyleBoxFlat_5yxrv")
-Tree/styles/selected = SubResource("StyleBoxFlat_55ejl")
-Tree/styles/selected_focus = SubResource("StyleBoxFlat_55ejl")
+BigTree/styles/selected = SubResource("StyleBoxFlat_fji6x")
+BigTree/styles/selected_focus = SubResource("StyleBoxFlat_fji6x")
+Tree/styles/selected = SubResource("StyleBoxFlat_81o7k")
+Tree/styles/selected_focus = SubResource("StyleBoxFlat_81o7k")
 WindowBG/base_type = &"PanelContainer"
-WindowBG/styles/panel = SubResource("StyleBoxFlat_aonjg")
+WindowBG/styles/panel = SubResource("StyleBoxFlat_sauhg")
 script = ExtResource("1_3cm4d")

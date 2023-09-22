@@ -8,9 +8,6 @@ enum Type {KEYBOARD, GAMEPAD}
 
 
 func _init() -> void:
-	name = "Input Binding"
-	desc = "Rebind keyboard or gamepad input of a specific input action."
-	
 	value_type = TYPE_STRING
 	default = ""
 

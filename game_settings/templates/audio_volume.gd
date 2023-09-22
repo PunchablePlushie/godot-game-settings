@@ -5,10 +5,6 @@ var bus_name: String = "[NONE]": set = set_bus_name
 
 
 func _init() -> void:
-	name = "Audio Volume"
-	icon = preload("res://addons/ggs/assets/game_settings/audio_volume.svg")
-	desc = "Change volume of a specific audio bus."
-	
 	value_type = TYPE_FLOAT
 	value_hint = PROPERTY_HINT_RANGE
 	value_hint_string = "0,100"

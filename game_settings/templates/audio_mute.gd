@@ -5,10 +5,6 @@ var bus_name: String = "[NONE]": set = set_bus_name
 
 
 func _init() -> void:
-	name = "Audio Mute"
-	icon = preload("res://addons/ggs/assets/game_settings/audio_mute.svg")
-	desc = "Toggle mute state of a specific audio bus."
-	
 	value_type = TYPE_BOOL
 	default = false
 

@@ -13,11 +13,11 @@ func _init() -> void:
 
 
 func set_key(section: String, key: String, value: Variant) -> void:
-	if section.is_empty():
-		return
+#	if section.is_empty():
+#		return
 	
 	set_value(section, key, value)
-	save(path)
+#	save(path)
 
 
 func get_key(section: String, key: String) -> Variant:

@@ -1,17 +1,53 @@
 @tool
 extends Node
-
-### Signals
-
 signal category_selected(category: String)
 signal active_category_updated()
 signal setting_selected(setting: ggsSetting)
 
-
-### Variables
-
 var active_category: String
 var active_setting: ggsSetting
+
+func update_save_file() -> void:
+	var cur_category: String
+	var cur_setting: String
+	
+	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
+	var dir: DirAccess = DirAccess.open(dir_settings)
+	var categories: PackedStringArray = dir.get_directories()
+	for category in categories:
+		cur_category = category
+		
+		dir.change_dir(dir_settings.path_join(category))
+		var items: PackedStringArray = dir.get_directories()
+		for item in items:
+			if item.begins_with("-"):
+				_update_save_file_recursive(dir, item, cur_category, cur_setting)
+			else:
+				cur_setting = item
+				var res_path: String = "%s/%s/%s.tres"%[dir.get_current_dir(), item, item]
+				var setting: ggsSetting = load(res_path)
+				
+				var save_file: ConfigFile = ggsSaveFile.new()
+				save_file.set_key(cur_category, cur_setting, setting.current)
+				save_file.save(save_file.path)
+
+
+func _update_save_file_recursive(dir: DirAccess, group: String, cur_category: String, cur_setting: String) -> void:
+	cur_setting += "%s_"%group.trim_prefix("-")
+	
+	dir.change_dir(dir.get_current_dir().path_join(group))
+	var items: PackedStringArray = dir.get_directories()
+	for item in items:
+		if item.begins_with("-"):
+			_update_save_file_recursive(dir, item, cur_category, cur_setting)
+		else:
+			cur_setting += item
+			var res_path: String = "%s/%s/%s.tres"%[dir.get_current_dir(), item, item]
+			var setting: ggsSetting = load(res_path)
+			
+			var save_file: ConfigFile = ggsSaveFile.new()
+			save_file.set_key(cur_category, cur_setting, setting.current)
+			save_file.save(save_file.path)
 
 
 ### Game Init

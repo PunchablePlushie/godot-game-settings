@@ -5,10 +5,6 @@ extends ggsSetting
 
 
 func _init() -> void:
-	name = "Window Size"
-	icon = preload("res://addons/ggs/assets/game_settings/display_size.svg")
-	desc = "Change window size by setting its width and height to specific values."
-	
 	value_type = TYPE_INT
 	value_hint = PROPERTY_HINT_ENUM
 	value_hint_string = ",".join(_get_sizes())

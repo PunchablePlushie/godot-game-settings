@@ -9,4 +9,5 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	OS.shell_open(URI)
+	GGS.update_save_file()
+#	OS.shell_open(URI)
