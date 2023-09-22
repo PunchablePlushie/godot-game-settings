@@ -33,6 +33,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "New from Template"
+disabled = true
 icon = ExtResource("3_tdauq")
 flat = true
 
@@ -41,6 +42,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New Setting..."
+editable = false
 clear_button_enabled = true
 
 [node name="NewGroupField" type="LineEdit" parent="MainCtnr/TopBar"]
@@ -48,6 +50,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New Group..."
+editable = false
 clear_button_enabled = true
 
 [node name="VSep" type="VSeparator" parent="MainCtnr/TopBar"]
@@ -57,6 +60,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Collapse All"
+disabled = true
 icon = ExtResource("3_cwys1")
 flat = true
 
@@ -64,6 +68,7 @@ flat = true
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Expand All"
+disabled = true
 icon = ExtResource("4_6vxtj")
 flat = true
 
@@ -71,6 +76,7 @@ flat = true
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload List"
+disabled = true
 icon = ExtResource("4_j6whk")
 flat = true
 

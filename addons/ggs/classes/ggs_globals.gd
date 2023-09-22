@@ -69,6 +69,7 @@ func _apply_settings() -> void:
 func _ready() -> void:
 	category_selected.connect(_on_category_selected)
 	setting_selected.connect(_on_setting_selected)
+	return
 	
 	var used_data: Dictionary = _get_used_settings()
 	_remove_unused_data(used_data)

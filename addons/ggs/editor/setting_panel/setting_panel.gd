@@ -16,15 +16,16 @@ const TEMPLATE_SCRIPT: GDScript = preload("res://addons/ggs/template.gd")
 
 
 func _ready() -> void:
-#	AddBtn.pressed.connect(_on_AddBtn_pressed)
-#	ASW.setting_selected.connect(_on_ASW_setting_selected)
+	AddBtn.pressed.connect(_on_AddBtn_pressed)
+	ASW.template_selected.connect(_on_ASW_template_selected)
 	
 	NSF.text_submitted.connect(_on_NSF_text_submitted)
 	NGF.text_submitted.connect(_on_NGF_text_submitted)
-#	GGS.setting_selected.connect(_on_Global_setting_selected)
 	CollapseAllBtn.pressed.connect(_on_CollapseAllBtn_pressed)
 	ExpandAllBtn.pressed.connect(_on_ExpandAllBtn_pressed)
 	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
+	
+	GGS.active_category_updated.connect(_on_Global_active_category_updated)
 
 
 func _create_item(item_name: String, creation_method: Callable) -> void:
@@ -44,6 +45,8 @@ func _create_item(item_name: String, creation_method: Callable) -> void:
 		path = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
 	else:
 		path = selected_item.get_metadata(0)["path"]
+	
+	if creation_method == _create_group:
 		item_name = item_name.insert(0, "-")
 	
 	var dir: DirAccess = DirAccess.open(path)
@@ -55,6 +58,19 @@ func _create_item(item_name: String, creation_method: Callable) -> void:
 	creation_method.call(item_name, path)
 	ggsUtils.get_resource_file_system().scan()
 	List.load_list()
+
+
+func _set_topbar_disabled(disabled: bool) -> void:
+	AddBtn.disabled = disabled
+	NSF.editable = !disabled
+	NGF.editable = !disabled
+	CollapseAllBtn.disabled = disabled
+	ExpandAllBtn.disabled = disabled
+	ReloadBtn.disabled = disabled
+
+
+func _on_Global_active_category_updated() -> void:
+	_set_topbar_disabled(GGS.active_category.is_empty())
 
 
 ### Setting Creation
@@ -90,6 +106,29 @@ func _create_group(group_name: String, path: String) -> void:
 
 func _on_NGF_text_submitted(submitted_text: String) -> void:
 	_create_item(submitted_text, _create_group)
+
+
+### Setting from Template
+
+func _create_from_template(setting_name: String, path: String, template: String) -> void:
+	var dir: DirAccess = DirAccess.open(path)
+	dir.make_dir(setting_name)
+	
+	var setting_dir: String = path.path_join(setting_name)
+	var script_path: String = ggsUtils.get_plugin_data().dir_templates.path_join(template)
+	
+	var resource: ggsSetting = ggsSetting.new()
+	var script: GDScript = load(script_path)
+	resource.set_script(script)
+	ResourceSaver.save(resource, "%s/%s.tres"%[setting_dir, setting_name])
+
+
+func _on_AddBtn_pressed() -> void:
+	ASW.popup_centered()
+
+
+func _on_ASW_template_selected(template: String, setting_name: String) -> void:
+	_create_item(setting_name, _create_from_template.bind(template))
 
 
 ### Collapse/Expand Btns

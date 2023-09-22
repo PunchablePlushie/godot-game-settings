@@ -9,7 +9,6 @@ enum Type {KEYBOARD, GAMEPAD}
 
 func _init() -> void:
 	name = "Input Binding"
-	icon = preload("res://addons/ggs/assets/game_settings/input_setting.svg")
 	desc = "Rebind keyboard or gamepad input of a specific input action."
 	
 	value_type = TYPE_STRING

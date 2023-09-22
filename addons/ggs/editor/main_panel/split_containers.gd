@@ -21,4 +21,4 @@ func _on_dragged(offset: int) -> void:
 	clamp_split_offset()
 	
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.set_data(property, offset)
+	data.set_property(property, offset)

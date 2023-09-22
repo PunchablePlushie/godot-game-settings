@@ -11,8 +11,7 @@ const SPLIT_OFFSET_0_DEFAULT: int = -225
 const SPLIT_OFFSET_1_DEFAULT: int = 420
 
 @export_category("GGS Plugin Data")
-@export var recent_settings: Array[ggsSetting]
-@export var setting_list_cache: Array[ggsSetting]
+@export var recent_settings: Array[String]
 @export var collapse_setting_list: bool = COLLAPSE_SETTING_LIST_DEFAULT
 @export_group("Directories", "dir_")
 @export_dir var dir_settings: String = DIR_SETTINGS_DEFAULT
@@ -35,7 +34,6 @@ func save() -> void:
 
 func reset() -> void:
 	recent_settings.clear()
-	setting_list_cache.clear()
 	collapse_setting_list = COLLAPSE_SETTING_LIST_DEFAULT
 	dir_settings = DIR_SETTINGS_DEFAULT
 	dir_templates = DIR_TEMPLATES_DEFAULT
@@ -49,7 +47,7 @@ func reset() -> void:
 
 ### Recent Settings
 
-func add_recent_setting(setting: ggsSetting) -> void:
+func add_recent_setting(setting: String) -> void:
 	if recent_settings.has(setting):
 		_bring_to_front(setting)
 	else:
@@ -59,7 +57,7 @@ func add_recent_setting(setting: ggsSetting) -> void:
 	save()
 
 
-func _bring_to_front(element: ggsSetting) -> void:
+func _bring_to_front(element: String) -> void:
 	recent_settings.erase(element)
 	recent_settings.push_front(element)
 

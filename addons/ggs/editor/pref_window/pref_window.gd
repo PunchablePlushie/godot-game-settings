@@ -103,8 +103,8 @@ func _on_close_requested() -> void:
 
 func _on_OkBtn_pressed() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.set_data("dir_settings", SDF.text)
-	data.set_data("dir_components", CDF.text)
-	data.set_data("dir_save_file", SFDF.text)
+	data.set_property("dir_settings", SDF.text)
+	data.set_property("dir_components", CDF.text)
+	data.set_property("dir_save_file", SFDF.text)
 	hide()
 	ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)

@@ -1,0 +1,3 @@
+@tool
+extends LineEdit
+

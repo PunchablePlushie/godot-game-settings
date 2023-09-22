@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-recent_settings = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
-setting_list_cache = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+recent_settings = Array[String](["input", "audio_mute", "display_size", "display_scale", "display_fullscreen"])
 collapse_setting_list = false
 dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
