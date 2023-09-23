@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv4acsp6se48h"
-path="res://.godot/imported/apply_toggle.svg-339be2f5139f2c7eb798e1e43b04844c.ctex"
+uid="uid://bybdvosl7ptgn"
+path="res://.godot/imported/uncheck_all.svg-abca75613ca5bd818fad7ad47e045d69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/apply_toggle.svg"
-dest_files=["res://.godot/imported/apply_toggle.svg-339be2f5139f2c7eb798e1e43b04844c.ctex"]
+source_file="res://addons/ggs/assets/uncheck_all.svg"
+dest_files=["res://.godot/imported/uncheck_all.svg-abca75613ca5bd818fad7ad47e045d69.ctex"]
 
 [params]
 

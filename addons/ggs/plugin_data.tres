@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-recent_settings = Array[String](["input", "audio_mute", "display_size", "display_scale", "display_fullscreen"])
+recent_settings = Array[String](["display_size", "display_fullscreen", "input", "audio_mute", "display_scale"])
 collapse_setting_list = false
 dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"
 dir_save_file = "user://settings.cfg"
-split_offset_0 = -225
-split_offset_1 = 420
+split_offset_0 = -222
+split_offset_1 = 488

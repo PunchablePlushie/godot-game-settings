@@ -7,47 +7,24 @@ signal setting_selected(setting: ggsSetting)
 var active_category: String
 var active_setting: ggsSetting
 
-func update_save_file() -> void:
-	var cur_category: String
-	var cur_setting: String
-	
+@onready var FSD: FileSystemDock = ggsUtils.get_file_system_dock()
+
+
+func _on_FSD_files_moved(old: String, new: String) -> void:
 	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
-	var dir: DirAccess = DirAccess.open(dir_settings)
-	var categories: PackedStringArray = dir.get_directories()
-	for category in categories:
-		cur_category = category
-		
-		dir.change_dir(dir_settings.path_join(category))
-		var items: PackedStringArray = dir.get_directories()
-		for item in items:
-			if item.begins_with("-"):
-				_update_save_file_recursive(dir, item, cur_category, cur_setting)
-			else:
-				cur_setting = item
-				var res_path: String = "%s/%s/%s.tres"%[dir.get_current_dir(), item, item]
-				var setting: ggsSetting = load(res_path)
-				
-				var save_file: ConfigFile = ggsSaveFile.new()
-				save_file.set_key(cur_category, cur_setting, setting.current)
-				save_file.save(save_file.path)
-
-
-func _update_save_file_recursive(dir: DirAccess, group: String, cur_category: String, cur_setting: String) -> void:
-	cur_setting += "%s_"%group.trim_prefix("-")
+	if not new.begins_with(dir_settings):
+		return
 	
-	dir.change_dir(dir.get_current_dir().path_join(group))
-	var items: PackedStringArray = dir.get_directories()
-	for item in items:
-		if item.begins_with("-"):
-			_update_save_file_recursive(dir, item, cur_category, cur_setting)
-		else:
-			cur_setting += item
-			var res_path: String = "%s/%s/%s.tres"%[dir.get_current_dir(), item, item]
-			var setting: ggsSetting = load(res_path)
-			
-			var save_file: ConfigFile = ggsSaveFile.new()
-			save_file.set_key(cur_category, cur_setting, setting.current)
-			save_file.save(save_file.path)
+	var file: Resource = load(new) as ggsSetting
+	if not file is ggsSetting:
+		return
+	
+	prints(file.category, file.name)
+	
+	file.update_category()
+	file.update_name()
+	
+	prints(file.category, file.name)
 
 
 ### Game Init
@@ -103,6 +80,8 @@ func _apply_settings() -> void:
 ### Private
 
 func _ready() -> void:
+	
+	FSD.files_moved.connect(_on_FSD_files_moved)
 	category_selected.connect(_on_category_selected)
 	setting_selected.connect(_on_setting_selected)
 	return
