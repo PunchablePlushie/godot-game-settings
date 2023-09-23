@@ -54,7 +54,7 @@ static func get_enum_string(target_enum: String) -> String:
 
 ### Dir Paths
 
-static func is_dir_in_settings(path: String) -> bool:
+static func path_is_in_dir_settings(path: String) -> bool:
 	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
 	return path.begins_with(dir_settings)
 

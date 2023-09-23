@@ -43,7 +43,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = -225
+split_offset = -222
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" node_paths=PackedStringArray("Notification") instance=ExtResource("4_4p007")]
@@ -54,7 +54,7 @@ Notification = NodePath("../../../Notification")
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 420
+split_offset = 488
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" node_paths=PackedStringArray("Notification") instance=ExtResource("6_rabjj")]
@@ -140,5 +140,5 @@ dialog_autowrap = true
 script = ExtResource("17_768tu")
 title_invalid = "Invalid Item Name"
 title_already_exists = "Item Already Exists"
-msg_invalid = "The item name must be a valid file name and cannot start with an underscore (\"_\") , dot (\".\") or hyphen (\"-\")."
+msg_invalid = "The item name must be a valid file name and cannot start with an underscore (\"_\")  or dot (\".\")."
 msg_already_exists = "An item with this name already exists."

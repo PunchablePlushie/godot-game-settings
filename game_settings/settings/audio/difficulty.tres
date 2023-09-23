@@ -6,7 +6,7 @@
 script = ExtResource("1_4m26s")
 current = false
 default = false
-name = "difficult"
+name = "difficulty"
 category = "audio"
 value_type = 1
 value_hint = 0

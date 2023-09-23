@@ -5,7 +5,7 @@ extends Control
 
 @onready var NCF: LineEdit = %NewCatField
 @onready var ReloadBtn: Button = %ReloadBtn
-@onready var List: Tree = %CategoryList
+@onready var List: ItemList = %CategoryList
 
 
 func _ready() -> void:
@@ -26,8 +26,7 @@ func _on_NCF_text_submitted(submitted_text: String) -> void:
 	if (
 		not submitted_text.is_valid_filename() or
 		submitted_text.begins_with("_") or
-		submitted_text.begins_with(".") or
-		submitted_text.begins_with("-")
+		submitted_text.begins_with(".")
 	):
 		Notification.purpose = Notification.Purpose.INVALID
 		Notification.popup_centered()

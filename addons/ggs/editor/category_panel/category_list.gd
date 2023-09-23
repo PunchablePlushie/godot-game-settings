@@ -1,5 +1,5 @@
 @tool
-extends ggsTree
+extends ItemList
 
 @onready var FSD: FileSystemDock = ggsUtils.get_file_system_dock()
 
@@ -16,35 +16,29 @@ func _ready() -> void:
 
 func load_list() -> void:
 	clear()
-	root = create_item()
 	
 	var category_list: Array = _get_category_list()
 	for category in category_list:
-		_add_item(category)
+		add_item(category)
 	
 	GGS.category_selected.emit("")
 
 
-func _add_item(category: String) -> void:
-	var created_item: TreeItem = create_item(root)
-	created_item.set_text(0, category)
-
-
 func _update_from_file_system(path: String) -> void:
-	if not ggsUtils.is_dir_in_settings(path):
+	if not ggsUtils.path_is_in_dir_settings(path):
 		return
 	
 	load_list()
 
 
-func _on_item_selected() -> void:
-	var item_name: String = get_selected().get_text(0)
-	GGS.category_selected.emit(item_name)
+func _on_item_selected(item_index: int) -> void:
+	var item_text: String = get_item_text(item_index)
+	GGS.category_selected.emit(item_text)
 
 
-func _on_item_activated() -> void:
-	var item_name: String = get_selected().get_text(0)
-	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(item_name)
+func _on_item_activated(item_index: int) -> void:
+	var item_text: String = get_item_text(item_index)
+	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(item_text)
 	ggsUtils.get_editor_interface().select_file(path)
 
 
