@@ -19,12 +19,8 @@ func _on_FSD_files_moved(old: String, new: String) -> void:
 	if not file is ggsSetting:
 		return
 	
-	prints(file.category, file.name)
-	
 	file.update_category()
 	file.update_name()
-	
-	prints(file.category, file.name)
 
 
 ### Game Init
@@ -80,8 +76,7 @@ func _apply_settings() -> void:
 ### Private
 
 func _ready() -> void:
-	
-	FSD.files_moved.connect(_on_FSD_files_moved)
+#	FSD.files_moved.connect(_on_FSD_files_moved)
 	category_selected.connect(_on_category_selected)
 	setting_selected.connect(_on_setting_selected)
 	return

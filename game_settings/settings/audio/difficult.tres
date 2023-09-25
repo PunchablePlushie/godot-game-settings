@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://3dxitfq5mmhf"]
 
-[ext_resource type="Script" path="res://game_settings/settings/audio/difficult.gd" id="1_4m26s"]
+[ext_resource type="Script" path="res://game_settings/settings/audio/difficult.gd" id="1_dfdbk"]
 
 [resource]
-script = ExtResource("1_4m26s")
+script = ExtResource("1_dfdbk")
 current = false
 default = false
-name = "difficulty"
-category = "audio"
+name = "difficult"
+category = "zzz"
 value_type = 1
 value_hint = 0
 value_hint_string = ""

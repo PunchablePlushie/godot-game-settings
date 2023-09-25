@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://n7eie67qjesd"]
 
-[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_iljqr"]
+[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_rrp67"]
 
 [resource]
 resource_name = "volume.gd"
-script = ExtResource("1_iljqr")
+script = ExtResource("1_rrp67")
 bus_name = "[NONE]"
 current = false
 default = false

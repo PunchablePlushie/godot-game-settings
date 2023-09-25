@@ -50,4 +50,6 @@ size_flags_vertical = 3
 theme_override_colors/guide_color = Color(0, 0, 0, 0)
 theme_override_constants/v_separation = 5
 allow_reselect = true
+item_count = 1
+item_0/text = "audio"
 script = ExtResource("4_xqs08")

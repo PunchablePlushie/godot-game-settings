@@ -1,9 +1,9 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://csq6gfvld4p4i"]
 
-[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_k0mit"]
+[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_bxm1u"]
 
 [resource]
-script = ExtResource("1_k0mit")
+script = ExtResource("1_bxm1u")
 bus_name = "[NONE]"
 current = false
 default = false
