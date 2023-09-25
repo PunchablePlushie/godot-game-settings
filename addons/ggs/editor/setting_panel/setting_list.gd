@@ -1,7 +1,6 @@
 @tool
-extends ggsTree
+extends ScrollContainer
 
-var parent: TreeItem = root
 var cur_path: String
 
 

@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://0gvjd2nxph5s"]
-
-[ext_resource type="Script" path="res://addons/ggs/classes/ggs_ui_component.gd" id="1_pdh06"]
+[gd_scene format=3 uid="uid://0gvjd2nxph5s"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

@@ -11,7 +11,7 @@ const TEMPLATE_SCRIPT: GDScript = preload("res://addons/ggs/template.gd")
 @onready var CollapseAllBtn: Button = %CollapseAllBtn
 @onready var ExpandAllBtn: Button = %ExpandAllBtn
 @onready var ReloadBtn: Button = %ReloadBtn
-@onready var List: Tree = %SettingList
+@onready var List: ScrollContainer = %SettingList
 @onready var ASW: ConfirmationDialog = $AddSettingWindow
 
 

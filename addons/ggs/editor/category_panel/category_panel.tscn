@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_list.gd" id="4_xqs08"]
 
 [node name="CategoryPanel" type="Control"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

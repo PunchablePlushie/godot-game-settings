@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vt5mwwxhtu3x"]
+[gd_scene load_steps=8 format=3 uid="uid://vt5mwwxhtu3x"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_panel.gd" id="1_2wlv0"]
 [ext_resource type="Texture2D" uid="uid://cv4acsp6se48h" path="res://addons/ggs/assets/check_all.svg" id="3_bh7l7"]
@@ -7,12 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dkmion6u6aokv" path="res://addons/ggs/assets/reload.svg" id="4_j6whk"]
 [ext_resource type="Texture2D" uid="uid://bybdvosl7ptgn" path="res://addons/ggs/assets/uncheck_all.svg" id="4_q4gh6"]
 [ext_resource type="PackedScene" uid="uid://111vt7wxn7lx" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5nob"]
-bg_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amv8b"]
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
 
 [node name="SettingPanel" type="Control"]
 custom_minimum_size = Vector2(342, 0)
@@ -86,172 +80,52 @@ disabled = true
 icon = ExtResource("4_j6whk")
 flat = true
 
-[node name="SettingList" type="Tree" parent="MainCtnr"]
+[node name="SettingList" type="ScrollContainer" parent="MainCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_type_variation = &"BigTree"
-allow_reselect = true
-hide_root = true
+horizontal_scroll_mode = 0
 script = ExtResource("4_htr8u")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainCtnr"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="SettingListNeo" type="PanelContainer" parent="MainCtnr/ScrollContainer"]
+[node name="PanelCtnr" type="PanelContainer" parent="MainCtnr/SettingList"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_n5nob")
+theme_type_variation = &"SettingListBG"
 
-[node name="MarginContainer" type="MarginContainer" parent="MainCtnr/ScrollContainer/SettingListNeo"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="HFlow" type="HFlowContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer"]
+[node name="MainCtnr" type="HFlowContainer" parent="MainCtnr/SettingList/PanelCtnr"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="master3" type="PanelContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow"]
+[node name="GroupLess" type="PanelContainer" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_amv8b")
+theme_type_variation = &"SettingItemBG"
 
-[node name="MarginContainer" type="MarginContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="HBoxContainer" type="HFlowContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer"]
+[node name="MainCtnr" type="HFlowContainer" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr/GroupLess"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "mute_state"
-
-[node name="Button5" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "health"
-
-[node name="Button2" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "volume"
-
-[node name="Button3" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "mute_state"
-
-[node name="Button6" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "health"
-
-[node name="Button4" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "volume"
-
-[node name="Button7" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "mute_state"
-
-[node name="Button8" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "health"
-
-[node name="Button9" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "volume"
-
-[node name="master" type="PanelContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow"]
+[node name="Group" type="PanelContainer" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_amv8b")
+theme_type_variation = &"SettingItemBG"
 
-[node name="MarginContainer" type="MarginContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer"]
+[node name="MainCtnr" type="VBoxContainer" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr/Group"]
 layout_mode = 2
 
-[node name="Label" type="CheckBox" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer/VBoxContainer"]
+[node name="GroupName" type="CheckBox" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr/Group/MainCtnr"]
 layout_mode = 2
 text = "master"
 text_overrun_behavior = 3
 
-[node name="HSeparator" type="HSeparator" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer/VBoxContainer"]
+[node name="HSep" type="HSeparator" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr/Group/MainCtnr"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HFlowContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer/VBoxContainer"]
+[node name="ItemCtnr" type="HFlowContainer" parent="MainCtnr/SettingList/PanelCtnr/MainCtnr/Group/MainCtnr"]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "mute_state"
-
-[node name="Button5" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "volume"
-
-[node name="master2" type="PanelContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_amv8b")
-
-[node name="MarginContainer" type="MarginContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer"]
-layout_mode = 2
-
-[node name="Label2" type="CheckBox" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "player"
-text_overrun_behavior = 3
-
-[node name="HSeparator" type="HSeparator" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HFlowContainer" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "god_mode"
-
-[node name="Button5" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "health"
-
-[node name="Button2" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "name"
-
-[node name="Button3" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "shuriken_count"
-
-[node name="Button4" type="Button" parent="MainCtnr/ScrollContainer/SettingListNeo/MarginContainer/HFlow/master2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "difficulty"
 
 [node name="AddSettingWindow" parent="." instance=ExtResource("7_o4e63")]

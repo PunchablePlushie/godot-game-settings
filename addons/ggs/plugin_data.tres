@@ -10,5 +10,5 @@ dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"
 dir_save_file = "user://settings.cfg"
-split_offset_0 = -322
-split_offset_1 = 518
+split_offset_0 = -317
+split_offset_1 = 618

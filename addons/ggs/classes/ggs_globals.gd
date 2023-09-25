@@ -1,26 +1,15 @@
 @tool
 extends Node
-signal category_selected(category: String)
-signal active_category_updated()
+signal active_category_changed()
 signal setting_selected(setting: ggsSetting)
 
-var active_category: String
+var active_category: String: set = set_active_category
 var active_setting: ggsSetting
 
-@onready var FSD: FileSystemDock = ggsUtils.get_file_system_dock()
 
-
-func _on_FSD_files_moved(old: String, new: String) -> void:
-	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
-	if not new.begins_with(dir_settings):
-		return
-	
-	var file: Resource = load(new) as ggsSetting
-	if not file is ggsSetting:
-		return
-	
-	file.update_category()
-	file.update_name()
+func set_active_category(value: String) -> void:
+	active_category = value
+	active_category_changed.emit(value)
 
 
 ### Game Init
@@ -76,8 +65,6 @@ func _apply_settings() -> void:
 ### Private
 
 func _ready() -> void:
-#	FSD.files_moved.connect(_on_FSD_files_moved)
-	category_selected.connect(_on_category_selected)
 	setting_selected.connect(_on_setting_selected)
 	return
 	
@@ -87,11 +74,6 @@ func _ready() -> void:
 	
 	if not Engine.is_editor_hint():
 		_apply_settings()
-
-
-func _on_category_selected(category: String) -> void:
-	active_category = category
-	active_category_updated.emit()
 
 
 func _on_setting_selected(setting: ggsSetting) -> void:

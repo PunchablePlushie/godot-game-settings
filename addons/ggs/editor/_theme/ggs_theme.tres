@@ -1,35 +1,47 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c4pwg7lhukqb8"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c4pwg7lhukqb8"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fji6x"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idsgx"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-bg_color = Color(0.905882, 0.647059, 0.0705882, 0.275)
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
 border_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 3
-expand_margin_left = 12.0
+expand_margin_bottom = 2.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81o7k"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.905882, 0.647059, 0.0705882, 0.275)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ad0p"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
 border_color = Color(0.211765, 0.211765, 0.211765, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 3
-expand_margin_left = 6.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45f0c"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.148235, 0.148235, 0.148235, 1)
+border_color = Color(0.084706, 0.084706, 0.084706, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sauhg"]
@@ -46,11 +58,11 @@ expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [resource]
-BigTree/base_type = &"Tree"
-BigTree/styles/selected = SubResource("StyleBoxFlat_fji6x")
-BigTree/styles/selected_focus = SubResource("StyleBoxFlat_fji6x")
-Tree/styles/selected = SubResource("StyleBoxFlat_81o7k")
-Tree/styles/selected_focus = SubResource("StyleBoxFlat_81o7k")
+PrefWindowBG/styles/panel = SubResource("StyleBoxFlat_idsgx")
+SettingItemBG/base_type = &"PanelContainer"
+SettingItemBG/styles/panel = SubResource("StyleBoxFlat_3ad0p")
+SettingListBG/base_type = &"PanelContainer"
+SettingListBG/styles/panel = SubResource("StyleBoxFlat_45f0c")
 WindowBG/base_type = &"PanelContainer"
 WindowBG/styles/panel = SubResource("StyleBoxFlat_sauhg")
 script = ExtResource("1_3cm4d")
