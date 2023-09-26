@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-recent_settings = Array[String](["display_size", "display_fullscreen", "input", "audio_mute", "display_scale"])
-collapse_setting_list = false
+recent_settings = Array[String](["audio_mute", "display_size", "display_fullscreen", "input", "display_scale"])
 dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"

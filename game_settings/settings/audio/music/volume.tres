@@ -1,15 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://n7eie67qjesd"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b1bwmpls42rw4"]
 
-[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_rrp67"]
+[ext_resource type="Script" path="res://game_settings/settings/audio/music/volume.gd" id="1_j6kyt"]
 
 [resource]
-resource_name = "volume.gd"
-script = ExtResource("1_rrp67")
-bus_name = "[NONE]"
-current = false
-default = false
-name = "music_volume"
-category = "audio"
-value_type = 1
+script = ExtResource("1_j6kyt")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
 value_hint = 0
 value_hint_string = ""

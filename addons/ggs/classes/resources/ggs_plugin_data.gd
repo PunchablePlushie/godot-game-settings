@@ -2,7 +2,6 @@
 extends Resource
 class_name ggsPluginData
 
-const COLLAPSE_SETTING_LIST_DEFAULT: bool = false
 const DIR_SETTINGS_DEFAULT: String = "res://game_settings/settings"
 const DIR_TEMPLATES_DEFAULT: String = "res://game_settings/templates"
 const DIR_COMPONENTS_DEFAULT: String = "res://game_settings/components"
@@ -12,7 +11,6 @@ const SPLIT_OFFSET_1_DEFAULT: int = 420
 
 @export_category("GGS Plugin Data")
 @export var recent_settings: Array[String]
-@export var collapse_setting_list: bool = COLLAPSE_SETTING_LIST_DEFAULT
 @export_group("Directories", "dir_")
 @export_dir var dir_settings: String = DIR_SETTINGS_DEFAULT
 @export_dir var dir_templates: String = DIR_TEMPLATES_DEFAULT
@@ -34,7 +32,6 @@ func save() -> void:
 
 func reset() -> void:
 	recent_settings.clear()
-	collapse_setting_list = COLLAPSE_SETTING_LIST_DEFAULT
 	dir_settings = DIR_SETTINGS_DEFAULT
 	dir_templates = DIR_TEMPLATES_DEFAULT
 	dir_components = DIR_COMPONENTS_DEFAULT

@@ -1,15 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b6wtngqpkee65"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://50p6epf23whx"]
 
-[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_u87c8"]
+[ext_resource type="Script" path="res://game_settings/settings/audio/master/mute_state.gd" id="1_la830"]
 
 [resource]
-resource_name = "mute_state.gd"
-script = ExtResource("1_u87c8")
-bus_name = "[NONE]"
-current = false
-default = false
-name = "master_mute_state"
-category = "zzz"
-value_type = 1
+script = ExtResource("1_la830")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
 value_hint = 0
 value_hint_string = ""

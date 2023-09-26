@@ -9,7 +9,7 @@ var active_setting: ggsSetting
 
 func set_active_category(value: String) -> void:
 	active_category = value
-	active_category_changed.emit(value)
+	active_category_changed.emit()
 
 
 ### Game Init

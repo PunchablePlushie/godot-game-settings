@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://rwnt051tno0x"]
+
+[ext_resource type="Script" path="res://game_settings/settings/audio/retro_mode.gd" id="1_qd86s"]
+
+[resource]
+script = ExtResource("1_qd86s")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
+value_hint = 0
+value_hint_string = ""
