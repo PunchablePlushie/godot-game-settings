@@ -1,15 +1,21 @@
 @tool
 extends Node
 signal active_category_changed()
-signal setting_selected(setting: ggsSetting)
+signal active_setting_changed()
 
 var active_category: String: set = set_active_category
-var active_setting: ggsSetting
+var active_setting: ggsSetting: set = set_active_setting
 
 
 func set_active_category(value: String) -> void:
 	active_category = value
 	active_category_changed.emit()
+	active_setting = null
+
+
+func set_active_setting(value: ggsSetting) -> void:
+	active_setting = value
+	active_setting_changed.emit()
 
 
 ### Game Init
@@ -65,7 +71,6 @@ func _apply_settings() -> void:
 ### Private
 
 func _ready() -> void:
-	setting_selected.connect(_on_setting_selected)
 	return
 	
 	var used_data: Dictionary = _get_used_settings()
@@ -74,8 +79,3 @@ func _ready() -> void:
 	
 	if not Engine.is_editor_hint():
 		_apply_settings()
-
-
-func _on_setting_selected(setting: ggsSetting) -> void:
-	active_setting = setting
-

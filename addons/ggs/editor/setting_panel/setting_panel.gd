@@ -26,6 +26,7 @@ func _ready() -> void:
 	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
 	
 	GGS.active_category_changed.connect(_on_Global_active_category_changed)
+	GGS.active_setting_changed.connect(_on_Global_active_setting_changed)
 
 
 func _set_topbar_disabled(disabled: bool) -> void:
@@ -39,6 +40,12 @@ func _set_topbar_disabled(disabled: bool) -> void:
 
 func _on_Global_active_category_changed() -> void:
 	_set_topbar_disabled(GGS.active_category.is_empty())
+
+
+func _on_Global_active_setting_changed() -> void:
+	var active_list_item: Button = List.btn_group.get_pressed_button()
+	if GGS.active_setting == null and active_list_item != null:
+		active_list_item.button_pressed = false
 
 
 ### Setting Creation

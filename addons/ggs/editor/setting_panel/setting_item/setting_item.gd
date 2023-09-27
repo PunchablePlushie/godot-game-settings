@@ -3,20 +3,27 @@ extends Button
 class_name ggsSettingItem
 
 var path: String
+var btn_group: ButtonGroup
 
 
 func _ready() -> void:
-	pressed.connect(_on_pressed)
+	toggled.connect(_on_toggled)
 	gui_input.connect(_on_gui_input)
+	
+	button_group = btn_group
 
 
-func _on_pressed() -> void:
+func _on_toggled(button_state: bool) -> void:
+	if button_state == false:
+		return
+	
 	if not FileAccess.file_exists(path):
 		printerr("GGS - Inspect Setting: The setting resource (%s.tres) could not be found."%text)
 		ggsUtils.get_editor_interface().inspect_object(null)
 		return
 	
 	var setting_res: ggsSetting = load(path)
+	GGS.active_setting = setting_res
 	ggsUtils.get_editor_interface().inspect_object(setting_res)
 
 

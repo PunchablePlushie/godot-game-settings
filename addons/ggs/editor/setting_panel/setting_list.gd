@@ -5,6 +5,7 @@ const setting_item_scn: PackedScene = preload("./setting_item/setting_item.tscn"
 const setting_group_scn: PackedScene = preload("./setting_group/setting_group.tscn")
 
 var cur_path: String
+var btn_group: ButtonGroup = ButtonGroup.new()
 
 @onready var MainCtnr: HFlowContainer = $PanelCtnr/MainCtnr
 @onready var GrouplessCtnr: PanelContainer = $PanelCtnr/MainCtnr/GroupLess
@@ -59,6 +60,7 @@ func get_selected_groups() -> Array[Node]:
 	
 	return result
 
+
 func set_checked_all(checked: bool) -> void:
 	var child_count: int = MainCtnr.get_child_count()
 	for child_index in range(child_count):
@@ -69,7 +71,9 @@ func set_checked_all(checked: bool) -> void:
 
 
 func _clear() -> void:
+	btn_group = ButtonGroup.new()
 	GrouplessCtnr.visible = false
+	GGS.active_setting = null
 	
 	var child_count: int = MainCtnr.get_child_count()
 	for child_index in range(child_count):
@@ -84,6 +88,7 @@ func _add_item(setting: String, parent: PanelContainer, path: String) -> void:
 	var NewItem: ggsSettingItem = setting_item_scn.instantiate()
 	NewItem.text = setting
 	NewItem.path = path
+	NewItem.btn_group = btn_group
 	
 	parent.add_item(NewItem)
 
