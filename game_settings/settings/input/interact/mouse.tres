@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://csirdtb167jmb"]
+
+[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_ppval"]
+
+[resource]
+script = ExtResource("1_ppval")
+current = false
+default = false
+name = ""
+category = ""
+value_type = 1
+value_hint = 0
+value_hint_string = ""

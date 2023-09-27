@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ocqigiq7v0l3"]
+
+[ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_es5bp"]
+
+[resource]
+script = ExtResource("1_es5bp")
+current = false
+default = false
+name = ""
+category = ""
+value_type = 1
+value_hint = 0
+value_hint_string = ""

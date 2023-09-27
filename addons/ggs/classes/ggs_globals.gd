@@ -15,6 +15,7 @@ func _ready() -> void:
 
 
 func update_save_file() -> void:
+	var start_time = Time.get_ticks_msec()
 	var save_file: ggsSaveFile = ggsSaveFile.new()
 	var fresh_save: ConfigFile = ConfigFile.new()
 	
@@ -27,6 +28,8 @@ func update_save_file() -> void:
 			fresh_save.set_value(setting.category, setting.name, setting.default)
 	
 	fresh_save.save(ggsUtils.get_plugin_data().dir_save_file)
+	var end_time = Time.get_ticks_msec()
+	prints("Time:", end_time - start_time)
 
 
 func set_active_category(value: String) -> void:
