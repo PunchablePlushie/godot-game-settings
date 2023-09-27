@@ -25,4 +25,3 @@ func remake() -> void:
 		set_value(setting.category, setting.name, setting.default)
 	
 	save(path)
-	print("GGS - Remake Save File: Save file was remade successfully.")
