@@ -83,17 +83,18 @@ func _create_setting(item_name: String, template: String = "") -> void:
 				printerr("GGS - Add Setting to Multiple Groups: An item with this name already exists. Ignoring <%s>."%path.get_file())
 				continue
 		
-		var script: GDScript = TEMPLATE_SCRIPT.duplicate()
+		var script: Script
 		var script_path: String
 		if template.is_empty():
+			script = TEMPLATE_SCRIPT.duplicate()
 			script_path = "%s/%s.gd"%[dir.get_current_dir(), item_name]
+			ResourceSaver.save(script, script_path)
+			script = load(script_path)
 		else:
 			script_path = ggsUtils.get_plugin_data().dir_templates.path_join(template)
-		
-		ResourceSaver.save(script, script_path)
+			script = load(script_path)
 		
 		var resource: ggsSetting = ggsSetting.new()
-		script = load(script_path)
 		resource.set_script(script)
 		ResourceSaver.save(resource, "%s/%s.tres"%[dir.get_current_dir(), item_name])
 	

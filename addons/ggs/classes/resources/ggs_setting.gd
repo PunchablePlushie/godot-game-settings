@@ -3,12 +3,12 @@ extends Resource
 class_name ggsSetting
 
 var current: Variant: set = set_current, get = get_current
-var default: Variant: set = set_default
-var name: String: set = set_name, get = get_name
-var category: String: set = set_category, get = get_category
-var value_type: Variant.Type
+var default: Variant
+var value_type: Variant.Type: set = set_value_type
 var value_hint: PropertyHint
 var value_hint_string: String
+var name: String: set = set_name, get = get_name
+var category: String: set = set_category, get = get_category
 
 
 func _get_property_list() -> Array:
@@ -42,8 +42,13 @@ func get_current() -> Variant:
 	if save_file.has_section_key(category, name):
 		return save_file.get_value(category, name)
 	else:
-		save_file.set_key(category, name, default)
+		save_file.set_value(category, name, default)
 		return default
+
+
+func set_value_type(value: Variant.Type) -> void:
+	value_type = value
+	ggsSaveFile.new().set_value(category, name, default)
 
 
 func set_name(value: String) -> void:
@@ -99,33 +104,3 @@ func _get_path_dict() -> Dictionary:
 		result["name"] = path_components[1].get_basename()
 	
 	return result
-
-
-func set_default(value: Variant) -> void:
-	default = value
-	
-	if Engine.is_editor_hint():
-		var plugin_data: ggsPluginData = ggsUtils.get_plugin_data()
-		
-		if plugin_data != null:
-			plugin_data.save()
-
-
-### Public Methods
-
-func delete() -> void:
-	set_script(load("res://addons/ggs/classes/resources/ggs_setting.gd"))
-	resource_name = "[Deleted Setting]"
-
-
-func save_plugin_data() -> void:
-	if not Engine.is_editor_hint():
-		return
-	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	if data != null:
-		data.save()
-
-
-func is_added() -> bool:
-	return not category.is_empty()

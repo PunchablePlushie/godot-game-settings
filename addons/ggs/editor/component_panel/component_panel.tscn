@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfr2j0ekmm5bm"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/component_panel/component_panel.gd" id="1_3cgut"]
-[ext_resource type="Texture2D" uid="uid://cv4acsp6se48h" path="res://addons/ggs/assets/check_all.svg" id="2_pmfiy"]
+[ext_resource type="Texture2D" uid="uid://bdvgfb144f4dj" path="res://addons/ggs/assets/apply_on_changed.svg" id="2_r0vbe"]
 [ext_resource type="Texture2D" uid="uid://dasus7dcslgli" path="res://addons/ggs/assets/close.svg" id="3_wh32e"]
 
 [node name="ComponentPanel" type="Control"]
@@ -41,7 +41,7 @@ layout_mode = 2
 tooltip_text = "Apply On Change of New Nodes
 Sets `apply_on_change` of newly created nodes."
 toggle_mode = true
-icon = ExtResource("2_pmfiy")
+icon = ExtResource("2_r0vbe")
 flat = true
 
 [node name="ActiveSettingCtnr" type="HBoxContainer" parent="MainCtnr"]

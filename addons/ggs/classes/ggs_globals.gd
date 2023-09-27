@@ -7,6 +7,28 @@ var active_category: String: set = set_active_category
 var active_setting: ggsSetting: set = set_active_setting
 
 
+func _ready() -> void:
+	update_save_file()
+	
+	if not Engine.is_editor_hint():
+		_apply_settings()
+
+
+func update_save_file() -> void:
+	var save_file: ggsSaveFile = ggsSaveFile.new()
+	var fresh_save: ConfigFile = ConfigFile.new()
+	
+	var all_settings: Array[ggsSetting] = get_all_settings()
+	for setting in all_settings:
+		if save_file.has_section_key(setting.category, setting.name):
+			var value: Variant = save_file.get_value(setting.category, setting.name)
+			fresh_save.set_value(setting.category, setting.name, value)
+		else:
+			fresh_save.set_value(setting.category, setting.name, setting.default)
+	
+	fresh_save.save(ggsUtils.get_plugin_data().dir_save_file)
+
+
 func set_active_category(value: String) -> void:
 	active_category = value
 	active_category_changed.emit()
@@ -20,62 +42,44 @@ func set_active_setting(value: ggsSetting) -> void:
 
 ### Game Init
 
-func _get_used_settings() -> Dictionary:
-	var used_data: Dictionary
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
+func get_all_settings() -> Array[ggsSetting]:
+	var all_settings: Array[ggsSetting]
 	
-	var categories: Dictionary = data.categories
-	for category in categories.values():
-		var used_keys: PackedStringArray
-		for setting in category.settings.values():
-			used_keys.append(setting.name)
+	var path: String = ggsUtils.get_plugin_data().dir_settings
+	var dir: DirAccess = DirAccess.open(path)
+	var categories: PackedStringArray = dir.get_directories()
+	for category in categories:
+		dir.change_dir(path.path_join(category))
+		var settings: Array[ggsSetting] = _get_settings_in_dir(dir)
+		all_settings.append_array(settings)
 		
-		used_data[category.name] = used_keys
+		var groups: PackedStringArray = dir.get_directories()
+		for group in groups:
+			dir.change_dir(path.path_join(category).path_join(group))
+			var subsettings: Array[ggsSetting] = _get_settings_in_dir(dir)
+			all_settings.append_array(subsettings)
 	
-	return used_data
+	return all_settings
 
 
-func _remove_unused_data(used_data: Dictionary) -> void:
-	var save_file: ggsSaveFile = ggsSaveFile.new()
-	var all_sections: PackedStringArray = save_file.get_sections()
-	for section in all_sections:
-		if not used_data.has(section):
-			save_file.delete_section(section)
+func _get_settings_in_dir(dir: DirAccess) -> Array[ggsSetting]:
+	var result: Array[ggsSetting]
+	
+	var settings: PackedStringArray = dir.get_files()
+	for setting in settings:
+		if setting.ends_with(".gd"):
 			continue
 		
-		var all_keys: PackedStringArray = save_file.get_section_keys(section)
-		for key in all_keys:
-			if not used_data[section].has(key):
-				save_file.delete_key(section, key)
-
-
-func _add_missing_data() -> void:
-	var save_file: ggsSaveFile = ggsSaveFile.new()
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	for category in data.categories.values():
-		for setting in category.settings.values():
-			if save_file.has_section_key(setting.category, setting.name):
-				continue
-			
-			save_file.set_key(setting.category, setting.name, setting.default)
+		var res: Resource = load(dir.get_current_dir().path_join(setting))
+		if not res is ggsSetting:
+			continue
+		
+		result.append(res as ggsSetting)
+	
+	return result
 
 
 func _apply_settings() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	for category in data.categories.values():
-		for setting in category.settings.values():
-			var value: Variant = ggsSaveFile.new().get_key(setting.category, setting.name)
-			setting.apply(value)
-
-
-### Private
-
-func _ready() -> void:
-	return
-	
-	var used_data: Dictionary = _get_used_settings()
-	_remove_unused_data(used_data)
-	_add_missing_data()
-	
-	if not Engine.is_editor_hint():
-		_apply_settings()
+	var all_settings: Array[ggsSetting] = get_all_settings()
+	for setting in all_settings:
+		setting.apply(setting.current)

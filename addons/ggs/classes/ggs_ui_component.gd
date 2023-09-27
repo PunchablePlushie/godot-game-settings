@@ -13,7 +13,8 @@ func _ready() -> void:
 
 
 func init_value() -> void:
-	setting_value = setting.current
+	if setting != null:
+		setting_value = setting.current
 
 
 func apply_setting() -> void:

@@ -78,14 +78,16 @@ layout_mode = 2
 layout_mode = 2
 tooltip_text = "Save File"
 icon = ExtResource("8_3r2nn")
-item_count = 3
+item_count = 4
 popup/item_0/text = "Open Save File"
 popup/item_0/id = 0
 popup/item_1/text = ""
-popup/item_1/id = -1
+popup/item_1/id = 999
 popup/item_1/separator = true
-popup/item_2/text = "Reset to Default"
+popup/item_2/text = "Remake from Current"
 popup/item_2/id = 1
+popup/item_3/text = "Remake from Default"
+popup/item_3/id = 2
 script = ExtResource("7_guojl")
 
 [node name="PrefBtn" type="Button" parent="MainCtnr/BtnCtnr/TopCtnr"]
