@@ -15,13 +15,3 @@ func _init() -> void:
 func set_key(section: String, key: String, value: Variant) -> void:
 	set_value(section, key, value)
 	save(path)
-
-
-func remake() -> void:
-	clear()
-	
-	var all_settings: Array[ggsSetting] = GGS.get_all_settings()
-	for setting in all_settings:
-		set_value(setting.category, setting.name, setting.default)
-	
-	save(path)

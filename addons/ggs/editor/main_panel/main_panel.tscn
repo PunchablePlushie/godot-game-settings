@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=20 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/_theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/category_panel/category_panel.tscn" id="4_4p007"]
@@ -16,7 +16,10 @@
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/bug_btn.gd" id="11_2ygfj"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/feedback_btn.gd" id="15_0jgkh"]
 [ext_resource type="Texture2D" uid="uid://bxo46lub26m2a" path="res://addons/ggs/assets/feedback.svg" id="16_abywd"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/progress_overlay.gd" id="16_hfs01"]
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/notification.gd" id="17_768tu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbg8d"]
 
 [node name="MainPanel" type="Control"]
 custom_minimum_size = Vector2(0, 300)
@@ -56,9 +59,8 @@ size_flags_horizontal = 3
 split_offset = 616
 script = ExtResource("4_mplwh")
 
-[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" node_paths=PackedStringArray("Notification") instance=ExtResource("6_rabjj")]
+[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
 layout_mode = 2
-Notification = NodePath("../../../../Notification")
 
 [node name="ComponentPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("5_7xo6y")]
 layout_mode = 2
@@ -123,6 +125,42 @@ tooltip_text = "Send Feedback"
 icon = ExtResource("16_abywd")
 flat = true
 script = ExtResource("15_0jgkh")
+
+[node name="ProgressOverlay" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jbg8d")
+script = ExtResource("16_hfs01")
+label_save_file_current = "Remaking Save File from Current Values"
+label_save_file_default = "Remaking Save File from Default Values"
+label_add_multiple_settings = "Adding Settings to Groups"
+
+[node name="ProgBG" type="ColorRect" parent="ProgressOverlay"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.588235)
+
+[node name="Center" type="CenterContainer" parent="ProgressOverlay"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ProgressOverlay/Center"]
+layout_mode = 2
+
+[node name="ProgLabel" type="Label" parent="ProgressOverlay/Center/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Remaking Save File from Current Values"
+
+[node name="ProgBar" type="ProgressBar" parent="ProgressOverlay/Center/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 4
 
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true

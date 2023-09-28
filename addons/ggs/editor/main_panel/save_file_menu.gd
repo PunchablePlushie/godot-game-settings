@@ -1,8 +1,6 @@
 @tool
 extends MenuButton
 
-const REMAKE_MSG: String = "GGS - Remake Save File: Save file was remade successfully."
-
 enum MenuItems {OPEN, REMAKE_CURRENT, REMAKE_DEFAULT}
 
 var Menu: PopupMenu = get_popup()
@@ -25,8 +23,6 @@ func _on_Menu_id_pressed(id: int) -> void:
 		MenuItems.OPEN:
 			_open_save_file()
 		MenuItems.REMAKE_CURRENT:
-			GGS.update_save_file()
-			print(REMAKE_MSG)
+			GGS.request_update_save_file()
 		MenuItems.REMAKE_DEFAULT:
-			ggsSaveFile.new().remake()
-			print(REMAKE_MSG)
+			GGS.request_update_save_file_default()
