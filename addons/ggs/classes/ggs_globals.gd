@@ -1,7 +1,7 @@
 @tool
 extends Node
 
-enum Progress {SAVE_FILE_CURRENT, SAVE_FILE_DEFAULT, ADD_MULTIPLE_SETTINGS}
+enum Progress {SAVE_FILE_CURRENT, SAVE_FILE_DEFAULT, ADD_SETTINGS}
 
 signal active_category_changed()
 signal active_setting_changed()
@@ -25,7 +25,6 @@ func _ready() -> void:
 	
 	if Engine.is_editor_hint():
 		request_update_save_file()
-		return
 		thread_default.start(_update_save_file_default)
 	
 	if not Engine.is_editor_hint():
@@ -36,7 +35,6 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-#	if thread_current.is_started():
 	terminate_current = true
 	semaphore_current.post()
 	thread_current.wait_to_finish()

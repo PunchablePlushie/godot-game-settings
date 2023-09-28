@@ -51,6 +51,10 @@ func _on_Global_active_setting_changed() -> void:
 ### Setting Creation
 
 func _create_setting(item_name: String, template: String = "") -> void:
+	GGS.progress_started.emit(GGS.Progress.ADD_SETTINGS)
+	
+	await get_tree().create_timer(0.05).timeout # A tiny delay so the progress_started signal can travel properly
+	
 	if (
 		not item_name.is_valid_filename() or
 		item_name.begins_with("_") or
@@ -101,6 +105,7 @@ func _create_setting(item_name: String, template: String = "") -> void:
 	NSF.clear()
 	ggsUtils.get_resource_file_system().scan()
 	List.load_list()
+	GGS.progress_ended.emit()
 
 
 func _on_NSF_text_submitted(submitted_text: String) -> void:

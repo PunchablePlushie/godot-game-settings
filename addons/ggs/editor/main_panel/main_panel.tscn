@@ -139,11 +139,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_jbg8d")
 script = ExtResource("16_hfs01")
 label_save_file_current = "Remaking Save File from Current Values"
 label_save_file_default = "Remaking Save File from Default Values"
-label_add_multiple_settings = "Adding Settings to Groups"
+label_add_multiple_settings = "Adding Setting(s)"
 
 [node name="ProgBG" type="ColorRect" parent="ProgressOverlay"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.588235)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="Center" type="CenterContainer" parent="ProgressOverlay"]
 layout_mode = 2

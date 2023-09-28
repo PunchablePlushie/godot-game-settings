@@ -6,8 +6,8 @@
 script = ExtResource("1_l2yh0")
 current = false
 default = false
-name = ""
-category = ""
+name = "fullscreen_mode"
+category = "display"
 value_type = 1
 value_hint = 0
 value_hint_string = ""

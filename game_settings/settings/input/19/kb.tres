@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ceg50r5rtayf"]
+
+[ext_resource type="Script" path="res://game_settings/settings/input/19/kb.gd" id="1_ql3kq"]
+
+[resource]
+script = ExtResource("1_ql3kq")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
+value_hint = 0
+value_hint_string = ""

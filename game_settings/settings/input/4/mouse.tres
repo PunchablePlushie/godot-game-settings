@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d075a1scvwfvd"]
+
+[ext_resource type="Script" path="res://game_settings/settings/input/4/mouse.gd" id="1_1piue"]
+
+[resource]
+script = ExtResource("1_1piue")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
+value_hint = 0
+value_hint_string = ""

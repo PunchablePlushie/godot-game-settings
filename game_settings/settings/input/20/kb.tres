@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://qfbjs4gef5ac"]
+
+[ext_resource type="Script" path="res://game_settings/settings/input/20/kb.gd" id="1_dqmx7"]
+
+[resource]
+script = ExtResource("1_dqmx7")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
+value_hint = 0
+value_hint_string = ""

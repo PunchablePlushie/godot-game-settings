@@ -15,19 +15,24 @@ func _ready() -> void:
 	GGS.progress_started.connect(_on_Global_progress_started)
 	GGS.progress_advanced.connect(_on_Global_progress_advanced)
 	GGS.progress_ended.connect(_on_Global_progress_ended)
+	
+	visible = false
+	ProgBar.value = 0
 
 
 func _on_Global_progress_started(progress_type: GGS.Progress) -> void:
 	visible = true
+	ProgBar.visible = true
 	type = progress_type
-	
+	print("test")
 	match type:
 		GGS.Progress.SAVE_FILE_CURRENT:
 			ProgLabel.text = label_save_file_current
 		GGS.Progress.SAVE_FILE_DEFAULT:
 			ProgLabel.text = label_save_file_default
-		GGS.Progress.ADD_MULTIPLE_SETTINGS:
+		GGS.Progress.ADD_SETTINGS:
 			ProgLabel.text = label_add_multiple_settings
+			ProgBar.visible = false
 
 
 func _on_Global_progress_ended() -> void:

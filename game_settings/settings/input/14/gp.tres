@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bs75x2mv3cjqa"]
+
+[ext_resource type="Script" path="res://game_settings/settings/input/14/gp.gd" id="1_2y0au"]
+
+[resource]
+script = ExtResource("1_2y0au")
+current = null
+default = null
+name = ""
+category = ""
+value_type = 0
+value_hint = 0
+value_hint_string = ""
