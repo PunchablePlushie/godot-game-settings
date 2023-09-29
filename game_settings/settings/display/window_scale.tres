@@ -5,11 +5,11 @@
 [resource]
 resource_name = "window_scale"
 script = ExtResource("1_u6clm")
-scales = Array[float]([0.0, 1.0, 2.0])
-current = 1
+scales = Array[float]([1.0, 1.5, 2.0])
+current = 222
 default = 1
 name = "window_scale"
 category = "display"
 value_type = 2
 value_hint = 2
-value_hint_string = "x0,x1,x2"
+value_hint_string = "x1,x1.5,x2"

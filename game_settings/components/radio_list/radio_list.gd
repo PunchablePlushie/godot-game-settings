@@ -1,7 +1,15 @@
 @tool
 extends ggsUIComponent
 
-@onready var BtnList: HBoxContainer = $BtnList
+enum Lists {HLIST, VLIST}
+
+@export var option_ids: PackedInt32Array
+@export var active_list: Lists = 0
+
+var ActiveList: BoxContainer
+
+@onready var HList: HBoxContainer = $HList
+@onready var VList: VBoxContainer = $VList
 @onready var btngrp: ButtonGroup = ButtonGroup.new()
 
 
@@ -10,25 +18,32 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	@warning_ignore("incompatible_ternary")
+	ActiveList = HList if active_list == Lists.HLIST else VList
+	
 	super()
 	btngrp.pressed.connect(_on_pressed)
 	
-	for child in BtnList.get_children():
+	for child in ActiveList.get_children():
 		child.button_group = btngrp
 
 
 func init_value() -> void:
 	super()
-	_set_button_pressed(setting_value, true)
+	
+	if not option_ids.is_empty():
+		_set_button_pressed(option_ids.find(setting_value), true)
+	else:
+		_set_button_pressed(setting_value, true)
 
 
 func _set_button_pressed(btn_index: int, pressed: bool) -> void:
-	BtnList.get_child(btn_index).button_pressed = pressed
+	ActiveList.get_child(btn_index).button_pressed = pressed
 
 
 func _get_child_index(target_child: BaseButton) -> int:
 	var i: int = 0
-	for child in BtnList.get_children():
+	for child in ActiveList.get_children():
 		if child == target_child:
 			return i
 		
@@ -39,7 +54,10 @@ func _get_child_index(target_child: BaseButton) -> int:
 
 func _on_pressed(button: BaseButton) -> void:
 	var child_index: int = _get_child_index(button)
-	setting_value = child_index
+	if not option_ids.is_empty():
+		setting_value = option_ids[child_index]
+	else:
+		setting_value = child_index
 	
 	if apply_on_change:
 		apply_setting()

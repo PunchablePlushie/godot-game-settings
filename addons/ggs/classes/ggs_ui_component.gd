@@ -29,7 +29,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if not setting.resource_path.begins_with(ggsUtils.get_plugin_data().dir_settings):
 		return PackedStringArray([WARNING_SETTING_NOT_IN_DIR])
 	
-	if not compatible_types.has(setting.value_type):
+	if (
+		not compatible_types.is_empty() and
+		not compatible_types.has(setting.value_type)
+	):
 		return PackedStringArray([WARNING_INCOMPATIBLE_SETTING])
 	
 	

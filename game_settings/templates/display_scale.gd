@@ -16,7 +16,7 @@ func apply(value: int) -> void:
 	var base_h: int = ProjectSettings.get_setting("display/window/size/viewport_height")
 	var size: Vector2 = Vector2(base_w, base_h) * scale
 	size = ggsUtils.window_clamp_to_screen(size)
-	
+
 	DisplayServer.window_set_size(size)
 	ggsUtils.center_window()
 
@@ -34,6 +34,6 @@ func set_scales(value: Array[float]) -> void:
 func _get_scales_strings() -> PackedStringArray:
 	var scales_strings: PackedStringArray = []
 	for scale in scales:
-		scales_strings.append("x%d"%[scale])
+		scales_strings.append("x%s"%[str(scale)])
 	
 	return scales_strings
