@@ -1,19 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c4pwg7lhukqb8"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c4pwg7lhukqb8"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idsgx"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
-border_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 3
-expand_margin_bottom = 2.0
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ad0p"]
 content_margin_left = 10.0
@@ -58,7 +45,8 @@ expand_margin_bottom = 2.0
 anti_aliasing = false
 
 [resource]
-PrefWindowBG/styles/panel = SubResource("StyleBoxFlat_idsgx")
+ItemList/colors/guide_color = Color(0.701961, 0.701961, 0.701961, 0)
+ItemList/constants/v_separation = 6
 SettingItemBG/base_type = &"PanelContainer"
 SettingItemBG/styles/panel = SubResource("StyleBoxFlat_3ad0p")
 SettingListBG/base_type = &"PanelContainer"
