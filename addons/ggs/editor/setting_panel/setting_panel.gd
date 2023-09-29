@@ -27,6 +27,13 @@ func _ready() -> void:
 	
 	GGS.active_category_changed.connect(_on_Global_active_category_changed)
 	GGS.active_setting_changed.connect(_on_Global_active_setting_changed)
+	
+	AddBtn.disabled = true
+	NSF.editable = false
+	NGF.editable = false
+	CheckAllBtn.disabled = true
+	UncheckAllBtn.disabled = true
+	ReloadBtn.disabled = true
 
 
 func _set_topbar_disabled(disabled: bool) -> void:

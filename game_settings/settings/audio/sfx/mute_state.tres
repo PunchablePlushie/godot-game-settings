@@ -6,8 +6,8 @@
 script = ExtResource("1_rqdj2")
 current = false
 default = false
-name = ""
-category = ""
+name = "sfx_mute_state"
+category = "audio"
 value_type = 1
 value_hint = 0
 value_hint_string = ""

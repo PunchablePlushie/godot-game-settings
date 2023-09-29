@@ -107,7 +107,7 @@ size_flags_vertical = 10
 [node name="DocsBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
-tooltip_text = "View Online Documentation"
+tooltip_text = "View Documentation on Github"
 icon = ExtResource("8_mdi0r")
 flat = true
 script = ExtResource("9_qwavr")
@@ -115,14 +115,14 @@ script = ExtResource("9_qwavr")
 [node name="BugBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
-tooltip_text = "Report an Issue"
+tooltip_text = "Report an Issue on Github"
 icon = ExtResource("10_rly1w")
 flat = true
 script = ExtResource("11_2ygfj")
 
 [node name="FeedbackBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
-tooltip_text = "Send Feedback"
+tooltip_text = "Send Feedback via Google Forms"
 icon = ExtResource("16_abywd")
 flat = true
 script = ExtResource("15_0jgkh")
