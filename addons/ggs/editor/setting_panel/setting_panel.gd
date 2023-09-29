@@ -53,7 +53,8 @@ func _on_Global_active_setting_changed() -> void:
 func _create_setting(item_name: String, template: String = "") -> void:
 	GGS.progress_started.emit(GGS.Progress.ADD_SETTINGS)
 	
-	await get_tree().create_timer(0.05).timeout # A tiny delay so the progress_started signal can travel properly
+	# A tiny delay so the progress_started signal can travel properly
+	await get_tree().create_timer(0.05).timeout 
 	
 	if (
 		not item_name.is_valid_filename() or
@@ -62,6 +63,7 @@ func _create_setting(item_name: String, template: String = "") -> void:
 	):
 		Notification.purpose = Notification.Purpose.INVALID
 		Notification.popup_centered()
+		GGS.progress_ended.emit()
 		return
 	
 	var paths: PackedStringArray
@@ -81,6 +83,7 @@ func _create_setting(item_name: String, template: String = "") -> void:
 			if dir.file_exists("%s.tres"%item_name):
 				Notification.purpose = Notification.Purpose.ALREADY_EXISTS
 				Notification.popup_centered()
+				GGS.progress_ended.emit()
 				return
 		else:
 			if dir.file_exists("%s.tres"%item_name):

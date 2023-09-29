@@ -18,6 +18,7 @@ var semaphore_current: Semaphore = Semaphore.new()
 var semaphore_default: Semaphore = Semaphore.new()
 var terminate_current: bool = false
 var terminate_default: bool = false
+var settings_cache: Array[ggsSetting] #?1
 
 
 func _ready() -> void:
@@ -80,7 +81,6 @@ func _update_save_file() -> void:
 		var step: float = float(0)
 		var total: float = float(all_settings.size())
 		var progress: float
-		
 		for setting_path in all_settings:
 			var setting: ggsSetting = load(setting_path)
 			
@@ -93,6 +93,9 @@ func _update_save_file() -> void:
 			step += 1
 			progress = (step / total) * 100
 			call_thread_safe("emit_signal", "progress_advanced", progress)
+			
+			if not settings_cache.has(setting):
+				settings_cache.append(setting)
 		
 		fresh_save.save(ggsUtils.get_plugin_data().dir_save_file)
 		call_thread_safe("emit_signal", "progress_ended")
@@ -167,3 +170,11 @@ func _apply_settings() -> void:
 		var setting: ggsSetting = load(setting_path)
 		var value: Variant = ggsSaveFile.new().get_value(setting.category, setting.name)
 		setting.apply(value)
+
+
+### Comments
+# ?1: The variable `settings_cache` itself is not actually being used in
+# the code. It's there to keep the references to the loaded settings
+# alive.
+# Godot caches loaded resources of the tree under the hood.
+# View `youtube.com/watch?v=3r7IohvVnw8` for more info.

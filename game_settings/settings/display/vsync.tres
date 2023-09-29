@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ocqigiq7v0l3"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ci3du5bs3vtmi"]
 
 [ext_resource type="Script" path="res://game_settings/templates/audio_mute.gd" id="1_es5bp"]
 

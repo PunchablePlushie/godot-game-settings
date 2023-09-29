@@ -24,7 +24,7 @@ func _on_Global_progress_started(progress_type: GGS.Progress) -> void:
 	visible = true
 	ProgBar.visible = true
 	type = progress_type
-	print("test")
+	
 	match type:
 		GGS.Progress.SAVE_FILE_CURRENT:
 			ProgLabel.text = label_save_file_current
