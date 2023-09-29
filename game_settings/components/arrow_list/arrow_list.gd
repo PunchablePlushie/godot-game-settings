@@ -1,3 +1,4 @@
+@tool
 extends ggsUIComponent
 signal option_selected(option_index: int)
 
@@ -10,6 +11,10 @@ signal option_selected(option_index: int)
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_BOOL, TYPE_INT]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	option_selected.connect(_on_option_selected)
 	LeftBtn.pressed.connect(_on_LeftBtn_pressed)

@@ -1,9 +1,14 @@
+@tool
 extends ggsUIComponent
 
 @onready var Btn: Button = $Btn
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_BOOL]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	Btn.toggled.connect(_on_Btn_toggled)
 

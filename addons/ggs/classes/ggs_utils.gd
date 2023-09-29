@@ -76,7 +76,3 @@ static func center_window() -> void:
 	var origin: Vector2i = DisplayServer.screen_get_position(screen_id)
 	var target_pos: Vector2 = origin + (display_size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
-
-
-#! Do not specify method return class (EditorInterface) as it causes error when
- # when the game is exported.

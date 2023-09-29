@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://0gvjd2nxph5s"]
-
-[ext_resource type="PackedScene" uid="uid://bhkyf3l4ee800" path="res://game_settings/components/checkbox/checkbox.tscn" id="1_xer7i"]
-[ext_resource type="Script" path="res://game_settings/components/_shared_scripts/binary_selection.gd" id="2_qchfg"]
+[gd_scene format=3 uid="uid://0gvjd2nxph5s"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,14 +7,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Checkbox" parent="." instance=ExtResource("1_xer7i")]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_qchfg")
-
-[node name="Btn" parent="Checkbox" index="0"]
-layout_mode = 2
-
-[editable path="Checkbox"]

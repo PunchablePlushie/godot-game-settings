@@ -1,3 +1,4 @@
+@tool
 extends ggsUIComponent
 
 @onready var BtnList: HBoxContainer = $BtnList
@@ -5,6 +6,10 @@ extends ggsUIComponent
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_BOOL, TYPE_INT]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	btngrp.pressed.connect(_on_pressed)
 	

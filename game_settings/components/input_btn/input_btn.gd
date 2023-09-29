@@ -1,3 +1,4 @@
+@tool
 extends ggsUIComponent
 
 enum Type {KEYBOARD, GAMEPAD}
@@ -19,6 +20,10 @@ enum Type {KEYBOARD, GAMEPAD}
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_STRING]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	Btn.pressed.connect(_on_Btn_pressed)
 	ICW.input_selected.connect(_on_ICW_input_selected)

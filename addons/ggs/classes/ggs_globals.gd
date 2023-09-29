@@ -5,6 +5,7 @@ enum Progress {SAVE_FILE_CURRENT, SAVE_FILE_DEFAULT, ADD_SETTINGS}
 
 signal active_category_changed()
 signal active_setting_changed()
+signal dir_settings_change_occured()
 signal progress_started(type: Progress)
 signal progress_advanced(progress: float)
 signal progress_ended()
@@ -20,11 +21,19 @@ var terminate_current: bool = false
 var terminate_default: bool = false
 var settings_cache: Array[ggsSetting] #?1
 
+var FSD: FileSystemDock 
+
 
 func _ready() -> void:
 	thread_current.start(_update_save_file)
 	
 	if Engine.is_editor_hint():
+		FSD = ggsUtils.get_file_system_dock()
+		FSD.files_moved.connect(_on_FSD_item_moved)
+		FSD.file_removed.connect(_on_FSD_item_removed)
+		FSD.folder_moved.connect(_on_FSD_item_moved)
+		FSD.folder_removed.connect(_on_FSD_item_removed)
+		
 		request_update_save_file()
 		thread_default.start(_update_save_file_default)
 	
@@ -127,6 +136,16 @@ func _update_save_file_default() -> void:
 		
 		save_file.save(save_file.path)
 		call_thread_safe("emit_signal", "progress_ended")
+
+
+func _on_FSD_item_moved(old: String, new: String) -> void:
+	if ggsUtils.path_is_in_dir_settings(old) or ggsUtils.path_is_in_dir_settings(new):
+		dir_settings_change_occured.emit()
+
+
+func _on_FSD_item_removed(item: String) -> void:
+	if ggsUtils.path_is_in_dir_settings(item):
+		dir_settings_change_occured.emit()
 
 
 ### Game Init

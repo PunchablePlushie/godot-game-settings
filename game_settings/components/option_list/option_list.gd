@@ -1,9 +1,14 @@
+@tool
 extends ggsUIComponent
 
 @onready var Btn: OptionButton = $Btn
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_BOOL, TYPE_INT]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	Btn.item_selected.connect(_on_Btn_item_selected)
 

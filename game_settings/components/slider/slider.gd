@@ -1,9 +1,14 @@
+@tool
 extends ggsUIComponent
 
 @onready var slider: HSlider = $Slider
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_INT, TYPE_FLOAT]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	slider.value_changed.connect(_on_Slider_value_changed)
 

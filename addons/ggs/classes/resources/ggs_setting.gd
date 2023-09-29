@@ -28,8 +28,15 @@ func _get_property_list() -> Array:
 		{"name": "value_hint", "type": TYPE_INT, "usage": PROPERTY_USAGE_DEFAULT, "hint": PROPERTY_HINT_ENUM, "hint_string": enum_string_property_hints},
 		{"name": "value_hint_string", "type": TYPE_STRING, "usage": PROPERTY_USAGE_DEFAULT},
 	])
-
+	
 	return properties
+
+
+func _get(property: StringName) -> Variant:
+	if property == "resource_name":
+		return name
+	
+	return null
 
 
 func set_current(value: Variant) -> void:
@@ -42,7 +49,6 @@ func get_current() -> Variant:
 	if save_file.has_section_key(category, name):
 		return save_file.get_value(category, name)
 	else:
-		save_file.set_value(category, name, default)
 		return default
 
 

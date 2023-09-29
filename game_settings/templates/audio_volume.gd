@@ -1,7 +1,7 @@
 @tool
 extends ggsSetting
 
-var bus_name: String = "[NONE]": set = set_bus_name
+var audio_bus: String = "None"
 
 
 func _init() -> void:
@@ -12,27 +12,21 @@ func _init() -> void:
 
 
 func apply(value: float) -> void:
-	var bus_index: int = AudioServer.get_bus_index(bus_name)
+	if audio_bus == "None":
+		printerr("GGS - Apply Setting (audio_volume.gd): No audio bus is selected.")
+		return
+	
+	var bus_index: int = AudioServer.get_bus_index(audio_bus)
 	var volume_db: float = linear_to_db(value/100)
 	AudioServer.set_bus_volume_db(bus_index, volume_db)
 
 
 ### Bus Name
 
-func set_bus_name(value: String) -> void:
-	bus_name = value
-	
-	if is_added():
-		save_plugin_data()
-
-
 func _get_property_list() -> Array:
-	if not is_added():
-		return []
-	
 	var hint_string: String = ",".join(_get_audio_buses())
 	return [{
-		"name": "bus_name",
+		"name": "audio_bus",
 		"type": TYPE_STRING,
 		"usage": PROPERTY_USAGE_DEFAULT,
 		"hint": PROPERTY_HINT_ENUM,
@@ -41,7 +35,7 @@ func _get_property_list() -> Array:
 
 
 func _get_audio_buses() -> PackedStringArray:
-	var buses: PackedStringArray = ["[NONE]"]
+	var buses: PackedStringArray = ["None"]
 	for bus_index in range(AudioServer.bus_count):
 		var bus: String = AudioServer.get_bus_name(bus_index)
 		buses.append(bus)

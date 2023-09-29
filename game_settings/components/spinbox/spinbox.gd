@@ -1,3 +1,4 @@
+@tool
 extends ggsUIComponent
 
 @onready var spin_box: SpinBox = $SpinBox
@@ -5,6 +6,10 @@ extends ggsUIComponent
 
 
 func _ready() -> void:
+	compatible_types = [TYPE_INT, TYPE_FLOAT]
+	if Engine.is_editor_hint():
+		return
+	
 	super()
 	spin_box.value_changed.connect(_on_SpinBox_value_changed)
 	Field.context_menu_enabled = false
