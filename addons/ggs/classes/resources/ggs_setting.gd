@@ -4,18 +4,18 @@ class_name ggsSetting
 
 var current: Variant: set = set_current, get = get_current
 var default: Variant
-var value_type: Variant.Type: set = set_value_type
+var value_type: Variant.Type
 var value_hint: PropertyHint
 var value_hint_string: String
-var name: String: set = set_name, get = get_name
-var category: String: set = set_category, get = get_category
+var name: String: get = get_name
+var category: String: get = get_category
 
 
 func _get_property_list() -> Array:
 	var read_only: PropertyUsageFlags =  PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY
 	var enum_string_types: String = ggsUtils.get_enum_string("Variant.Type")
 	var enum_string_property_hints: String = ggsUtils.get_enum_string("PropertyHint")
-
+	
 	var properties: Array
 	properties.append_array([
 		{"name": "Game Setting", "type": TYPE_NIL, "usage": PROPERTY_USAGE_CATEGORY},
@@ -34,14 +34,17 @@ func _get_property_list() -> Array:
 
 func _get(property: StringName) -> Variant:
 	if property == "resource_name":
-		return name
+		resource_name = name
+		return resource_name
 	
 	return null
 
 
 func set_current(value: Variant) -> void:
 	current = value
-	ggsSaveFile.new().set_key(category, name, value)
+	
+	if not category.is_empty() or not name.is_empty():
+		ggsSaveFile.new().set_key(category, name, value)
 
 
 func get_current() -> Variant:
@@ -52,21 +55,6 @@ func get_current() -> Variant:
 		return default
 
 
-func set_value_type(value: Variant.Type) -> void:
-	value_type = value
-	ggsSaveFile.new().set_value(category, name, default)
-
-
-func set_name(value: String) -> void:
-	var path_dict: Dictionary = _get_path_dict()
-	var group: String = ""
-	
-	if path_dict["group"].is_empty():
-		name = path_dict["name"]
-	else:
-		name = "%s_%s"%[path_dict["group"], path_dict["name"]]
-
-
 func get_name() -> String:
 	var path_dict: Dictionary = _get_path_dict()
 	var group: String = ""
@@ -75,10 +63,6 @@ func get_name() -> String:
 		return path_dict["name"]
 	else:
 		return "%s_%s"%[path_dict["group"], path_dict["name"]]
-
-
-func set_category(value: String) -> void:
-	category = _get_path_dict()["category"]
 
 
 func get_category() -> String:

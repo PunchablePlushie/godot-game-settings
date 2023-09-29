@@ -7,7 +7,7 @@ extends ggsSetting
 func _init() -> void:
 	value_type = TYPE_INT
 	value_hint = PROPERTY_HINT_ENUM
-	value_hint_string = ",".join(_get_sizes())
+	value_hint_string = ",".join(_get_sizes_strings())
 
 
 func apply(value: int) -> void:
@@ -23,25 +23,15 @@ func apply(value: int) -> void:
 func set_sizes(value: Array[Vector2]) -> void:
 	sizes = value
 	
-	if not is_added():
-		return
-	
-	save_plugin_data()
-	
 	if Engine.is_editor_hint():
-		value_hint_string = ",".join(_get_sizes())
+		value_hint_string = ",".join(_get_sizes_strings())
 		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
-	
 
 
-func _get_sizes() -> PackedStringArray:
-	var arr0: PackedStringArray
+func _get_sizes_strings() -> PackedStringArray:
+	var sizes_strings: PackedStringArray
 	for size in sizes:
-		arr0.append(str(size))
+		var formatted_size: String = str(size).trim_prefix("(").trim_suffix(")").replace(",", " x")
+		sizes_strings.append(formatted_size)
 	
-	var arr1: PackedStringArray
-	for size in arr0:
-		var formatted_string: String = size.trim_prefix("(").trim_suffix(")").replace(",", " x")
-		arr1.append(formatted_string)
-	
-	return arr1
+	return sizes_strings

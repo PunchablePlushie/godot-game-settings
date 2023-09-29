@@ -109,9 +109,10 @@ func _create_setting(item_name: String, template: String = "") -> void:
 			script = load(script_path)
 		
 		var resource: ggsSetting = ggsSetting.new()
+		var res_path: String = "%s/%s.tres"%[dir.get_current_dir(), item_name]
 		resource.set_script(script)
-		ResourceSaver.save(resource, "%s/%s.tres"%[dir.get_current_dir(), item_name])
-#
+		ResourceSaver.save(resource, res_path)
+	
 	NSF.clear()
 	ggsUtils.get_resource_file_system().scan()
 	List.load_list()

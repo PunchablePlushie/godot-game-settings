@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dlgp8yybhamuu"]
+
+[ext_resource type="Script" path="res://game_settings/templates/display_scale.gd" id="1_u6clm"]
+
+[resource]
+resource_name = "window_scale"
+script = ExtResource("1_u6clm")
+scales = Array[float]([0.0, 1.0, 2.0])
+current = 1
+default = 1
+name = "window_scale"
+category = "display"
+value_type = 2
+value_hint = 2
+value_hint_string = "x0,x1,x2"

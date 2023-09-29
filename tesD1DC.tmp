@@ -27,7 +27,6 @@ offset_bottom = 40.0
 layout_mode = 2
 script = ExtResource("2_d8uho")
 setting = ExtResource("3_888te")
-apply_on_change = true
 
 [node name="Btn" parent="VBoxContainer/Switch" index="0"]
 layout_mode = 2
@@ -37,7 +36,6 @@ text = "test"
 layout_mode = 2
 script = ExtResource("5_lm4ja")
 setting = ExtResource("6_5bym7")
-apply_on_change = true
 
 [node name="Btn" parent="VBoxContainer/OptionList" index="0"]
 layout_mode = 2
@@ -53,7 +51,6 @@ popup/item_2/id = 2
 layout_mode = 2
 script = ExtResource("8_nkneb")
 setting = ExtResource("9_348ha")
-apply_on_change = true
 
 [node name="BtnList" parent="VBoxContainer/RadioList" index="0"]
 layout_mode = 2
