@@ -184,6 +184,7 @@ func _get_settings_in_dir(dir: DirAccess) -> PackedStringArray:
 
 
 func _apply_settings() -> void:
+	return
 	var all_settings: PackedStringArray = get_all_settings()
 	for setting_path in all_settings:
 		var setting: ggsSetting = load(setting_path)

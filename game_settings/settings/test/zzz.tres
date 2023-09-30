@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=2 format=3 uid="uid://o2ite72q0tme"]
+
+[ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_0l6oe"]
+
+[resource]
+resource_name = "zzz"
+script = ExtResource("1_0l6oe")
+action = ""
+event_index = null
+current = -1
+default = 0
+name = "zzz"
+category = "test"
+value_type = 2
+value_hint = 0
+value_hint_string = ""

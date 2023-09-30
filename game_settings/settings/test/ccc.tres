@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=3 format=3 uid="uid://dd03mgk1wygdp"]
+
+[ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_xyc4c"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4uulj"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[resource]
+resource_name = "ccc"
+script = ExtResource("1_xyc4c")
+action = "move_right"
+event_index = 0
+default_as_event = SubResource("InputEventKey_4uulj")
+current = 0
+default = 0
+name = "ccc"
+category = "test"
+value_type = 2
+value_hint = 0
+value_hint_string = ""
