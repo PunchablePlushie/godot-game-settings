@@ -1,8 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://0gvjd2nxph5s"]
-
-[ext_resource type="Resource" uid="uid://dlgp8yybhamuu" path="res://game_settings/settings/display/window_scale.tres" id="6_5bym7"]
-[ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="7_24643"]
-[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="8_nkneb"]
+[gd_scene format=3 uid="uid://0gvjd2nxph5s"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -16,30 +12,3 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="RadioList" parent="VBoxContainer" instance=ExtResource("7_24643")]
-layout_mode = 2
-script = ExtResource("8_nkneb")
-active_list = 1
-setting = ExtResource("6_5bym7")
-apply_on_change = true
-
-[node name="HList" parent="VBoxContainer/RadioList" index="0"]
-layout_mode = 2
-
-[node name="VList" parent="VBoxContainer/RadioList" index="1"]
-layout_mode = 2
-
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/RadioList/VList" index="0"]
-layout_mode = 2
-text = "aaa"
-
-[node name="CheckBox2" type="CheckBox" parent="VBoxContainer/RadioList/VList" index="1"]
-layout_mode = 2
-text = "bbb"
-
-[node name="CheckBox3" type="CheckBox" parent="VBoxContainer/RadioList/VList" index="2"]
-layout_mode = 2
-text = "ccc"
-
-[editable path="VBoxContainer/RadioList"]

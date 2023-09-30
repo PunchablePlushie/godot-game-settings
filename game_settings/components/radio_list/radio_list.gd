@@ -4,7 +4,7 @@ extends ggsUIComponent
 enum Lists {HLIST, VLIST}
 
 @export var option_ids: PackedInt32Array
-@export var active_list: Lists = 0
+@export var active_list: Lists = Lists.HLIST
 
 var ActiveList: BoxContainer
 

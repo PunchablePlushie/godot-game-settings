@@ -3,8 +3,8 @@ extends ggsSetting
 
 enum Type {KEYBOARD, GAMEPAD}
 
-@export var action: String: set = set_action
-@export var type: Type: set = set_type
+@export var action: String
+@export var type: Type
 
 
 func _init() -> void:
@@ -31,19 +31,3 @@ func _event_is_type(event: InputEvent) -> bool:
 			return (event is InputEventJoypadButton) or (event is InputEventJoypadMotion)
 		_:
 			return false
-
-
-### Properties
-
-func set_action(value: String) -> void:
-	action = value
-	
-	if is_added():
-		save_plugin_data()
-
-
-func set_type(value: Type) -> void:
-	type = value
-	
-	if is_added():
-		save_plugin_data()

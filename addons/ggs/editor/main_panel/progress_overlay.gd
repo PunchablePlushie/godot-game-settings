@@ -33,9 +33,13 @@ func _on_Global_progress_started(progress_type: GGS.Progress) -> void:
 		GGS.Progress.ADD_SETTINGS:
 			ProgLabel.text = label_add_multiple_settings
 			ProgBar.visible = false
+	
 
 
 func _on_Global_progress_ended() -> void:
+	# A small delay to make sure progress_ended happens after progress_started
+	await get_tree().create_timer(0.01).timeout
+	
 	visible = false
 	ProgBar.value = 0
 
