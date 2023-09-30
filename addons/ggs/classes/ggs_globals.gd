@@ -78,9 +78,6 @@ func _update_save_file() -> void:
 	while (true):
 		semaphore_current.wait()
 		
-		if terminate_current:
-			break
-		
 		call_thread_safe("emit_signal", "progress_started", Progress.SAVE_FILE_CURRENT)
 		
 		var save_file: ggsSaveFile = ggsSaveFile.new()
@@ -108,14 +105,14 @@ func _update_save_file() -> void:
 		
 		fresh_save.save(ggsUtils.get_plugin_data().dir_save_file)
 		call_thread_safe("emit_signal", "progress_ended")
+		
+		if terminate_current:
+			break
 
 
 func _update_save_file_default() -> void:
 	while (true):
 		semaphore_default.wait()
-		
-		if terminate_default:
-			break
 		
 		call_thread_safe("emit_signal", "progress_started", Progress.SAVE_FILE_DEFAULT)
 	
@@ -136,6 +133,9 @@ func _update_save_file_default() -> void:
 		
 		save_file.save(save_file.path)
 		call_thread_safe("emit_signal", "progress_ended")
+		
+		if terminate_default:
+			break
 
 
 func _on_FSD_item_moved(old: String, new: String) -> void:
@@ -184,7 +184,6 @@ func _get_settings_in_dir(dir: DirAccess) -> PackedStringArray:
 
 
 func _apply_settings() -> void:
-	return
 	var all_settings: PackedStringArray = get_all_settings()
 	for setting_path in all_settings:
 		var setting: ggsSetting = load(setting_path)

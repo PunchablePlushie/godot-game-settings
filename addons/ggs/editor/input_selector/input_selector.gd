@@ -48,6 +48,7 @@ func _confirm(item: TreeItem) -> void:
 	inspected_obj.action = item.get_parent().get_text(0)
 	inspected_obj.event_index = item.get_metadata(0)["index"]
 	inspected_obj.default_as_event = item.get_metadata(0)["event"]
+	inspected_obj.current_as_event = item.get_metadata(0)["event"].duplicate()
 
 
 func _on_SIW_confirmed() -> void:
