@@ -213,27 +213,29 @@ func get_event_as_icon(event: InputEvent, icon_db: ggsIconDB) -> Texture2D:
 
 
 func _get_mouse_event_as_icon(event: InputEventMouse, icon_db: ggsIconDB) -> Texture2D:
-	return Texture2D.new()
+	var button_index: int = event.button_index
+	var icon: Texture2D = icon_db.get_mouse_button_texture(button_index)
+	
+	return icon
 
 
 func _get_gp_btn_event_as_icon(event: InputEventJoypadButton, icon_db: ggsIconDB) -> Texture2D:
-	return Texture2D.new()
-#	var device_name: String = Input.get_joy_name(event.device)
-#	device_name = _get_joy_name_shortened(device_name)
-#
-#	var event_string: String = _get_gp_event_string(event)
-#	var icon: Texture2D = icon_db.get_btn_texture(device_name, event_string)
-#
-#	return icon
+	var device_name: String = Input.get_joy_name(event.device)
+	device_name = _get_joy_name_abbr(device_name)
+	
+	var button_index: int = event.button_index
+	var icon: Texture2D = icon_db.get_gp_btn_texture(device_name, button_index)
+	
+	return icon
 
 
 func _get_gp_motion_event_as_icon(event: InputEventJoypadMotion, icon_db: ggsIconDB) -> Texture2D:
-	return Texture2D.new()
-#	var device_name: String = Input.get_joy_name(event.device)
-#	device_name = _get_joy_name_shortened(device_name)
-#
-#	var event_string: String = _get_gp_event_string(event)
-#	var icon: Texture2D = icon_db.get_motion_texture(device_name, event_string)
-#
-#	return icon
+	var device_name: String = Input.get_joy_name(event.device)
+	device_name = _get_joy_name_abbr(device_name)
+	
+	var axis: int = event.axis
+	var axis_dir: String = "-" if event.axis_value < 1 else "+"
+	var icon: Texture2D = icon_db.get_gp_motion_texture(device_name, axis, axis_dir)
+	
+	return icon
 

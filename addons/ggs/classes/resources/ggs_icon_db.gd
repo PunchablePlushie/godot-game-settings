@@ -2,7 +2,43 @@
 extends Resource
 class_name ggsIconDB
 
+var property_map: Dictionary = {
+	"mouse_button": [
+		"lmb", "rmb", "mmb", "mw_up", "mw_down", "mw_left", "mw_right", "mb1", "mb2"
+	],
+	
+	"gp_button": [
+		"bot", "right", "left", "top",
+		"back", "guide", "start",
+		"left_stick", "right_stick",
+		"left_shoulder", "right_shoulder",
+		"dup", "ddown", "dleft", "dright",
+		"misc", "pad1", "pad2", "pad3", "pad4",
+	"touch"],
+	
+	"gp_motion": [
+		{"-": "ls_left", "+": "ls_right"},
+		{"-": "ls_down", "+": "ls_up"},
+		{"-": "rs_left", "+": "rs_right"},
+		{"-": "rs_down", "+": "rs_up"},
+		{"+": "left_trigger"},
+		{"+": "right_trigger"},
+	],
+}
+
+
 @export_category("Icon Database")
+@export_group("Mouse", "mouse_")
+@export var mouse_lmb: Texture2D
+@export var mouse_rmb: Texture2D
+@export var mouse_mmb: Texture2D
+@export var mouse_mw_up: Texture2D
+@export var mouse_mw_down: Texture2D
+@export var mouse_mw_left: Texture2D
+@export var mouse_mw_right: Texture2D
+@export var mouse_mb1: Texture2D
+@export var mouse_mb2: Texture2D
+
 @export_group("XBox", "xbox_")
 @export_subgroup("XBox Motions", "xbox_")
 @export var xbox_ls_left: Texture2D
@@ -144,9 +180,13 @@ class_name ggsIconDB
 @export var other_touch: Texture2D
 
 
-func get_btn_texture(category: String, button: String) -> Texture2D:
-	return get("%s_%s"%[category, button])
+func get_mouse_button_texture(button_index: int) -> Texture2D:
+	return get("mouse_%s"%property_map["mouse_button"][button_index - 1])
 
 
-func get_motion_texture(category: String, motion: String) -> Texture2D:
-	return get("%s_%s"%[category, motion])
+func get_gp_button_texture(category: String, button_index: int) -> Texture2D:
+	return get("%s_%s"%[category, property_map["gp_button"][button_index]])
+
+
+func get_gp_motion_texture(category: String, axis: int, axis_dir: String) -> Texture2D:
+	return get("%s_%s"%[category, property_map["gp_motion"][axis][axis_dir]])

@@ -86,7 +86,7 @@ func apply(value: Array) -> void:
 	
 	var event: InputEvent = input_helper.create_event_from_type(value[0])
 	input_helper.set_event_id(event, value[1])
-	print(event)
+	
 	var action_events: Array[InputEvent] = InputMap.action_get_events(action)
 	action_events.remove_at(event_index)
 	action_events.insert(event_index, event)
