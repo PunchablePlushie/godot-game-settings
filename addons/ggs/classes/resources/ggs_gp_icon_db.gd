@@ -1,6 +1,6 @@
 @tool
 extends Resource
-class_name ggsGPIconDB
+class_name ggsIconDB
 
 @export_category("Icon Database")
 @export_group("XBox", "xbox_")

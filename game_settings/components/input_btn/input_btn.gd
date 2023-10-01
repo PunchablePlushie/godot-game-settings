@@ -1,26 +1,23 @@
 @tool
 extends ggsUIComponent
 
-enum Type {KEYBOARD, GAMEPAD}
+@export var ICW: ConfirmationDialog
+@export var accept_modifiers: bool
+@export var accept_mouse: bool
+@export var accept_axis: bool
 
-@export_node_path("ConfirmationDialog") var icw: NodePath
-@export var type: Type
-
-@export_group("Keyboard")
-@export var accept_mouse: bool = true
-@export var accept_modifiers: bool = true
-
-@export_group("Gamepad")
+@export_group("Icon")
 @export var use_icons: bool
-@export var icon_db: ggsGPIconDB
+@export var icon_db: ggsIconDB
+
+var type: ggsInputHelper.InputType = ggsInputHelper.InputType.INVALID
+var input_helper: ggsInputHelper = ggsInputHelper.new()
 
 @onready var Btn: Button = $Btn
-@onready var ICW: ConfirmationDialog = get_node(icw)
-@onready var input_helper: ggsInputHelper = ggsInputHelper.new()
 
 
 func _ready() -> void:
-	compatible_types = [TYPE_STRING]
+	compatible_types = [TYPE_ARRAY]
 	if Engine.is_editor_hint():
 		return
 	
@@ -32,7 +29,11 @@ func _ready() -> void:
 
 func init_value() -> void:
 	super()
-	var event: InputEvent = input_helper.get_event_from_string(setting_value)
+	var event: InputEvent = input_helper.create_event_from_type(setting_value[0])
+	
+	type = input_helper.get_event_type(event)
+	
+	input_helper.set_event_id(event, setting_value[1])
 	_set_btn_text_or_icon(event)
 
 
@@ -41,16 +42,17 @@ func _on_Btn_pressed() -> void:
 	ICW.type = type
 	ICW.accept_mouse = accept_mouse
 	ICW.accept_modifiers = accept_modifiers
+	ICW.accept_axis = accept_axis
 	ICW.use_icons = use_icons
 	ICW.popup_centered()
 
 
-func _on_ICW_input_selected(input: InputEvent) -> void:
+func _on_ICW_input_selected(event: InputEvent) -> void:
 	if ICW.src != self:
 		return
 	
-	setting_value = input_helper.get_string_from_event(input)
-	_set_btn_text_or_icon(input)
+	setting_value = [input_helper.get_event_type(event), input_helper.get_event_id(event)]
+	_set_btn_text_or_icon(event)
 	
 	if apply_on_change:
 		apply_setting()
@@ -59,13 +61,19 @@ func _on_ICW_input_selected(input: InputEvent) -> void:
 ### Button Text or Icon
 
 func _set_btn_text_or_icon(event: InputEvent) -> void:
-	if use_icons and type == Type.GAMEPAD:
+	if (
+		use_icons and
+		(type == ggsInputHelper.InputType.MOUSE or
+		type == ggsInputHelper.InputType.GP_BTN or
+		type == ggsInputHelper.InputType.GP_MOTION)
+	):
 		Btn.icon = input_helper.get_event_as_icon(event, icon_db)
 		
 		if Btn.icon == null:
 			Btn.text = input_helper.get_event_as_text(event)
 		else:
 			Btn.text = ""
+		
 		return
 	
 	Btn.icon = null
@@ -73,7 +81,8 @@ func _set_btn_text_or_icon(event: InputEvent) -> void:
 
 
 func _on_Input_joy_connection_changed(_device: int, _connected: bool) -> void:
-	var event: InputEvent = input_helper.get_event_from_string(setting_value)
+	var event: InputEvent = input_helper.create_event_from_type(setting_value[0])
+	input_helper.set_event_id(event, setting_value[1])
 	_set_btn_text_or_icon(event)
 
 
@@ -81,5 +90,6 @@ func _on_Input_joy_connection_changed(_device: int, _connected: bool) -> void:
 
 func reset_setting() -> void:
 	super()
-	var event: InputEvent = input_helper.get_event_from_string(setting_value)
+	var event: InputEvent = input_helper.create_event_from_type(setting_value[0])
+	input_helper.set_event_id(event, setting_value[1])
 	_set_btn_text_or_icon(event)
