@@ -107,7 +107,7 @@ size_flags_vertical = 10
 [node name="DocsBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
-tooltip_text = "View Documentation on Github"
+tooltip_text = "View Documentation"
 icon = ExtResource("8_mdi0r")
 flat = true
 script = ExtResource("9_qwavr")
@@ -115,14 +115,14 @@ script = ExtResource("9_qwavr")
 [node name="BugBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
-tooltip_text = "Report an Issue on Github"
+tooltip_text = "Report an Issue"
 icon = ExtResource("10_rly1w")
 flat = true
 script = ExtResource("11_2ygfj")
 
 [node name="FeedbackBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
 layout_mode = 2
-tooltip_text = "Send Feedback via Google Forms"
+tooltip_text = "Send Feedback"
 icon = ExtResource("16_abywd")
 flat = true
 script = ExtResource("15_0jgkh")
@@ -155,7 +155,7 @@ layout_mode = 2
 [node name="ProgLabel" type="Label" parent="ProgressOverlay/Center/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Remaking Save File from Current Values"
+text = "Remaking Save File from Default Values"
 
 [node name="ProgBar" type="ProgressBar" parent="ProgressOverlay/Center/VBox"]
 unique_name_in_owner = true

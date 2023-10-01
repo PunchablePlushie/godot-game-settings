@@ -1,7 +1,7 @@
 @tool
 extends Button
 
-const URI: String = "https://example.com"
+const URI: String = "https://forms.gle/c8XQzKHEqeMqxJ3Z9"
 
 
 func _ready() -> void:

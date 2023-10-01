@@ -14,7 +14,8 @@ var property_map: Dictionary = {
 		"left_shoulder", "right_shoulder",
 		"dup", "ddown", "dleft", "dright",
 		"misc", "pad1", "pad2", "pad3", "pad4",
-	"touch"],
+		"touch"
+	],
 	
 	"gp_motion": [
 		{"-": "ls_left", "+": "ls_right"},

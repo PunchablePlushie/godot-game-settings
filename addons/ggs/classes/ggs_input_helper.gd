@@ -224,7 +224,7 @@ func _get_gp_btn_event_as_icon(event: InputEventJoypadButton, icon_db: ggsIconDB
 	device_name = _get_joy_name_abbr(device_name)
 	
 	var button_index: int = event.button_index
-	var icon: Texture2D = icon_db.get_gp_btn_texture(device_name, button_index)
+	var icon: Texture2D = icon_db.get_gp_button_texture(device_name, button_index)
 	
 	return icon
 
