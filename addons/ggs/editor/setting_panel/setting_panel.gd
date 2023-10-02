@@ -57,7 +57,7 @@ func _on_Global_active_setting_changed() -> void:
 
 ### Setting Creation
 
-func _create_setting(item_name: String, template: String = "") -> void:
+func _create_setting(item_name: String, template_path: String = "") -> void:
 	GGS.progress_started.emit(GGS.Progress.ADD_SETTINGS)
 	
 	# A tiny delay so the progress_started signal can travel properly
@@ -99,14 +99,13 @@ func _create_setting(item_name: String, template: String = "") -> void:
 		
 		var script: Script
 		var script_path: String
-		if template.is_empty():
+		if template_path.is_empty():
 			script = TEMPLATE_SCRIPT.duplicate()
 			script_path = "%s/%s.gd"%[dir.get_current_dir(), item_name]
 			ResourceSaver.save(script, script_path)
 			script = load(script_path)
 		else:
-			script_path = ggsUtils.get_plugin_data().dir_templates.path_join(template)
-			script = load(script_path)
+			script = load(template_path)
 		
 		var resource: ggsSetting = ggsSetting.new()
 		var res_path: String = "%s/%s.tres"%[dir.get_current_dir(), item_name]

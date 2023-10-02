@@ -1,6 +1,6 @@
 @tool
 extends ConfirmationDialog
-signal template_selected(template: String, setting_name: String)
+signal template_selected(template_path: String, setting_name: String)
 
 @onready var SettingList: ItemList = %SettingList
 @onready var FilterField: LineEdit = %FilterField
@@ -27,18 +27,18 @@ func _ready() -> void:
 
 func _confirm() -> void:
 	var selected_item_index: int
-	var selected_item_text: String
+	var selected_item_meta: String
 	
 	if SettingList.is_anything_selected():
 		selected_item_index = SettingList.get_selected_items()[0]
-		selected_item_text = SettingList.get_item_text(selected_item_index)
+		selected_item_meta = SettingList.get_item_metadata(selected_item_index)
 	
 	if RecentList.is_anything_selected():
 		selected_item_index = RecentList.get_selected_items()[0]
-		selected_item_text = RecentList.get_item_text(selected_item_index)
+		selected_item_meta = RecentList.get_item_metadata(selected_item_index)
 	
-	template_selected.emit("%s.gd"%selected_item_text, NameField.text)
-	ggsUtils.get_plugin_data().add_recent_setting(selected_item_text)
+	template_selected.emit(selected_item_meta, NameField.text)
+	ggsUtils.get_plugin_data().add_recent_setting(selected_item_meta)
 
 
 func _on_about_to_popup() -> void:
@@ -90,10 +90,39 @@ func _on_AnyList_item_activated(index: int, list: ItemList) -> void:
 func _load_settings() -> void:
 	SettingList.clear()
 	
-	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_templates)
-	var template_list: PackedStringArray = dir.get_files()
+	var template_list: PackedStringArray = _get_all_settings()
 	for template in template_list:
-		SettingList.add_item(template.get_basename())
+		var item_index: int = SettingList.add_item(template.get_file().get_basename())
+		SettingList.set_item_metadata(item_index, template)
+		SettingList.set_item_tooltip(item_index, template)
+
+
+func _get_all_settings() -> PackedStringArray:
+	var all_settings: PackedStringArray
+	var path: String = ggsUtils.get_plugin_data().dir_templates
+	
+	var dir: DirAccess = DirAccess.open(path)
+	var templates: PackedStringArray = dir.get_files()
+	for template in templates:
+		template = dir.get_current_dir().path_join(template)
+		all_settings.append(template)
+	
+	_get_settings_in_dir(dir, all_settings)
+	
+	return all_settings
+
+
+func _get_settings_in_dir(dir: DirAccess, all_settings: PackedStringArray) -> void:
+	var base_dir: String = dir.get_current_dir()
+	var subdirs: PackedStringArray = dir.get_directories()
+	for subdir in subdirs:
+		dir.change_dir(base_dir.path_join(subdir))
+		var templates: PackedStringArray = dir.get_files()
+		for template in templates:
+			template = dir.get_current_dir().path_join(template)
+			all_settings.append(template)
+		
+		_get_settings_in_dir(dir, all_settings)
 
 
 func _filter_setting_list(filter: String) -> void:
@@ -124,7 +153,9 @@ func _load_recent() -> void:
 	
 	var list: Array[String] = ggsUtils.get_plugin_data().recent_settings
 	for item in list:
-		RecentList.add_item(item)
+		var item_index: int = RecentList.add_item(item.get_file().get_basename())
+		RecentList.set_item_metadata(item_index, item)
+		RecentList.set_item_tooltip(item_index, item)
 
 
 func _on_ClearRecentBtn_pressed() -> void:
