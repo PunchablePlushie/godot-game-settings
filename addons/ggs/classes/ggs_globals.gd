@@ -157,6 +157,9 @@ func get_all_settings() -> PackedStringArray:
 	var dir: DirAccess = DirAccess.open(path)
 	var categories: PackedStringArray = dir.get_directories()
 	for category in categories:
+		if category.begins_with("_"):
+			continue
+		
 		dir.change_dir(path.path_join(category))
 		var settings: PackedStringArray = _get_settings_in_dir(dir)
 		all_settings.append_array(settings)
