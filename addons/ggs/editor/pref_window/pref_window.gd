@@ -1,20 +1,33 @@
 @tool
 extends Window
 
+enum DirTarget {SETTINGS, COMPONENTS, TEMPLATES}
+enum ConfirmPurpose {RESET, OK}
+
+const THEME: Theme = preload("res://addons/ggs/editor/_theme/ggs_theme.tres")
+const TEMPLATE: Script = preload("res://addons/ggs/template.gd")
+
+@export_multiline var reset_text: String
+@export_multiline var ok_text: String
+
 @onready var OkBtn: Button = %OkBtn
 @onready var CancelBtn: Button = %CancelBtn
 
 @onready var SDF: LineEdit = %SettingDirField
 @onready var CDF: LineEdit = %CompDirField
-@onready var SFDF: LineEdit = %SaveFileDirField
+@onready var TDF: LineEdit = %TemplatesDirField
+@onready var SFNF: LineEdit = %SaveFileNameField
+@onready var SFEF: LineEdit = %SaveFileExtensionField
 
 @onready var SDB: Button = %SettingDirBtn
 @onready var CDB: Button = %CompDirBtn
-@onready var SFDB: Button = %SaveFileDirBtn
-@onready var DSW: FileDialog = $DirSelectionWndw
+@onready var TDB: Button = %TemplatesDirBtn
+@onready var DSW: FileDialog = $DirSelectionWindow
 
+@onready var UpdateThemeBtn: Button = %UpdateThemeBtn
+@onready var BaseTemplateBtn: Button = %BaseTemplateBtn
 @onready var ResetBtn: Button = %ResetBtn
-@onready var CRW: ConfirmationDialog = $ConfirmResetWndw
+@onready var CRW: ConfirmationDialog = $ConfirmWindow
 
 
 func _ready() -> void:
@@ -25,10 +38,11 @@ func _ready() -> void:
 	
 	SDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(SDB))
 	CDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(CDB))
-	SFDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(SFDB))
+	TDB.pressed.connect(_on_AnyDirectoryBtn_pressed.bind(TDB))
 	DSW.dir_selected.connect(_on_DSW_dir_selected)
-	DSW.file_selected.connect(_on_DSW_file_selected)
 	
+	UpdateThemeBtn.pressed.connect(_on_UpdateThemeBtn_pressed)
+	BaseTemplateBtn.pressed.connect(_on_BaseTemplateBtn_pressed)
 	ResetBtn.pressed.connect(_on_ResetBtn_pressed)
 	CRW.confirmed.connect(_on_CRW_confirmed)
 	
@@ -41,23 +55,23 @@ func _init_fields() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	SDF.text = data.dir_settings
 	CDF.text = data.dir_components
-	SFDF.text = data.dir_save_file
+	TDF.text = data.dir_templates
+	
+	var value: String = data.dir_save_file
+	SFNF.text = value.get_file().get_basename()
+	SFEF.text = value.get_extension()
 
 
 func _on_AnyDirectoryBtn_pressed(src: Button) -> void:
 	var target: String
+	
 	match src:
 		SDB:
-			DSW.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-			DSW.access = FileDialog.ACCESS_RESOURCES
-			DSW.set_meta("Target", "Settings")
+			DSW.set_meta("target", DirTarget.SETTINGS)
 		CDB:
-			DSW.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-			DSW.access = FileDialog.ACCESS_RESOURCES
-			DSW.set_meta("Target", "Components")
-		SFDB:
-			DSW.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-			DSW.access = FileDialog.ACCESS_USERDATA
+			DSW.set_meta("target", DirTarget.COMPONENTS)
+		TDB:
+			DSW.set_meta("target", DirTarget.TEMPLATES)
 	
 	DSW.invalidate()
 	DSW.popup_centered()
@@ -65,30 +79,58 @@ func _on_AnyDirectoryBtn_pressed(src: Button) -> void:
 
 func _on_DSW_dir_selected(dir: String) -> void:
 	var target_field: LineEdit
-	match DSW.get_meta("Target"):
-		"Settings":
+	match DSW.get_meta("target"):
+		DirTarget.SETTINGS:
 			target_field = SDF
-		"Components":
+		DirTarget.COMPONENTS:
 			target_field = CDF
+		DirTarget.TEMPLATES:
+			target_field = TDF
 	
 	target_field.text = dir
 
 
-func _on_DSW_file_selected(file: String) -> void:
-	SFDF.text = file
+### Buttons
+
+func _on_UpdateThemeBtn_pressed() -> void:
+	THEME.update()
 
 
-### Reseting
+func _on_BaseTemplateBtn_pressed() -> void:
+	ggsUtils.get_editor_interface().inspect_object(TEMPLATE)
+	hide()
+
 
 func _on_ResetBtn_pressed() -> void:
+	CRW.dialog_text = reset_text
+	CRW.set_meta("purpose", ConfirmPurpose.RESET)
+	CRW.popup_centered()
+
+
+func _on_OkBtn_pressed() -> void:
+	CRW.dialog_text = ok_text
+	CRW.set_meta("purpose", ConfirmPurpose.OK)
 	CRW.popup_centered()
 
 
 func _on_CRW_confirmed() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.reset()
-	hide()
-	ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
+	match CRW.get_meta("purpose"):
+		ConfirmPurpose.RESET:
+			ggsUtils.get_plugin_data().reset()
+			
+			hide()
+			ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
+		ConfirmPurpose.OK:
+			var data: ggsPluginData = ggsUtils.get_plugin_data()
+			data.set_property("dir_settings", SDF.text)
+			data.set_property("dir_components", CDF.text)
+			data.set_property("dir_templates", TDF.text)
+			
+			var value: String = "user://%s.%s"%[SFNF.text, SFEF.text]
+			data.set_property("dir_save_file", value)
+			
+			hide()
+			ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
 
 
 ### Window Functionalities
@@ -99,12 +141,3 @@ func _on_about_to_popup() -> void:
 
 func _on_close_requested() -> void:
 	hide()
-
-
-func _on_OkBtn_pressed() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.set_property("dir_settings", SDF.text)
-	data.set_property("dir_components", CDF.text)
-	data.set_property("dir_save_file", SFDF.text)
-	hide()
-	ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)

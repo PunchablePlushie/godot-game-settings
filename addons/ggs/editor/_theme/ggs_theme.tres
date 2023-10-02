@@ -2,7 +2,20 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/_theme/ggs_theme.gd" id="1_3cm4d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ad0p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wolqy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.211765, 0.211765, 0.211765, 1)
+border_color = Color(0.211765, 0.211765, 0.211765, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5a6g"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
@@ -17,7 +30,7 @@ corner_detail = 3
 expand_margin_bottom = 2.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45f0c"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1mf3"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
@@ -31,26 +44,12 @@ corner_radius_bottom_left = 3
 corner_detail = 3
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sauhg"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.211765, 0.211765, 0.211765, 1)
-border_color = Color(0.211765, 0.211765, 0.211765, 1)
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 3
-expand_margin_bottom = 2.0
-anti_aliasing = false
-
 [resource]
 ItemList/colors/guide_color = Color(0.701961, 0.701961, 0.701961, 0)
 ItemList/constants/v_separation = 6
+PrefWindowBG/styles/panel = SubResource("StyleBoxFlat_wolqy")
 SettingItemBG/base_type = &"PanelContainer"
-SettingItemBG/styles/panel = SubResource("StyleBoxFlat_3ad0p")
+SettingItemBG/styles/panel = SubResource("StyleBoxFlat_l5a6g")
 SettingListBG/base_type = &"PanelContainer"
-SettingListBG/styles/panel = SubResource("StyleBoxFlat_45f0c")
-WindowBG/base_type = &"PanelContainer"
-WindowBG/styles/panel = SubResource("StyleBoxFlat_sauhg")
+SettingListBG/styles/panel = SubResource("StyleBoxFlat_g1mf3")
 script = ExtResource("1_3cm4d")

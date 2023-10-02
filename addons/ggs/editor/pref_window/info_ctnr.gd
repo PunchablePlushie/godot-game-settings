@@ -2,31 +2,29 @@
 extends HBoxContainer
 
 const PLUGIN_CONFIG_PATH: String = "res://addons/ggs/plugin.cfg"
-const REPO_PAGE: String = "https://github.com/PunchablePlushie/godot-game-settings"
+const URL_CHANGELOG: String = "https://github.com/PunchablePlushie/godot-game-settings/tree/main/docs/changelog.md#"
+const URL_RELEASES: String = "https://github.com/PunchablePlushie/godot-game-settings/releases/tag/"
 
+var version: String
 var plugin_config: ConfigFile = ConfigFile.new()
 
 @onready var VersionBtn: Button = $VersionBtn
 @onready var ChangelogBtn: Button = $ChangelogBtn
+
 
 func _ready() -> void:
 	VersionBtn.pressed.connect(_on_VersionBtn_pressed)
 	ChangelogBtn.pressed.connect(_on_ChangelogBtn_pressed)
 	
 	plugin_config.load(PLUGIN_CONFIG_PATH)
-	_set_btns_text()
-
-
-func _set_btns_text() -> void:
-	var version: String = plugin_config.get_value("plugin", "version")
+	
+	version = plugin_config.get_value("plugin", "version")
 	VersionBtn.text = version
 
 
 func _on_VersionBtn_pressed() -> void:
-	var page: String = plugin_config.get_value("extra", "release")
-	OS.shell_open(REPO_PAGE.path_join(page))
+	OS.shell_open(URL_RELEASES + version)
 
 
 func _on_ChangelogBtn_pressed() -> void:
-	var page: String = plugin_config.get_value("extra", "changelog")
-	OS.shell_open(REPO_PAGE.path_join(page))
+	OS.shell_open(URL_CHANGELOG + version.replace(".", ""))

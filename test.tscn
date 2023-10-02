@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://0gvjd2nxph5s"]
+[gd_scene load_steps=2 format=3 uid="uid://0gvjd2nxph5s"]
 
 [ext_resource type="Script" path="res://test.gd" id="1_uifwv"]
-[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="2_0a80j"]
-[ext_resource type="Resource" uid="uid://bx707xlhnf214" path="res://game_settings/settings/test/ccc.tres" id="4_6lky5"]
-[ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="5_l8ogt"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,16 +15,3 @@ script = ExtResource("1_uifwv")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="InputBtn" parent="VBoxContainer" node_paths=PackedStringArray("ICW") instance=ExtResource("2_0a80j")]
-layout_mode = 2
-ICW = NodePath("../../InputConfirmWindow")
-accept_modifiers = true
-accept_mouse = true
-accept_axis = true
-setting = ExtResource("4_6lky5")
-apply_on_change = true
-
-[node name="InputConfirmWindow" parent="." instance=ExtResource("5_l8ogt")]
-
-[editable path="VBoxContainer/InputBtn"]

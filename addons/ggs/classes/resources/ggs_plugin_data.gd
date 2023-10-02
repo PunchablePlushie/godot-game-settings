@@ -6,8 +6,8 @@ const DIR_SETTINGS_DEFAULT: String = "res://game_settings/settings"
 const DIR_TEMPLATES_DEFAULT: String = "res://game_settings/templates"
 const DIR_COMPONENTS_DEFAULT: String = "res://game_settings/components"
 const DIR_SAVE_FILE_DEFAULT: String = "user://settings.cfg"
-const SPLIT_OFFSET_0_DEFAULT: int = -225
-const SPLIT_OFFSET_1_DEFAULT: int = 420
+const SPLIT_OFFSET_0_DEFAULT: int = -315
+const SPLIT_OFFSET_1_DEFAULT: int = 615
 
 @export_category("GGS Plugin Data")
 @export var recent_settings: Array[String]
@@ -27,7 +27,7 @@ func set_property(property: String, value: Variant) -> void:
 
 
 func save() -> void:
-	ResourceSaver.save(self, resource_path)
+	ResourceSaver.save(self)
 
 
 func reset() -> void:

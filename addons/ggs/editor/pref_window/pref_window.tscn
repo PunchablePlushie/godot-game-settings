@@ -9,12 +9,17 @@
 
 [node name="PrefWindow" type="Window"]
 title = "GGS Preferences"
-size = Vector2i(813, 594)
+position = Vector2i(0, 36)
+size = Vector2i(650, 400)
 visible = false
 wrap_controls = true
 exclusive = true
-min_size = Vector2i(500, 0)
+min_size = Vector2i(650, 400)
 script = ExtResource("1_ihv6i")
+reset_text = "Are you sure you want to reset settings?
+A plugin restart is required and the plugin will be disabled automatically if confirmed."
+ok_text = "Confirm changes?
+A plugin restart is required and the plugin will be disabled automatically if confirmed."
 
 [node name="BgPanel" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -22,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"WindowBG"
+theme_type_variation = &"PrefWindowBG"
 
 [node name="Margin" type="MarginContainer" parent="BgPanel"]
 layout_mode = 2
@@ -34,105 +39,173 @@ theme_override_constants/margin_bottom = 5
 [node name="MainCtnr" type="VBoxContainer" parent="BgPanel/Margin"]
 layout_mode = 2
 
-[node name="OptionsCtnr" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+[node name="DirectoriesSection" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
-[node name="SettingsDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+[node name="SectionLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
+layout_mode = 2
+text = "Directories"
+horizontal_alignment = 1
+
+[node name="HSep" type="HSeparator" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
 layout_mode = 2
 
-[node name="SettingDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+[node name="SettingsDir" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
+layout_mode = 2
+
+[node name="SettingDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SettingsDir"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-text = "Settings Directory:"
+text = "Settings:"
 
-[node name="SettingDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+[node name="SettingDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SettingsDir"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="SettingDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SettingsDirCtnr"]
+[node name="SettingDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SettingsDir"]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("2_qx4su")
 
-[node name="CompDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+[node name="ComponentDir" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
 layout_mode = 2
 
-[node name="CompDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+[node name="CompDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/ComponentDir"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-text = "Components Directory:"
+text = "Components:"
 
-[node name="CompDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+[node name="CompDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/ComponentDir"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="CompDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/CompDirCtnr"]
+[node name="CompDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/ComponentDir"]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("2_qx4su")
 
-[node name="SaveFileDirCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
+[node name="TemplatesDir" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
 layout_mode = 2
 
-[node name="SaveFileDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+[node name="TemplatesDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/TemplatesDir"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
-text = "Components Directory:"
+text = "Templates:"
 
-[node name="SaveFileDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+[node name="TemplatesDirField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/TemplatesDir"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="SaveFileDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr/SaveFileDirCtnr"]
+[node name="TemplatesDirBtn" type="Button" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/TemplatesDir"]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("2_qx4su")
 
-[node name="ResetBtn" type="Button" parent="BgPanel/Margin/MainCtnr/OptionsCtnr"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 10
-text = "Clear Plugin Data"
-
-[node name="Disclaimer" type="Button" parent="BgPanel/Margin/MainCtnr"]
-custom_minimum_size = Vector2(0, 21)
+[node name="SaveFileDir" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/DirectoriesSection"]
 layout_mode = 2
 size_flags_vertical = 8
-focus_mode = 0
-mouse_filter = 2
-theme_override_constants/h_separation = 5
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ki5am")
-disabled = true
-text = "※ All changes take effect after a plugin restart.
-※ If confirmed, the plugin will be disabled automatically."
-flat = true
-alignment = 0
+
+[node name="SaveFileDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Save File:"
+
+[node name="HBox" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveFileBaseDirLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "user://"
+
+[node name="SaveFileNameField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "file_name"
+
+[node name="SaveFileDotLabel" type="Label" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir/HBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "."
+
+[node name="SaveFileExtensionField" type="LineEdit" parent="BgPanel/Margin/MainCtnr/DirectoriesSection/SaveFileDir/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "extension"
+
+[node name="MiscSection" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HSep" type="HSeparator" parent="BgPanel/Margin/MainCtnr/MiscSection"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/MiscSection"]
+layout_mode = 2
+
+[node name="UpdateThemeBtn" type="Button" parent="BgPanel/Margin/MainCtnr/MiscSection/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Update the GGS editor theme to match your current Godot editor theme."
+text = "Update Theme"
+
+[node name="BaseTemplateBtn" type="Button" parent="BgPanel/Margin/MainCtnr/MiscSection/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit Base Template"
+
+[node name="ResetBtn" type="Button" parent="BgPanel/Margin/MainCtnr/MiscSection/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+text = "Reset"
 
 [node name="HSep" type="HSeparator" parent="BgPanel/Margin/MainCtnr"]
 layout_mode = 2
 
-[node name="FooterCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+[node name="FooterCtnr" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="DisclaimerBtn" type="VBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+layout_mode = 2
+
+[node name="DisclaimerLabel" type="Label" parent="BgPanel/Margin/MainCtnr/FooterCtnr/DisclaimerBtn"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ki5am")
+text = "※ All changes take effect after a plugin restart."
 
-[node name="InfoCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+[node name="HSep" type="HSeparator" parent="BgPanel/Margin/MainCtnr/FooterCtnr/DisclaimerBtn"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+layout_mode = 2
+
+[node name="InfoCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 2
 script = ExtResource("3_1rins")
 
-[node name="PluginInfo" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+[node name="PluginInfo" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/InfoCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -143,28 +216,28 @@ icon = ExtResource("3_ggsp5")
 flat = true
 alignment = 0
 
-[node name="VersionBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+[node name="VersionBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/InfoCtnr"]
 layout_mode = 2
 tooltip_text = "View Release"
-text = "3.0.0"
+text = "3.1.0"
 
-[node name="ChangelogBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/InfoCtnr"]
+[node name="ChangelogBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/InfoCtnr"]
 layout_mode = 2
 tooltip_text = "View Changelog"
 text = "Changelog"
 
-[node name="BtnCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr"]
+[node name="BtnCtnr" type="HBoxContainer" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="OkBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/BtnCtnr"]
+[node name="OkBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/BtnCtnr"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "OK"
 
-[node name="CancelBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/BtnCtnr"]
+[node name="CancelBtn" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/BtnCtnr"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -172,19 +245,14 @@ size_flags_horizontal = 10
 text = "Cancel
 "
 
-[node name="DirSelectionWndw" type="FileDialog" parent="."]
+[node name="DirSelectionWindow" type="FileDialog" parent="."]
 title = "Open a Directory"
 size = Vector2i(600, 500)
 min_size = Vector2i(600, 500)
 ok_button_text = "Select Current Folder"
 file_mode = 2
-metadata/Target = ""
+metadata/target = 0
 
-[node name="ConfirmResetWndw" type="ConfirmationDialog" parent="."]
-title = "Clear Plugin Data"
+[node name="ConfirmWindow" type="ConfirmationDialog" parent="."]
 size = Vector2i(497, 135)
-ok_button_text = "Reset"
-dialog_text = "Are you sure you want to clear ALL plugin data? This includes all categories and settings. NO UNDO.
-• A plugin restart is required for the changes to take effect. 
-• If confirmed, the plugin will be disabled automatically.
-• Please don't forget to update your instantiated UI components as GGS does not automatically update those."
+metadata/purpose = 0
