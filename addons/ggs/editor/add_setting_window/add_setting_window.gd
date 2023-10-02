@@ -116,6 +116,9 @@ func _get_settings_in_dir(dir: DirAccess, all_settings: PackedStringArray) -> vo
 	var base_dir: String = dir.get_current_dir()
 	var subdirs: PackedStringArray = dir.get_directories()
 	for subdir in subdirs:
+		if subdir.begins_with("_"):
+			continue
+		
 		dir.change_dir(base_dir.path_join(subdir))
 		var templates: PackedStringArray = dir.get_files()
 		for template in templates:
