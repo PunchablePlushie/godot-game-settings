@@ -1,0 +1,12 @@
+GGS comes with the following predefined components:
+* [Binary Selection](https://github.com/PunchablePlushie/godot-game-settings/wiki/Binary-Selection)
+* [Arrow List](https://github.com/PunchablePlushie/godot-game-settings/wiki/Arrow-List)
+* [Option List](https://github.com/PunchablePlushie/godot-game-settings/wiki/Option-List)
+* [Radio List](https://github.com/PunchablePlushie/godot-game-settings/wiki/Radio-List)
+* [Slider](https://github.com/PunchablePlushie/godot-game-settings/wiki/Slider)
+* [SpinBox](https://github.com/PunchablePlushie/godot-game-settings/wiki/SpinBox)
+* [Text Field](https://github.com/PunchablePlushie/godot-game-settings/wiki/Text-Field)
+* [Input Button](https://github.com/PunchablePlushie/godot-game-settings/wiki/Input-Button)
+* [Input Confirm Window](https://github.com/PunchablePlushie/godot-game-settings/wiki/Input-Confirm-Window)
+* [Apply Button](https://github.com/PunchablePlushie/godot-game-settings/wiki/Apply-Button)
+* [Reset Button](https://github.com/PunchablePlushie/godot-game-settings/wiki/Reset-Button)

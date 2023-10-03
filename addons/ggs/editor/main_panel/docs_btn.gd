@@ -1,7 +1,7 @@
 @tool
 extends Button
 
-const URI: String = "https://github.com/PunchablePlushie/godot-game-settings/wiki"
+const URI: String = "https://github.com/PunchablePlushie/godot-game-settings/tree/main/docs/home.md"
 
 
 func _ready() -> void:
