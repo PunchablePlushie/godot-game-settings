@@ -80,7 +80,7 @@ You can rename, delete, or move settings and groups in the file system similar t
 ## Custom Settings
 To learn how you can set up your own custom settings and templates, view [Creating Custom Settings](custom_settings.md).
 
-For more info on the predefined settings, visit [Settings](settings.md).
+For more info on the predefined settings, visit [Settings](settings/settings.md).
 
 
 # UI Components
@@ -97,7 +97,7 @@ It is possible to use certain components with multiple types. For instance, you 
 ## Custom Components
 To learn how you can create your own custom components, view [Creating Custom Components](custom_components.md).
 
-For more info on the predefined components, visit [Components](components.md).
+For more info on the predefined components, visit [Components](components/components.md).
 
 ---
 
