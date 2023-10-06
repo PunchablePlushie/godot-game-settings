@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/feedback_btn.gd" id="15_0jgkh"]
 [ext_resource type="Texture2D" uid="uid://bxo46lub26m2a" path="res://addons/ggs/assets/feedback.svg" id="16_abywd"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main_panel/progress_overlay.gd" id="16_hfs01"]
-[ext_resource type="Script" path="res://addons/ggs/editor/category_panel/notification.gd" id="17_768tu"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main_panel/notification.gd" id="18_ky7ax"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbg8d"]
 
@@ -45,7 +45,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-split_offset = -317
+split_offset = -315
 script = ExtResource("4_mplwh")
 
 [node name="CategoryPanel" parent="MainCtnr/HSplit_0" node_paths=PackedStringArray("Notification") instance=ExtResource("4_4p007")]
@@ -56,7 +56,7 @@ Notification = NodePath("../../../Notification")
 [node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
 layout_mode = 2
 size_flags_horizontal = 3
-split_offset = 616
+split_offset = 615
 script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" node_paths=PackedStringArray("Notification") instance=ExtResource("6_rabjj")]
@@ -171,7 +171,7 @@ size = Vector2i(687, 100)
 unresizable = true
 max_size = Vector2i(700, 16384)
 dialog_autowrap = true
-script = ExtResource("17_768tu")
+script = ExtResource("18_ky7ax")
 title_invalid = "Invalid Item Name"
 title_already_exists = "Item Already Exists"
 msg_invalid = "The item name must be a valid file name and cannot start with an underscore (\"_\")  or dot (\".\")."
