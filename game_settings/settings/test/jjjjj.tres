@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=4 format=3 uid="uid://bqcdt3kfst0do"]
+
+[ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_jn1xa"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_t01rm"]
+physical_keycode = 68
+
+[sub_resource type="InputEventKey" id="InputEventKey_2sbl5"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[resource]
+resource_name = "jjjjj"
+script = ExtResource("1_jn1xa")
+action = "move_right"
+event_index = 0
+type = 1
+default_as_event = SubResource("InputEventKey_2sbl5")
+current_as_event = null
+current = [1, 68]
+default = [1, 68]
+name = "jjjjj"
+category = "test"
+value_type = 28
+value_hint = 0
+value_hint_string = ""

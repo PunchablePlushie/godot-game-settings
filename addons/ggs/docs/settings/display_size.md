@@ -1,5 +1,7 @@
-Changes the window size by setting its width and height to certain values.
+Sets the window size by setting its width and height to certain values.
 
-## Properties
-* default/current - *int* : Index of a list. No default is provided. Use the `sizes` property to set this value.
-* sizes - *Array[Vector2]* : The list of available sizes. When creating a component, the order of items in the component list must be the same as the order of items in this property.
+# Properties
+| Property | Description | Type |
+| :---: | --- | :---: |
+| default/current | Index or ID of a list item. Invalid until the `sizes` property is set. | `int` |
+| sizes | The list of available sizes. When setting up a UI component, the order of list items must match the order of items in this property unless you're using item IDs. If using item IDs, each item ID must point to a valid index in this array. | `Array[Vector2]` |

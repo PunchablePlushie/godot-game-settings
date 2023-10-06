@@ -1,46 +1,37 @@
-Changes keyboard/mouse or gamepad event of a specific input action (i.e. rebinds an input).
+Sets an input event of a specific input action (i.e. rebinds an input).
 
-## Properties
-* default/current - *String* : Must be an input keyword.
-* action - *String* : The name of the target action in the input map.
-* type - *int (enum)* : The type of input this setting is for.
+# Properties
+| Property | Description | Type |
+| :---: | --- | :---: |
+| default/current | An array that stores the input type and id. The array structure is `[type, id]`. | `Array[int]`: Read-Only |
+| action | The input action that holds the target input event. | `String`: Read-Only |
+| event_index | The index of the target input event inside the input action. | `int`: Read-Only |
+| default_as_event | The default value (an Array) as an `InputEvent`. | `InputEvent`: Read-Only |
+| current_as_event | The current value (an Array) as an `InputEvent`. | `InputEvent` |
 
-## Input Keywords
-Input keywords are strings that correspond to a certain input. GGS converts this string into an actual `InputEvent` using the `ggsInputHelper` class. All keywords must be lowercase.
+## Type and ID
+Type is the type of input event such as `InputEventKey` or `InputEventJoypadMotion`. GGS uses this to create the correct type of input event when loading the setting.
 
-### Keyboard
-Keyboard keywords are pretty self-explanatory. For example, `d` corresponds to the **D** key on the keyboard (`KEY_D` in Godot). `escape` corresponds to the **Esc** key on the keyboard (`KEY_ESCAPE` in Godot).
+ID refers to the property that stores what the actual input is. For each event type, it's as followed:
+* **InputEventKey**: `physical_keycode`
+* **InputEventMouseButton** & **InputEventJoypadButton**: `button_index`
+* **InputEventJoypadMotion**: `axis`
 
-### Mouse
-| Button  | Keyword | Wheel | Keyword |
-| ------------- | ------------- | ------------- | ------------- |
-| Left Click  | lmb | Wheel Up | mw_up |
-| Right Click | rmb | Wheel Down | mw_down |
-| Middle Click| mmb | Wheel Left | mw_left |
-| Misc 1 | mb1 | Wheel Right | mw_right |
-| Misc 2 | mb2 |
+## default_as_event
+As mentioned, it shows the default value as an appropriate `InputEvent`. This is always the same as the input event defined in the Input Map.
 
-### Modifiers
-Keyboard and mouse inputs can accept modifiers. To add a modifier, write a modifier keyword before the main keyword followed by a comma. Do **not** add a space after the comma.
+> [!WARNING]
+> The `default_as_event` property is read-only. However, you can still technically change it by using the "Configure" button when expanding the resource. Do not do this. If you want to change the default value, use the "Select Input" button at the top instead.
 
-Examples: `shift,d`, `ctrl,alt,rmb`, `alt,f4`
-| Modifier| Keyword |
-| ------------- | ------------- |
-| Shift  | shift |
-| Control  | ctrl |
-| Alt  | alt |
+## current_as_event
+It shows the current value as an appropriate `InputEvent`. You can easily change this by expanding the resource and using the "Configure" button. You can also clear it and add another type of `InputEvent` (e.g. if it's an `InputEventKey`, you can clear that and create an `InputEventMouseButton` instead).
 
-### Gamepad
-| Button        | Keyword | Button     | Keyword | Button         | Keyword        | Button | Keyword | Button   | Keyword | Button | Keyword |
-| ------        | -----   | ------     | ------  | ------         | ------         | ------ | ------  | ------   | ------  | ------ | ------  |
-| Bottom Button | bbot     | DPad Right | dright  | Left Stick     | left_stick     | Back   | back    | Paddle 1 | pad1    | Touch  | touch   |
-| Right Button  | bright   | DPad Left  | dleft   | Right Stick    | right_stick    | Guide  | guide   | Paddle 2 | pad2    |
-| Top Button    | btop     | DPad Up    | dup     | Left Shoulder  | left_shoulder  | Start  | start   | Paddle 3 | pad3    |
-| Left Button   | bleft    | DPad Down  | ddown   | Right Shoulder | right_shoulder | Misc   | misc    | Paddle 4 | pad4    |
+Unlike other current/default values of other settings, the `current_as_event` property is not updated from the save file every tick as this would prevent the user from changing the resource. Instead, it's updated every time the setting is inspected. So if the `current_as_event` does not reflect what the actual `current` value is, simply re-inspect the setting.
 
-| Left Stick | Keyword  |  Right Stick | Keyword  | Triggers | Keyword       |
-| ------     | ------   | ------       | ------   | ------   | ------        |
-| Left       | ls_left  | Left         | rs_left  | Left     | left_trigger  |
-| Right      | ls_right | Right        | rs_right | Right    | right_trigger |
-| Up         | ls_up    | Up           | rs_up    |
-| Down       | ls_down  | Down         | rs_down  |
+> [!NOTE]
+> The type of `InputEvent` you can create when setting `current_as_event` depends on the type of `default_as_event`. If the default is keyboard or mouse, then you can only create `InputEventKey` and `InputEventMouseButton`. If it's one of the gamepad events, you can only create a gamepad event.
+
+> [!WARNING]
+> When configuring an `InputEventKey`, use "physical keycode". GGS does not accept "keycode" and "key label".
+
+
