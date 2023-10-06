@@ -1,3 +1,3 @@
-A text field that only accepts numbers. Edit the child `SpinBox` to edit range, step, etc.
+A text field that only accepts numbers. Edit the child `SpinBox` to set range, step, etc.
 
-* Handles: *Int*, *Float*
+Handles integer and float values.

@@ -1,3 +1,3 @@
 A simple text field.
 
-* Handles: *String*
+Handles string values.

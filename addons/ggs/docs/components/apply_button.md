@@ -1,4 +1,6 @@
-Calls `apply_setting()` on all UI components that are in a specific node group. Must be instantiated directly from the scene tree.
+Calls `apply_setting()` on all UI components in a specific node group. Must be instantiated directly from the scene tree.
 
-## Properties
-* Group - *String*: The name of the target node group.
+# Properties
+| Property | Description | Type |
+| :---: | --- | :---: |
+| group | The name of the target node group. | `String` |
