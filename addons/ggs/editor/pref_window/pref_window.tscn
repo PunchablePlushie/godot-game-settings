@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c42mh74d7l2rt"]
+[gd_scene load_steps=5 format=3 uid="uid://c42mh74d7l2rt"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/pref_window/pref_window.gd" id="1_ihv6i"]
 [ext_resource type="Texture2D" uid="uid://byyjlh0afcrr5" path="res://addons/ggs/assets/file_dialog.svg" id="2_qx4su"]
-[ext_resource type="Script" path="res://addons/ggs/editor/pref_window/info_ctnr.gd" id="3_1rins"]
 [ext_resource type="Texture2D" uid="uid://nrljysrl7w0m" path="res://addons/ggs/assets/icon_mini.svg" id="3_ggsp5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki5am"]
@@ -203,7 +202,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 2
-script = ExtResource("3_1rins")
 
 [node name="PluginInfo" type="Button" parent="BgPanel/Margin/MainCtnr/FooterCtnr/HBox/InfoCtnr"]
 layout_mode = 2
