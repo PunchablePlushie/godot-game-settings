@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://audio_bus_layout.tres"
+buses/default_bus_layout=""
 
 [autoload]
 
