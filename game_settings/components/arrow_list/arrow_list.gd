@@ -20,6 +20,11 @@ func _ready() -> void:
 	option_selected.connect(_on_option_selected)
 	LeftBtn.pressed.connect(_on_LeftBtn_pressed)
 	RightBtn.pressed.connect(_on_RightBtn_pressed)
+	
+	LeftBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(LeftBtn))
+	RightBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(RightBtn))
+	LeftBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
+	RightBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
 
 
 func init_value() -> void:
@@ -54,11 +59,21 @@ func select(index: int, emit_selected: bool = true) -> void:
 
 
 func _on_LeftBtn_pressed() -> void:
-	select(option_ids.find(setting_value) - 1)
+	if option_ids.is_empty():
+		select(setting_value - 1)
+	else:
+		select(option_ids.find(setting_value) - 1)
+	
+	GGS.play_sfx(GGS.SFX.INTERACT)
 
 
 func _on_RightBtn_pressed() -> void:
-	select(option_ids.find(setting_value) + 1)
+	if option_ids.is_empty():
+		select(setting_value + 1)
+	else:
+		select(option_ids.find(setting_value) + 1)
+	
+	GGS.play_sfx(GGS.SFX.INTERACT)
 
 
 ### Setting
@@ -66,3 +81,16 @@ func _on_RightBtn_pressed() -> void:
 func reset_setting() -> void:
 	select(setting.default)
 	apply_setting()
+
+
+### SFX
+
+func _on_AnyBtn_mouse_entered(Btn: Button) -> void:
+	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	
+	if grab_focus_on_mouse_over:
+		Btn.grab_focus()
+
+
+func _on_AnyBtn_focus_entered() -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)

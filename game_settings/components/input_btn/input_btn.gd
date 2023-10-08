@@ -25,6 +25,9 @@ func _ready() -> void:
 	Btn.pressed.connect(_on_Btn_pressed)
 	ICW.input_selected.connect(_on_ICW_input_selected)
 	Input.joy_connection_changed.connect(_on_Input_joy_connection_changed)
+	
+	Btn.mouse_entered.connect(_on_Btn_mouse_entered)
+	Btn.focus_entered.connect(_on_Btn_focus_entered)
 
 
 func init_value() -> void:
@@ -45,6 +48,8 @@ func _on_Btn_pressed() -> void:
 	ICW.accept_axis = accept_axis
 	ICW.use_icons = use_icons
 	ICW.popup_centered()
+	
+	GGS.play_sfx(GGS.SFX.FOCUS)
 
 
 func _on_ICW_input_selected(event: InputEvent) -> void:
@@ -93,3 +98,16 @@ func reset_setting() -> void:
 	var event: InputEvent = input_helper.create_event_from_type(setting_value[0])
 	input_helper.set_event_id(event, setting_value[1])
 	_set_btn_text_or_icon(event)
+
+
+### SFX
+
+func _on_Btn_mouse_entered() -> void:
+	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	
+	if grab_focus_on_mouse_over:
+		Btn.grab_focus()
+
+
+func _on_Btn_focus_entered() -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)

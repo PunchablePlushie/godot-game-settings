@@ -2,6 +2,7 @@
 extends Node
 
 enum Progress {SAVE_FILE_CURRENT, SAVE_FILE_DEFAULT, ADD_SETTINGS}
+enum SFX {MOUSE_OVER, FOCUS, INTERACT}
 
 signal active_category_changed()
 signal active_setting_changed()
@@ -21,7 +22,11 @@ var terminate_current: bool = false
 var terminate_default: bool = false
 var settings_cache: Array[ggsSetting] #?1
 
-var FSD: FileSystemDock 
+var FSD: FileSystemDock
+ 
+@onready var MouseOverSFX: AudioStreamPlayer = $MouseOverSFX
+@onready var FocusSFX: AudioStreamPlayer = $FocusSFX
+@onready var InteractSFX: AudioStreamPlayer = $InteractSFX
 
 
 func _ready() -> void:
@@ -192,6 +197,25 @@ func _apply_settings() -> void:
 		var setting: ggsSetting = load(setting_path)
 		var value: Variant = ggsSaveFile.new().get_value(setting.category, setting.name)
 		setting.apply(value)
+
+
+### SFX
+
+func play_sfx(sfx: SFX) -> void:
+	var target_player: AudioStreamPlayer
+	match sfx:
+		SFX.MOUSE_OVER:
+			target_player = MouseOverSFX
+		SFX.FOCUS:
+			target_player = FocusSFX
+		SFX.INTERACT:
+			target_player = InteractSFX
+		_:
+			printerr("GGS - Play SFX: The target SFX does not exist.")
+			return
+	
+	if target_player.stream != null:
+		target_player.play()
 
 
 ### Comments

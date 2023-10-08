@@ -13,6 +13,11 @@ func _ready() -> void:
 	
 	super()
 	Btn.item_selected.connect(_on_Btn_item_selected)
+	
+	Btn.pressed.connect(_on_Btn_pressed)
+	Btn.mouse_entered.connect(_on_Btn_mouse_entered)
+	Btn.focus_entered.connect(_on_Btn_focus_entered)
+	Btn.item_focused.connect(_on_Btn_item_focused)
 
 
 func init_value() -> void:
@@ -25,6 +30,8 @@ func init_value() -> void:
 
 
 func _on_Btn_item_selected(item_index: int) -> void:
+	GGS.play_sfx(GGS.SFX.INTERACT)
+	
 	if use_ids:
 		setting_value = Btn.get_item_id(item_index)
 	else:
@@ -35,7 +42,27 @@ func _on_Btn_item_selected(item_index: int) -> void:
 
 ### Setting
 
-
 func reset_setting() -> void:
 	super()
 	Btn.select(setting_value)
+
+
+### SFX
+
+func _on_Btn_pressed() -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)
+
+
+func _on_Btn_mouse_entered() -> void:
+	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	
+	if grab_focus_on_mouse_over:
+		Btn.grab_focus()
+
+
+func _on_Btn_focus_entered() -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)
+
+
+func _on_Btn_item_focused(_index: int) -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)

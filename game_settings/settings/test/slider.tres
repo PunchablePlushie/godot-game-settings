@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://2d7vkwlvjdow"]
+
+[ext_resource type="Script" path="res://game_settings/templates/audio/audio_volume.gd" id="1_oerc8"]
+
+[resource]
+resource_name = "slider"
+script = ExtResource("1_oerc8")
+audio_bus = "Master"
+current = 80.0
+default = 80.0
+name = "slider"
+category = "test"
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"

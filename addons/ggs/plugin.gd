@@ -33,7 +33,7 @@ func _remove_editor_interface_singleton() -> void:
 
 func _add_plugin_singleton() -> void:
 	if not ProjectSettings.has_setting("autoload/GGS"):
-		add_autoload_singleton("GGS", "res://addons/ggs/classes/ggs_globals.gd")
+		add_autoload_singleton("GGS", "res://addons/ggs/classes/global/ggs.tscn")
 
 
 ### Main Editor

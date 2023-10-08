@@ -22,7 +22,8 @@ func init_value() -> void:
 
 func _on_Btn_toggled(btn_state: bool) -> void:
 	setting_value = btn_state
-	_play_interact_sfx()
+	GGS.play_sfx(GGS.SFX.INTERACT)
+	
 	if apply_on_change:
 		apply_setting()
 
@@ -36,19 +37,12 @@ func reset_setting() -> void:
 
 ### SFX
 
-func _play_interact_sfx() -> void:
-	if sfx_interact != null:
-		sfx_interact.play()
-
-
 func _on_Btn_mouse_entered() -> void:
-	if sfx_mouse_over != null:
-		sfx_mouse_over.play()
+	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
 	
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 
 
 func _on_Btn_focus_entered() -> void:
-	if sfx_focus != null:
-		sfx_focus.play()
+	GGS.play_sfx(GGS.SFX.FOCUS)

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-recent_settings = Array[String](["res://game_settings/templates/input.gd", "res://game_settings/templates/audio/audio_volume.gd", "res://game_settings/templates/audio/audio_mute.gd", "res://game_settings/templates/display/display_size.gd", "res://game_settings/templates/display/display_fullscreen.gd"])
+recent_settings = Array[String](["res://game_settings/templates/audio/audio_volume.gd", "res://game_settings/templates/display/display_size.gd", "res://game_settings/templates/audio/audio_mute.gd", "res://game_settings/templates/input.gd", "res://game_settings/templates/display/display_fullscreen.gd"])
 dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"

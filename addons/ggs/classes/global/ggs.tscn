@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://esw7j7or7gpd"]
+
+[ext_resource type="Script" path="res://addons/ggs/classes/global/ggs.gd" id="1_6v3cu"]
+[ext_resource type="AudioStream" uid="uid://da2xm660h1xkk" path="res://focus.wav" id="2_kmwmh"]
+[ext_resource type="AudioStream" uid="uid://cv70edayafrmg" path="res://interact.wav" id="3_6o5pu"]
+
+[node name="GGS" type="Node"]
+script = ExtResource("1_6v3cu")
+
+[node name="MouseOverSFX" type="AudioStreamPlayer" parent="."]
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_kmwmh")
+
+[node name="InteractSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6o5pu")

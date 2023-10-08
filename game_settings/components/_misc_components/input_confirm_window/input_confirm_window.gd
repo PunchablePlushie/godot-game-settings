@@ -38,7 +38,15 @@ func _ready() -> void:
 	ListenTimer.timeout.connect(_on_ListenTimer_timeout)
 	MaxListenTimer.timeout.connect(_on_MaxListenTimer_timeout)
 	
-	ListenBtn.focus_neighbor_bottom = OkBtn.get_path()
+	ListenBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(ListenBtn))
+	OkBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(OkBtn))
+	CancelBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(CancelBtn))
+	ListenBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
+	OkBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
+	CancelBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
+	CancelBtn.pressed.connect(_on_CancelBtn_pressed)
+	
+	ListenBtn.focus_neighbor_bottom = CancelBtn.get_path()
 	OkBtn.focus_neighbor_top = ListenBtn.get_path()
 	CancelBtn.focus_neighbor_top = ListenBtn.get_path()
 	
@@ -235,6 +243,7 @@ func _stop_listening(timed_out: bool = false) -> void:
 
 func _on_ListenBtn_pressed() -> void:
 	_start_listening()
+	GGS.play_sfx(GGS.SFX.INTERACT)
 
 
 func _on_ListenTimer_timeout() -> void:
@@ -256,3 +265,21 @@ func _on_visibility_changed() -> void:
 
 func _on_confirmed() -> void:
 	input_selected.emit(chosen_input)
+	GGS.play_sfx(GGS.SFX.INTERACT)
+
+
+### SFX
+
+func _on_AnyBtn_mouse_entered(Btn: Button) -> void:
+	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	
+	if src.grab_focus_on_mouse_over:
+		Btn.grab_focus()
+
+
+func _on_AnyBtn_focus_entered() -> void:
+	GGS.play_sfx(GGS.SFX.FOCUS)
+
+
+func _on_CancelBtn_pressed() -> void:
+	GGS.play_sfx(GGS.SFX.INTERACT)

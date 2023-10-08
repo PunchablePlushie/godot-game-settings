@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dv4u5l3a1agi3"]
+
+[ext_resource type="Script" path="res://game_settings/templates/display/display_size.gd" id="1_eqvyc"]
+
+[resource]
+resource_name = "list"
+script = ExtResource("1_eqvyc")
+sizes = Array[Vector2]([Vector2(500, 500), Vector2(500, 500), Vector2(500, 500)])
+current = 0
+default = 0
+name = "list"
+category = "test"
+value_type = 2
+value_hint = 2
+value_hint_string = "500 x 500,500 x 500,500 x 500"
