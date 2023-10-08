@@ -2,7 +2,6 @@
 extends Control
 
 @onready var GroupField: LineEdit = %GroupField
-@onready var ApplyBtn: Button = %ApplyBtn
 @onready var ASI: LineEdit = %ActiveSettingIndicator
 @onready var CASBtn: Button = %ClearActiveSettingBtn
 @onready var List: ItemList = %ComponentList
@@ -79,7 +78,8 @@ func _on_List_item_activated(item_index: int) -> void:
 	var comp_scene: PackedScene = load(item_meta)
 	var Component: Control = comp_scene.instantiate()
 	Component.setting = GGS.active_setting
-	Component.apply_on_change = ApplyBtn.button_pressed
+	Component.apply_on_change = ggsUtils.get_plugin_data().apply_on_changed_all
+	Component.grab_focus_on_mouse_over = ggsUtils.get_plugin_data().grab_focus_on_mouse_over_all
 	
 	SelectedNode.add_child(Component, true)
 	SelectedNode.set_editable_instance(Component, true)

@@ -2,6 +2,8 @@
 extends Resource
 class_name ggsPluginData
 
+const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true
+const GRAB_FOCUS_ON_MOUSE_OVER_ALL: bool = true
 const DIR_SETTINGS_DEFAULT: String = "res://game_settings/settings"
 const DIR_TEMPLATES_DEFAULT: String = "res://game_settings/templates"
 const DIR_COMPONENTS_DEFAULT: String = "res://game_settings/components"
@@ -11,6 +13,8 @@ const SPLIT_OFFSET_1_DEFAULT: int = 615
 
 @export_category("GGS Plugin Data")
 @export var recent_settings: Array[String]
+@export var apply_on_changed_all: bool = APPLY_ON_CHANGED_ALL_DEFAULT
+@export var grab_focus_on_mouse_over_all: bool = GRAB_FOCUS_ON_MOUSE_OVER_ALL
 @export_group("Directories", "dir_")
 @export_dir var dir_settings: String = DIR_SETTINGS_DEFAULT
 @export_dir var dir_templates: String = DIR_TEMPLATES_DEFAULT
@@ -32,6 +36,8 @@ func save() -> void:
 
 func reset() -> void:
 	recent_settings.clear()
+	apply_on_changed_all = APPLY_ON_CHANGED_ALL_DEFAULT
+	grab_focus_on_mouse_over_all = GRAB_FOCUS_ON_MOUSE_OVER_ALL
 	dir_settings = DIR_SETTINGS_DEFAULT
 	dir_templates = DIR_TEMPLATES_DEFAULT
 	dir_components = DIR_COMPONENTS_DEFAULT

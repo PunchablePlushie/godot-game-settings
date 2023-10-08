@@ -6,6 +6,7 @@ enum ConfirmPurpose {RESET, OK}
 
 const THEME: Theme = preload("res://addons/ggs/editor/_theme/ggs_theme.tres")
 const TEMPLATE: Script = preload("res://addons/ggs/template.gd")
+const GGS_SCENE: String = "res://addons/ggs/classes/global/ggs.tscn"
 
 @export_multiline var reset_text: String
 @export_multiline var ok_text: String
@@ -23,6 +24,10 @@ const TEMPLATE: Script = preload("res://addons/ggs/template.gd")
 @onready var CDB: Button = %CompDirBtn
 @onready var TDB: Button = %TemplatesDirBtn
 @onready var DSW: FileDialog = $DirSelectionWindow
+
+@onready var ApplyOnChanged: CheckBox = %ApplyOnChanged
+@onready var GrabFocusOnMouseOver: CheckBox = %GrabFocusOnMouseOver
+@onready var SetSFXBtn: Button = %SetSFXBtn
 
 @onready var UpdateThemeBtn: Button = %UpdateThemeBtn
 @onready var BaseTemplateBtn: Button = %BaseTemplateBtn
@@ -46,16 +51,20 @@ func _ready() -> void:
 	ResetBtn.pressed.connect(_on_ResetBtn_pressed)
 	CRW.confirmed.connect(_on_CRW_confirmed)
 	
+	SetSFXBtn.pressed.connect(_on_SetSFXBtn_pressed)
+	
 	hide()
 
 
 ### Fields
 
-func _init_fields() -> void:
+func _init_values() -> void:
 	var data: ggsPluginData = ggsUtils.get_plugin_data()
 	SDF.text = data.dir_settings
 	CDF.text = data.dir_components
 	TDF.text = data.dir_templates
+	ApplyOnChanged.button_pressed = data.apply_on_changed_all
+	GrabFocusOnMouseOver.button_pressed = data.grab_focus_on_mouse_over_all
 	
 	var value: String = data.dir_save_file
 	SFNF.text = value.get_file().get_basename()
@@ -92,6 +101,11 @@ func _on_DSW_dir_selected(dir: String) -> void:
 
 ### Buttons
 
+func _on_SetSFXBtn_pressed() -> void:
+	ggsUtils.get_editor_interface().open_scene_from_path(GGS_SCENE)
+	hide()
+
+
 func _on_UpdateThemeBtn_pressed() -> void:
 	THEME.update()
 
@@ -125,6 +139,8 @@ func _on_CRW_confirmed() -> void:
 			data.set_property("dir_settings", SDF.text)
 			data.set_property("dir_components", CDF.text)
 			data.set_property("dir_templates", TDF.text)
+			data.set_property("apply_on_changed_all", ApplyOnChanged.button_pressed)
+			data.set_property("grab_focus_on_mouse_over_all", GrabFocusOnMouseOver.button_pressed)
 			
 			var value: String = "user://%s.%s"%[SFNF.text, SFEF.text]
 			data.set_property("dir_save_file", value)
@@ -136,7 +152,7 @@ func _on_CRW_confirmed() -> void:
 ### Window Functionalities
 
 func _on_about_to_popup() -> void:
-	_init_fields()
+	_init_values()
 
 
 func _on_close_requested() -> void:

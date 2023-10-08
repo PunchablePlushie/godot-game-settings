@@ -11,10 +11,12 @@ All components have several properties that are shared among them.
 # Setting Sound Effects
 You can set sound effects to be played when the player mouses over the components, interacts with them, or the components grab focus.
 
-To do so, open the `ggs.tscn` scene located at `res://addons/ggs/classes/global/ggs.tscn`. This is the same node that's added to the autoload list. Once the scene is open, assign an audio stream to each of the available audio stream players under the root `GGS` node.
+First, you should open the `ggs.tscn` scene. To do so:
+* Open the scene via the Preferences in the GGS editor.
+* Open the scene using the *Quick Open Scene...* option in Godot editor.
+* Manually open the scene. The scene is located at `res://addons/ggs/classes/global/ggs.tscn`
 
-> [!NOTE]
-> You can also simply use the *Quick Open Scene...* option located under the *Scene* menu at the top. Simply search for `ggs.tscn`.
+This scene is the same scene that's added to the autoload list. Once the scene is open, assign an audio stream to each of the available audio stream players under the root `GGS` node.
 
 # Predefined Components
 GGS comes with the following predefined components:

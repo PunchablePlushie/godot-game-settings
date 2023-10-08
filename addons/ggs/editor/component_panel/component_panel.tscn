@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfr2j0ekmm5bm"]
+[gd_scene load_steps=3 format=3 uid="uid://cfr2j0ekmm5bm"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/component_panel/component_panel.gd" id="1_3cgut"]
-[ext_resource type="Texture2D" uid="uid://bdvgfb144f4dj" path="res://addons/ggs/assets/apply_on_changed.svg" id="2_r0vbe"]
 [ext_resource type="Texture2D" uid="uid://dasus7dcslgli" path="res://addons/ggs/assets/close.svg" id="3_wh32e"]
 
 [node name="ComponentPanel" type="Control"]
@@ -33,15 +32,6 @@ tooltip_text = "Node Group
 If not empty, newly created components are added to this node group."
 placeholder_text = "Node Group"
 clear_button_enabled = true
-
-[node name="ApplyBtn" type="Button" parent="MainCtnr/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "Toggle Apply On Change
-Sets the `apply_on_change` property of created components."
-toggle_mode = true
-icon = ExtResource("2_r0vbe")
-flat = true
 
 [node name="ActiveSettingCtnr" type="HBoxContainer" parent="MainCtnr"]
 layout_mode = 2
