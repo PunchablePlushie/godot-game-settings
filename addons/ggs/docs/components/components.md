@@ -1,3 +1,22 @@
+UI components are nodes that can be added to your settings menu and allow players to change a setting.
+
+# Properties
+All components have several properties that are shared among them.
+| Property | Description | Type |
+| :---: | --- | :---: |
+| setting | The setting that's assigned to the component. The setting's value type must be compatible with the types the component handles. | `ggsSetting` |
+| apply_on_changed | Whether the component should apply the setting when the player interacts with it. If false, you should apply the settings with an [Apply Button](apply_button.md) component. | `Bool`|
+| grab_focus_on_mouse_over | Whether the component should grab focus on mouseover. Useful if your game supports both keyboard and mouse. | `Bool` |
+
+# Setting Sound Effects
+You can set sound effects to be played when the player mouses over the components, interacts with them, or the components grab focus.
+
+To do so, open the `ggs.tscn` scene located at `res://addons/ggs/classes/global/ggs.tscn`. This is the same node that's added to the autoload list. Once the scene is open, assign an audio stream to each of the available audio stream players under the root `GGS` node.
+
+> [!NOTE]
+> You can also simply use the *Quick Open Scene...* option located under the *Scene* menu at the top. Simply search for `ggs.tscn`.
+
+# Predefined Components
 GGS comes with the following predefined components:
 * [Binary Selection](binary_selection.md)
 * [Arrow List](arrow_list.md)
