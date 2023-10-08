@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=4 format=3 uid="uid://ctwyfsk3ml7in"]
+
+[ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_odvwu"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_hhey2"]
+physical_keycode = 4194319
+
+[sub_resource type="InputEventKey" id="InputEventKey_qr5ls"]
+device = -1
+physical_keycode = 4194319
+
+[resource]
+resource_name = "move_left_keyboard_1"
+script = ExtResource("1_odvwu")
+action = "move_left"
+event_index = 1
+type = 1
+default_as_event = SubResource("InputEventKey_qr5ls")
+current_as_event = null
+current = [1, 4194319]
+default = [1, 4194319]
+name = "move_left_keyboard_1"
+category = "input"
+value_type = 28
+value_hint = 0
+value_hint_string = ""

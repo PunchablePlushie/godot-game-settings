@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=4 format=3 uid="uid://c16wxcl04k0rv"]
+
+[ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_b3060"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_04ojp"]
+button_index = 13
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_5aolg"]
+device = -1
+button_index = 13
+pressed = true
+
+[resource]
+resource_name = "move_left_gamepad"
+script = ExtResource("1_b3060")
+action = "move_left"
+event_index = 2
+type = 3
+default_as_event = SubResource("InputEventJoypadButton_5aolg")
+current_as_event = null
+current = [3, 13]
+default = [3, 13]
+name = "move_left_gamepad"
+category = "input"
+value_type = 28
+value_hint = 0
+value_hint_string = ""

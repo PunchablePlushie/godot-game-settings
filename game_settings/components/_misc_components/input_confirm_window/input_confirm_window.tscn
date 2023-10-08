@@ -8,6 +8,7 @@ min_size = Vector2i(300, 115)
 ok_button_text = "Confirm"
 dialog_close_on_escape = false
 script = ExtResource("1_uql0i")
+listening_wait_time = 0.2
 
 [node name="MainCtnr" type="VBoxContainer" parent="."]
 offset_left = 8.0

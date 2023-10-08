@@ -11,5 +11,8 @@ grow_vertical = 2
 script = ExtResource("1_roqsf")
 
 [node name="Btn" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+text_overrun_behavior = 3
+clip_text = true
 icon_alignment = 1

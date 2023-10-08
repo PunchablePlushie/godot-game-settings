@@ -35,6 +35,7 @@ func _on_SIW_about_to_popup() -> void:
 	List.load_list()
 	OkBtn.disabled = true
 	SearchField.clear()
+	List.set_collapsed_all(true)
 
 
 func _on_List_item_selected() -> void:
