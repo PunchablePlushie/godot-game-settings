@@ -5,7 +5,7 @@
 [resource]
 resource_name = "difficulty"
 script = ExtResource("1_cspxt")
-current = 3
+current = 1
 default = 1
 name = "difficulty"
 category = "gameplay"

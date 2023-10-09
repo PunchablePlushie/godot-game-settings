@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_rjabp"]
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gamlc"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_su2gu"]
 button_index = 12
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_klvje"]

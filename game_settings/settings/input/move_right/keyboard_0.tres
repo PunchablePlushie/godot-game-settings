@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_1io67"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_ab5bg"]
+[sub_resource type="InputEventKey" id="InputEventKey_u006x"]
 physical_keycode = 68
 
 [sub_resource type="InputEventKey" id="InputEventKey_a3afc"]

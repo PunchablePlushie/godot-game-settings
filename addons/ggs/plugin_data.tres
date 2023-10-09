@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-recent_settings = Array[String]([])
+recent_settings = Array[String](["res://game_settings/templates/input.gd"])
 apply_on_changed_all = true
 grab_focus_on_mouse_over_all = true
 dir_settings = "res://game_settings/settings"
