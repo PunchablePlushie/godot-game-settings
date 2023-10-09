@@ -25,12 +25,17 @@ func _get_property_list() -> Array:
 		{"name": "action", "type": TYPE_STRING, "usage": read_only},
 		{"name": "event_index", "type": TYPE_INT, "usage": read_only},
 		{"name": "type", "type": TYPE_INT, "usage": PROPERTY_USAGE_STORAGE, "hint": PROPERTY_HINT_ENUM, "hint_string": "None,Keyboard,Mouse,Gamepad Button,Gamepad Motion"},
-		{"name": "default_as_event", "type": TYPE_OBJECT, "usage": read_only, "hint": PROPERTY_HINT_RESOURCE_TYPE, "hint_string": allowed_event},
+		{"name": "default_as_event", "type": TYPE_OBJECT, "usage": read_only, "hint": PROPERTY_HINT_RESOURCE_TYPE, "hint_string": "InputEvent"},
 		{"name": "current_as_event", "type": TYPE_OBJECT, "usage": read_only if type == input_helper.InputType.INVALID else PROPERTY_USAGE_DEFAULT, "hint": PROPERTY_HINT_RESOURCE_TYPE, "hint_string": allowed_event},
 	])
 	
-	_update_current_as_event()
 	return properties
+
+
+func update_current_as_event() -> void:
+	var event: InputEvent = input_helper.create_event_from_type(current[0])
+	input_helper.set_event_id(event, current[1])
+	current_as_event = event
 
 
 func _get_allowed_event_types() -> String:
@@ -41,12 +46,6 @@ func _get_allowed_event_types() -> String:
 		return "InputEventJoypadButton,InputEventJoypadMotion"
 	
 	return ""
-
-
-func _update_current_as_event() -> void:
-	var event: InputEvent = input_helper.create_event_from_type(current[0])
-	input_helper.set_event_id(event, current[1])
-	current_as_event = event
 
 
 ### Updating Current and Default

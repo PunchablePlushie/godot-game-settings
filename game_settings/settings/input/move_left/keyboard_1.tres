@@ -1,9 +1,6 @@
-[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=4 format=3 uid="uid://ctwyfsk3ml7in"]
+[gd_resource type="Resource" script_class="ggsInputSetting" load_steps=3 format=3 uid="uid://ctwyfsk3ml7in"]
 
 [ext_resource type="Script" path="res://game_settings/templates/input.gd" id="1_odvwu"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_pwuh6"]
-physical_keycode = 4194319
 
 [sub_resource type="InputEventKey" id="InputEventKey_qr5ls"]
 device = -1
@@ -16,7 +13,6 @@ action = "move_left"
 event_index = 1
 type = 1
 default_as_event = SubResource("InputEventKey_qr5ls")
-current_as_event = null
 current = [1, 4194319]
 default = [1, 4194319]
 name = "move_left_keyboard_1"

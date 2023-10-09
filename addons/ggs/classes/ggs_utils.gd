@@ -2,16 +2,16 @@
 extends RefCounted
 class_name ggsUtils
 
-
-static func get_editor_interface() -> EditorInterface:
+#!1
+static func get_editor_interface():
 	return Engine.get_singleton("ggsEI")
 
 
-static func get_resource_file_system() -> EditorFileSystem:
+static func get_resource_file_system():
 	return get_editor_interface().get_resource_filesystem()
 
 
-static func get_file_system_dock() -> FileSystemDock:
+static func get_file_system_dock():
 	return get_editor_interface().get_file_system_dock()
 
 
@@ -76,3 +76,8 @@ static func center_window() -> void:
 	var origin: Vector2i = DisplayServer.screen_get_position(screen_id)
 	var target_pos: Vector2 = origin + (display_size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
+
+
+### Comments
+# !1: Specifying return types for the editor interface methods causes
+# issues when the game is exported.

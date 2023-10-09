@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bhll4i822rl3e"]
+[gd_scene load_steps=38 format=3 uid="uid://bhll4i822rl3e"]
 
 [ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="1_dp0x6"]
 [ext_resource type="Script" path="res://demo/scenes/settings_menu/settings_menu.gd" id="1_xvbwk"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="6_fyban"]
 [ext_resource type="Resource" uid="uid://1v2k7glufimr" path="res://game_settings/settings/display/window_size.tres" id="8_efygg"]
 [ext_resource type="PackedScene" uid="uid://bhkyf3l4ee800" path="res://game_settings/components/checkbox/checkbox.tscn" id="9_681tc"]
-[ext_resource type="Resource" uid="uid://bri4atc6taq7n" path="res://game_settings/settings/audio/master/mute_state.tres" id="10_nxrqq"]
+[ext_resource type="Resource" uid="uid://djr2qy10po5sv" path="res://game_settings/settings/audio/master/mute_state.tres" id="10_nxrqq"]
 [ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="11_xeqq8"]
 [ext_resource type="Resource" uid="uid://7yc4gwua8pf2" path="res://game_settings/settings/audio/master/volume.tres" id="13_3mn4q"]
 [ext_resource type="Resource" uid="uid://2m1oonr3dopn" path="res://game_settings/settings/audio/music/mute_state.tres" id="14_fnald"]
@@ -32,11 +32,9 @@
 [ext_resource type="Resource" uid="uid://c67qu6uephcjw" path="res://game_settings/settings/gameplay/player_name.tres" id="29_2be0i"]
 [ext_resource type="PackedScene" uid="uid://bqi00h7i7sg3u" path="res://game_settings/components/spinbox/spinbox.tscn" id="29_f8pee"]
 [ext_resource type="AudioStream" uid="uid://birryplp6gs63" path="res://demo/assets/audio/focus.wav" id="29_timu8"]
-[ext_resource type="Script" path="res://game_settings/components/spinbox/spinbox.gd" id="30_3xs1d"]
 [ext_resource type="AudioStream" uid="uid://mo3wq0vrrelp" path="res://demo/assets/audio/interact.wav" id="30_ob0u6"]
 [ext_resource type="Resource" uid="uid://dsiuepvql652m" path="res://game_settings/settings/gameplay/player_speed.tres" id="31_nec13"]
 [ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="32_y4ych"]
-[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="33_chy3n"]
 [ext_resource type="Resource" uid="uid://bls016g4wcy00" path="res://game_settings/settings/gameplay/difficulty.tres" id="34_pl7xs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bbgam"]
@@ -414,13 +412,9 @@ text = "Player Speed"
 [node name="PlayerSpeedField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed" instance=ExtResource("29_f8pee")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-script = ExtResource("30_3xs1d")
 setting = ExtResource("31_nec13")
 apply_on_change = true
 grab_focus_on_mouse_over = true
-
-[node name="SpinBox" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed/PlayerSpeedField" index="0"]
-layout_mode = 2
 
 [node name="Difficulty" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
 layout_mode = 2
@@ -432,14 +426,9 @@ text = "Difficulty"
 
 [node name="DifficultyList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty" instance=ExtResource("32_y4ych")]
 layout_mode = 2
-script = ExtResource("33_chy3n")
 setting = ExtResource("34_pl7xs")
 apply_on_change = true
 grab_focus_on_mouse_over = true
-
-[node name="HList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList" index="0"]
-layout_mode = 2
-mouse_filter = 2
 
 [node name="Btn0" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="0"]
 custom_minimum_size = Vector2(70, 0)
@@ -464,10 +453,6 @@ custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 toggle_mode = true
 text = "Expert"
-
-[node name="VList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList" index="1"]
-layout_mode = 2
-mouse_filter = 2
 
 [node name="BotCtnr" type="VBoxContainer" parent="Background/Margin/MainCtnr"]
 layout_mode = 2

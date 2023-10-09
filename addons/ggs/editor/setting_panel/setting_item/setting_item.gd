@@ -23,6 +23,10 @@ func _on_toggled(button_state: bool) -> void:
 		return
 	
 	var setting_res: ggsSetting = load(path)
+	
+	if setting_res is ggsInputSetting:
+		setting_res.update_current_as_event()
+	
 	GGS.active_setting = setting_res
 	ggsUtils.get_editor_interface().inspect_object(setting_res)
 
