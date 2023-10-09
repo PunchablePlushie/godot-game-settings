@@ -1,6 +1,4 @@
 **/*.import
-icon.svg
-project.godot
 _testing
 
 # Godot 4+ specific ignores
