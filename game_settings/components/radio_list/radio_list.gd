@@ -18,8 +18,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	@warning_ignore("incompatible_ternary")
-	ActiveList = HList if active_list == Lists.HLIST else VList
+	ActiveList = (HList as BoxContainer) if (active_list == Lists.HLIST) else (VList as BoxContainer)
 	
 	super()
 	btngrp.pressed.connect(_on_pressed)

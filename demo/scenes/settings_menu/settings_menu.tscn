@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bhll4i822rl3e"]
+[gd_scene load_steps=40 format=3 uid="uid://bhll4i822rl3e"]
 
 [ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="1_dp0x6"]
 [ext_resource type="Script" path="res://demo/scenes/settings_menu/settings_menu.gd" id="1_xvbwk"]
@@ -29,10 +29,15 @@
 [ext_resource type="Resource" uid="uid://c2xc0ava5qb6w" path="res://game_settings/settings/input/move_down/keyboard_1.tres" id="25_haclr"]
 [ext_resource type="Resource" uid="uid://cd5k6o2f53d4w" path="res://game_settings/settings/input/move_down/gamepad.tres" id="26_cq6g5"]
 [ext_resource type="PackedScene" uid="uid://di8r6amxunq7q" path="res://game_settings/components/text_field/text_field.tscn" id="27_i0356"]
-[ext_resource type="Script" path="res://game_settings/components/text_field/text_field.gd" id="28_1yb2c"]
 [ext_resource type="Resource" uid="uid://c67qu6uephcjw" path="res://game_settings/settings/gameplay/player_name.tres" id="29_2be0i"]
+[ext_resource type="PackedScene" uid="uid://bqi00h7i7sg3u" path="res://game_settings/components/spinbox/spinbox.tscn" id="29_f8pee"]
 [ext_resource type="AudioStream" uid="uid://birryplp6gs63" path="res://demo/assets/audio/focus.wav" id="29_timu8"]
+[ext_resource type="Script" path="res://game_settings/components/spinbox/spinbox.gd" id="30_3xs1d"]
 [ext_resource type="AudioStream" uid="uid://mo3wq0vrrelp" path="res://demo/assets/audio/interact.wav" id="30_ob0u6"]
+[ext_resource type="Resource" uid="uid://dsiuepvql652m" path="res://game_settings/settings/gameplay/player_speed.tres" id="31_nec13"]
+[ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="32_y4ych"]
+[ext_resource type="Script" path="res://game_settings/components/radio_list/radio_list.gd" id="33_chy3n"]
+[ext_resource type="Resource" uid="uid://bls016g4wcy00" path="res://game_settings/settings/gameplay/difficulty.tres" id="34_pl7xs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bbgam"]
 content_margin_left = 5.0
@@ -390,21 +395,79 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Player Name"
 
-[node name="TextField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName" instance=ExtResource("27_i0356")]
+[node name="PlayerNameField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName" instance=ExtResource("27_i0356")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-script = ExtResource("28_1yb2c")
 setting = ExtResource("29_2be0i")
 apply_on_change = true
 grab_focus_on_mouse_over = true
 
-[node name="TextField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName/TextField" index="0"]
-custom_minimum_size = Vector2(100, 0)
+[node name="PlayerSpeed" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
 layout_mode = 2
-context_menu_enabled = false
-caret_blink = true
-caret_blink_interval = 0.5
+
+[node name="PlayerSpeedLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Speed"
+
+[node name="PlayerSpeedField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed" instance=ExtResource("29_f8pee")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+script = ExtResource("30_3xs1d")
+setting = ExtResource("31_nec13")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="SpinBox" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed/PlayerSpeedField" index="0"]
+layout_mode = 2
+
+[node name="Difficulty" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Difficulty"
+
+[node name="DifficultyList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty" instance=ExtResource("32_y4ych")]
+layout_mode = 2
+script = ExtResource("33_chy3n")
+setting = ExtResource("34_pl7xs")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="HList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList" index="0"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Btn0" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="0"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Easy"
+
+[node name="Btn1" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="1"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Normal"
+
+[node name="Btn2" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="2"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Hard"
+
+[node name="Btn3" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="3"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Expert"
+
+[node name="VList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList" index="1"]
+layout_mode = 2
+mouse_filter = 2
 
 [node name="BotCtnr" type="VBoxContainer" parent="Background/Margin/MainCtnr"]
 layout_mode = 2
@@ -457,4 +520,6 @@ stream = ExtResource("30_ob0u6")
 [editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Kb0"]
 [editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Kb1"]
 [editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Gp"]
-[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName/TextField"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName/PlayerNameField"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed/PlayerSpeedField"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList"]

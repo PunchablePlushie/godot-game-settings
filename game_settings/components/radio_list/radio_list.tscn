@@ -8,6 +8,8 @@ script = ExtResource("1_47eay")
 
 [node name="HList" type="HBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VList" type="VBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2

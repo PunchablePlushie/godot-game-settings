@@ -5,6 +5,7 @@ extends Node2D
 var SettingsMenu: Control
 
 @onready var Player: CharacterBody2D = $player
+@onready var BgMusic: AudioStreamPlayer = $BgMusic
 @onready var HUD: CanvasLayer = $HUD
 @onready var ScoreLabel: Label = %ScoreLabel
 
