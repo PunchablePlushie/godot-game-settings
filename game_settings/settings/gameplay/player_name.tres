@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c67qu6uephcjw"]
+
+[ext_resource type="Script" path="res://game_settings/settings/gameplay/player_name.gd" id="1_vf4ka"]
+
+[resource]
+resource_name = "player_name"
+script = ExtResource("1_vf4ka")
+current = "Ristar"
+default = "Ristar"
+name = "player_name"
+category = "gameplay"
+value_type = 4
+value_hint = 0
+value_hint_string = ""

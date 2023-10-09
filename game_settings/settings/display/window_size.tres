@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://1v2k7glufimr"]
+
+[ext_resource type="Script" path="res://game_settings/templates/display/display_size.gd" id="1_m5r8p"]
+
+[resource]
+resource_name = "window_size"
+script = ExtResource("1_m5r8p")
+sizes = Array[Vector2]([Vector2(640, 480), Vector2(800, 600), Vector2(1024, 768), Vector2(1280, 720)])
+current = 1
+default = 1
+name = "window_size"
+category = "display"
+value_type = 2
+value_hint = 2
+value_hint_string = "640 x 480,800 x 600,1024 x 768,1280 x 720"

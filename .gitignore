@@ -1,5 +1,4 @@
 **/*.import
-_testing
 
 # Godot 4+ specific ignores
 .godot/

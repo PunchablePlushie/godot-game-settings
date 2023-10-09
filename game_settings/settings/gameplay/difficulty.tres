@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bls016g4wcy00"]
+
+[ext_resource type="Script" path="res://game_settings/settings/gameplay/difficulty.gd" id="1_cspxt"]
+
+[resource]
+resource_name = "difficulty"
+script = ExtResource("1_cspxt")
+current = 3
+default = 1
+name = "difficulty"
+category = "gameplay"
+value_type = 2
+value_hint = 2
+value_hint_string = "Easy,Medium,Hard,Nightmare"

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj4w38uaulb84"]
+
+[ext_resource type="Script" path="res://demo/entities/harm/harm.gd" id="1_0bu4s"]
+[ext_resource type="Texture2D" uid="uid://cfc7yjm3c0f04" path="res://demo/assets/images/harm.png" id="1_0fk4g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11ejw"]
+radius = 16.0312
+
+[node name="harm" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0bu4s")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+texture = ExtResource("1_0fk4g")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("CircleShape2D_11ejw")
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(16, 16)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_11ejw")
+
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="."]
