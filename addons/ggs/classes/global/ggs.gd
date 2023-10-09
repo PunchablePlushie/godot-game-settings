@@ -22,7 +22,7 @@ var terminate_current: bool = false
 var terminate_default: bool = false
 var settings_cache: Array[ggsSetting] #?1
 
-var FSD: FileSystemDock
+var FSD #!1
  
 @onready var MouseOverSFX: AudioStreamPlayer = $MouseOverSFX
 @onready var FocusSFX: AudioStreamPlayer = $FocusSFX
@@ -224,3 +224,6 @@ func play_sfx(sfx: SFX) -> void:
 # alive.
 # Godot caches loaded resources of the tree under the hood.
 # View `youtube.com/watch?v=3r7IohvVnw8` for more info.
+
+# !1: Specifying return types for the editor interface methods causes
+# issues when the game is exported.

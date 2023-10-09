@@ -34,6 +34,9 @@ const GGS_SCENE: String = "res://addons/ggs/classes/global/ggs.tscn"
 @onready var ResetBtn: Button = %ResetBtn
 @onready var CRW: ConfirmationDialog = $ConfirmWindow
 
+@onready var VersionBtn: Button = %VersionBtn
+@onready var ChangelogBtn: Button = %ChangelogBtn
+
 
 func _ready() -> void:
 	about_to_popup.connect(_on_about_to_popup)
@@ -53,7 +56,22 @@ func _ready() -> void:
 	
 	SetSFXBtn.pressed.connect(_on_SetSFXBtn_pressed)
 	
+	VersionBtn.pressed.connect(_on_VersionBtn_pressed)
+	ChangelogBtn.pressed.connect(_on_ChangelogBtn_pressed)
+	
 	hide()
+
+
+### Info Buttons
+
+func _on_VersionBtn_pressed() -> void:
+	var URI: String = "https://github.com/PunchablePlushie/godot-game-settings/releases"
+	OS.shell_open(URI)
+
+
+func _on_ChangelogBtn_pressed() -> void:
+	var URI: String = "https://github.com/PunchablePlushie/godot-game-settings/tree/main/docs/changelog.md"
+	OS.shell_open(URI)
 
 
 ### Fields

@@ -1,4 +1,3 @@
-# Current Version
 ## 3.1.0
 This version completely reworks how the categories and settings are stored, and adds several QoL features to the plugin.
 
@@ -25,6 +24,7 @@ This version completely reworks how the categories and settings are stored, and 
 * All list components now support using item IDs instead of indices.
 * The input button now supports icons for mouse events.
 * UI components now warn the user when they don't have a setting or their setting is invalid.
+* You can now set up sound effects for UI components.
 
 
 # Previous Versions
