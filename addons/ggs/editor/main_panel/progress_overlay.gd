@@ -20,7 +20,7 @@ func _ready() -> void:
 	ProgBar.value = 0
 
 
-func _on_Global_progress_started(progress_type: GGS.Progress) -> void:
+func _on_Global_progress_started(progress_type: int) -> void:
 	visible = true
 	ProgBar.visible = true
 	type = progress_type
