@@ -1,0 +1,2 @@
+Prevents this directory from getting deleting.
+Feel free to delete this file after adding at least one setting.
