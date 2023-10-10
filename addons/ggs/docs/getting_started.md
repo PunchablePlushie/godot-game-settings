@@ -4,8 +4,20 @@ This guide will show you how to create a basic settings menu with the predefined
 You can install the plugin through various ways, including:
 * Install the plugin through the Asset Library inside the Godot editor.
 * Clone the repository with Git.
+* Download the latest release.
 * Download the `main` branch directly with [DownGit](https://minhaskamal.github.io/DownGit/#/home) or similar tools.
 * Add the `main` branch as a Git Submodule. [Learn more about Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+> [!ATTENTION]
+> No matter how you download the `main` branch (via releases, DownGit, or as a Git submodule), you should copy the contents of the *_premade* folder and paste them into your own game settings directory. You can change these directories in Preferences.
+> Example:
+> ```
+> res://
+>   └ game_settings
+>       └ components
+>       └ settings
+>       └ templates
+> ```
 
 > [!NOTE]
 > The plugin may not work as expected when added to a project at first. Enable the plugin through the Project Settings then restart the Godot editor. [More information](troubleshoot.md#can't-use-the-plugin-after-installation).
