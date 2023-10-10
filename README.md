@@ -39,5 +39,5 @@ This version completely reworks how the categories and settings are stored, and 
 * You can now set up sound effects for UI components.
 
 <p align="right">
-	<a href="https://github.com/PunchablePlushie/godot_ggs/wiki/Changelog">Full Changelog</a><br/>
+	<a href="https://github.com/PunchablePlushie/godot-game-settings/tree/main/docs/changelog.md">Full Changelog</a><br/>
 </p>
