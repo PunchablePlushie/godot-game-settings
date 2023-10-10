@@ -8,7 +8,7 @@ You can install the plugin through various ways, including:
 * Download the `main` branch directly with [DownGit](https://minhaskamal.github.io/DownGit/#/home) or similar tools.
 * Add the `main` branch as a Git Submodule. [Learn more about Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
-> [!ATTENTION]
+> [!IMPORTANT]
 > No matter how you download the `main` branch (via releases, DownGit, or as a Git submodule), you should copy the contents of the *_premade* folder and paste them into your own game settings directory. You can change these directories in Preferences.
 > Example:
 > ```
