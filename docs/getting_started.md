@@ -22,6 +22,10 @@ You can install the plugin through various ways, including:
 > [!NOTE]
 > The plugin may not work as expected when added to a project at first. Enable the plugin through the Project Settings then restart the Godot editor. [More information](troubleshoot.md#can't-use-the-plugin-after-installation).
 
+# Change Project Settings
+For the settings to work on an exported build, you must disable `convert_text_resources_to_binary` option in the project settings. You can find this option in the *Editor/Export* section (`editor/export/convert_text_resources_to_binary`).
+
+
 # GGS Editor
 When enabled, GGS adds a bottom panel editor to Godot named "Game Settings". The editor is divided into 3 panels:
 * The categories panel on the left.
