@@ -9,9 +9,9 @@ This means that the GGS singleton doesn't exist. When the plugin is first added,
 
 Note that the plugin adds the singleton automatically when enabled. If for some reason it doesn't, you can find the script at the following path:
 ```
-res://addons/ggs/classes/ggs_globals.gd
+res://addons/ggs/classes/global/ggs.tscn
 ```
-Simply add that script to the autoload list, **name it GGS**, and reload the project.
+Simply add that *scene* (not the script) to the autoload list, **name it GGS**, and reload the project.
 
 
 ## Setting type error
