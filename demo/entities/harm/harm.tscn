@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bj4w38uaulb84"]
 
 [ext_resource type="Script" path="res://demo/entities/harm/harm.gd" id="1_0bu4s"]
-[ext_resource type="Texture2D" uid="uid://cfc7yjm3c0f04" path="res://demo/assets/images/harm.png" id="1_0fk4g"]
+[ext_resource type="Texture2D" uid="uid://cpsy68pbba4aq" path="res://demo/assets/images/harm.png" id="1_0fk4g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11ejw"]
 radius = 16.0312
