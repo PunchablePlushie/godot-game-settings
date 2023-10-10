@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://7yc4gwua8pf2"]
+
+[ext_resource type="Script" path="res://game_settings/templates/audio/audio_volume.gd" id="1_7if2j"]
+
+[resource]
+resource_name = "master_volume"
+script = ExtResource("1_7if2j")
+audio_bus = "Master"
+current = 100.0
+default = 100.0
+name = "master_volume"
+category = "audio"
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"

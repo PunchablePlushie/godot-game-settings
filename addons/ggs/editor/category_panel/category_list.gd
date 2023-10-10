@@ -1,62 +1,54 @@
 @tool
-extends ggsTree
+extends ItemList
 
-@onready var CMenu: PopupMenu = $ContextMenu
+@onready var FSD: FileSystemDock = ggsUtils.get_file_system_dock()
 
 
 func _ready() -> void:
-	item_selected.connect(_on_item_selected)
 	item_activated.connect(_on_item_activated)
-	item_mouse_selected.connect(_on_item_mouse_selected)
+	item_selected.connect(_on_item_selected)
 	
-	_load_list()
+	GGS.dir_settings_change_occured.connect(_on_Global_dir_settings_change_occured)
+	
+	load_list()
 
 
-func _load_list() -> void:
+func load_list() -> void:
 	clear()
-	root = create_item()
 	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	for item in data.category_order:
-		add_item(item)
-
-
-func add_item(category: ggsCategory) -> void:
-	var created_item: TreeItem = create_item(root)
-	created_item.set_text(0, category.name)
-	created_item.set_metadata(0, category)
-
-
-func remove_item(item: TreeItem) -> void:
-	GGS.category_selected.emit(null)
-	item.free()
-	_update_item_order()
-
-
-func _on_item_selected() -> void:
-	var selected_category: ggsCategory = get_selected().get_metadata(0)
-	GGS.category_selected.emit(selected_category)
-
-
-### Drag and Drop
-
-func _update_item_order() -> void:
-	var new_order: Array[ggsCategory]
-	for child in root.get_children():
-		var category_obj: ggsCategory = child.get_metadata(0)
-		new_order.append(category_obj)
+	var categories: PackedStringArray = _load_categories_from_filesystem()
+	for category in categories:
+		add_item(category)
 	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.update_category_order(new_order)
+	GGS.active_category = ""
 
 
-### Context Menu
+func _update_from_file_system() -> void:
+	load_list()
 
-func _on_item_mouse_selected(pos: Vector2, mouse_btn: int) -> void:
-	var category: ggsCategory = get_item_at_position(pos).get_metadata(0)
-	
-	if not mouse_btn == MOUSE_BUTTON_RIGHT:
-		return
-	
-	CMenu.position = DisplayServer.mouse_get_position()
-	CMenu.popup()
+
+func _on_item_selected(item_index: int) -> void:
+	var item_text: String = get_item_text(item_index)
+	GGS.active_category = item_text
+
+
+func _on_item_activated(item_index: int) -> void:
+	var item_text: String = get_item_text(item_index)
+	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(item_text)
+	ggsUtils.get_editor_interface().select_file(path)
+
+
+func _on_Global_dir_settings_change_occured() -> void:
+	_update_from_file_system()
+
+
+### Load Categories
+
+func _load_categories_from_filesystem() -> PackedStringArray:
+	var dir: DirAccess = DirAccess.open(ggsUtils.get_plugin_data().dir_settings)
+	var list: Array = Array(dir.get_directories()).filter(_remove_underscored)
+	return PackedStringArray(list)
+
+
+func _remove_underscored(element: String) -> bool:
+	return not element.begins_with("_")

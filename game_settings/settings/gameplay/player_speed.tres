@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dsiuepvql652m"]
+
+[ext_resource type="Script" path="res://game_settings/settings/gameplay/player_speed.gd" id="1_aqptj"]
+
+[resource]
+resource_name = "player_speed"
+script = ExtResource("1_aqptj")
+current = 400.0
+default = 400.0
+name = "player_speed"
+category = "gameplay"
+value_type = 3
+value_hint = 1
+value_hint_string = "400,600"

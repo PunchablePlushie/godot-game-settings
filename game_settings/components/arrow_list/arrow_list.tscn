@@ -7,8 +7,6 @@ offset_left = 143.0
 offset_right = 143.0
 offset_bottom = 40.0
 script = ExtResource("1_cifu3")
-options = null
-apply_on_change = null
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2

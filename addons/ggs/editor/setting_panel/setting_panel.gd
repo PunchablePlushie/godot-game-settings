@@ -1,118 +1,179 @@
 @tool
 extends Control
 
+const TEMPLATE_SCRIPT: GDScript = preload("res://addons/ggs/template.gd")
+
+@export var Notification: AcceptDialog
+
 @onready var AddBtn: Button = %AddBtn
-@onready var DeleteBtn: Button = %DeleteBtn
-@onready var AssignBtn: Button = %AssignBtn
-@onready var List: Tree = %SettingList
+@onready var NSF: LineEdit = %NewSettingField
+@onready var NGF: LineEdit = %NewGroupField
+@onready var CheckAllBtn: Button = %CheckAllBtn
+@onready var UncheckAllBtn: Button = %UncheckAllBtn
+@onready var ReloadBtn: Button = %ReloadBtn
+@onready var List: ScrollContainer = %SettingList
 @onready var ASW: ConfirmationDialog = $AddSettingWindow
-@onready var DeleteConfirm: ConfirmationDialog = $DeleteConfirm
 
 
 func _ready() -> void:
 	AddBtn.pressed.connect(_on_AddBtn_pressed)
-	ASW.setting_selected.connect(_on_ASW_setting_selected)
+	ASW.template_selected.connect(_on_ASW_template_selected)
 	
-	List.item_edited.connect(_on_List_item_edited)
+	NSF.text_submitted.connect(_on_NSF_text_submitted)
+	NGF.text_submitted.connect(_on_NGF_text_submitted)
+	CheckAllBtn.pressed.connect(_on_CheckAllBtn_pressed)
+	UncheckAllBtn.pressed.connect(_on_UncheckAllBtn_pressed)
+	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
 	
-	GGS.category_selected.connect(_on_Global_category_selected)
-	GGS.setting_selected.connect(_on_Global_setting_selected)
-	DeleteBtn.pressed.connect(_on_DeleteBtn_pressed)
-	DeleteConfirm.confirmed.connect(_on_DeleteConfirm_confirmed)
+	GGS.active_category_changed.connect(_on_Global_active_category_changed)
+	GGS.active_setting_changed.connect(_on_Global_active_setting_changed)
 	
-	AssignBtn.pressed.connect(_on_AssignBtn_pressed)
+	AddBtn.disabled = true
+	NSF.editable = false
+	NGF.editable = false
+	CheckAllBtn.disabled = true
+	UncheckAllBtn.disabled = true
+	ReloadBtn.disabled = true
 
 
+func _set_topbar_disabled(disabled: bool) -> void:
+	AddBtn.disabled = disabled
+	NSF.editable = !disabled
+	NGF.editable = !disabled
+	CheckAllBtn.disabled = disabled
+	UncheckAllBtn.disabled = disabled
+	ReloadBtn.disabled = disabled
 
-### Adding Settings
 
-func _add_setting(setting: ggsSetting) -> void:
-	var name_list: PackedStringArray = GGS.active_category.get_setting_name_list()
-	setting.name = ggsUtils.get_unique_string(name_list, setting.name)
-	setting.category = GGS.active_category.name
-	setting.current = setting.default
+func _on_Global_active_category_changed() -> void:
+	_set_topbar_disabled(GGS.active_category.is_empty())
+
+
+func _on_Global_active_setting_changed() -> void:
+	var active_list_item: Button = List.btn_group.get_pressed_button()
+	if GGS.active_setting == null and active_list_item != null:
+		active_list_item.button_pressed = false
+
+
+### Setting Creation
+
+func _create_setting(item_name: String, template_path: String = "") -> void:
+	GGS.progress_started.emit(GGS.Progress.ADD_SETTINGS)
 	
-	List.add_item(setting)
-	GGS.active_category.add_setting(setting)
-	ggsSaveFile.new().set_key(setting.category, setting.name, setting.default)
+	# A tiny delay so the progress_started signal can travel properly
+	await get_tree().create_timer(0.05).timeout 
+	
+	if (
+		not item_name.is_valid_filename() or
+		item_name.begins_with("_") or
+		item_name.begins_with(".")
+	):
+		Notification.purpose = Notification.Purpose.INVALID
+		Notification.popup_centered()
+		GGS.progress_ended.emit()
+		return
+	
+	var paths: PackedStringArray
+	var selected_groups: Array[Node] = List.get_selected_groups()
+	if selected_groups.is_empty():
+		var category_path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
+		paths.append(category_path)
+	else:
+		for group in selected_groups:
+			paths.append(group.path)
+	
+	var dir: DirAccess = DirAccess.open("res://")
+	for path in paths:
+		dir.change_dir(path)
+		
+		if paths.size() == 1:
+			if dir.file_exists("%s.tres"%item_name):
+				Notification.purpose = Notification.Purpose.ALREADY_EXISTS
+				Notification.popup_centered()
+				GGS.progress_ended.emit()
+				return
+		else:
+			if dir.file_exists("%s.tres"%item_name):
+				printerr("GGS - Add Setting to Multiple Groups: An item with this name already exists. Ignoring <%s>."%path.get_file())
+				continue
+		
+		var script: Script
+		var script_path: String
+		if template_path.is_empty():
+			script = TEMPLATE_SCRIPT.duplicate()
+			script_path = "%s/%s.gd"%[dir.get_current_dir(), item_name]
+			ResourceSaver.save(script, script_path)
+			script = load(script_path)
+		else:
+			script = load(template_path)
+		
+		var resource: ggsSetting = ggsSetting.new()
+		var res_path: String = "%s/%s.tres"%[dir.get_current_dir(), item_name]
+		resource.set_script(script)
+		ResourceSaver.save(resource, res_path)
+	
+	NSF.clear()
+	ggsUtils.get_resource_file_system().scan()
+	List.load_list()
+	GGS.progress_ended.emit()
 
+
+func _on_NSF_text_submitted(submitted_text: String) -> void:
+	_create_setting(submitted_text)
+
+
+### Group Creation
+
+func _create_group(group_name: String) -> void:
+	if (
+		not group_name.is_valid_filename() or
+		group_name.begins_with("_") or
+		group_name.begins_with(".")
+	):
+		Notification.purpose = Notification.Purpose.INVALID
+		Notification.popup_centered()
+		return
+	
+	var path: String = ggsUtils.get_plugin_data().dir_settings.path_join(GGS.active_category)
+	var dir: DirAccess = DirAccess.open(path)
+	if dir.dir_exists(group_name):
+		Notification.purpose = Notification.Purpose.ALREADY_EXISTS
+		Notification.popup_centered()
+		return
+	
+	dir.make_dir(group_name)
+	
+	NGF.clear()
+	ggsUtils.get_resource_file_system().scan()
+	List.load_list()
+
+
+func _on_NGF_text_submitted(submitted_text: String) -> void:
+	_create_group(submitted_text)
+
+
+### Setting from Template
 
 func _on_AddBtn_pressed() -> void:
 	ASW.popup_centered()
 
 
-func _on_ASW_setting_selected(selected_setting: ggsSetting) -> void:
-	_add_setting(selected_setting)
+func _on_ASW_template_selected(template: String, setting_name: String) -> void:
+	_create_setting(setting_name, template)
 
 
-### Renaming Settings
+### Check/Uncheck Btns
 
-func _rename_setting(tree_item: TreeItem) -> void:
-	var setting: ggsSetting = tree_item.get_metadata(0)
-	var prev_name: String = setting.name
-	var new_name: String = tree_item.get_text(0)
-	
-	if prev_name == new_name:
-		return
-	
-	var name_list: PackedStringArray = GGS.active_category.get_setting_name_list()
-	setting.name = ggsUtils.get_unique_string(name_list, new_name)
-	
-	GGS.active_category.rename_setting(prev_name, setting)
-	ggsSaveFile.new().rename_key(setting.category, prev_name, setting.name)
-	
-	tree_item.set_text(0, setting.name)
-	tree_item.set_editable(0, false)
+func _on_CheckAllBtn_pressed() -> void:
+	List.set_checked_all(true)
 
 
-func _on_List_item_edited() -> void:
-	_rename_setting(List.get_edited())
+func _on_UncheckAllBtn_pressed() -> void:
+	List.set_checked_all(false)
 
 
-### Deleting Settings
+### Reload Btn
 
-func _delete_setting(setting: ggsSetting) -> void:
-	GGS.active_category.remove_setting(setting)
-	ggsSaveFile.new().delete_key(setting.category, setting.name)
-	List.remove_item(List.get_selected())
-	setting.delete()
+func _on_ReloadBtn_pressed() -> void:
+	List.load_list()
 
-
-func _on_Global_category_selected(category: ggsCategory) -> void:
-	DeleteBtn.disabled = true
-	AssignBtn.disabled = true
-	
-	AddBtn.disabled = (category == null)
-
-
-func _on_Global_setting_selected(setting: ggsSetting) -> void:
-	DeleteBtn.disabled = (setting == null)
-	AssignBtn.disabled = (setting == null)
-
-
-func _on_DeleteBtn_pressed() -> void:
-	DeleteConfirm.popup_centered()
-
-
-func _on_DeleteConfirm_confirmed() -> void:
-	_delete_setting(List.get_selected().get_metadata(0))
-
-
-### Assigning Settings
-
-func _on_AssignBtn_pressed() -> void:
-	var EI: EditorInterface = ggsUtils.get_editor_interface()
-	var ES: EditorSelection = EI.get_selection()
-	var selected_nodes: Array[Node] = ES.get_selected_nodes()
-	
-	if selected_nodes.size() != 1:
-		printerr("GGS - Assign to Component: Exactly 1 item in the scene tree must be selected.")
-		return
-	
-	var SelectedNode: Node = selected_nodes[0]
-	if not SelectedNode is ggsUIComponent:
-		printerr("GGS - Assign to Component: The selected node is not a GGS UI Component.")
-		return
-	
-	SelectedNode.setting = GGS.active_setting
-	EI.save_scene()

@@ -2,23 +2,21 @@
 extends RefCounted
 class_name ggsUtils
 
-
-static func get_editor_interface(): #!
+#!1
+static func get_editor_interface():
 	return Engine.get_singleton("ggsEI")
+
+
+static func get_resource_file_system():
+	return get_editor_interface().get_resource_filesystem()
+
+
+static func get_file_system_dock():
+	return get_editor_interface().get_file_system_dock()
 
 
 static func get_plugin_data() -> ggsPluginData:
 	return load("res://addons/ggs/plugin_data.tres")
-
-
-static func get_unique_string(list: PackedStringArray, string: String) -> String:
-	var cur_string: String = string
-	var count: int = 2
-	while list.has(cur_string):
-		cur_string = "%s %d"%[string, count]
-		count += 1
-	
-	return cur_string
 
 
 static func get_enum_string(target_enum: String) -> String:
@@ -54,6 +52,13 @@ static func get_enum_string(target_enum: String) -> String:
 	return enum_string
 
 
+### Dir Paths
+
+static func path_is_in_dir_settings(path: String) -> bool:
+	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
+	return path.begins_with(dir_settings)
+
+
 ### Window
 
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
@@ -73,5 +78,6 @@ static func center_window() -> void:
 	DisplayServer.window_set_position(target_pos)
 
 
-#! Do not specify method return class (EditorInterface) as it causes error when
- # when the game is exported.
+### Comments
+# !1: Specifying return types for the editor interface methods causes
+# issues when the game is exported.

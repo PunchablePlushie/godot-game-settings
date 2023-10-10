@@ -1,0 +1,510 @@
+[gd_scene load_steps=38 format=3 uid="uid://bhll4i822rl3e"]
+
+[ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://game_settings/components/switch/switch.tscn" id="1_dp0x6"]
+[ext_resource type="Script" path="res://demo/scenes/settings_menu/settings_menu.gd" id="1_xvbwk"]
+[ext_resource type="PackedScene" path="res://game_settings/components/_misc_components/reset_btn/reset_btn.tscn" id="2_jg4s8"]
+[ext_resource type="Resource" uid="uid://dgmk2avdg1upv" path="res://game_settings/settings/display/fullscreen.tres" id="3_acp7e"]
+[ext_resource type="PackedScene" uid="uid://b1btmq8y3gexs" path="res://game_settings/components/_misc_components/input_confirm_window/input_confirm_window.tscn" id="6_121a1"]
+[ext_resource type="PackedScene" uid="uid://b7m6l0lvojrsj" path="res://game_settings/components/option_list/option_list.tscn" id="6_fyban"]
+[ext_resource type="Resource" uid="uid://1v2k7glufimr" path="res://game_settings/settings/display/window_size.tres" id="8_efygg"]
+[ext_resource type="PackedScene" uid="uid://bhkyf3l4ee800" path="res://game_settings/components/checkbox/checkbox.tscn" id="9_681tc"]
+[ext_resource type="Resource" uid="uid://djr2qy10po5sv" path="res://game_settings/settings/audio/master/mute_state.tres" id="10_nxrqq"]
+[ext_resource type="PackedScene" uid="uid://ds06mwhee8ygm" path="res://game_settings/components/slider/slider.tscn" id="11_xeqq8"]
+[ext_resource type="Resource" uid="uid://7yc4gwua8pf2" path="res://game_settings/settings/audio/master/volume.tres" id="13_3mn4q"]
+[ext_resource type="Resource" uid="uid://2m1oonr3dopn" path="res://game_settings/settings/audio/music/mute_state.tres" id="14_fnald"]
+[ext_resource type="Resource" uid="uid://ccwm56m2e4nmo" path="res://game_settings/settings/audio/music/volume.tres" id="15_silmr"]
+[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://game_settings/components/input_btn/input_btn.tscn" id="16_nkph2"]
+[ext_resource type="Resource" uid="uid://bcqtoqmjue0xe" path="res://game_settings/settings/audio/sfx/mute_state.tres" id="16_t5v0d"]
+[ext_resource type="Resource" uid="uid://dnga4lbsox3wu" path="res://game_settings/settings/audio/sfx/volume.tres" id="17_3ti8q"]
+[ext_resource type="Resource" uid="uid://b3q3ecvufsboy" path="res://game_settings/settings/input/move_right/keyboard_0.tres" id="18_cmq11"]
+[ext_resource type="Resource" uid="uid://5l0iu6tqqsuy" path="res://game_settings/settings/input/move_left/keyboard_0.tres" id="18_d506i"]
+[ext_resource type="Resource" uid="uid://ctwyfsk3ml7in" path="res://game_settings/settings/input/move_left/keyboard_1.tres" id="19_4aqyp"]
+[ext_resource type="Resource" uid="uid://cfp74fqf3hig0" path="res://game_settings/settings/input/move_right/keyboard_1.tres" id="19_djvuv"]
+[ext_resource type="Resource" uid="uid://c16wxcl04k0rv" path="res://game_settings/settings/input/move_left/gamepad.tres" id="20_5mjj5"]
+[ext_resource type="Resource" uid="uid://ftlqbsy5gvwn" path="res://game_settings/settings/input/move_right/gamepad.tres" id="20_ibr1v"]
+[ext_resource type="Resource" uid="uid://dvnv8tfy60rw5" path="res://game_settings/settings/input/move_up/keyboard_0.tres" id="21_515iw"]
+[ext_resource type="Resource" uid="uid://hc4oukt0w1lq" path="res://game_settings/settings/input/move_up/keyboard_1.tres" id="22_rbkwh"]
+[ext_resource type="Resource" uid="uid://bxcnecq0va3gl" path="res://game_settings/settings/input/move_up/gamepad.tres" id="23_stdkd"]
+[ext_resource type="Resource" uid="uid://7yg1d18e6p62" path="res://game_settings/settings/input/move_down/keyboard_0.tres" id="24_moaeb"]
+[ext_resource type="Resource" uid="uid://c2xc0ava5qb6w" path="res://game_settings/settings/input/move_down/keyboard_1.tres" id="25_haclr"]
+[ext_resource type="Resource" uid="uid://cd5k6o2f53d4w" path="res://game_settings/settings/input/move_down/gamepad.tres" id="26_cq6g5"]
+[ext_resource type="PackedScene" uid="uid://di8r6amxunq7q" path="res://game_settings/components/text_field/text_field.tscn" id="27_i0356"]
+[ext_resource type="Resource" uid="uid://c67qu6uephcjw" path="res://game_settings/settings/gameplay/player_name.tres" id="29_2be0i"]
+[ext_resource type="PackedScene" uid="uid://bqi00h7i7sg3u" path="res://game_settings/components/spinbox/spinbox.tscn" id="29_f8pee"]
+[ext_resource type="AudioStream" uid="uid://dbeucupcrh31w" path="res://demo/assets/audio/focus.wav" id="29_timu8"]
+[ext_resource type="AudioStream" uid="uid://d03vle3rnm2ma" path="res://demo/assets/audio/interact.wav" id="30_ob0u6"]
+[ext_resource type="Resource" uid="uid://dsiuepvql652m" path="res://game_settings/settings/gameplay/player_speed.tres" id="31_nec13"]
+[ext_resource type="PackedScene" uid="uid://c11tbsolk6dnu" path="res://game_settings/components/radio_list/radio_list.tscn" id="32_y4ych"]
+[ext_resource type="Resource" uid="uid://bls016g4wcy00" path="res://game_settings/settings/gameplay/difficulty.tres" id="34_pl7xs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bbgam"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[node name="SettingsMenu" type="Control"]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -250.0
+offset_right = 225.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_xvbwk")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainCtnr" type="VBoxContainer" parent="Background/Margin"]
+layout_mode = 2
+
+[node name="SettingsCtnr" type="ScrollContainer" parent="Background/Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bbgam")
+
+[node name="VBox" type="VBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Fullscreen" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fullscreen"
+
+[node name="FullscreenBtn" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Fullscreen" groups=["settings"] instance=ExtResource("1_dp0x6")]
+unique_name_in_owner = true
+layout_mode = 2
+setting = ExtResource("3_acp7e")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="WindowSize" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="WindowSizeLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/WindowSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window Size"
+
+[node name="WindowSizeBtn" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/WindowSize" groups=["settings"] instance=ExtResource("6_fyban")]
+layout_mode = 2
+setting = ExtResource("8_efygg")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Btn" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/WindowSize/WindowSizeBtn" index="0"]
+item_count = 4
+popup/item_0/text = "640x480"
+popup/item_0/id = 0
+popup/item_1/text = "800x600"
+popup/item_1/id = 1
+popup/item_2/text = "1024x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
+
+[node name="HSep0" type="HSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="Master" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master"
+
+[node name="MasterMute" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master" groups=["settings"] instance=ExtResource("9_681tc")]
+layout_mode = 2
+setting = ExtResource("10_nxrqq")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="MasterVolume" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master" groups=["settings"] instance=ExtResource("11_xeqq8")]
+layout_mode = 2
+setting = ExtResource("13_3mn4q")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Slider" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master/MasterVolume" index="0"]
+custom_minimum_size = Vector2(250, 0)
+
+[node name="Music" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music"
+
+[node name="MusicMute" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music" groups=["settings"] instance=ExtResource("9_681tc")]
+layout_mode = 2
+setting = ExtResource("14_fnald")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="MusicVolume" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music" groups=["settings"] instance=ExtResource("11_xeqq8")]
+layout_mode = 2
+setting = ExtResource("15_silmr")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Slider" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music/MusicVolume" index="0"]
+custom_minimum_size = Vector2(250, 0)
+
+[node name="SFX" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX"
+
+[node name="SFXMute" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX" groups=["settings"] instance=ExtResource("9_681tc")]
+layout_mode = 2
+setting = ExtResource("16_t5v0d")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="SFXVolume" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX" groups=["settings"] instance=ExtResource("11_xeqq8")]
+layout_mode = 2
+setting = ExtResource("17_3ti8q")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Slider" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX/SFXVolume" index="0"]
+custom_minimum_size = Vector2(250, 0)
+
+[node name="HSep1" type="HSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MoveLeft" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MoveLeftLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Move Left"
+
+[node name="BtnCtnr" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kb0" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_modifiers = true
+accept_mouse = true
+setting = ExtResource("18_d506i")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Kb1" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+setting = ExtResource("19_4aqyp")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="VSep" type="VSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Gp" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_axis = true
+setting = ExtResource("20_5mjj5")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="MoveRight" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MoveRightLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Move Right"
+
+[node name="BtnCtnr" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kb0" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_modifiers = true
+accept_mouse = true
+setting = ExtResource("18_cmq11")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Kb1" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+setting = ExtResource("19_djvuv")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="VSep" type="VSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Gp" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 10
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_axis = true
+setting = ExtResource("20_ibr1v")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="MoveUp" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MoveUpLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Move Up"
+
+[node name="BtnCtnr" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kb0" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_modifiers = true
+accept_mouse = true
+setting = ExtResource("21_515iw")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Kb1" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+setting = ExtResource("22_rbkwh")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="VSep" type="VSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Gp" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_axis = true
+setting = ExtResource("23_stdkd")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="MoveDown" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="MoveDownLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Move Down"
+
+[node name="BtnCtnr" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kb0" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_modifiers = true
+accept_mouse = true
+setting = ExtResource("24_moaeb")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Kb1" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+setting = ExtResource("25_haclr")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="VSep" type="VSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Gp" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr" node_paths=PackedStringArray("ICW") groups=["settings"] instance=ExtResource("16_nkph2")]
+layout_mode = 2
+size_flags_horizontal = 3
+ICW = NodePath("../../../../../../../../InputConfirmWindow")
+accept_axis = true
+setting = ExtResource("26_cq6g5")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="HSep2" type="HSeparator" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="PlayerName" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Name"
+
+[node name="PlayerNameField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName" instance=ExtResource("27_i0356")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+setting = ExtResource("29_2be0i")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="PlayerSpeed" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="PlayerSpeedLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Speed"
+
+[node name="PlayerSpeedField" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed" instance=ExtResource("29_f8pee")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+setting = ExtResource("31_nec13")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Difficulty" type="HBoxContainer" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox"]
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Difficulty"
+
+[node name="DifficultyList" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty" instance=ExtResource("32_y4ych")]
+layout_mode = 2
+setting = ExtResource("34_pl7xs")
+apply_on_change = true
+grab_focus_on_mouse_over = true
+
+[node name="Btn0" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="0"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Easy"
+
+[node name="Btn1" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="1"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Normal"
+
+[node name="Btn2" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="2"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Hard"
+
+[node name="Btn3" type="Button" parent="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList/HList" index="3"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Expert"
+
+[node name="BotCtnr" type="VBoxContainer" parent="Background/Margin/MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BotHSep" type="HSeparator" parent="Background/Margin/MainCtnr/BotCtnr"]
+layout_mode = 2
+
+[node name="BtnCtnr" type="HBoxContainer" parent="Background/Margin/MainCtnr/BotCtnr"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ConfirmBtn" type="Button" parent="Background/Margin/MainCtnr/BotCtnr/BtnCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="ResetBtn" parent="Background/Margin/MainCtnr/BotCtnr/BtnCtnr" instance=ExtResource("2_jg4s8")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset"
+group = "settings"
+
+[node name="InputConfirmWindow" parent="." instance=ExtResource("6_121a1")]
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_timu8")
+
+[node name="InteractSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_ob0u6")
+
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Fullscreen/FullscreenBtn"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/WindowSize/WindowSizeBtn"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master/MasterMute"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Master/MasterVolume"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music/MusicMute"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Music/MusicVolume"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX/SFXMute"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/SFX/SFXVolume"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr/Kb0"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr/Kb1"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveLeft/BtnCtnr/Gp"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr/Kb0"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr/Kb1"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveRight/BtnCtnr/Gp"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr/Kb0"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr/Kb1"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveUp/BtnCtnr/Gp"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Kb0"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Kb1"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/MoveDown/BtnCtnr/Gp"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerName/PlayerNameField"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/PlayerSpeed/PlayerSpeedField"]
+[editable path="Background/Margin/MainCtnr/SettingsCtnr/VBox/Difficulty/DifficultyList"]

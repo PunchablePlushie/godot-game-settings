@@ -1,13 +1,12 @@
 @tool
 extends ConfirmationDialog
-signal setting_selected(setting: ggsSetting)
+signal template_selected(template_path: String, setting_name: String)
 
 @onready var SettingList: ItemList = %SettingList
-@onready var RecentList: ItemList = %RecentList
-@onready var DescField: RichTextLabel = %DescField
 @onready var FilterField: LineEdit = %FilterField
-@onready var ReloadBtn: Button = %ReloadBtn
+@onready var RecentList: ItemList = %RecentList
 @onready var ClearRecentBtn: Button = %ClearRecentBtn
+@onready var NameField: LineEdit = %NameField
 @onready var OkBtn: Button = get_ok_button()
 
 
@@ -22,34 +21,30 @@ func _ready() -> void:
 	RecentList.item_activated.connect(_on_AnyList_item_activated.bind(RecentList))
 	
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
-	ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
 	ClearRecentBtn.pressed.connect(_on_ClearRecentBtn_pressed)
+	NameField.text_submitted.connect(_on_NameField_text_submitted)
 
 
 func _confirm() -> void:
-	var selected_setting: ggsSetting
-	var selected_item: int
+	var selected_item_index: int
+	var selected_item_meta: String
 	
 	if SettingList.is_anything_selected():
-		selected_item = SettingList.get_selected_items()[0]
-		selected_setting = SettingList.get_item_metadata(selected_item)
+		selected_item_index = SettingList.get_selected_items()[0]
+		selected_item_meta = SettingList.get_item_metadata(selected_item_index)
 	
 	if RecentList.is_anything_selected():
-		selected_item = RecentList.get_selected_items()[0]
-		selected_setting = RecentList.get_item_metadata(selected_item)
+		selected_item_index = RecentList.get_selected_items()[0]
+		selected_item_meta = RecentList.get_item_metadata(selected_item_index)
 	
-	if selected_setting == null:
-		return
-	
-	setting_selected.emit(selected_setting.duplicate())
-	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.add_recent_setting(selected_setting)
+	template_selected.emit(selected_item_meta, NameField.text)
+	ggsUtils.get_plugin_data().add_recent_setting(selected_item_meta)
 
 
 func _on_about_to_popup() -> void:
 	OkBtn.disabled = true
-	DescField.clear_content()
+	NameField.editable = true
+	NameField.clear()
 	FilterField.clear()
 	_load_settings()
 	_load_recent()
@@ -64,75 +59,12 @@ func _on_confirmed() -> void:
 	_confirm()
 
 
-### List/General
-
-func _load_settings() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	if data.setting_list_cache.is_empty():
-		_load_from_filesystem()
-	else:
-		_load_from_cache()
+func _on_NameField_text_submitted(_submitted_text: String) -> void:
+	_confirm()
+	hide()
 
 
-func _load_from_cache() -> void:
-	SettingList.clear()
-	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var cache: Array[ggsSetting] = data.setting_list_cache
-	
-	for setting in cache:
-		var text: String = setting.name
-		var icon: Texture2D = setting.icon
-		
-		var item_index: int = SettingList.add_item(text, icon)
-		SettingList.set_item_metadata(item_index, setting) 
-
-
-func _load_from_filesystem() -> void:
-	SettingList.clear()
-	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var base_path: String = data.dir_settings
-	
-	var setting_files: PackedStringArray = DirAccess.get_files_at(base_path)
-	
-	var cache: Array[ggsSetting]
-	for setting_file in setting_files:
-		var path: String = base_path.path_join(setting_file)
-		var script: Script = load(path)
-		var setting: ggsSetting = script.new()
-		
-		var text: String = setting.name
-		var icon: Texture2D = setting.icon
-		
-		var item_index: int = SettingList.add_item(text, icon)
-		SettingList.set_item_metadata(item_index, setting)
-		
-		cache.append(setting)
-	
-	data.set_data("setting_list_cache", cache)
-
-
-func _load_recent() -> void:
-	RecentList.clear()
-	
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	
-	var settings: Array[ggsSetting] = data.recent_settings
-	for setting in settings:
-		var script: Script = setting.get_script()
-		var path: String = script.resource_path
-		if not FileAccess.file_exists(path):
-			data.recent_settings.erase(setting)
-			data.save()
-			continue
-		
-		var text: String = setting.name
-		var icon: Texture2D = setting.icon
-		
-		var item_index: int = RecentList.add_item(text, icon)
-		RecentList.set_item_metadata(item_index, setting)
-
+### Lists (General)
 
 func _deselect_other_list(list: ItemList) -> void:
 	if list == SettingList:
@@ -142,27 +74,59 @@ func _deselect_other_list(list: ItemList) -> void:
 
 
 func _on_AnyList_item_selected(index: int, list: ItemList) -> void:
-	OkBtn.disabled = false
-	DescField.set_content(list.get_item_metadata(index))
+	OkBtn.disabled = true
+	NameField.editable = false
 	_deselect_other_list(list)
 
 
 func _on_AnyList_item_activated(index: int, list: ItemList) -> void:
-	_confirm()
-	hide()
+	OkBtn.disabled = false
+	NameField.editable = true
+	NameField.grab_focus()
 
 
-func _on_ReloadBtn_pressed() -> void:
-	_load_from_filesystem()
+### Setting List
+
+func _load_settings() -> void:
+	SettingList.clear()
+	
+	var template_list: PackedStringArray = _get_all_settings()
+	for template in template_list:
+		var item_index: int = SettingList.add_item(template.get_file().get_basename())
+		SettingList.set_item_metadata(item_index, template)
+		SettingList.set_item_tooltip(item_index, template)
 
 
-func _on_ClearRecentBtn_pressed() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	data.clear_recent_settings()
-	_load_recent()
+func _get_all_settings() -> PackedStringArray:
+	var all_settings: PackedStringArray
+	var path: String = ggsUtils.get_plugin_data().dir_templates
+	
+	var dir: DirAccess = DirAccess.open(path)
+	var templates: PackedStringArray = dir.get_files()
+	for template in templates:
+		template = dir.get_current_dir().path_join(template)
+		all_settings.append(template)
+	
+	_get_settings_in_dir(dir, all_settings)
+	
+	return all_settings
 
 
-### SettingList/Filtering
+func _get_settings_in_dir(dir: DirAccess, all_settings: PackedStringArray) -> void:
+	var base_dir: String = dir.get_current_dir()
+	var subdirs: PackedStringArray = dir.get_directories()
+	for subdir in subdirs:
+		if subdir.begins_with("_"):
+			continue
+		
+		dir.change_dir(base_dir.path_join(subdir))
+		var templates: PackedStringArray = dir.get_files()
+		for template in templates:
+			template = dir.get_current_dir().path_join(template)
+			all_settings.append(template)
+		
+		_get_settings_in_dir(dir, all_settings)
+
 
 func _filter_setting_list(filter: String) -> void:
 	var to_remove: Array[int]
@@ -182,3 +146,21 @@ func _filter_setting_list(filter: String) -> void:
 
 func _on_FilterField_text_changed(new_text: String) -> void:
 	_filter_setting_list(new_text)
+	NameField.editable = false
+
+
+### Recent List
+
+func _load_recent() -> void:
+	RecentList.clear()
+	
+	var list: Array[String] = ggsUtils.get_plugin_data().recent_settings
+	for item in list:
+		var item_index: int = RecentList.add_item(item.get_file().get_basename())
+		RecentList.set_item_metadata(item_index, item)
+		RecentList.set_item_tooltip(item_index, item)
+
+
+func _on_ClearRecentBtn_pressed() -> void:
+	ggsUtils.get_plugin_data().clear_recent_settings()
+	RecentList.clear()

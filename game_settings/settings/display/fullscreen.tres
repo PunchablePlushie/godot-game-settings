@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dgmk2avdg1upv"]
+
+[ext_resource type="Script" path="res://game_settings/templates/display/display_fullscreen.gd" id="1_ipev4"]
+[ext_resource type="Resource" uid="uid://1v2k7glufimr" path="res://game_settings/settings/display/window_size.tres" id="2_2pwuf"]
+
+[resource]
+resource_name = "fullscreen"
+script = ExtResource("1_ipev4")
+size_setting = ExtResource("2_2pwuf")
+current = false
+default = false
+name = "fullscreen"
+category = "display"
+value_type = 1
+value_hint = 0
+value_hint_string = ""

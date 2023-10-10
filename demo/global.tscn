@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://reuqspn3is4n"]
+
+[ext_resource type="Script" path="res://demo/global.gd" id="1_imq3r"]
+
+[node name="global" type="Node"]
+script = ExtResource("1_imq3r")
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true

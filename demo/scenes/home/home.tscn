@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://dtq5eq2csw01"]
+
+[ext_resource type="PackedScene" uid="uid://wyisusgvah1f" path="res://demo/entities/player/player.tscn" id="1_0qrrl"]
+[ext_resource type="Script" path="res://demo/scenes/home/home.gd" id="1_5117p"]
+[ext_resource type="AudioStream" uid="uid://c0w0bn6cyrhk" path="res://demo/assets/audio/bg_music.mp3" id="2_7ts7k"]
+[ext_resource type="PackedScene" uid="uid://bhll4i822rl3e" path="res://demo/scenes/settings_menu/settings_menu.tscn" id="2_s78da"]
+[ext_resource type="PackedScene" uid="uid://bj4w38uaulb84" path="res://demo/entities/harm/harm.tscn" id="3_7qudx"]
+[ext_resource type="Script" path="res://demo/scenes/home/segment.gd" id="5_or1ep"]
+[ext_resource type="Script" path="res://demo/scenes/home/harm_spawner.gd" id="5_wlwfn"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wcgfq"]
+b = Vector2(0, 600)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_aggpo"]
+b = Vector2(800, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q5urr"]
+b = Vector2(0, 600)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vw84s"]
+b = Vector2(800, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ohi4v"]
+b = Vector2(0, 552)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lcvnw"]
+b = Vector2(752, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7vx2f"]
+b = Vector2(0, 552)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ax7sh"]
+b = Vector2(752, 0)
+
+[node name="Home" type="Node2D"]
+script = ExtResource("1_5117p")
+settings_menu_scn = ExtResource("2_s78da")
+
+[node name="player" parent="." instance=ExtResource("1_0qrrl")]
+position = Vector2(400, 300)
+
+[node name="Boundry" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="LeftSegment" type="CollisionShape2D" parent="Boundry"]
+shape = SubResource("SegmentShape2D_wcgfq")
+debug_color = Color(0.968627, 1, 1, 0.419608)
+
+[node name="TopSegment" type="CollisionShape2D" parent="Boundry"]
+shape = SubResource("SegmentShape2D_aggpo")
+debug_color = Color(0.968627, 1, 1, 0.419608)
+
+[node name="RightSegment" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(800, 0)
+shape = SubResource("SegmentShape2D_q5urr")
+debug_color = Color(0.968627, 1, 1, 0.419608)
+
+[node name="BottomSegment" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(0, 600)
+shape = SubResource("SegmentShape2D_vw84s")
+debug_color = Color(0.968627, 1, 1, 0.419608)
+
+[node name="HarmSpawner" type="Area2D" parent="."]
+script = ExtResource("5_wlwfn")
+
+[node name="LeftSegment" type="CollisionShape2D" parent="HarmSpawner" node_paths=PackedStringArray("scene_root")]
+position = Vector2(-64, 24)
+shape = SubResource("SegmentShape2D_ohi4v")
+script = ExtResource("5_or1ep")
+harm_scn = ExtResource("3_7qudx")
+scene_root = NodePath("../..")
+
+[node name="TopSegment" type="CollisionShape2D" parent="HarmSpawner" node_paths=PackedStringArray("scene_root")]
+position = Vector2(24, -64)
+shape = SubResource("SegmentShape2D_lcvnw")
+script = ExtResource("5_or1ep")
+side = 1
+harm_scn = ExtResource("3_7qudx")
+scene_root = NodePath("../..")
+
+[node name="RightSegment" type="CollisionShape2D" parent="HarmSpawner" node_paths=PackedStringArray("scene_root")]
+position = Vector2(864, 24)
+shape = SubResource("SegmentShape2D_7vx2f")
+script = ExtResource("5_or1ep")
+side = 2
+harm_scn = ExtResource("3_7qudx")
+scene_root = NodePath("../..")
+
+[node name="BotSegment" type="CollisionShape2D" parent="HarmSpawner" node_paths=PackedStringArray("scene_root")]
+position = Vector2(24, 664)
+shape = SubResource("SegmentShape2D_ax7sh")
+script = ExtResource("5_or1ep")
+side = 3
+harm_scn = ExtResource("3_7qudx")
+scene_root = NodePath("../..")
+
+[node name="SpawnTimer" type="Timer" parent="HarmSpawner"]
+one_shot = true
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_7ts7k")
+autoplay = true
+bus = &"Music"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Margin" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScoreLabel" type="Label" parent="HUD/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Score: 000"
+
+[node name="MusicSrc" type="LinkButton" parent="HUD/Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Music: Ristar - PLANET SONATA - \"Rd 4-1 Pre-Song - Intension\""
+uri = "https://www.youtube.com/watch?v=o1WECjve7Zw"

@@ -2,103 +2,55 @@
 extends Resource
 class_name ggsPluginData
 
-var categories: Dictionary
-var category_order: Array[ggsCategory]
-var recent_settings: Array[ggsSetting]
-var setting_list_cache: Array[ggsSetting]
+const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true
+const GRAB_FOCUS_ON_MOUSE_OVER_ALL: bool = true
+const DIR_SETTINGS_DEFAULT: String = "res://game_settings/settings"
+const DIR_TEMPLATES_DEFAULT: String = "res://game_settings/templates"
+const DIR_COMPONENTS_DEFAULT: String = "res://game_settings/components"
+const DIR_SAVE_FILE_DEFAULT: String = "user://settings.cfg"
+const SPLIT_OFFSET_0_DEFAULT: int = -315
+const SPLIT_OFFSET_1_DEFAULT: int = 615
 
-var dir_settings: String = "res://game_settings/settings"
-var dir_components: String = "res://game_settings/components"
-var dir_save_file: String = "user://setting.cfg"
-
-var split_offset_0: int = -225
-var split_offset_1: int = 440
-
-
-func _get_property_list() -> Array:
-	var usage: PropertyUsageFlags = PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY
-	
-	var properties: Array
-	properties.append_array([
-		{"name": "GGS Data", "type": TYPE_NIL, "usage": PROPERTY_USAGE_CATEGORY},
-		{"name": "categories", "type": TYPE_DICTIONARY, "usage": usage},
-		{"name": "category_order", "type": TYPE_ARRAY, "usage": usage},
-		{"name": "recent_settings", "type": TYPE_ARRAY, "usage": usage},
-		{"name": "setting_list_cache", "type": TYPE_ARRAY, "usage": usage},
-		
-		{"name": "Directories", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
-		{"name": "dir_settings", "type": TYPE_STRING, "usage": usage},
-		{"name": "dir_components", "type": TYPE_STRING, "usage": usage},
-		{"name": "dir_save_file", "type": TYPE_STRING, "usage": usage},
-		
-		{"name": "Split Offset", "type": TYPE_NIL, "usage": PROPERTY_USAGE_GROUP},
-		{"name": "split_offset_0", "type": TYPE_INT, "usage": usage},
-		{"name": "split_offset_1", "type": TYPE_INT, "usage": usage},
-	])
-	
-	return properties
+@export_category("GGS Plugin Data")
+@export var recent_settings: Array[String]
+@export var apply_on_changed_all: bool = APPLY_ON_CHANGED_ALL_DEFAULT
+@export var grab_focus_on_mouse_over_all: bool = GRAB_FOCUS_ON_MOUSE_OVER_ALL
+@export_group("Directories", "dir_")
+@export_dir var dir_settings: String = DIR_SETTINGS_DEFAULT
+@export_dir var dir_templates: String = DIR_TEMPLATES_DEFAULT
+@export_dir var dir_components: String = DIR_COMPONENTS_DEFAULT
+@export var dir_save_file: String = DIR_SAVE_FILE_DEFAULT
+@export_group("Split Offset", "split_offset_")
+@export var split_offset_0: int = SPLIT_OFFSET_0_DEFAULT
+@export var split_offset_1: int = SPLIT_OFFSET_1_DEFAULT
 
 
-func set_data(data: String, value: Variant) -> void:
-	set(data, value)
+func set_property(property: String, value: Variant) -> void:
+	set(property, value)
 	save()
 
 
 func save() -> void:
-	ResourceSaver.save(self, resource_path)
+	ResourceSaver.save(self)
 
 
 func reset() -> void:
-	categories.clear()
-	category_order.clear()
 	recent_settings.clear()
-	setting_list_cache.clear()
-	dir_settings = "res://game_settings/settings"
-	dir_components = "res://game_settings/components"
-	dir_save_file = "user://settings.cfg"
-	split_offset_0 = -225
-	split_offset_1 = 420
+	apply_on_changed_all = APPLY_ON_CHANGED_ALL_DEFAULT
+	grab_focus_on_mouse_over_all = GRAB_FOCUS_ON_MOUSE_OVER_ALL
+	dir_settings = DIR_SETTINGS_DEFAULT
+	dir_templates = DIR_TEMPLATES_DEFAULT
+	dir_components = DIR_COMPONENTS_DEFAULT
+	dir_save_file = DIR_SAVE_FILE_DEFAULT
+	split_offset_0 = SPLIT_OFFSET_0_DEFAULT
+	split_offset_1 = SPLIT_OFFSET_1_DEFAULT
 	
-	save()
-
-
-### Categories
-
-func add_category(category: ggsCategory) -> void:
-	categories[category.name] = category
-	category_order.append(category)
-	save()
-
-
-func remove_category(category: ggsCategory) -> void:
-	categories.erase(category.name)
-	category_order.erase(category)
-	save()
-
-
-func rename_category(prev_name: String, category: ggsCategory) -> void:
-	categories.erase(prev_name)
-	categories[category.name] = category
-	save()
-
-
-func get_category_name_list() -> PackedStringArray:
-	var name_list: PackedStringArray
-	for category in categories.values():
-		name_list.append(category.name)
-	
-	return name_list
-
-
-func update_category_order(new_order: Array[ggsCategory]) -> void:
-	category_order.clear()
-	category_order = new_order
 	save()
 
 
 ### Recent Settings
 
-func add_recent_setting(setting: ggsSetting) -> void:
+func add_recent_setting(setting: String) -> void:
 	if recent_settings.has(setting):
 		_bring_to_front(setting)
 	else:
@@ -108,7 +60,7 @@ func add_recent_setting(setting: ggsSetting) -> void:
 	save()
 
 
-func _bring_to_front(element: ggsSetting) -> void:
+func _bring_to_front(element: String) -> void:
 	recent_settings.erase(element)
 	recent_settings.push_front(element)
 

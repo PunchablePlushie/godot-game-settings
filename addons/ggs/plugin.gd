@@ -1,9 +1,8 @@
 @tool
 extends EditorPlugin
 
-const ggs_globals_path: String = "res://addons/ggs/classes/ggs_globals.gd"
-
 var main_panel_scn: PackedScene = preload("./editor/main_panel/main_panel.tscn")
+var inspector_plugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
 var MainPanel: Control
 
 
@@ -11,21 +10,13 @@ func _enter_tree() -> void:
 	_add_editor_interface_singleton()
 	_add_plugin_singleton()
 	_add_editor()
-	_create_save_file()
+	add_inspector_plugin(inspector_plugin)
 
 
 func _exit_tree() -> void:
 	_remove_editor_interface_singleton()
 	_remove_editor()
-
-
-func _create_save_file():
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	if FileAccess.file_exists(data.dir_save_file):
-		return
-	
-	var save_file: ggsSaveFile = ggsSaveFile.new()
-	save_file.save(data.dir_save_file)
+	remove_inspector_plugin(inspector_plugin)
 
 
 ### Singletons
@@ -42,7 +33,7 @@ func _remove_editor_interface_singleton() -> void:
 
 func _add_plugin_singleton() -> void:
 	if not ProjectSettings.has_setting("autoload/GGS"):
-		add_autoload_singleton("GGS", "res://addons/ggs/classes/ggs_globals.gd")
+		add_autoload_singleton("GGS", "res://addons/ggs/classes/global/ggs.tscn")
 
 
 ### Main Editor
