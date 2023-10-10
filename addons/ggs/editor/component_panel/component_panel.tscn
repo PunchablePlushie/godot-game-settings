@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfr2j0ekmm5bm"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/component_panel/component_panel.gd" id="1_3cgut"]
-[ext_resource type="Texture2D" uid="uid://dasus7dcslgli" path="res://addons/ggs/assets/close.svg" id="3_wh32e"]
+[ext_resource type="Texture2D" uid="uid://cflcng660hsp0" path="res://addons/ggs/assets/close.svg" id="3_wh32e"]
 
 [node name="ComponentPanel" type="Control"]
 custom_minimum_size = Vector2(170, 0)

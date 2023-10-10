@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://vt5mwwxhtu3x"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_panel.gd" id="1_2wlv0"]
-[ext_resource type="Texture2D" uid="uid://cv4acsp6se48h" path="res://addons/ggs/assets/check_all.svg" id="3_bh7l7"]
-[ext_resource type="Texture2D" uid="uid://brtdsxn4swphc" path="res://addons/ggs/assets/add.svg" id="3_tdauq"]
+[ext_resource type="Texture2D" uid="uid://bttv2hpecd38m" path="res://addons/ggs/assets/check_all.svg" id="3_bh7l7"]
+[ext_resource type="Texture2D" uid="uid://by345a10evjm8" path="res://addons/ggs/assets/add.svg" id="3_tdauq"]
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_list.gd" id="4_htr8u"]
-[ext_resource type="Texture2D" uid="uid://dkmion6u6aokv" path="res://addons/ggs/assets/reload.svg" id="4_j6whk"]
-[ext_resource type="Texture2D" uid="uid://bybdvosl7ptgn" path="res://addons/ggs/assets/uncheck_all.svg" id="4_q4gh6"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/reload.svg" id="4_j6whk"]
+[ext_resource type="Texture2D" uid="uid://romr61n4g5y5" path="res://addons/ggs/assets/uncheck_all.svg" id="4_q4gh6"]
 [ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/groupless.gd" id="7_l1jd4"]
 [ext_resource type="PackedScene" uid="uid://111vt7wxn7lx" path="res://addons/ggs/editor/add_setting_window/add_setting_window.tscn" id="7_o4e63"]
 
@@ -34,6 +34,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Setting from Template"
+disabled = true
 icon = ExtResource("3_tdauq")
 flat = true
 
@@ -42,6 +43,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New Setting..."
+editable = false
 clear_button_enabled = true
 
 [node name="NewGroupField" type="LineEdit" parent="MainCtnr/TopBar"]
@@ -49,6 +51,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New Group..."
+editable = false
 clear_button_enabled = true
 
 [node name="VSep" type="VSeparator" parent="MainCtnr/TopBar"]
@@ -58,6 +61,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Check All"
+disabled = true
 icon = ExtResource("3_bh7l7")
 flat = true
 
@@ -65,6 +69,7 @@ flat = true
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Uncheck All"
+disabled = true
 icon = ExtResource("4_q4gh6")
 flat = true
 
@@ -72,6 +77,7 @@ flat = true
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload List"
+disabled = true
 icon = ExtResource("4_j6whk")
 flat = true
 

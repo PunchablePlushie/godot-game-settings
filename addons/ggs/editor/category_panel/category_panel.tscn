@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bkp77x1seytg7"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_panel.gd" id="1_yu7o4"]
-[ext_resource type="Texture2D" uid="uid://dkmion6u6aokv" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
 [ext_resource type="Script" path="res://addons/ggs/editor/category_panel/category_list.gd" id="4_xqs08"]
 
 [node name="CategoryPanel" type="Control"]
@@ -48,7 +48,4 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
-item_count = 2
-item_0/text = "audio"
-item_1/text = "display"
 script = ExtResource("4_xqs08")

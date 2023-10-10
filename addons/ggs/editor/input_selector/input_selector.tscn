@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqymtf8fuyj54"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/input_selector/input_selector.gd" id="1_qjksw"]
-[ext_resource type="Texture2D" uid="uid://otjpb5hpts2r" path="res://addons/ggs/assets/search.svg" id="2_cgd6a"]
+[ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/assets/search.svg" id="2_cgd6a"]
 [ext_resource type="Script" path="res://addons/ggs/editor/input_selector/input_list.gd" id="3_jsbwa"]
-[ext_resource type="Texture2D" uid="uid://b40xf0p8r6ay3" path="res://addons/ggs/assets/collapse_all.svg" id="3_mxhgu"]
-[ext_resource type="Texture2D" uid="uid://cskxl8idbqat7" path="res://addons/ggs/assets/expand_all.svg" id="4_3d11l"]
+[ext_resource type="Texture2D" uid="uid://l0mve5lc0okm" path="res://addons/ggs/assets/collapse_all.svg" id="3_mxhgu"]
+[ext_resource type="Texture2D" uid="uid://caajrkkuvle0e" path="res://addons/ggs/assets/expand_all.svg" id="4_3d11l"]
 
 [node name="Margin" type="MarginContainer"]
 offset_right = 100.0
