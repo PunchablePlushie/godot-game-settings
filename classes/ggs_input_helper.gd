@@ -65,7 +65,8 @@ func get_event_id(event: InputEvent) -> int:
 		return event.button_index
 	
 	if event is InputEventJoypadMotion:
-		return event.axis
+		# Pack values to int
+		return (10 * event.axis) + roundi(event.axis_value) + 5
 	
 	return -1
 
@@ -83,7 +84,9 @@ func set_event_id(event: InputEvent, id: int) -> void:
 		event.button_index = id
 	
 	if event is InputEventJoypadMotion:
-		event.axis = id
+		# Unpack values from int
+		event.axis = roundi((id - 5) / 10.0)
+		event.axis_value = (id % 10) - 5
 
 
 func get_event_type(event: InputEvent) -> InputType:
