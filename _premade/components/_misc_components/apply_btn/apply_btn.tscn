@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://6on16u4s0aia"]
 
 [ext_resource type="Script" path="res://game_settings/components/_misc_components/apply_btn/apply_btn.gd" id="1_dk1tm"]
 
