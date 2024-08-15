@@ -4,7 +4,7 @@ class_name ggsUtils
 
 #!1
 static func get_editor_interface():
-	return Engine.get_singleton("ggsEI")
+	return EditorInterface
 
 
 static func get_resource_file_system():

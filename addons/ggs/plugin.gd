@@ -1,49 +1,41 @@
 @tool
 extends EditorPlugin
 
-var main_panel_scn: PackedScene = preload("./editor/main_panel/main_panel.tscn")
+const SINGLETON_NAME: String = "GGS"
+const SINGLETON_PATH: String = "res://addons/ggs/globals/ggs.tscn"
+const BTM_PNL_NAME: String = "Game Settings"
+
+var core_scn: PackedScene = preload("./editor/core/core.tscn")
+var CoreNode: Control
 var inspector_plugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
-var MainPanel: Control
 
 
 func _enter_tree() -> void:
-	_add_editor_interface_singleton()
-	_add_plugin_singleton()
+	_add_singleton()
 	_add_editor()
 	add_inspector_plugin(inspector_plugin)
 
 
 func _exit_tree() -> void:
-	_remove_editor_interface_singleton()
 	_remove_editor()
 	remove_inspector_plugin(inspector_plugin)
 
 
-### Singletons
-
-func _add_editor_interface_singleton() -> void:
-	if not Engine.has_singleton("ggsEI"):
-		Engine.register_singleton("ggsEI", get_editor_interface())
-
-
-func _remove_editor_interface_singleton() -> void:
-	if Engine.has_singleton("ggsEI"):
-		Engine.unregister_singleton("ggsEI")
+# Singleton #
+func _add_singleton() -> void:
+	if ProjectSettings.has_setting("autoload/" + SINGLETON_NAME):
+		return
+	
+	add_autoload_singleton(SINGLETON_NAME, SINGLETON_PATH)
 
 
-func _add_plugin_singleton() -> void:
-	if not ProjectSettings.has_setting("autoload/GGS"):
-		add_autoload_singleton("GGS", "res://addons/ggs/classes/global/ggs.tscn")
-
-
-### Main Editor
-
+# Core Scene #
 func _add_editor() -> void:
-	MainPanel = main_panel_scn.instantiate()
-	add_control_to_bottom_panel(MainPanel, "Game Settings")
+	CoreNode = core_scn.instantiate()
+	add_control_to_bottom_panel(CoreNode, BTM_PNL_NAME)
 
 
 func _remove_editor() -> void:
-	if MainPanel:
-		remove_control_from_bottom_panel(MainPanel)
-		MainPanel.queue_free()
+	if CoreNode:
+		remove_control_from_bottom_panel(CoreNode)
+		CoreNode.queue_free()

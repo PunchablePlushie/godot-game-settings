@@ -21,7 +21,7 @@ buses/default_bus_layout=""
 
 [autoload]
 
-GGS="*res://addons/ggs/classes/global/ggs.tscn"
+GGS="*res://addons/ggs/globals/ggs.tscn"
 
 [debug]
 

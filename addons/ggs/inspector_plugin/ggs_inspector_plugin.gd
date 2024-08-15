@@ -2,7 +2,7 @@
 extends EditorInspectorPlugin
 class_name ggsInspectorPlugin
 
-var input_selector_scn: PackedScene = preload("res://addons/ggs/editor/input_selector/input_selector.tscn")
+var input_selector_scn: PackedScene = preload("./input_selector/input_selector.tscn")
 
 
 func _can_handle(object: Object) -> bool:
