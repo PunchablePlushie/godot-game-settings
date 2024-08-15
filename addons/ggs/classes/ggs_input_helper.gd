@@ -238,4 +238,3 @@ func _get_gp_motion_event_as_icon(event: InputEventJoypadMotion, icon_db: ggsIco
 	var icon: Texture2D = icon_db.get_gp_motion_texture(device_name, axis, axis_dir)
 	
 	return icon
-

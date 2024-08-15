@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://omjbr70esfn5"]
+
+[ext_resource type="Script" path="res://game_settings/templates/audio/audio_volume.gd" id="1_sm120"]
+
+[resource]
+script = ExtResource("1_sm120")
+audio_bus = "None"
+current = 80.0
+default = 80.0
+name = ""
+category = ""
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"

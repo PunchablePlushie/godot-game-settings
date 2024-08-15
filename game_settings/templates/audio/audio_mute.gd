@@ -38,4 +38,3 @@ func _get_audio_buses() -> PackedStringArray:
 		buses.append(bus)
 	
 	return buses
-

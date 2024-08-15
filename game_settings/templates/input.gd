@@ -93,4 +93,3 @@ func apply(value: Array) -> void:
 	InputMap.action_erase_events(action)
 	for _event_ in action_events:
 		InputMap.action_add_event(action, _event_)
-
