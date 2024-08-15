@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ggsPluginData" load_steps=2 format=3 uid="uid://dpk53al471l8m"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_plugin_data.gd" id="1_wabe0"]
+[ext_resource type="Script" path="res://addons/ggs/classes/ggs_plugin_pref.gd" id="1_wabe0"]
 
 [resource]
 script = ExtResource("1_wabe0")
@@ -11,5 +11,5 @@ dir_settings = "res://game_settings/settings"
 dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"
 dir_save_file = "user://settings.cfg"
-split_offset_0 = -315
-split_offset_1 = 615
+split_offset_0 = -331
+split_offset_1 = 606

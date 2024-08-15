@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkp77x1seytg7"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/categories.gd" id="1_yu7o4"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="4_xqs08"]
+
+[sub_resource type="Animation" id="Animation_phhxn"]
+resource_name = "flash"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_klr1l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohn6l"]
+_data = {
+"RESET": SubResource("Animation_klr1l"),
+"flash": SubResource("Animation_phhxn")
+}
+
+[node name="Categories" type="Control" node_paths=PackedStringArray("Field", "List", "ReloadBtn")]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yu7o4")
+Field = NodePath("MainCtnr/TopBar/Field")
+List = NodePath("MainCtnr/List")
+ReloadBtn = NodePath("MainCtnr/TopBar/ReloadBtn")
+
+[node name="MainCtnr" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
+layout_mode = 2
+
+[node name="Field" type="LineEdit" parent="MainCtnr/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New Category..."
+clear_button_enabled = true
+
+[node name="VSep" type="VSeparator" parent="MainCtnr/TopBar"]
+layout_mode = 2
+
+[node name="ReloadBtn" type="Button" parent="MainCtnr/TopBar"]
+layout_mode = 2
+tooltip_text = "Reload List"
+icon = ExtResource("2_so3ov")
+flat = true
+icon_alignment = 1
+
+[node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ReloadAnimation")]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+item_count = 3
+item_0/text = "components"
+item_1/text = "settings"
+item_2/text = "templates"
+script = ExtResource("4_xqs08")
+ReloadAnimation = NodePath("../../ReloadEffect/ReloadAnimation")
+
+[node name="ReloadEffect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ReloadAnimation" type="AnimationPlayer" parent="ReloadEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_ohn6l")
+}

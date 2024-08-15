@@ -39,6 +39,10 @@ window/stretch/mode="canvas_items"
 
 export/convert_text_resources_to_binary=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ggs/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false

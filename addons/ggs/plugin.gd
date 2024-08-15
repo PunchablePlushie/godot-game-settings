@@ -23,10 +23,8 @@ func _exit_tree() -> void:
 
 # Singleton #
 func _add_singleton() -> void:
-	if ProjectSettings.has_setting("autoload/" + SINGLETON_NAME):
-		return
-	
-	add_autoload_singleton(SINGLETON_NAME, SINGLETON_PATH)
+	if not ProjectSettings.has_setting("autoload/" + SINGLETON_NAME):
+		add_autoload_singleton(SINGLETON_NAME, SINGLETON_PATH)
 
 
 # Core Scene #

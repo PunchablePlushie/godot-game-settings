@@ -1,22 +1,7 @@
 @tool
 extends RefCounted
 class_name ggsUtils
-
-#!1
-static func get_editor_interface():
-	return EditorInterface
-
-
-static func get_resource_file_system():
-	return get_editor_interface().get_resource_filesystem()
-
-
-static func get_file_system_dock():
-	return get_editor_interface().get_file_system_dock()
-
-
-static func get_plugin_data() -> ggsPluginData:
-	return load("res://addons/ggs/plugin_data.tres")
+## Provides various utility functions used throughout GGS.
 
 
 static func get_enum_string(target_enum: String) -> String:
@@ -52,13 +37,6 @@ static func get_enum_string(target_enum: String) -> String:
 	return enum_string
 
 
-### Dir Paths
-
-static func path_is_in_dir_settings(path: String) -> bool:
-	var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
-	return path.begins_with(dir_settings)
-
-
 ### Window
 
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
@@ -76,8 +54,3 @@ static func center_window() -> void:
 	var origin: Vector2i = DisplayServer.screen_get_position(screen_id)
 	var target_pos: Vector2 = origin + (display_size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
-
-
-### Comments
-# !1: Specifying return types for the editor interface methods causes
-# issues when the game is exported.

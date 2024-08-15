@@ -1,26 +1,33 @@
 @tool
 extends AcceptDialog
 
-enum Purpose {INVALID, ALREADY_EXISTS}
+@export_group("Name Invalid", "invalid_")
+@export var invalid_title: String
+@export_multiline var invalid_message: String
 
-@export_group("Title", "title_")
-@export var title_invalid: String
-@export var title_already_exists: String
-@export_group("Message", "msg_")
-@export_multiline var msg_invalid: String
-@export_multiline var msg_already_exists: String
-
-
-var purpose: int : set = set_purpose
+@export_group("Name Exists", "exists_")
+@export var exists_title: String
+@export_multiline var exists_message: String
 
 
-func set_purpose(value: int) -> void:
-	purpose = value
-	
-	match value:
-		Purpose.INVALID:
-			title = title_invalid
-			dialog_text = msg_invalid
-		Purpose.ALREADY_EXISTS:
-			title = title_already_exists
-			dialog_text = msg_already_exists
+func _init() -> void:
+	visible = false
+
+
+func _ready() -> void:
+	GGS.Event.PopupNotif.name_invalid.connect(_on_PopupNotif_name_invalid)
+	GGS.Event.PopupNotif.name_exists.connect(_on_PopupNotif_name_exists)
+
+
+func _notify_user(ttl: String, msg: String) -> void:
+	title = ttl
+	dialog_text = msg
+	popup_centered(min_size)
+
+
+func _on_PopupNotif_name_invalid() -> void:
+	_notify_user(invalid_title, invalid_message)
+
+
+func _on_PopupNotif_name_exists() -> void:
+	_notify_user(exists_title, exists_message)
