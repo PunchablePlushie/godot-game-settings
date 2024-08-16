@@ -1,6 +1,5 @@
 @tool
-extends RefCounted
-class_name ggsPluginState
+extends Node
 ## Provides information regarding the current state of the GGS editor.
 
 ## The currently selected category in the editor.

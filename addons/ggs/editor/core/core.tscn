@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=15 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/main/categories/categories.tscn" id="4_4p007"]
@@ -14,8 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/popup/pref_window/pref_window.tscn" id="10_ir36c"]
 [ext_resource type="Texture2D" uid="uid://bt7gdorkvo4an" path="res://addons/ggs/assets/main/bug.svg" id="10_rly1w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/bug_btn.gd" id="11_2ygfj"]
-[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/core/core_popups/rename/rename.tscn" id="16_8r436"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/core_popups/notification.gd" id="18_ky7ax"]
 
 [node name="MainPanel" type="Control"]
 custom_minimum_size = Vector2(0, 400)
@@ -54,9 +52,8 @@ size_flags_horizontal = 3
 split_offset = 606
 script = ExtResource("4_mplwh")
 
-[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" node_paths=PackedStringArray("Notification") instance=ExtResource("6_rabjj")]
+[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
 layout_mode = 2
-Notification = NodePath("../../../../CorePopups/Notification")
 
 [node name="ComponentPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("5_7xo6y")]
 layout_mode = 2
@@ -115,26 +112,3 @@ script = ExtResource("11_2ygfj")
 
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true
-
-[node name="CorePopups" type="Node" parent="."]
-
-[node name="Notification" type="AcceptDialog" parent="CorePopups"]
-auto_translate_mode = 1
-editor_description = "Displays notification popups via signals provided by [ ggsPopupNotif ] class."
-title = "Name Already Exists"
-position = Vector2i(317, 83)
-size = Vector2i(400, 100)
-exclusive = false
-unresizable = true
-min_size = Vector2i(400, 100)
-dialog_text = "An item with that name already exists."
-dialog_autowrap = true
-script = ExtResource("18_ky7ax")
-invalid_title = "Invalid Name"
-invalid_message = "Item name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
-exists_title = "Name Already Exists"
-exists_message = "An item with that name already exists."
-
-[node name="Rename" parent="CorePopups" instance=ExtResource("16_8r436")]
-title = "Rename Category"
-position = Vector2i(317, 71)

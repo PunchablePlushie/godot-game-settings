@@ -1,26 +1,32 @@
 @tool
-extends RefCounted
-class_name ggsUtils
-## Provides various utility functions used throughout GGS.
+extends Node
+## Provides various functions used throughout GGS.
+
+@export var popup_notif: PackedScene
+@export var popup_rename: PackedScene
 
 
-# Item Name Validation #
+#region Item Name Validation
 ## Checks whether [param item_name] is valid and can be used.[br]
 ## A valid name is a valid file name, does not start with dot or underscore
 ## ,and does not already exist.
-static func item_name_validate(item_name: String) -> bool:
+func item_name_validate(item_name: String, category: String = "", group: String = "") -> bool:
 	if not _item_name_is_valid(item_name):
-		GGS.Event.PopupNotif.name_invalid.emit()
+		var Notif: AcceptDialog = popup_notif.instantiate()
+		Notif.content = GGS.NotifDB.item_name_invalid
+		add_child(Notif)
 		return false
 	
-	if _item_name_exists(item_name):
-		GGS.Event.PopupNotif.name_exists.emit()
+	if _item_name_exists(item_name, category, group):
+		var Notif: AcceptDialog = popup_notif.instantiate()
+		Notif.content = GGS.NotifDB.item_name_exists
+		add_child(Notif)
 		return false
 	
 	return true
 
 
-static func _item_name_is_valid(item_name: String) -> bool:
+func _item_name_is_valid(item_name: String) -> bool:
 	return (
 		item_name.is_valid_filename() 
 		and not item_name.begins_with("_") 
@@ -28,13 +34,15 @@ static func _item_name_is_valid(item_name: String) -> bool:
 	)
 
 
-static func _item_name_exists(item_name: String, category: String = "", group: String = "") -> bool:
+func _item_name_exists(item_name: String, category: String, group: String) -> bool:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
 	var final_path: String = settings_path.path_join(category).path_join(group)
 	var dir: DirAccess = DirAccess.open(final_path)
 	return dir.dir_exists(item_name)
 
+#endregion
 
+ 
 # ooooooooooooooooo #
 static func get_enum_string(target_enum: String) -> String:
 	var types: PackedStringArray = [
@@ -69,7 +77,7 @@ static func get_enum_string(target_enum: String) -> String:
 	return enum_string
 
 
-### Window
+# Window
 
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
 	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect()

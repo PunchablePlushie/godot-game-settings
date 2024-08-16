@@ -8,21 +8,16 @@ extends Control
 
 
 func _ready() -> void:
-	AddField.text_submitted.connect(_on_AddField_text_submitted)
+	AddField.cat_creation_requested.connect(_on_cat_creation_requested)
 
 
-# Category Creation #
 func _create_category(cat_name: String) -> void:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
 	var dir: DirAccess = DirAccess.open(settings_path)
 	dir.make_dir(cat_name)
-	AddField.clear()
-
-
-func _on_AddField_text_submitted(submitted_text: String) -> void:
-	if not ggsUtils.item_name_validate(submitted_text):
-		return
-	
-	_create_category(submitted_text)
 	EditorInterface.get_resource_filesystem().scan()
+
+
+func _on_cat_creation_requested(cat_name: String) -> void:
+	_create_category(cat_name)
 	List.load_list()

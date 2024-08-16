@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dap6fot4e1fj4"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/core_popups/notification/src/notification.gd" id="1_deei5"]
+
+[node name="Notification" type="AcceptDialog"]
+auto_translate_mode = 1
+editor_description = "Displays notification popups via signals provided by [ ggsPopupNotif ] class."
+position = Vector2i(317, 83)
+size = Vector2i(400, 100)
+exclusive = false
+unresizable = true
+min_size = Vector2i(400, 100)
+dialog_autowrap = true
+script = ExtResource("1_deei5")

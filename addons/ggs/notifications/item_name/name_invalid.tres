@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ggsNotifContent" load_steps=2 format=3 uid="uid://1in44eh3ivp8"]
+
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_notif_content.gd" id="1_8per2"]
+
+[resource]
+script = ExtResource("1_8per2")
+title = "Invalid Name"
+text = "Item name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."

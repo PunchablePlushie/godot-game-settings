@@ -1,5 +1,4 @@
-extends RefCounted
-class_name ggsGameConfig
+extends Node
 ## Handles everything related to game settings at runtime.
 
 

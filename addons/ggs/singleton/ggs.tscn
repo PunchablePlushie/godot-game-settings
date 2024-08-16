@@ -1,0 +1,45 @@
+[gd_scene load_steps=11 format=3 uid="uid://esw7j7or7gpd"]
+
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs.gd" id="1_6v3cu"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/util.gd" id="2_ly0hh"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/notif_db.gd" id="2_wbcys"]
+[ext_resource type="Resource" uid="uid://1in44eh3ivp8" path="res://addons/ggs/notifications/item_name/name_invalid.tres" id="3_bin6j"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/state.gd" id="3_dgje8"]
+[ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/core_popups/notification/notification.tscn" id="3_jbar2"]
+[ext_resource type="Resource" uid="uid://cf3hopibdycqb" path="res://addons/ggs/notifications/item_name/name_exists.tres" id="4_fdkrq"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/event.gd" id="4_sh1mk"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/game_config.gd" id="5_hjnpp"]
+[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/core_popups/rename/rename.tscn" id="7_q4d2h"]
+
+[node name="GGS" type="Node" node_paths=PackedStringArray("NotifDB", "Util", "State", "Event", "GameConfig")]
+script = ExtResource("1_6v3cu")
+NotifDB = NodePath("NotifDB")
+Util = NodePath("Util")
+State = NodePath("State")
+Event = NodePath("Event")
+GameConfig = NodePath("GameConfig")
+
+[node name="NotifDB" type="Node" parent="."]
+script = ExtResource("2_wbcys")
+item_name_invalid = ExtResource("3_bin6j")
+item_name_exists = ExtResource("4_fdkrq")
+
+[node name="Util" type="Node" parent="."]
+script = ExtResource("2_ly0hh")
+popup_notif = ExtResource("3_jbar2")
+popup_rename = ExtResource("7_q4d2h")
+
+[node name="State" type="Node" parent="."]
+script = ExtResource("3_dgje8")
+
+[node name="Event" type="Node" parent="."]
+script = ExtResource("4_sh1mk")
+
+[node name="GameConfig" type="Node" parent="."]
+script = ExtResource("5_hjnpp")
+
+[node name="MouseOverSFX" type="AudioStreamPlayer" parent="."]
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="."]
+
+[node name="InteractSFX" type="AudioStreamPlayer" parent="."]
