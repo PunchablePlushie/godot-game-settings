@@ -82,6 +82,18 @@ func _on_ContextMenu_id_pressed(id: int) -> void:
 			RenamePopup.prev_name = selected_cat
 			RenamePopup.rename_confirmed.connect(_on_rename_confirmed)
 			add_child(RenamePopup)
+		
+		ContextMenu.ItemId.DELETE:
+			pass
+		
+		ContextMenu.ItemId.FILESYSTEM_GODOT:
+			_show_in_filesystem_dock(selected_cat)
+		
+		ContextMenu.ItemId.FILESYSTEM_OS:
+			_show_in_os_filesystem(selected_cat)
+		
+		ContextMenu.ItemId.RELOAD:
+			load_list()
 
 
 # Rename #
@@ -91,5 +103,20 @@ func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
 	dir.rename(prev_name, new_name)
 	load_list()
 	EditorInterface.get_resource_filesystem().scan()
+
+
+# Show in FileSystem Dock
+func _show_in_filesystem_dock(cat_name: String) -> void:
+	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var file: String = settings_path.path_join(cat_name)
+	EditorInterface.get_file_system_dock().navigate_to_path(file)
+
+
+# Show in OS File System #
+func _show_in_os_filesystem(cat_name: String) -> void:
+	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var file: String = settings_path.path_join(cat_name)
+	var path: String = ProjectSettings.globalize_path(file)
+	OS.shell_show_in_file_manager(path)
 
 #endregion
