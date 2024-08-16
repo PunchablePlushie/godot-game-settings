@@ -4,6 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="4_xqs08"]
 
+[sub_resource type="Animation" id="Animation_klr1l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_phhxn"]
 resource_name = "flash"
 step = 0.5
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_klr1l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ohn6l"]

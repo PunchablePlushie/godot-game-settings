@@ -4,20 +4,20 @@ class_name ggsPluginPref
 ## Handles saving and loading plugin preferences data.
 
 ## Path for saving and loading the config file.
-const FILE_PATH: String = "res://addon/ggs/plugin.pref"
+const FILE_PATH: String = "res://addons/ggs/plugin.pref"
 
 ## Default values of all preferences.
 var DEFAULTS: Dictionary = {
 	"dir_settings": "res://game_settings",
+	"dir_templates": "res://game_settings/templates",
+	"dir_components": "res://game_settings/components",
+	"dir_game_config": "user://settings.cfg",
+	"split_offset_0": -315,
+	"split_offset_1": 615,
 }
 
-const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true
-const GRAB_FOCUS_ON_MOUSE_OVER_ALL: bool = true
-const DIR_TEMPLATES_DEFAULT: String = "res://game_settings/templates"
-const DIR_COMPONENTS_DEFAULT: String = "res://game_settings/components"
-const DIR_SAVE_FILE_DEFAULT: String = "user://settings.cfg"
-const SPLIT_OFFSET_0_DEFAULT: int = -315
-const SPLIT_OFFSET_1_DEFAULT: int = 615
+#const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true
+#const GRAB_FOCUS_ON_MOUSE_OVER_ALL: bool = true
 
 
 func _init() -> void:
@@ -26,7 +26,18 @@ func _init() -> void:
 		reset()
 
 
-## Checks if [param config_name] is a valid editor preference.
+## Overrides the inherited [method ConfigFile.save].[br]
+## In addition to the default saving behavior, it prints an error in case of failure.
+func save(path: String) -> Error:
+	var err: Error = super(path)
+	if err:
+		printerr("GGS: Save Editor Preferences - Could not save on disk (err: %s) (path: %s)"%[error_string(err), FILE_PATH])
+	
+	return err
+
+
+## Checks if [param config_name] is a valid editor preference.[br]
+## Only names that are part of [member DEFAULTS] are considered valid.
 func is_valid_config(config_name: String) -> bool:
 	return DEFAULTS.has(config_name)
 
@@ -41,12 +52,12 @@ func get_config(config_name: String) -> Variant:
 	
 	if not has_section_key("", config_name):
 		set_value("", config_name, DEFAULTS[config_name])
-		save(FILE_PATH)
+		self.save(FILE_PATH)
 	
 	return get_value("", config_name)
 
 
-## Sets the value of [param config_name] in the config file
+## Sets [param config_name] in the config file
 ## to [param value] and saves it.[br]
 ## Does nothing if [param config_name] is invalid.
 func set_config(config_name: String, value: Variant) -> void:
@@ -55,7 +66,7 @@ func set_config(config_name: String, value: Variant) -> void:
 		return
 	
 	set_value("", config_name, value)
-	save(FILE_PATH)
+	self.save(FILE_PATH)
 
 
 ## Resets all keys to their default value. Also used to recreate the file
@@ -64,7 +75,7 @@ func reset() -> void:
 	for config in DEFAULTS:
 		set_value("", config, DEFAULTS[config])
 	
-	save(FILE_PATH)
+	self.save(FILE_PATH)
 
 
 # Recent Settings #

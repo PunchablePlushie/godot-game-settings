@@ -1,5 +1,5 @@
 @tool
-extends Object
+extends RefCounted
 class_name ggsPopupNotif
 ## Hosts signals related to notifying the user via a popup, usually a window.
 

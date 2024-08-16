@@ -1,5 +1,5 @@
 @tool
-extends Object
+extends RefCounted
 class_name ggsPluginEvent
 ## Hosts all events and signals related to the GGS editor.
 

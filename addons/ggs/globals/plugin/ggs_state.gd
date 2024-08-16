@@ -1,5 +1,5 @@
 @tool
-extends Object
+extends RefCounted
 class_name ggsPluginState
 ## Provides information regarding the current state of the GGS editor.
 
