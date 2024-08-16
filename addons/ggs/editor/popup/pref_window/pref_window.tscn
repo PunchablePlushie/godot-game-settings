@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/popup/pref_window/pref_window.gd" id="1_ihv6i"]
 [ext_resource type="Texture2D" uid="uid://badl61ealw70o" path="res://addons/ggs/assets/file_dialog.svg" id="2_qx4su"]
-[ext_resource type="Texture2D" uid="uid://bk0u7p6a1apta" path="res://addons/ggs/assets/icon_mini.svg" id="3_ggsp5"]
+[ext_resource type="Texture2D" uid="uid://bk0u7p6a1apta" path="res://addons/ggs/assets/popup/preferences/icon_mini.svg" id="3_ggsp5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki5am"]
 

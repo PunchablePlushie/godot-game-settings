@@ -8,12 +8,16 @@ const FILE_PATH: String = "res://addons/ggs/plugin.pref"
 
 ## Default values of all preferences.
 var DEFAULTS: Dictionary = {
-	"dir_settings": "res://game_settings",
-	"dir_templates": "res://game_settings/templates",
-	"dir_components": "res://game_settings/components",
-	"dir_game_config": "user://settings.cfg",
-	"split_offset_0": -315,
-	"split_offset_1": 615,
+	"PATH_settings": "res://game_settings",
+	"PATH_templates": "res://addons/ggs/templates",
+	"PATH_components": "res://addons/ggs/components",
+	"PATH_game_config": "user://settings.cfg",
+	
+	"SPLIT_OFFSET_0": -315,
+	"SPLIT_OFFSET_1": 615,
+	
+	"HIDE_UI_categories_addfield": true,
+	"HIDE_UI_categories_filterfield": true,
 }
 
 #const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true

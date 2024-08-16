@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/popup/add_setting_window/add_setting_window.gd" id="1_338sp"]
 [ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/assets/search.svg" id="1_th7u7"]
-[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/delete.svg" id="2_7ec7g"]
+[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="2_7ec7g"]
 
 [node name="AddSettingWindow" type="ConfirmationDialog"]
 title = "Add Setting from Template"

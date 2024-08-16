@@ -1,47 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=11 format=3 uid="uid://bkp77x1seytg7"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/categories.gd" id="1_yu7o4"]
-[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/reload.svg" id="2_so3ov"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/add_field.gd" id="2_2fbnh"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="2_so3ov"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/filter_field.gd" id="3_a648m"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/context_menu.gd" id="4_7sh7w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="4_xqs08"]
+[ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="5_8lac3"]
+[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="6_8uu2l"]
+[ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="7_hdi0a"]
+[ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="7_pnw47"]
 
-[sub_resource type="Animation" id="Animation_klr1l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_phhxn"]
-resource_name = "flash"
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohn6l"]
-_data = {
-"RESET": SubResource("Animation_klr1l"),
-"flash": SubResource("Animation_phhxn")
-}
-
-[node name="Categories" type="Control" node_paths=PackedStringArray("Field", "List", "ReloadBtn")]
+[node name="Categories" type="Control" node_paths=PackedStringArray("AddField", "FilterField", "List")]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -50,9 +20,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yu7o4")
-Field = NodePath("MainCtnr/TopBar/Field")
+AddField = NodePath("MainCtnr/TopBar/AddField")
+FilterField = NodePath("MainCtnr/TopBar/FilterField")
 List = NodePath("MainCtnr/List")
-ReloadBtn = NodePath("MainCtnr/TopBar/ReloadBtn")
 
 [node name="MainCtnr" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -63,47 +33,57 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
+[node name="TopBar" type="VBoxContainer" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="Field" type="LineEdit" parent="MainCtnr/TopBar"]
+[node name="AddField" type="LineEdit" parent="MainCtnr/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "New Category..."
+tooltip_text = "Add a new category with the chosen name (ENTER to confirm).
+The name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
+placeholder_text = "New category..."
 clear_button_enabled = true
+script = ExtResource("2_2fbnh")
 
-[node name="VSep" type="VSeparator" parent="MainCtnr/TopBar"]
+[node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar"]
 layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Filter categories. Accepts regular expressions."
+placeholder_text = "Filter categories..."
+clear_button_enabled = true
+script = ExtResource("3_a648m")
 
-[node name="ReloadBtn" type="Button" parent="MainCtnr/TopBar"]
-layout_mode = 2
-tooltip_text = "Reload List"
-icon = ExtResource("2_so3ov")
-flat = true
-icon_alignment = 1
-
-[node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ReloadAnimation")]
+[node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ContextMenu")]
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
-item_count = 3
-item_0/text = "components"
-item_1/text = "settings"
-item_2/text = "templates"
+allow_rmb_select = true
 script = ExtResource("4_xqs08")
-ReloadAnimation = NodePath("../../ReloadEffect/ReloadAnimation")
+ContextMenu = NodePath("ContextMenu")
 
-[node name="ReloadEffect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
-
-[node name="ReloadAnimation" type="AnimationPlayer" parent="ReloadEffect"]
-libraries = {
-"": SubResource("AnimationLibrary_ohn6l")
-}
+[node name="ContextMenu" type="PopupMenu" parent="MainCtnr/List"]
+allow_search = false
+item_count = 7
+item_0/text = "Rename"
+item_0/icon = ExtResource("5_8lac3")
+item_1/text = "Delete"
+item_1/icon = ExtResource("6_8uu2l")
+item_1/id = 1
+item_2/id = -1
+item_2/separator = true
+item_3/text = "Show in FileSystem Dock"
+item_3/icon = ExtResource("7_pnw47")
+item_3/id = 2
+item_4/text = "Show in OS File Manager"
+item_4/icon = ExtResource("7_hdi0a")
+item_4/id = 3
+item_5/id = -1
+item_5/separator = true
+item_6/text = "Reload List"
+item_6/icon = ExtResource("2_so3ov")
+script = ExtResource("4_7sh7w")
+icon_rename = ExtResource("5_8lac3")
+icon_delete = ExtResource("6_8uu2l")
+icon_filesystem_godot = ExtResource("7_pnw47")
+icon_filesystem_os = ExtResource("7_hdi0a")
+icon_reload = ExtResource("2_so3ov")

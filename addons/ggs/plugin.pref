@@ -1,6 +1,3 @@
-dir_settings="res://game_settings"
-dir_templates="res://game_settings/templates"
-dir_components="res://game_settings/components"
-dir_game_config="user://settings.cfg"
-split_offset_0=-315
-split_offset_1=615
+HIDE_UI_categories_addfield=true
+HIDE_UI_categories_filterfield=true
+PATH_settings="res://game_settings"

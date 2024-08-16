@@ -4,6 +4,38 @@ class_name ggsUtils
 ## Provides various utility functions used throughout GGS.
 
 
+# Item Name Validation #
+## Checks whether [param item_name] is valid and can be used.[br]
+## A valid name is a valid file name, does not start with dot or underscore
+## ,and does not already exist.
+static func item_name_validate(item_name: String) -> bool:
+	if not _item_name_is_valid(item_name):
+		GGS.Event.PopupNotif.name_invalid.emit()
+		return false
+	
+	if _item_name_exists(item_name):
+		GGS.Event.PopupNotif.name_exists.emit()
+		return false
+	
+	return true
+
+
+static func _item_name_is_valid(item_name: String) -> bool:
+	return (
+		item_name.is_valid_filename() 
+		and not item_name.begins_with("_") 
+		and not item_name.begins_with(".")
+	)
+
+
+static func _item_name_exists(item_name: String, category: String = "", group: String = "") -> bool:
+	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var final_path: String = settings_path.path_join(category).path_join(group)
+	var dir: DirAccess = DirAccess.open(final_path)
+	return dir.dir_exists(item_name)
+
+
+# ooooooooooooooooo #
 static func get_enum_string(target_enum: String) -> String:
 	var types: PackedStringArray = [
 		"Nil","Bool","Int","Float","String","Vector2","Vector2i","Rect2",

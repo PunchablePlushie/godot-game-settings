@@ -1,25 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/main/categories/categories.tscn" id="4_4p007"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/split_containers.gd" id="4_mplwh"]
 [ext_resource type="PackedScene" uid="uid://cfr2j0ekmm5bm" path="res://addons/ggs/editor/main/component_panel/component_panel.tscn" id="5_7xo6y"]
 [ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/main/setting_panel/setting_panel.tscn" id="6_rabjj"]
-[ext_resource type="Texture2D" uid="uid://b8o243gwa707v" path="res://addons/ggs/assets/icon_mono.svg" id="6_t7de8"]
+[ext_resource type="Texture2D" uid="uid://b8o243gwa707v" path="res://addons/ggs/assets/main/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/save_file_menu.gd" id="7_guojl"]
-[ext_resource type="Texture2D" uid="uid://bx8yoim3ur6h" path="res://addons/ggs/assets/save_file.svg" id="8_3r2nn"]
-[ext_resource type="Texture2D" uid="uid://cdxv6r8uy2me5" path="res://addons/ggs/assets/docs.svg" id="8_mdi0r"]
+[ext_resource type="Texture2D" uid="uid://bx8yoim3ur6h" path="res://addons/ggs/assets/main/save_file.svg" id="8_3r2nn"]
+[ext_resource type="Texture2D" uid="uid://cdxv6r8uy2me5" path="res://addons/ggs/assets/main/docs.svg" id="8_mdi0r"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/pref_btn.gd" id="9_oodag"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/docs_btn.gd" id="9_qwavr"]
 [ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/popup/pref_window/pref_window.tscn" id="10_ir36c"]
-[ext_resource type="Texture2D" uid="uid://bt7gdorkvo4an" path="res://addons/ggs/assets/bug.svg" id="10_rly1w"]
+[ext_resource type="Texture2D" uid="uid://bt7gdorkvo4an" path="res://addons/ggs/assets/main/bug.svg" id="10_rly1w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/bug_btn.gd" id="11_2ygfj"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/src/feedback_btn.gd" id="15_0jgkh"]
-[ext_resource type="Texture2D" uid="uid://c5a5taq8d2n0v" path="res://addons/ggs/assets/feedback.svg" id="16_abywd"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/src/notification.gd" id="18_ky7ax"]
+[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/core/core_popups/rename/rename.tscn" id="16_8r436"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/core_popups/notification.gd" id="18_ky7ax"]
 
 [node name="MainPanel" type="Control"]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +56,7 @@ script = ExtResource("4_mplwh")
 
 [node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" node_paths=PackedStringArray("Notification") instance=ExtResource("6_rabjj")]
 layout_mode = 2
-Notification = NodePath("../../../../Notification")
+Notification = NodePath("../../../../CorePopups/Notification")
 
 [node name="ComponentPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("5_7xo6y")]
 layout_mode = 2
@@ -114,23 +113,18 @@ icon = ExtResource("10_rly1w")
 flat = true
 script = ExtResource("11_2ygfj")
 
-[node name="FeedbackBtn" type="Button" parent="MainCtnr/BtnCtnr/BotCtnr"]
-layout_mode = 2
-tooltip_text = "Send Feedback"
-icon = ExtResource("16_abywd")
-flat = true
-script = ExtResource("15_0jgkh")
-
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true
 
-[node name="Notification" type="AcceptDialog" parent="."]
+[node name="CorePopups" type="Node" parent="."]
+
+[node name="Notification" type="AcceptDialog" parent="CorePopups"]
 auto_translate_mode = 1
 editor_description = "Displays notification popups via signals provided by [ ggsPopupNotif ] class."
 title = "Name Already Exists"
-position = Vector2i(317, 285)
+position = Vector2i(317, 83)
 size = Vector2i(400, 100)
-visible = true
+exclusive = false
 unresizable = true
 min_size = Vector2i(400, 100)
 dialog_text = "An item with that name already exists."
@@ -140,3 +134,7 @@ invalid_title = "Invalid Name"
 invalid_message = "Item name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
 exists_title = "Name Already Exists"
 exists_message = "An item with that name already exists."
+
+[node name="Rename" parent="CorePopups" instance=ExtResource("16_8r436")]
+title = "Rename Category"
+position = Vector2i(317, 71)
