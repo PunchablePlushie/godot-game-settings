@@ -38,4 +38,4 @@ func _init_items() -> void:
 	add_icon_item(icon_filesystem_godot, "Show in FileSystem Dock", ItemId.FILESYSTEM_GODOT)
 	add_icon_item(icon_filesystem_os, "Show in OS File Manager", ItemId.FILESYSTEM_OS)
 	add_separator()
-	add_icon_item(icon_reload, "Reload List", ItemId.RENAME)
+	add_icon_item(icon_reload, "Reload List", ItemId.RELOAD)

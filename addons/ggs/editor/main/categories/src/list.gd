@@ -3,6 +3,7 @@ extends ItemList
 
 @export_group("Nodes")
 @export var ContextMenu: PopupMenu
+@export var FlashEffect: ColorRect
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func load_list() -> void:
 		var idx: int = add_item(category)
 	
 	GGS.State.selected_category = ""
+	FlashEffect.run()
 
 
 func _load_from_filesystem() -> PackedStringArray:
@@ -82,6 +84,7 @@ func _on_ContextMenu_id_pressed(id: int) -> void:
 			add_child(RenamePopup)
 
 
+# Rename #
 func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
 	var dir: DirAccess = DirAccess.open(settings_path)

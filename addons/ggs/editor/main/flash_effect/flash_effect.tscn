@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceamkmyb77wgx"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/main/flash_effect/flash_effect.gd" id="1_tacfp"]
+
+[sub_resource type="Animation" id="Animation_qjmo3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4r5ir"]
+resource_name = "flash"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.15), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4oel"]
+_data = {
+"RESET": SubResource("Animation_qjmo3"),
+"flash": SubResource("Animation_4r5ir")
+}
+
+[node name="FlashEffect" type="ColorRect" node_paths=PackedStringArray("AnimPlayer")]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_tacfp")
+AnimPlayer = NodePath("AnimPlayer")
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n4oel")
+}
+playback_auto_capture_ease_type = 1
+speed_scale = 5.0
