@@ -13,7 +13,7 @@ func _ready() -> void:
 	item_clicked.connect(_on_item_clicked)
 	empty_clicked.connect(_on_empty_clicked)
 	ContextMenu.id_pressed.connect(_on_ContextMenu_id_pressed)
-	ggsPluginPref.new().set_config("dsa", "dsa")
+	
 	load_list()
 
 
@@ -28,7 +28,7 @@ func load_list() -> void:
 
 
 func _load_from_disc() -> PackedStringArray:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var dir: DirAccess = DirAccess.open(settings_path)
 	
 	# Temporarily converted to Array so we can use filter().
@@ -102,7 +102,7 @@ func _on_ContextMenu_id_pressed(id: int) -> void:
 
 # Rename #
 func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var dir: DirAccess = DirAccess.open(settings_path)
 	dir.rename(prev_name, new_name)
 	load_list()
@@ -111,7 +111,7 @@ func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
 
 # Delete #
 func _on_delete_confirmed(cat_name: String) -> void:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var path: String = settings_path.path_join(cat_name)
 	path = ProjectSettings.globalize_path(path)
 	OS.move_to_trash(path)
@@ -121,14 +121,14 @@ func _on_delete_confirmed(cat_name: String) -> void:
 
 # Show in FileSystem Dock
 func _show_in_filesystem_dock(cat_name: String) -> void:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var file: String = settings_path.path_join(cat_name)
 	EditorInterface.get_file_system_dock().navigate_to_path(file)
 
 
 # Open in OS File Manager #
 func _show_in_os_filesystem(cat_name: String) -> void:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var file: String = settings_path.path_join(cat_name)
 	var path: String = ProjectSettings.globalize_path(file)
 	OS.shell_show_in_file_manager(path)

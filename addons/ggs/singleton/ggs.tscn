@@ -1,17 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://esw7j7or7gpd"]
+[gd_scene load_steps=11 format=3 uid="uid://esw7j7or7gpd"]
 
 [ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs.gd" id="1_6v3cu"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/util.gd" id="2_ly0hh"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/state.gd" id="3_dgje8"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_util.gd" id="2_ly0hh"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_state.gd" id="3_dgje8"]
 [ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/core_popups/notification/notification.tscn" id="3_jbar2"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/event.gd" id="4_sh1mk"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/game_config.gd" id="5_hjnpp"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_event.gd" id="4_sh1mk"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_game_config.gd" id="5_hjnpp"]
 [ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/core_popups/delete/delete.tscn" id="5_lrh2h"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_pref.gd" id="6_okuxg"]
+[ext_resource type="Resource" uid="uid://klxw3jp65ip5" path="res://addons/ggs/preferences.tres" id="7_i18lm"]
 [ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/core_popups/rename/rename.tscn" id="7_q4d2h"]
 
-[node name="GGS" type="Node" node_paths=PackedStringArray("Util", "State", "Event", "GameConfig")]
+[node name="GGS" type="Node" node_paths=PackedStringArray("Util", "Pref", "State", "Event", "GameConfig")]
 script = ExtResource("1_6v3cu")
 Util = NodePath("Util")
+Pref = NodePath("Pref")
 State = NodePath("State")
 Event = NodePath("Event")
 GameConfig = NodePath("GameConfig")
@@ -21,6 +24,10 @@ script = ExtResource("2_ly0hh")
 popup_notif = ExtResource("3_jbar2")
 popup_rename = ExtResource("7_q4d2h")
 popup_delete = ExtResource("5_lrh2h")
+
+[node name="Pref" type="Node" parent="."]
+script = ExtResource("6_okuxg")
+res = ExtResource("7_i18lm")
 
 [node name="State" type="Node" parent="."]
 script = ExtResource("3_dgje8")

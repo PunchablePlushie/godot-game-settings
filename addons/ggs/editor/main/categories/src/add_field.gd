@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func _create_category(cat_name: String) -> void:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var dir: DirAccess = DirAccess.open(settings_path)
 	dir.make_dir(cat_name)
 	EditorInterface.get_resource_filesystem().scan()

@@ -36,7 +36,7 @@ func _item_name_is_valid(item_name: String) -> bool:
 
 
 func _item_name_exists(item_name: String, category: String, group: String) -> bool:
-	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var final_path: String = settings_path.path_join(category).path_join(group)
 	var dir: DirAccess = DirAccess.open(final_path)
 	return dir.dir_exists(item_name)

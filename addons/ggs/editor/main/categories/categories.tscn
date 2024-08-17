@@ -42,8 +42,8 @@ script = ExtResource("2_2fbnh")
 List = NodePath("../../List")
 
 [node name="VisManager" parent="MainCtnr/TopBar/AddField" instance=ExtResource("3_ujarx")]
-pref_cat = "categories"
-pref_id = "addfield"
+section = "categories"
+key = "add_field"
 
 [node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar" node_paths=PackedStringArray("List")]
 layout_mode = 2
@@ -54,8 +54,8 @@ script = ExtResource("3_a648m")
 List = NodePath("../../List")
 
 [node name="VisManager" parent="MainCtnr/TopBar/FilterField" instance=ExtResource("3_ujarx")]
-pref_cat = "categories"
-pref_id = "filterfield"
+section = "categories"
+key = "filter_field"
 
 [node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ContextMenu", "FlashEffect")]
 layout_mode = 2
