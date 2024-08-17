@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=11 format=3 uid="uid://bkp77x1seytg7"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/categories.gd" id="1_yu7o4"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/add_field.gd" id="2_2fbnh"]
 [ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="2_so3ov"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/filter_field.gd" id="3_a648m"]
@@ -12,18 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="7_pnw47"]
 [ext_resource type="PackedScene" uid="uid://ceamkmyb77wgx" path="res://addons/ggs/editor/main/flash_effect/flash_effect.tscn" id="11_8veyq"]
 
-[node name="Categories" type="Control" node_paths=PackedStringArray("AddField", "FilterField", "List")]
-custom_minimum_size = Vector2(160, 0)
+[node name="Categories" type="Control"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yu7o4")
-AddField = NodePath("MainCtnr/TopBar/AddField")
-FilterField = NodePath("MainCtnr/TopBar/FilterField")
-List = NodePath("MainCtnr/List")
 
 [node name="MainCtnr" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -37,30 +32,30 @@ size_flags_horizontal = 3
 [node name="TopBar" type="VBoxContainer" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="AddField" type="LineEdit" parent="MainCtnr/TopBar"]
+[node name="AddField" type="LineEdit" parent="MainCtnr/TopBar" node_paths=PackedStringArray("List")]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Add a new category with the chosen name (ENTER to confirm).
-The name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
 placeholder_text = "New category..."
 clear_button_enabled = true
 script = ExtResource("2_2fbnh")
+List = NodePath("../../List")
 
-[node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar"]
+[node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar" node_paths=PackedStringArray("List")]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Filter categories. Accepts regular expressions."
 placeholder_text = "Filter categories..."
 clear_button_enabled = true
 script = ExtResource("3_a648m")
+List = NodePath("../../List")
 
 [node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ContextMenu", "FlashEffect")]
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
 allow_rmb_select = true
-item_count = 1
+item_count = 2
 item_0/text = "dsa"
+item_1/text = "zzz"
 script = ExtResource("4_xqs08")
 ContextMenu = NodePath("ContextMenu")
 FlashEffect = NodePath("FlashEffect")

@@ -1,5 +1,7 @@
 @tool
-extends ItemList
+extends ggsItemList
+
+signal loaded
 
 @export_group("Nodes")
 @export var ContextMenu: PopupMenu
@@ -17,17 +19,15 @@ func _ready() -> void:
 
 #region Load Categories
 func load_list() -> void:
-	clear()
-	
-	var categories: PackedStringArray = _load_from_filesystem()
-	for category in categories:
-		var idx: int = add_item(category)
+	var categories: PackedStringArray = _load_from_disc()
+	create_from_arr(categories)
 	
 	GGS.State.selected_category = ""
 	FlashEffect.run()
+	loaded.emit()
 
 
-func _load_from_filesystem() -> PackedStringArray:
+func _load_from_disc() -> PackedStringArray:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
 	var dir: DirAccess = DirAccess.open(settings_path)
 	

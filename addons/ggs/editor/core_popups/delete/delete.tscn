@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cipgbptnweeq5"]
+
+[node name="Delete" type="ConfirmationDialog"]
