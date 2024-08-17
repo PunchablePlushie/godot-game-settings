@@ -8,8 +8,6 @@ extends LineEdit
 func _ready() -> void:
 	text_changed.connect(_on_text_changed)
 	List.loaded.connect(_on_List_loaded)
-	
-	visible = ggsPluginPref.new().get_config("HIDE_UI_categories_filterfield")
 
 
 func _on_text_changed(new_text: String) -> void:

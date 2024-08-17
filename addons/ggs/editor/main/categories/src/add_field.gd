@@ -8,8 +8,6 @@ extends LineEdit
 func _ready() -> void:
 	text_submitted.connect(_on_text_submitted)
 	List.loaded.connect(_on_List_loaded)
-	
-	visible = ggsPluginPref.new().get_config("HIDE_UI_categories_addfield")
 
 
 func _create_category(cat_name: String) -> void:

@@ -9,9 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/core_popups/delete/delete.tscn" id="5_lrh2h"]
 [ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/core_popups/rename/rename.tscn" id="7_q4d2h"]
 
-[node name="GGS" type="Node" node_paths=PackedStringArray("NotifDB", "Util", "State", "Event", "GameConfig")]
+[node name="GGS" type="Node" node_paths=PackedStringArray("Util", "State", "Event", "GameConfig")]
 script = ExtResource("1_6v3cu")
-NotifDB = NodePath("")
 Util = NodePath("Util")
 State = NodePath("State")
 Event = NodePath("Event")

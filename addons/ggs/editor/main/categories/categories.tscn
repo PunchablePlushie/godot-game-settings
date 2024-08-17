@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=12 format=3 uid="uid://bkp77x1seytg7"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/add_field.gd" id="2_2fbnh"]
 [ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="2_so3ov"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/filter_field.gd" id="3_a648m"]
+[ext_resource type="PackedScene" uid="uid://rcjwjrntfpgm" path="res://addons/ggs/editor/core/vis_manager/vis_manager.tscn" id="3_ujarx"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/context_menu.gd" id="4_7sh7w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="4_xqs08"]
 [ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="5_8lac3"]
@@ -40,6 +41,10 @@ clear_button_enabled = true
 script = ExtResource("2_2fbnh")
 List = NodePath("../../List")
 
+[node name="VisManager" parent="MainCtnr/TopBar/AddField" instance=ExtResource("3_ujarx")]
+pref_cat = "categories"
+pref_id = "addfield"
+
 [node name="FilterField" type="LineEdit" parent="MainCtnr/TopBar" node_paths=PackedStringArray("List")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -48,14 +53,17 @@ clear_button_enabled = true
 script = ExtResource("3_a648m")
 List = NodePath("../../List")
 
+[node name="VisManager" parent="MainCtnr/TopBar/FilterField" instance=ExtResource("3_ujarx")]
+pref_cat = "categories"
+pref_id = "filterfield"
+
 [node name="List" type="ItemList" parent="MainCtnr" node_paths=PackedStringArray("ContextMenu", "FlashEffect")]
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
 allow_rmb_select = true
-item_count = 2
+item_count = 1
 item_0/text = "dsa"
-item_1/text = "zzz"
 script = ExtResource("4_xqs08")
 ContextMenu = NodePath("ContextMenu")
 FlashEffect = NodePath("FlashEffect")
@@ -73,12 +81,12 @@ item_2/separator = true
 item_3/text = "Show in FileSystem Dock"
 item_3/icon = ExtResource("7_pnw47")
 item_3/id = 2
-item_4/text = "Show in OS File Manager"
+item_4/text = "Open in OS File Manager"
 item_4/icon = ExtResource("7_hdi0a")
 item_4/id = 3
 item_5/id = -1
 item_5/separator = true
-item_6/text = "Reload List"
+item_6/text = "Reload"
 item_6/icon = ExtResource("2_so3ov")
 item_6/id = 4
 script = ExtResource("4_7sh7w")

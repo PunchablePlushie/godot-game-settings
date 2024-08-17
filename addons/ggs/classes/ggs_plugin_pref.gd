@@ -3,6 +3,7 @@ extends ConfigFile
 class_name ggsPluginPref
 ## Handles saving and loading plugin preferences data.
 
+
 ## Path for saving and loading the config file.
 const FILE_PATH: String = "res://addons/ggs/plugin.pref"
 
@@ -16,8 +17,8 @@ var DEFAULTS: Dictionary = {
 	"SPLIT_OFFSET_0": -315,
 	"SPLIT_OFFSET_1": 615,
 	
-	"HIDE_UI_categories_addfield": true,
-	"HIDE_UI_categories_filterfield": true,
+	"SHOW_UI_categories_addfield": true,
+	"SHOW_UI_categories_filterfield": true,
 }
 
 #const APPLY_ON_CHANGED_ALL_DEFAULT: bool = true
