@@ -13,7 +13,7 @@ func _ready() -> void:
 	item_clicked.connect(_on_item_clicked)
 	empty_clicked.connect(_on_empty_clicked)
 	ContextMenu.id_pressed.connect(_on_ContextMenu_id_pressed)
-	
+	ggsPluginPref.new().set_config("dsa", "dsa")
 	load_list()
 
 

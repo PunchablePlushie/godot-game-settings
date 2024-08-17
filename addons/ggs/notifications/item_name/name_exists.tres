@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="ggsNotifContent" load_steps=2 format=3 uid="uid://cf3hopibdycqb"]
-
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_notif_content.gd" id="1_c2eyg"]
-
-[resource]
-script = ExtResource("1_c2eyg")
-title = "Name Already Exists"
-text = "An item with that name already exists."

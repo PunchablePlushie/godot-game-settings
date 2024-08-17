@@ -30,16 +30,6 @@ func _init() -> void:
 		reset()
 
 
-## Overrides the inherited [method ConfigFile.save].[br]
-## In addition to the default saving behavior, it prints an error in case of failure.
-func save(path: String) -> Error:
-	var err: Error = super(path)
-	if err:
-		printerr("GGS: Save Editor Preferences - Could not save on disk (err: %s) (path: %s)"%[error_string(err), FILE_PATH])
-	
-	return err
-
-
 ## Checks if [param config_name] is a valid editor preference.[br]
 ## Only names that are part of [member DEFAULTS] are considered valid.
 func is_valid_config(config_name: String) -> bool:
@@ -51,12 +41,11 @@ func is_valid_config(config_name: String) -> bool:
 ## Returns [code]null[/code] if [param config_name] is invalid.
 func get_config(config_name: String) -> Variant:
 	if not is_valid_config(config_name):
-		printerr("GGS: Get Editor Preference - %s is not a valid key."%[config_name])
 		return null
 	
 	if not has_section_key("", config_name):
 		set_value("", config_name, DEFAULTS[config_name])
-		self.save(FILE_PATH)
+		save(FILE_PATH)
 	
 	return get_value("", config_name)
 
@@ -66,11 +55,10 @@ func get_config(config_name: String) -> Variant:
 ## Does nothing if [param config_name] is invalid.
 func set_config(config_name: String, value: Variant) -> void:
 	if not is_valid_config(config_name):
-		printerr("GGS: Set Editor Preference - %s is not a valid key."%[config_name])
 		return
 	
 	set_value("", config_name, value)
-	self.save(FILE_PATH)
+	save(FILE_PATH)
 
 
 ## Resets all keys to their default value. Also used to recreate the file
@@ -79,7 +67,7 @@ func reset() -> void:
 	for config in DEFAULTS:
 		set_value("", config, DEFAULTS[config])
 	
-	self.save(FILE_PATH)
+	save(FILE_PATH)
 
 
 # Recent Settings #

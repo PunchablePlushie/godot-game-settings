@@ -3,6 +3,13 @@ extends PopupMenu
 
 enum ItemId {RENAME, DELETE, FILESYSTEM_GODOT, FILESYSTEM_OS, RELOAD}
 
+@export_group("Labels", "label_")
+@export var label_rename: String
+@export var label_delete: String
+@export var label_filesystem_godot: String
+@export var label_filesystem_os: String
+@export var label_reload: String
+
 @export_group("Icons", "icon_")
 @export var icon_rename: Texture2D
 @export var icon_delete: Texture2D
@@ -32,10 +39,10 @@ func set_category_actions_disabled(disabled: bool) -> void:
 func _init_items() -> void:
 	clear()
 	
-	add_icon_item(icon_rename, "Rename", ItemId.RENAME)
-	add_icon_item(icon_delete, "Delete", ItemId.DELETE)
+	add_icon_item(icon_rename, label_rename, ItemId.RENAME)
+	add_icon_item(icon_delete, label_delete, ItemId.DELETE)
 	add_separator()
-	add_icon_item(icon_filesystem_godot, "Show in FileSystem Dock", ItemId.FILESYSTEM_GODOT)
-	add_icon_item(icon_filesystem_os, "Show in OS File Manager", ItemId.FILESYSTEM_OS)
+	add_icon_item(icon_filesystem_godot, label_filesystem_godot, ItemId.FILESYSTEM_GODOT)
+	add_icon_item(icon_filesystem_os, label_filesystem_os, ItemId.FILESYSTEM_OS)
 	add_separator()
-	add_icon_item(icon_reload, "Reload List", ItemId.RELOAD)
+	add_icon_item(icon_reload, label_reload, ItemId.RELOAD)

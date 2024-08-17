@@ -4,6 +4,7 @@ extends Node
 
 @export var popup_notif: PackedScene
 @export var popup_rename: PackedScene
+@export var popup_delete: PackedScene
 
 
 #region Item Name Validation
@@ -13,13 +14,13 @@ extends Node
 func item_name_validate(item_name: String, category: String = "", group: String = "") -> bool:
 	if not _item_name_is_valid(item_name):
 		var Notif: AcceptDialog = popup_notif.instantiate()
-		Notif.content = GGS.NotifDB.item_name_invalid
+		Notif.set_content(Notif.Type.NAME_INVALID)
 		add_child(Notif)
 		return false
 	
 	if _item_name_exists(item_name, category, group):
 		var Notif: AcceptDialog = popup_notif.instantiate()
-		Notif.content = GGS.NotifDB.item_name_exists
+		Notif.set_content(Notif.Type.NAME_EXISTS)
 		add_child(Notif)
 		return false
 	

@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cipgbptnweeq5"]
+[gd_scene load_steps=2 format=3 uid="uid://cipgbptnweeq5"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/core_popups/delete/src/delete.gd" id="1_55qfc"]
 
 [node name="Delete" type="ConfirmationDialog"]
+title = "Delete Item"
+ok_button_text = "Delete"
+dialog_text = "Are you sure you want to delete"
+script = ExtResource("1_55qfc")

@@ -12,3 +12,7 @@ unresizable = true
 min_size = Vector2i(400, 100)
 dialog_autowrap = true
 script = ExtResource("1_deei5")
+invalid_title = "Invalid Name"
+invalid_text = "Name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
+exists_title = "Name Already Exists"
+exists_text = "An item with that name already exists."
