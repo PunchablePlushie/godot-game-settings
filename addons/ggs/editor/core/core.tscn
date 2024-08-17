@@ -1,10 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=15 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/main/categories/categories.tscn" id="4_4p007"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/src/split_containers.gd" id="4_mplwh"]
-[ext_resource type="PackedScene" uid="uid://cfr2j0ekmm5bm" path="res://addons/ggs/editor/main/component_panel/component_panel.tscn" id="5_7xo6y"]
-[ext_resource type="PackedScene" uid="uid://vt5mwwxhtu3x" path="res://addons/ggs/editor/main/setting_panel/setting_panel.tscn" id="6_rabjj"]
+[ext_resource type="PackedScene" uid="uid://dhwbhrb1q27h3" path="res://addons/ggs/editor/main/groups/groups.tscn" id="4_vm5xb"]
 [ext_resource type="Texture2D" uid="uid://b8o243gwa707v" path="res://addons/ggs/assets/main/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/save_file_menu.gd" id="7_guojl"]
 [ext_resource type="Texture2D" uid="uid://bx8yoim3ur6h" path="res://addons/ggs/assets/main/save_file.svg" id="8_3r2nn"]
@@ -37,30 +35,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HSplit_0" type="HSplitContainer" parent="MainCtnr"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-split_offset = -331
-script = ExtResource("4_mplwh")
-
-[node name="Categories" parent="MainCtnr/HSplit_0" instance=ExtResource("4_4p007")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSplit_1" type="HSplitContainer" parent="MainCtnr/HSplit_0"]
-layout_mode = 2
-size_flags_horizontal = 3
-split_offset = 606
-script = ExtResource("4_mplwh")
-
-[node name="SettingPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("6_rabjj")]
+[node name="Categories" parent="MainCtnr" instance=ExtResource("4_4p007")]
 layout_mode = 2
 
-[node name="ComponentPanel" parent="MainCtnr/HSplit_0/HSplit_1" instance=ExtResource("5_7xo6y")]
+[node name="VSep_0" type="VSeparator" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="VSep" type="VSeparator" parent="MainCtnr"]
+[node name="Groups" parent="MainCtnr" instance=ExtResource("4_vm5xb")]
+layout_mode = 2
+
+[node name="VSep_1" type="VSeparator" parent="MainCtnr"]
 layout_mode = 2
 
 [node name="SideBar" type="VBoxContainer" parent="MainCtnr"]

@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhwbhrb1q27h3"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/add_field.gd" id="1_0jf10"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/list.gd" id="1_dd653"]
+[ext_resource type="PackedScene" uid="uid://rcjwjrntfpgm" path="res://addons/ggs/editor/misc/vis_manager/vis_manager.tscn" id="1_neaee"]
+[ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="2_rx7b3"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/filter_field.gd" id="3_q30ii"]
+[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="3_uw371"]
+[ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="4_ti6ut"]
+[ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="5_f2oxu"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="6_r8rjr"]
+[ext_resource type="PackedScene" uid="uid://ceamkmyb77wgx" path="res://addons/ggs/editor/main/flash_effect/flash_effect.tscn" id="7_ha6dw"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/context_menu.gd" id="10_8obgd"]
+[ext_resource type="PackedScene" uid="uid://3acgk2lkp6sl" path="res://addons/ggs/editor/misc/occluder/occluder.tscn" id="10_us21d"]
+
+[node name="Group" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainCtnr" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddField" type="LineEdit" parent="MainCtnr" node_paths=PackedStringArray("List")]
+layout_mode = 2
+placeholder_text = "New Group..."
+clear_button_enabled = true
+script = ExtResource("1_0jf10")
+List = NodePath("../ListCtnr/Ctnr/List")
+
+[node name="VisManager" parent="MainCtnr/AddField" instance=ExtResource("1_neaee")]
+section = "groups"
+key = "add_field"
+
+[node name="FilterField" type="LineEdit" parent="MainCtnr" node_paths=PackedStringArray("List")]
+layout_mode = 2
+placeholder_text = "Filter Groups..."
+clear_button_enabled = true
+script = ExtResource("3_q30ii")
+List = NodePath("../ListCtnr/Ctnr/List")
+
+[node name="VisManager" parent="MainCtnr/FilterField" instance=ExtResource("1_neaee")]
+section = "groups"
+key = "filter_field"
+
+[node name="HSep" type="HSeparator" parent="MainCtnr"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ListCtnr" type="MarginContainer" parent="MainCtnr"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ctnr" type="VBoxContainer" parent="MainCtnr/ListCtnr"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NoGroupBtn" type="Button" parent="MainCtnr/ListCtnr/Ctnr"]
+layout_mode = 2
+toggle_mode = true
+text = "No Group"
+
+[node name="List" type="ItemList" parent="MainCtnr/ListCtnr/Ctnr" node_paths=PackedStringArray("ContextMenu", "FlashEffect")]
+layout_mode = 2
+size_flags_vertical = 3
+allow_rmb_select = true
+script = ExtResource("1_dd653")
+ContextMenu = NodePath("ContextMenu")
+FlashEffect = NodePath("../../FlashEffect")
+
+[node name="ContextMenu" type="PopupMenu" parent="MainCtnr/ListCtnr/Ctnr/List"]
+size = Vector2i(100, 151)
+allow_search = false
+item_count = 7
+item_0/text = "Rename"
+item_0/icon = ExtResource("2_rx7b3")
+item_1/text = "Delete"
+item_1/icon = ExtResource("3_uw371")
+item_1/id = 1
+item_2/id = -1
+item_2/separator = true
+item_3/text = "Show in FileSystem Dock"
+item_3/icon = ExtResource("4_ti6ut")
+item_3/id = 2
+item_4/text = "Open in OS File Manager"
+item_4/icon = ExtResource("5_f2oxu")
+item_4/id = 3
+item_5/id = -1
+item_5/separator = true
+item_6/text = "Reload"
+item_6/icon = ExtResource("6_r8rjr")
+item_6/id = 4
+script = ExtResource("10_8obgd")
+label_rename = "Rename"
+label_delete = "Delete"
+label_filesystem_godot = "Show in FileSystem Dock"
+label_filesystem_os = "Open in OS File Manager"
+label_reload = "Reload"
+icon_rename = ExtResource("2_rx7b3")
+icon_delete = ExtResource("3_uw371")
+icon_filesystem_godot = ExtResource("4_ti6ut")
+icon_filesystem_os = ExtResource("5_f2oxu")
+icon_reload = ExtResource("6_r8rjr")
+
+[node name="FlashEffect" parent="MainCtnr/ListCtnr" instance=ExtResource("7_ha6dw")]
+layout_mode = 2
+
+[node name="Occluder" parent="." instance=ExtResource("10_us21d")]
+visible = true
+layout_mode = 2
+label_text = "Select a Category"

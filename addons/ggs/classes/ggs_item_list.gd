@@ -19,7 +19,7 @@ func create_from_arr(list: PackedStringArray, is_filtered: bool = false) -> void
 		add_item(item)
 
 
-## Filters out all items that don't begin with [param filter].
+## Filters items that begin with [param filter].
 func filter_list(filter: String) -> void:
 	var _filter_: String = filter.to_lower()
 	if _filter_.is_empty():

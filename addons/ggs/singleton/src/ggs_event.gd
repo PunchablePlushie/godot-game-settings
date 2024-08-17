@@ -10,7 +10,10 @@ signal notif_popup_closed
 signal ui_vis_changed(pref_cat: String, ui: String, vis: bool)
 
 ## Emitted when a category is selected in the Categories Panel.
-signal category_selected()
-signal group_selected()
+signal category_selected(category: String)
+
+## Emitted when a group is selected in the Groups Panel.
+signal group_selected(group: String)
+
+
 signal setting_selected()
-signal reload_categories_requested()

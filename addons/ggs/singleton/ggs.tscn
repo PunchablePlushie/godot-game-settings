@@ -19,18 +19,20 @@ State = NodePath("State")
 Event = NodePath("Event")
 GameConfig = NodePath("GameConfig")
 
-[node name="Util" type="Node" parent="."]
+[node name="Util" type="Node" parent="." node_paths=PackedStringArray("State")]
 script = ExtResource("2_ly0hh")
 popup_notif = ExtResource("3_jbar2")
 popup_rename = ExtResource("7_q4d2h")
 popup_delete = ExtResource("5_lrh2h")
+State = NodePath("../State")
 
 [node name="Pref" type="Node" parent="."]
 script = ExtResource("6_okuxg")
 res = ExtResource("7_i18lm")
 
-[node name="State" type="Node" parent="."]
+[node name="State" type="Node" parent="." node_paths=PackedStringArray("Event")]
 script = ExtResource("3_dgje8")
+Event = NodePath("../Event")
 
 [node name="Event" type="Node" parent="."]
 script = ExtResource("4_sh1mk")

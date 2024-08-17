@@ -6,6 +6,9 @@ extends Node
 @export var popup_rename: PackedScene
 @export var popup_delete: PackedScene
 
+@export_group("Nodes")
+@export var State: Node
+
 
 #region Item Name Validation
 ## Checks whether [param item_name] is valid and can be used.[br]
@@ -18,7 +21,7 @@ func item_name_validate(item_name: String, category: String = "", group: String 
 		add_child(Notif)
 		return false
 	
-	if _item_name_exists(item_name, category, group):
+	if _item_name_exists(item_name, State.selected_category, State.selected_group):
 		var Notif: AcceptDialog = popup_notif.instantiate()
 		Notif.set_content(Notif.Type.NAME_EXISTS)
 		add_child(Notif)
@@ -39,11 +42,21 @@ func _item_name_exists(item_name: String, category: String, group: String) -> bo
 	var settings_path: String = GGS.Pref.res.paths["settings"]
 	var final_path: String = settings_path.path_join(category).path_join(group)
 	var dir: DirAccess = DirAccess.open(final_path)
+	print(item_name)
 	return dir.dir_exists(item_name)
 
 #endregion
 
  
+static func exclude_underscored(list: PackedStringArray) -> PackedStringArray:
+	var filtered_list: Array = Array(list).filter(_filter_underscored)
+	return PackedStringArray(filtered_list)
+
+
+static func _filter_underscored(element: String) -> bool:
+	return not element.begins_with("_")
+
+
 # ooooooooooooooooo #
 static func get_enum_string(target_enum: String) -> String:
 	var types: PackedStringArray = [
