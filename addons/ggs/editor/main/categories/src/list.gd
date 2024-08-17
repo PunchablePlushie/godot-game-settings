@@ -84,7 +84,11 @@ func _on_ContextMenu_id_pressed(id: int) -> void:
 			add_child(RenamePopup)
 		
 		ContextMenu.ItemId.DELETE:
-			pass
+			var DeletePopup: ConfirmationDialog = GGS.Util.popup_delete.instantiate()
+			DeletePopup.item_name = selected_cat
+			DeletePopup.set_content(DeletePopup.Type.CATEGORY)
+			DeletePopup.delete_confirmed.connect(_on_delete_confirmed)
+			add_child(DeletePopup)
 		
 		ContextMenu.ItemId.FILESYSTEM_GODOT:
 			_show_in_filesystem_dock(selected_cat)
@@ -105,6 +109,16 @@ func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
 	EditorInterface.get_resource_filesystem().scan()
 
 
+# Delete #
+func _on_delete_confirmed(cat_name: String) -> void:
+	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
+	var path: String = settings_path.path_join(cat_name)
+	path = ProjectSettings.globalize_path(path)
+	OS.move_to_trash(path)
+	load_list()
+	EditorInterface.get_resource_filesystem().scan()
+
+
 # Show in FileSystem Dock
 func _show_in_filesystem_dock(cat_name: String) -> void:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
@@ -112,7 +126,7 @@ func _show_in_filesystem_dock(cat_name: String) -> void:
 	EditorInterface.get_file_system_dock().navigate_to_path(file)
 
 
-# Show in OS File System #
+# Open in OS File Manager #
 func _show_in_os_filesystem(cat_name: String) -> void:
 	var settings_path: String = ggsPluginPref.new().get_config("PATH_settings")
 	var file: String = settings_path.path_join(cat_name)
