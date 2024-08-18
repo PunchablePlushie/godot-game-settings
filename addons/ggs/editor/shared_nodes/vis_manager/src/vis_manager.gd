@@ -9,7 +9,7 @@ extends Node
 
 func _ready() -> void:
 	GGS.Event.ui_vis_changed.connect(_on_Global_ui_vis_changed)
-	managed_node.visible = GGS.Pref.res.ui_vis[section][key]
+	managed_node.visible = GGS.Pref.data.ui_vis[section][key]
 
 
 func _reset_managed_node() -> void:

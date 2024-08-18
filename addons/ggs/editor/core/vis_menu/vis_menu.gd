@@ -13,7 +13,7 @@ func _ready() -> void:
 func _init_items() -> void:
 	Menu.clear()
 	
-	var sections: Dictionary = GGS.Pref.res.ui_vis
+	var sections: Dictionary = GGS.Pref.data.ui_vis
 	for section in sections:
 		var Submenu: PopupMenu = submenu_script.new()
 		Submenu.section = section

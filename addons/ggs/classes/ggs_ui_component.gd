@@ -27,7 +27,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if setting.resource_path.is_empty():
 		return PackedStringArray([WARNING_DELETED_SETTING])
 	
-	if not setting.resource_path.begins_with(ggsUtils.get_plugin_data().dir_settings):
+	if not setting.resource_path.begins_with(GGS.Pref.data.paths["settings"]):
 		return PackedStringArray([WARNING_SETTING_NOT_IN_DIR])
 	
 	if (

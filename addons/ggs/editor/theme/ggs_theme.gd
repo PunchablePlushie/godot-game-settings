@@ -7,7 +7,7 @@ var editor_theme: Theme
 
 
 func update() -> void:
-	editor_theme = ggsUtils.get_editor_interface().get_base_control().theme
+	editor_theme = EditorInterface.get_base_control().theme
 	_set_window_bg()
 	_set_setting_list_bg()
 	_set_setting_item_bg()

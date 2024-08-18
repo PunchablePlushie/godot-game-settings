@@ -6,7 +6,7 @@ extends Node
 func get_all_settings() -> PackedStringArray:
 	var all_settings: PackedStringArray
 	
-	var path: String = ggsPluginPref.new().get_config("dir_settings")
+	var path: String = GGS.Pref.data.paths["settings"]
 	var dir: DirAccess = DirAccess.open(path)
 	var categories: PackedStringArray = dir.get_directories()
 	for category in categories:

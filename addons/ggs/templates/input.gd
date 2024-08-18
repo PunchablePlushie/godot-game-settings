@@ -58,7 +58,7 @@ func set_default_as_event(value: InputEvent) -> void:
 	
 	type = input_helper.get_event_type(value)
 	default = [type, input_helper.get_event_id(value)]
-	ggsUtils.get_editor_interface().inspect_object.call_deferred(self)
+	EditorInterface.inspect_object.call_deferred(self)
 
 
 func set_current_as_event(value: InputEvent) -> void:

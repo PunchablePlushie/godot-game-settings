@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://rcjwjrntfpgm"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/misc/vis_manager/src/vis_manager.gd" id="1_osp3p"]
+[ext_resource type="Script" path="res://addons/ggs/editor/shared_nodes/vis_manager/src/vis_manager.gd" id="1_osp3p"]
 
 [node name="VisManager" type="Node"]
 script = ExtResource("1_osp3p")

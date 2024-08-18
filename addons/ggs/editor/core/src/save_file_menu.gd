@@ -11,8 +11,8 @@ func _ready() -> void:
 
 
 func _open_save_file() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	var path: String = ProjectSettings.globalize_path(data.dir_save_file)
+	var data: String = GGS.Pref.data.paths["game_config"]
+	var path: String = ProjectSettings.globalize_path(data)
 	var err: Error = OS.shell_open(path)
 	if err != OK:
 		printerr("GGS - Open Save File: An error has occured while opening the file. Code: %s"%[error_string(err)])

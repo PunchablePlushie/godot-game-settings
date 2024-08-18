@@ -5,7 +5,8 @@ signal loaded
 
 @export_group("Nodes")
 @export var ContextMenu: PopupMenu
-@export var FlashEffect: ColorRect
+
+var _category: String
 
 
 func _ready() -> void:
@@ -18,20 +19,19 @@ func _ready() -> void:
 	clear()
 
 
-#region Load Categories
+#region Load Groups
 func load_list() -> void:
 	var groups: PackedStringArray = _load_from_disc()
 	create_from_arr(groups)
 	
 	GGS.State.selected_group = ""
-	FlashEffect.run()
 	loaded.emit()
 
 
 func _load_from_disc() -> PackedStringArray:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
-	var path: String = settings_path.path_join(GGS.State.selected_category)
-	var dir: DirAccess = DirAccess.open(path)
+	var settings_path: String = GGS.Pref.data.paths["settings"]
+	var category_path: String = settings_path.path_join(_category)
+	var dir: DirAccess = DirAccess.open(category_path)
 	
 	return GGS.Util.exclude_underscored(dir.get_directories())
 
@@ -41,6 +41,7 @@ func _on_Global_category_selected(category: String) -> void:
 		clear()
 		return
 	
+	_category = category
 	load_list()
 
 
@@ -107,7 +108,7 @@ func _on_ContextMenu_id_pressed(id: int) -> void:
 
 # Rename #
 func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
+	var settings_path: String = GGS.Pref.data.paths["settings"]
 	var path: String = settings_path.path_join(GGS.State.selected_category)
 	var dir: DirAccess = DirAccess.open(path)
 	dir.rename(prev_name, new_name)
@@ -117,7 +118,7 @@ func _on_rename_confirmed(prev_name: String, new_name: String) -> void:
 
 # Delete #
 func _on_delete_confirmed(cat_name: String) -> void:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
+	var settings_path: String = GGS.Pref.data.paths["settings"]
 	var grp: String = GGS.State.selected_category
 	var path: String = settings_path.path_join(cat_name).path_join(grp)
 	path = ProjectSettings.globalize_path(path)
@@ -128,7 +129,7 @@ func _on_delete_confirmed(cat_name: String) -> void:
 
 # Show in FileSystem Dock
 func _show_in_filesystem_dock(cat_name: String) -> void:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
+	var settings_path: String = GGS.Pref.data.paths["settings"]
 	var grp: String = GGS.State.selected_category
 	var file: String = settings_path.path_join(cat_name).path_join(grp)
 	EditorInterface.get_file_system_dock().navigate_to_path(file)
@@ -136,7 +137,7 @@ func _show_in_filesystem_dock(cat_name: String) -> void:
 
 # Open in OS File Manager #
 func _show_in_os_filesystem(cat_name: String) -> void:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
+	var settings_path: String = GGS.Pref.data.paths["settings"]
 	var grp: String = GGS.State.selected_category
 	var file: String = settings_path.path_join(cat_name).path_join(grp)
 	var path: String = ProjectSettings.globalize_path(file)

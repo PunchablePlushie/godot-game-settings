@@ -1,14 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://3acgk2lkp6sl"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/misc/occluder/src/occluder.gd" id="1_qs1tq"]
+[ext_resource type="Script" path="res://addons/ggs/editor/shared_nodes/occluder/src/occluder.gd" id="1_qs1tq"]
 
 [node name="Occluder" type="MarginContainer"]
-visible = false
 script = ExtResource("1_qs1tq")
 
 [node name="Color" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0.05, 0.05, 0.05, 0.9)
+color = Color(0.05, 0.05, 0.05, 0.5)
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 2

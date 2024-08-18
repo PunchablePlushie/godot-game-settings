@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://u2vig40n5byw"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/core_popups/rename/src/rename.gd" id="1_3htyy"]
+[ext_resource type="Script" path="res://addons/ggs/editor/popup/rename_item/src/rename.gd" id="1_3htyy"]
 
 [node name="Rename" type="ConfirmationDialog" node_paths=PackedStringArray("CurField", "NewField")]
 auto_translate_mode = 1

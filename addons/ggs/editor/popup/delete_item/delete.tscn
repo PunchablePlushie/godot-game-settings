@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cipgbptnweeq5"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/core_popups/delete/src/delete.gd" id="1_55qfc"]
+[ext_resource type="Script" path="res://addons/ggs/editor/popup/delete_item/src/delete.gd" id="1_55qfc"]
 
 [node name="Delete" type="ConfirmationDialog"]
 title = "Delete Item"

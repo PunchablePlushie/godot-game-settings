@@ -14,11 +14,11 @@ var paths: Dictionary = {
 ## Visibility state of specific GGS editor elements.
 var ui_vis: Dictionary = {
 	"categories": {
-		"add_field": true,
+		"new_field": true,
 		"filter_field": true,
 	},
 	"groups": {
-		"add_field": true,
+		"new_field": true,
 		"filter_field": true,
 	},
 	"settings": {

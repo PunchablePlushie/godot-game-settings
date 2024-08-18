@@ -4,7 +4,7 @@ extends Window
 enum DirTarget {SETTINGS, COMPONENTS, TEMPLATES}
 enum ConfirmPurpose {RESET, OK}
 
-const THEME: Theme = preload("res://addons/ggs/editor/_theme/ggs_theme.tres")
+const THEME: Theme = preload("res://addons/ggs/editor/theme/ggs_theme.tres")
 const TEMPLATE: Script = preload("res://addons/ggs/template.gd")
 const GGS_SCENE: String = "res://addons/ggs/classes/global/ggs.tscn"
 
@@ -77,10 +77,10 @@ func _on_ChangelogBtn_pressed() -> void:
 ### Fields
 
 func _init_values() -> void:
-	var data: ggsPluginData = ggsUtils.get_plugin_data()
-	SDF.text = data.dir_settings
-	CDF.text = data.dir_components
-	TDF.text = data.dir_templates
+	var data: Dictionary = GGS.Pref.data.paths
+	SDF.text = data["settings"]
+	CDF.text = data["components"]
+	TDF.text = data["templates"]
 	ApplyOnChanged.button_pressed = data.apply_on_changed_all
 	GrabFocusOnMouseOver.button_pressed = data.grab_focus_on_mouse_over_all
 	
@@ -120,7 +120,7 @@ func _on_DSW_dir_selected(dir: String) -> void:
 ### Buttons
 
 func _on_SetSFXBtn_pressed() -> void:
-	ggsUtils.get_editor_interface().open_scene_from_path(GGS_SCENE)
+	EditorInterface.open_scene_from_path(GGS_SCENE)
 	hide()
 
 
@@ -129,7 +129,7 @@ func _on_UpdateThemeBtn_pressed() -> void:
 
 
 func _on_BaseTemplateBtn_pressed() -> void:
-	ggsUtils.get_editor_interface().inspect_object(TEMPLATE)
+	EditorInterface.inspect_object(TEMPLATE)
 	hide()
 
 
@@ -148,23 +148,23 @@ func _on_OkBtn_pressed() -> void:
 func _on_CRW_confirmed() -> void:
 	match CRW.get_meta("purpose"):
 		ConfirmPurpose.RESET:
-			ggsUtils.get_plugin_data().reset()
+			GGS.Pref.reset()
 			
 			hide()
-			ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
+			EditorInterface.set_plugin_enabled("ggs", false)
 		ConfirmPurpose.OK:
-			var data: ggsPluginData = ggsUtils.get_plugin_data()
-			data.set_property("dir_settings", SDF.text)
-			data.set_property("dir_components", CDF.text)
-			data.set_property("dir_templates", TDF.text)
-			data.set_property("apply_on_changed_all", ApplyOnChanged.button_pressed)
-			data.set_property("grab_focus_on_mouse_over_all", GrabFocusOnMouseOver.button_pressed)
-			
-			var value: String = "user://%s.%s"%[SFNF.text, SFEF.text]
-			data.set_property("dir_save_file", value)
-			
-			hide()
-			ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
+			var data: Dictionary = GGS.Pref.data.paths
+			#data.set_property("dir_settings", SDF.text)
+			#data.set_property("dir_components", CDF.text)
+			#data.set_property("dir_templates", TDF.text)
+			#data.set_property("apply_on_changed_all", ApplyOnChanged.button_pressed)
+			#data.set_property("grab_focus_on_mouse_over_all", GrabFocusOnMouseOver.button_pressed)
+			#
+			#var value: String = "user://%s.%s"%[SFNF.text, SFEF.text]
+			#data.set_property("dir_save_file", value)
+			#
+			#hide()
+			#ggsUtils.get_editor_interface().set_plugin_enabled("ggs", false)
 
 
 ### Window Functionalities

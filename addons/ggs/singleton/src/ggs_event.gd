@@ -2,8 +2,11 @@
 extends Node
 ## Hosts all events and signals related to the GGS editor.
 
-## Emitted when a notification dialog is closed.
-signal notif_popup_closed
+## Emitted when the currently open notification dialog is closed.
+signal notif_closed()
+
+## Emitted when a node requests a notification dialog
+signal notif_requested(title: String, text: String)
 
 ## Emitted when the visibility of a UI element is changed from the
 ## UI Visibility menu

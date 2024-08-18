@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ggsPrefRes" load_steps=2 format=3 uid="uid://klxw3jp65ip5"]
+[gd_resource type="Resource" script_class="ggsPrefRes" load_steps=2 format=3 uid="uid://5xumykkth1ei"]
 
 [ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_pref_res.gd" id="1_6udwc"]
 

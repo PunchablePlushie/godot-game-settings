@@ -2,12 +2,21 @@
 extends Node
 ## Provides various functions used throughout GGS.
 
-@export var popup_notif: PackedScene
-@export var popup_rename: PackedScene
-@export var popup_delete: PackedScene
+@export_group("Notification Content")
+
+@export_subgroup("Invalid Name", "_invalid_")
+@export var _invalid_title: String
+@export_multiline var _invalid_text: String
+
+@export_subgroup("Name Exists", "_exists_")
+@export var _exists_title: String
+@export_multiline var _exists_text: String
+
 
 @export_group("Nodes")
-@export var State: Node
+@export var _Pref: Node
+@export var _State: Node
+@export var _Event: Node
 
 
 #region Item Name Validation
@@ -16,15 +25,11 @@ extends Node
 ## ,and does not already exist.
 func item_name_validate(item_name: String, category: String = "", group: String = "") -> bool:
 	if not _item_name_is_valid(item_name):
-		var Notif: AcceptDialog = popup_notif.instantiate()
-		Notif.set_content(Notif.Type.NAME_INVALID)
-		add_child(Notif)
+		_Event.notif_requested.emit(_invalid_title, _invalid_text)
 		return false
 	
-	if _item_name_exists(item_name, State.selected_category, State.selected_group):
-		var Notif: AcceptDialog = popup_notif.instantiate()
-		Notif.set_content(Notif.Type.NAME_EXISTS)
-		add_child(Notif)
+	if _item_name_exists(item_name):
+		_Event.notif_requested.emit(_exists_title, _exists_text)
 		return false
 	
 	return true
@@ -38,12 +43,13 @@ func _item_name_is_valid(item_name: String) -> bool:
 	)
 
 
-func _item_name_exists(item_name: String, category: String, group: String) -> bool:
-	var settings_path: String = GGS.Pref.res.paths["settings"]
-	var final_path: String = settings_path.path_join(category).path_join(group)
-	var dir: DirAccess = DirAccess.open(final_path)
-	print(item_name)
-	return dir.dir_exists(item_name)
+func _item_name_exists(item_name: String) -> bool:
+	var settings_path: String = _Pref.data.paths["settings"]
+	var category: String = _State.selected_category
+	var group: String = _State.selected_group
+	var parent_path: String = settings_path.path_join(category).path_join(group)
+	var item_path: String = parent_path.path_join(item_name)
+	return DirAccess.dir_exists_absolute(item_path)
 
 #endregion
 
