@@ -18,10 +18,6 @@ GameConfig = NodePath("GameConfig")
 
 [node name="Util" type="Node" parent="." node_paths=PackedStringArray("_Pref", "_State", "_Event")]
 script = ExtResource("2_ly0hh")
-_invalid_title = "Invalid Name"
-_invalid_text = "Name must be a valid file name and cannot start with a dot (\".\") or an underscore (\"_\")."
-_exists_title = "Item Already Exists"
-_exists_text = "An item with that name already exists."
 _Pref = NodePath("../Pref")
 _State = NodePath("../State")
 _Event = NodePath("../Event")
@@ -30,9 +26,9 @@ _Event = NodePath("../Event")
 script = ExtResource("6_okuxg")
 data = ExtResource("7_uuxqp")
 
-[node name="State" type="Node" parent="." node_paths=PackedStringArray("Event")]
+[node name="State" type="Node" parent="." node_paths=PackedStringArray("_Event")]
 script = ExtResource("3_dgje8")
-Event = NodePath("../Event")
+_Event = NodePath("../Event")
 
 [node name="Event" type="Node" parent="."]
 script = ExtResource("4_sh1mk")

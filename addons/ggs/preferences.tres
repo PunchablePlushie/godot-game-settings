@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="ggsPrefRes" load_steps=2 format=3 uid="uid://5xumykkth1ei"]
+[gd_resource type="Resource" script_class="ggsPrefData" load_steps=2 format=3 uid="uid://5xumykkth1ei"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_pref_res.gd" id="1_6udwc"]
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_pref_data.gd" id="1_p5eha"]
 
 [resource]
-script = ExtResource("1_6udwc")
+script = ExtResource("1_p5eha")
 paths = {
 "components": "res://addons/ggs/components",
 "game_config": "user://settings.cfg",

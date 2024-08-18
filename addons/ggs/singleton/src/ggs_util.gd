@@ -2,34 +2,43 @@
 extends Node
 ## Provides various functions used throughout GGS.
 
-@export_group("Notification Content")
-
-@export_subgroup("Invalid Name", "_invalid_")
-@export var _invalid_title: String
-@export_multiline var _invalid_text: String
-
-@export_subgroup("Name Exists", "_exists_")
-@export var _exists_title: String
-@export_multiline var _exists_text: String
-
-
 @export_group("Nodes")
 @export var _Pref: Node
 @export var _State: Node
 @export var _Event: Node
 
 
+func _ready() -> void:
+	_Event.rename_confirmed.connect(_on_Global_rename_confirmed)
+	_Event.delete_confirmed.connect(_on_Global_delete_confirmed)
+
+
+func remove_underscored(list: PackedStringArray) -> PackedStringArray:
+	var filter_method: Callable = func(e): return not e.begins_with("_")
+	var filtered_list: Array = Array(list).filter(filter_method)
+	return PackedStringArray(filtered_list)
+
+
+func get_item_path(item_type: ggsCore.ItemType, item_name: String) -> String:
+	var path: String = GGS.Pref.data.paths["settings"]
+	match item_type:
+		ggsCore.ItemType.CATEGORY:
+			path = path.path_join(item_name)
+		ggsCore.ItemType.GROUP:
+			path = path.path_join(_State.selected_category)
+			path = path.path_join(item_name)
+	
+	return path
+
+
 #region Item Name Validation
-## Checks whether [param item_name] is valid and can be used.[br]
-## A valid name is a valid file name, does not start with dot or underscore
-## ,and does not already exist.
-func item_name_validate(item_name: String, category: String = "", group: String = "") -> bool:
+func validate_item_name(item_type: ggsCore.ItemType, item_name: String) -> bool:
 	if not _item_name_is_valid(item_name):
-		_Event.notif_requested.emit(_invalid_title, _invalid_text)
+		GGS.Event.notif_requested.emit(ggsCore.NotifType.NAME_INVALID)
 		return false
 	
-	if _item_name_exists(item_name):
-		_Event.notif_requested.emit(_exists_title, _exists_text)
+	if _item_name_exists(item_type, item_name):
+		GGS.Event.notif_requested.emit(ggsCore.NotifType.NAME_EXISTS)
 		return false
 	
 	return true
@@ -43,25 +52,41 @@ func _item_name_is_valid(item_name: String) -> bool:
 	)
 
 
-func _item_name_exists(item_name: String) -> bool:
-	var settings_path: String = _Pref.data.paths["settings"]
-	var category: String = _State.selected_category
-	var group: String = _State.selected_group
-	var parent_path: String = settings_path.path_join(category).path_join(group)
-	var item_path: String = parent_path.path_join(item_name)
-	return DirAccess.dir_exists_absolute(item_path)
+func _item_name_exists(item_type: ggsCore.ItemType, item_name: String) -> bool:
+	var path: String = get_item_path(item_type, item_name)
+	return DirAccess.dir_exists_absolute(path)
 
 #endregion
 
- 
-static func exclude_underscored(list: PackedStringArray) -> PackedStringArray:
-	var filtered_list: Array = Array(list).filter(_filter_underscored)
-	return PackedStringArray(filtered_list)
+#region Item Actions
+func show_item_in_filesystem_godot(item_type: ggsCore.ItemType, item_name: String) -> void:
+	var path: String = get_item_path(item_type, item_name)
+	EditorInterface.get_file_system_dock().navigate_to_path(path)
 
 
-static func _filter_underscored(element: String) -> bool:
-	return not element.begins_with("_")
+func show_item_in_filesystem_os(item_type: ggsCore.ItemType, item_name: String) -> void:
+	var path: String = get_item_path(item_type, item_name)
+	
+	path = ProjectSettings.globalize_path(path)
+	OS.shell_show_in_file_manager(path)
 
+
+func _on_Global_rename_confirmed(item_type: ggsCore.ItemType, prev_name:String, new_name: String) -> void:
+	var from: String = get_item_path(item_type, prev_name)
+	var to: String = get_item_path(item_type, new_name)
+	
+	DirAccess.rename_absolute(from, to)
+	EditorInterface.get_resource_filesystem().scan()
+
+
+func _on_Global_delete_confirmed(item_type: ggsCore.ItemType, item_name: String) -> void:
+	var path: String = get_item_path(item_type, item_name)
+	path = ProjectSettings.globalize_path(path)
+	
+	OS.move_to_trash(path)
+	EditorInterface.get_resource_filesystem().scan()
+
+#endregion
 
 # ooooooooooooooooo #
 static func get_enum_string(target_enum: String) -> String:

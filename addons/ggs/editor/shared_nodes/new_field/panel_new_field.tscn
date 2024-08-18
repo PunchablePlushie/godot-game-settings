@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4gao84ux34ek"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/shared_nodes/new_field/src/panel_new_fied.gd" id="1_j1unn"]
+
+[node name="PanelNewField" type="LineEdit"]
+clear_button_enabled = true
+script = ExtResource("1_j1unn")

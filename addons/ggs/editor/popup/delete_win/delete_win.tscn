@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cipgbptnweeq5"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/popup/delete_win/src/delete_win.gd" id="1_55qfc"]
+
+[node name="DeleteWin" type="ConfirmationDialog"]
+title = "Delete Category"
+position = Vector2i(268, 282)
+size = Vector2i(499, 106)
+visible = true
+unresizable = true
+ok_button_text = "Delete"
+dialog_text = "Are you sure you want to delete category \"dsa\"?
+The category folder will be moved to your system's recycle bin."
+script = ExtResource("1_55qfc")
+title_category = "Delete Category"
+title_group = "Delete Group"
+title_setting = "Delete Setting"
+text_category = "Are you sure you want to delete category \"{0}\"?
+The category folder will be moved to your system's recycle bin."
+text_group = "Are you sure you want to delete group \"{0}\"?
+The group folder will be moved to your system's recycle bin."
+text_setting = "Are you sure you want to delete setting \"{0}\"?
+The setting resource and script will be moved to your system's recycle bin."

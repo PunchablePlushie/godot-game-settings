@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_w3bfk"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/main/categories/categories.tscn" id="4_4p007"]
-[ext_resource type="PackedScene" uid="uid://dhwbhrb1q27h3" path="res://addons/ggs/editor/main/groups/groups.tscn" id="4_vm5xb"]
 [ext_resource type="Texture2D" uid="uid://b8o243gwa707v" path="res://addons/ggs/assets/main/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/save_file_menu.gd" id="7_guojl"]
 [ext_resource type="Texture2D" uid="uid://bx8yoim3ur6h" path="res://addons/ggs/assets/main/save_file.svg" id="8_3r2nn"]
@@ -13,8 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://bt7gdorkvo4an" path="res://addons/ggs/assets/main/bug.svg" id="10_rly1w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/bug_btn.gd" id="11_2ygfj"]
 [ext_resource type="Texture2D" uid="uid://bttv2hpecd38m" path="res://addons/ggs/assets/main/check_all.svg" id="14_767s3"]
-[ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/popup/generic_notif/GenericNotif.tscn" id="15_45a50"]
+[ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/popup/notif_win/notif_win.tscn" id="15_45a50"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/vis_menu/vis_menu.gd" id="15_hfrgi"]
+[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/popup/rename_win/rename_win.tscn" id="16_brfyv"]
+[ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/popup/delete_win/delete_win.tscn" id="17_w0x4b"]
 
 [node name="Core" type="Control"]
 custom_minimum_size = Vector2(0, 400)
@@ -40,9 +41,6 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="VSep_0" type="VSeparator" parent="MainCtnr"]
-layout_mode = 2
-
-[node name="Groups" parent="MainCtnr" instance=ExtResource("4_vm5xb")]
 layout_mode = 2
 
 [node name="VSep_1" type="VSeparator" parent="MainCtnr"]
@@ -115,4 +113,9 @@ unique_name_in_owner = true
 
 [node name="Popups" type="Node" parent="."]
 
-[node name="GenericNotif" parent="Popups" instance=ExtResource("15_45a50")]
+[node name="NotifWin" parent="Popups" instance=ExtResource("15_45a50")]
+
+[node name="RenameWin" parent="Popups" instance=ExtResource("16_brfyv")]
+
+[node name="DeleteWin" parent="Popups" instance=ExtResource("17_w0x4b")]
+visible = false

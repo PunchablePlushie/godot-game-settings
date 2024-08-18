@@ -1,16 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=3 format=3 uid="uid://bkp77x1seytg7"]
 
-[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="2_so3ov"]
-[ext_resource type="PackedScene" uid="uid://c7ofbdisxru3i" path="res://addons/ggs/editor/shared_nodes/fields/filter_field/filter_field.tscn" id="3_8nxyo"]
-[ext_resource type="PackedScene" uid="uid://rcjwjrntfpgm" path="res://addons/ggs/editor/shared_nodes/vis_manager/vis_manager.tscn" id="3_ujarx"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/context_menu.gd" id="4_7sh7w"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="4_xqs08"]
-[ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="5_8lac3"]
-[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="6_8uu2l"]
-[ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="7_hdi0a"]
-[ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="7_pnw47"]
-[ext_resource type="PackedScene" uid="uid://ceamkmyb77wgx" path="res://addons/ggs/editor/main/flash_effect/flash_effect.tscn" id="11_8veyq"]
-[ext_resource type="PackedScene" uid="uid://cfhdd68iercdr" path="res://addons/ggs/editor/shared_nodes/fields/new_field/new_field.tscn" id="12_v4e2e"]
+[ext_resource type="PackedScene" uid="uid://d4gao84ux34ek" path="res://addons/ggs/editor/shared_nodes/new_field/panel_new_field.tscn" id="1_jxn3j"]
+[ext_resource type="PackedScene" uid="uid://drgtw6g2lkffv" path="res://addons/ggs/editor/shared_nodes/panel_list/panel_list.tscn" id="4_wts0q"]
 
 [node name="Categories" type="VBoxContainer"]
 anchors_preset = 15
@@ -21,81 +12,17 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewField" parent="." node_paths=PackedStringArray("List") instance=ExtResource("12_v4e2e")]
+[node name="NewField" parent="." node_paths=PackedStringArray("List") instance=ExtResource("1_jxn3j")]
 layout_mode = 2
 placeholder_text = "New Category..."
-mode = 1
+editable = false
+_type = 1
 List = NodePath("../List")
-
-[node name="VisManager" parent="NewField" instance=ExtResource("3_ujarx")]
-section = "categories"
-key = "new_field"
-
-[node name="FilterField" parent="." node_paths=PackedStringArray("List") instance=ExtResource("3_8nxyo")]
-layout_mode = 2
-placeholder_text = "Filter Categories..."
-mode = 1
-List = NodePath("../List")
-
-[node name="VisManager" parent="FilterField" instance=ExtResource("3_ujarx")]
-section = "categories"
-key = "filter_field"
 
 [node name="HSep" type="HSeparator" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="List" type="ItemList" parent="." node_paths=PackedStringArray("ContextMenu", "FlashEffect")]
+[node name="List" parent="." instance=ExtResource("4_wts0q")]
 layout_mode = 2
-size_flags_vertical = 3
-allow_rmb_select = true
-item_count = 3
-item_0/text = "caa"
-item_1/text = "cxz"
-item_2/text = "dsa"
-script = ExtResource("4_xqs08")
-ContextMenu = NodePath("ContextMenu")
-FlashEffect = NodePath("FlashEffect")
-
-[node name="ContextMenu" type="PopupMenu" parent="List"]
-allow_search = false
-item_count = 7
-item_0/text = "Rename"
-item_0/icon = ExtResource("5_8lac3")
-item_1/text = "Delete"
-item_1/icon = ExtResource("6_8uu2l")
-item_1/id = 1
-item_2/id = -1
-item_2/separator = true
-item_3/text = "Show in FileSystem Dock"
-item_3/icon = ExtResource("7_pnw47")
-item_3/id = 2
-item_4/text = "Open in OS File Manager"
-item_4/icon = ExtResource("7_hdi0a")
-item_4/id = 3
-item_5/id = -1
-item_5/separator = true
-item_6/text = "Reload"
-item_6/icon = ExtResource("2_so3ov")
-item_6/id = 4
-script = ExtResource("4_7sh7w")
-label_rename = "Rename"
-label_delete = "Delete"
-label_filesystem_godot = "Show in FileSystem Dock"
-label_filesystem_os = "Open in OS File Manager"
-label_reload = "Reload"
-icon_rename = ExtResource("5_8lac3")
-icon_delete = ExtResource("6_8uu2l")
-icon_filesystem_godot = ExtResource("7_pnw47")
-icon_filesystem_os = ExtResource("7_hdi0a")
-icon_reload = ExtResource("2_so3ov")
-
-[node name="FlashEffect" parent="List" instance=ExtResource("11_8veyq")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+_type = 1
