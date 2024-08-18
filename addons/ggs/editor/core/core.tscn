@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://buovvisskoqxh"]
+[gd_scene load_steps=14 format=3 uid="uid://buovvisskoqxh"]
 
 [ext_resource type="Theme" uid="uid://c4pwg7lhukqb8" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_w3bfk"]
+[ext_resource type="PackedScene" uid="uid://dhwbhrb1q27h3" path="res://addons/ggs/editor/main/groups/groups.tscn" id="3_rtnna"]
 [ext_resource type="PackedScene" uid="uid://bkp77x1seytg7" path="res://addons/ggs/editor/main/categories/categories.tscn" id="4_4p007"]
 [ext_resource type="Texture2D" uid="uid://b8o243gwa707v" path="res://addons/ggs/assets/main/icon_mono.svg" id="6_t7de8"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/save_file_menu.gd" id="7_guojl"]
@@ -8,14 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cdxv6r8uy2me5" path="res://addons/ggs/assets/main/docs.svg" id="8_mdi0r"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/pref_btn.gd" id="9_oodag"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/docs_btn.gd" id="9_qwavr"]
-[ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/popup/pref_window/pref_window.tscn" id="10_ir36c"]
+[ext_resource type="PackedScene" uid="uid://c42mh74d7l2rt" path="res://addons/ggs/editor/core/pref_win/pref_window.tscn" id="10_ir36c"]
 [ext_resource type="Texture2D" uid="uid://bt7gdorkvo4an" path="res://addons/ggs/assets/main/bug.svg" id="10_rly1w"]
 [ext_resource type="Script" path="res://addons/ggs/editor/core/src/bug_btn.gd" id="11_2ygfj"]
-[ext_resource type="Texture2D" uid="uid://bttv2hpecd38m" path="res://addons/ggs/assets/main/check_all.svg" id="14_767s3"]
-[ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/popup/notif_win/notif_win.tscn" id="15_45a50"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/vis_menu/vis_menu.gd" id="15_hfrgi"]
-[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/popup/rename_win/rename_win.tscn" id="16_brfyv"]
-[ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/popup/delete_win/delete_win.tscn" id="17_w0x4b"]
+[ext_resource type="PackedScene" uid="uid://dap6fot4e1fj4" path="res://addons/ggs/editor/core/notif_win/notif_win.tscn" id="15_45a50"]
 
 [node name="Core" type="Control"]
 custom_minimum_size = Vector2(0, 400)
@@ -41,6 +38,9 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="VSep_0" type="VSeparator" parent="MainCtnr"]
+layout_mode = 2
+
+[node name="Group" parent="MainCtnr" instance=ExtResource("3_rtnna")]
 layout_mode = 2
 
 [node name="VSep_1" type="VSeparator" parent="MainCtnr"]
@@ -80,18 +80,6 @@ script = ExtResource("9_oodag")
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="VisMenu" type="MenuButton" parent="MainCtnr/SideBar/BotCtnr"]
-layout_mode = 2
-tooltip_text = "UI Visibility"
-icon = ExtResource("14_767s3")
-item_count = 3
-popup/item_0/text = "Categories"
-popup/item_1/text = "Groups"
-popup/item_1/id = 1
-popup/item_2/text = "Settings"
-popup/item_2/id = 2
-script = ExtResource("15_hfrgi")
-
 [node name="DocsBtn" type="Button" parent="MainCtnr/SideBar/BotCtnr"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -111,11 +99,4 @@ script = ExtResource("11_2ygfj")
 [node name="PrefWindow" parent="." instance=ExtResource("10_ir36c")]
 unique_name_in_owner = true
 
-[node name="Popups" type="Node" parent="."]
-
-[node name="NotifWin" parent="Popups" instance=ExtResource("15_45a50")]
-
-[node name="RenameWin" parent="Popups" instance=ExtResource("16_brfyv")]
-
-[node name="DeleteWin" parent="Popups" instance=ExtResource("17_w0x4b")]
-visible = false
+[node name="NotifWin" parent="." instance=ExtResource("15_45a50")]

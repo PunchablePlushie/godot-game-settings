@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkp77x1seytg7"]
+[gd_scene load_steps=11 format=3 uid="uid://bkp77x1seytg7"]
 
-[ext_resource type="PackedScene" uid="uid://d4gao84ux34ek" path="res://addons/ggs/editor/shared_nodes/new_field/panel_new_field.tscn" id="1_jxn3j"]
-[ext_resource type="PackedScene" uid="uid://drgtw6g2lkffv" path="res://addons/ggs/editor/shared_nodes/panel_list/panel_list.tscn" id="4_wts0q"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/new_field.gd" id="2_bssmk"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/context_menu.gd" id="4_s7ows"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/src/list.gd" id="5_8gnix"]
+[ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="5_wwf6u"]
+[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="6_kf2qh"]
+[ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="7_1f6b7"]
+[ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="8_a00k7"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="9_3t8my"]
+[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/main/categories/rename_win/rename_win_category.tscn" id="9_21t0j"]
+[ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/main/categories/delete_win/delete_win_category.tscn" id="10_3u0ql"]
 
 [node name="Categories" type="VBoxContainer"]
 anchors_preset = 15
@@ -12,17 +20,64 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewField" parent="." node_paths=PackedStringArray("List") instance=ExtResource("1_jxn3j")]
+[node name="NewField" type="LineEdit" parent="." node_paths=PackedStringArray("List")]
 layout_mode = 2
 placeholder_text = "New Category..."
-editable = false
-_type = 1
+clear_button_enabled = true
+script = ExtResource("2_bssmk")
 List = NodePath("../List")
 
 [node name="HSep" type="HSeparator" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="List" parent="." instance=ExtResource("4_wts0q")]
+[node name="List" type="ItemList" parent="." node_paths=PackedStringArray("Menu", "RenameWin", "DeleteWin")]
 layout_mode = 2
-_type = 1
+size_flags_vertical = 3
+allow_rmb_select = true
+item_count = 2
+item_0/text = "cxz"
+item_1/text = "dsa"
+script = ExtResource("5_8gnix")
+Menu = NodePath("ContextMenu")
+RenameWin = NodePath("../RenameWin")
+DeleteWin = NodePath("../DeleteWin")
+
+[node name="ContextMenu" type="PopupMenu" parent="List"]
+unfocusable = true
+item_count = 7
+item_0/text = "Rename"
+item_0/icon = ExtResource("5_wwf6u")
+item_1/text = "Delete"
+item_1/icon = ExtResource("6_kf2qh")
+item_1/id = 1
+item_2/id = -1
+item_2/separator = true
+item_3/text = "Show in FileSystem Dock"
+item_3/icon = ExtResource("7_1f6b7")
+item_3/id = 2
+item_4/text = "Open in OS File Manager"
+item_4/icon = ExtResource("8_a00k7")
+item_4/id = 3
+item_5/id = -1
+item_5/separator = true
+item_6/text = "Reload"
+item_6/icon = ExtResource("9_3t8my")
+item_6/id = 4
+script = ExtResource("4_s7ows")
+label_rename = "Rename"
+label_delete = "Delete"
+label_filesystem_godot = "Show in FileSystem Dock"
+label_filesystem_os = "Open in OS File Manager"
+label_reload = "Reload"
+icon_rename = ExtResource("5_wwf6u")
+icon_delete = ExtResource("6_kf2qh")
+icon_filesystem_godot = ExtResource("7_1f6b7")
+icon_filesystem_os = ExtResource("8_a00k7")
+icon_reload = ExtResource("9_3t8my")
+
+[node name="RenameWin" parent="." instance=ExtResource("9_21t0j")]
+visible = false
+
+[node name="DeleteWin" parent="." instance=ExtResource("10_3u0ql")]
+visible = false

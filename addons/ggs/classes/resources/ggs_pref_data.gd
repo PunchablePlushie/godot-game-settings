@@ -10,19 +10,3 @@ class_name ggsPrefData
 	"components": "res://addons/ggs/components",
 	"game_config": "user://settings.cfg",
 }
-
-## Visibility state of specific GGS editor elements.
-@export var ui_vis: Dictionary = {
-	"categories": {
-		"new_field": true,
-		"filter_field": true,
-	},
-	"groups": {
-		"new_field": true,
-		"filter_field": true,
-	},
-	"settings": {
-		"add_bar": true,
-		"filter_field": true,
-	},
-}

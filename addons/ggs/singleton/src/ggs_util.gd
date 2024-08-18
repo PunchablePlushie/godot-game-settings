@@ -8,11 +8,6 @@ extends Node
 @export var _Event: Node
 
 
-func _ready() -> void:
-	_Event.rename_confirmed.connect(_on_Global_rename_confirmed)
-	_Event.delete_confirmed.connect(_on_Global_delete_confirmed)
-
-
 func remove_underscored(list: PackedStringArray) -> PackedStringArray:
 	var filter_method: Callable = func(e): return not e.begins_with("_")
 	var filtered_list: Array = Array(list).filter(filter_method)
@@ -69,22 +64,6 @@ func show_item_in_filesystem_os(item_type: ggsCore.ItemType, item_name: String) 
 	
 	path = ProjectSettings.globalize_path(path)
 	OS.shell_show_in_file_manager(path)
-
-
-func _on_Global_rename_confirmed(item_type: ggsCore.ItemType, prev_name:String, new_name: String) -> void:
-	var from: String = get_item_path(item_type, prev_name)
-	var to: String = get_item_path(item_type, new_name)
-	
-	DirAccess.rename_absolute(from, to)
-	EditorInterface.get_resource_filesystem().scan()
-
-
-func _on_Global_delete_confirmed(item_type: ggsCore.ItemType, item_name: String) -> void:
-	var path: String = get_item_path(item_type, item_name)
-	path = ProjectSettings.globalize_path(path)
-	
-	OS.move_to_trash(path)
-	EditorInterface.get_resource_filesystem().scan()
 
 #endregion
 

@@ -1,6 +1,5 @@
 @tool
 extends PopupMenu
-class_name ggsBaseContextMenu
 
 enum ItemId {RENAME, DELETE, FILESYSTEM_GODOT, FILESYSTEM_OS, RELOAD}
 

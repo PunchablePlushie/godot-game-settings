@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cipgbptnweeq5"]
+
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/delete_win/src/delete_win_category.gd" id="1_55qfc"]
+
+[node name="DeleteWin" type="ConfirmationDialog" node_paths=PackedStringArray("_DialogText", "_CheckBtn")]
+title = "Delete Category"
+position = Vector2i(186, 125)
+size = Vector2i(600, 123)
+visible = true
+unresizable = true
+min_size = Vector2i(550, 70)
+script = ExtResource("1_55qfc")
+_text_regular = "Are you sure you want to delete category \"{0}\" and all of its items?
+The category folder will be moved to your system's recycle bin."
+_text_perma_delete = "Are you sure you want to permanently delete category \"{0}\" and all of its items?
+This action cannot be undone."
+_DialogText = NodePath("Ctnr/DialogText")
+_CheckBtn = NodePath("Ctnr/CheckBtn")
+
+[node name="Ctnr" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 74.0
+
+[node name="DialogText" type="Label" parent="Ctnr"]
+layout_mode = 2
+
+[node name="HSep" type="HSeparator" parent="Ctnr"]
+layout_mode = 2
+
+[node name="CheckBtn" type="CheckBox" parent="Ctnr"]
+layout_mode = 2
+text = "Delete permanently"

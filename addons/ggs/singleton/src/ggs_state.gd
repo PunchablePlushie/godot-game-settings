@@ -22,4 +22,4 @@ func _on_Global_item_selected(item_type: ggsCore.ItemType ,item_name: String) ->
 			selected_group = item_name
 		ggsCore.ItemType.SETTING:
 			selected_setting = item_name
-		
+	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dap6fot4e1fj4"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/popup/notif_win/src/notif_win.gd" id="1_h7aa6"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/notif_win/src/notif_win.gd" id="1_h7aa6"]
 
 [node name="NotifWin" type="AcceptDialog"]
 auto_translate_mode = 1

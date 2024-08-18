@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c42mh74d7l2rt"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/popup/pref_window/pref_window.gd" id="1_ihv6i"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/pref_win/pref_window.gd" id="1_ihv6i"]
 [ext_resource type="Texture2D" uid="uid://badl61ealw70o" path="res://addons/ggs/assets/file_dialog.svg" id="2_qx4su"]
 [ext_resource type="Texture2D" uid="uid://bk0u7p6a1apta" path="res://addons/ggs/assets/popup/preferences/icon_mini.svg" id="3_ggsp5"]
 

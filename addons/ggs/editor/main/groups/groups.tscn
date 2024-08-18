@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhwbhrb1q27h3"]
+[gd_scene load_steps=10 format=3 uid="uid://dhwbhrb1q27h3"]
 
 [ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/new_field.gd" id="1_8i8sf"]
-[ext_resource type="PackedScene" uid="uid://rcjwjrntfpgm" path="res://addons/ggs/editor/shared_nodes/vis_manager/vis_manager.tscn" id="1_neaee"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/filter_field.gd" id="3_rbl05"]
-[ext_resource type="PackedScene" uid="uid://3acgk2lkp6sl" path="res://addons/ggs/editor/shared_nodes/occluder/occluder.tscn" id="10_us21d"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/list.gd" id="2_7aqvv"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/context_menu.gd" id="3_bq2vq"]
+[ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="4_xt7i7"]
+[ext_resource type="Texture2D" uid="uid://cs26dievm22hp" path="res://addons/ggs/assets/main/clear_settings.svg" id="5_0qsdn"]
+[ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="5_gxvwa"]
+[ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="6_bd1co"]
+[ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="7_py1br"]
+[ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="8_d3kf6"]
 
 [node name="Group" type="MarginContainer"]
 anchors_preset = 15
@@ -22,32 +27,13 @@ size_flags_vertical = 3
 [node name="NewField" type="LineEdit" parent="MainCtnr" node_paths=PackedStringArray("List")]
 layout_mode = 2
 placeholder_text = "New Group..."
-editable = false
 clear_button_enabled = true
 script = ExtResource("1_8i8sf")
-_type = 0
-List = NodePath("")
-
-[node name="VisManager" parent="MainCtnr/NewField" instance=ExtResource("1_neaee")]
-section = "groups"
-key = "new_field"
+List = NodePath("../ListCtnr/Ctnr/List")
 
 [node name="HSep" type="HSeparator" parent="MainCtnr"]
 layout_mode = 2
 theme_override_constants/separation = 0
-
-[node name="FilterField" type="LineEdit" parent="MainCtnr" node_paths=PackedStringArray("List")]
-layout_mode = 2
-placeholder_text = "Filter Groups..."
-editable = false
-clear_button_enabled = true
-script = ExtResource("3_rbl05")
-_type = 0
-List = NodePath("")
-
-[node name="VisManager" parent="MainCtnr/FilterField" instance=ExtResource("1_neaee")]
-section = "groups"
-key = "filter_field"
 
 [node name="ListCtnr" type="MarginContainer" parent="MainCtnr"]
 layout_mode = 2
@@ -62,6 +48,48 @@ layout_mode = 2
 toggle_mode = true
 text = "No Group"
 
-[node name="Occluder" parent="MainCtnr/ListCtnr" instance=ExtResource("10_us21d")]
+[node name="List" type="ItemList" parent="MainCtnr/ListCtnr/Ctnr"]
 layout_mode = 2
-label_text = "Select a Category"
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "cxz"
+item_1/text = "dsa"
+script = ExtResource("2_7aqvv")
+
+[node name="ContextMenu" type="PopupMenu" parent="MainCtnr/ListCtnr/Ctnr/List"]
+unfocusable = true
+item_count = 8
+item_0/text = "Rename"
+item_0/icon = ExtResource("4_xt7i7")
+item_1/text = "Clear Settings"
+item_1/icon = ExtResource("5_0qsdn")
+item_1/id = 1
+item_2/text = "Delete"
+item_2/icon = ExtResource("5_gxvwa")
+item_2/id = 2
+item_3/id = -1
+item_3/separator = true
+item_4/text = "Show in FileSystem Dock"
+item_4/icon = ExtResource("6_bd1co")
+item_4/id = 3
+item_5/text = "Open in OS File Manager"
+item_5/icon = ExtResource("7_py1br")
+item_5/id = 4
+item_6/id = -1
+item_6/separator = true
+item_7/text = "Reload"
+item_7/icon = ExtResource("8_d3kf6")
+item_7/id = 5
+script = ExtResource("3_bq2vq")
+label_rename = "Rename"
+label_clear = "Clear Settings"
+label_delete = "Delete"
+label_filesystem_godot = "Show in FileSystem Dock"
+label_filesystem_os = "Open in OS File Manager"
+label_reload = "Reload"
+icon_rename = ExtResource("4_xt7i7")
+icon_clear = ExtResource("5_0qsdn")
+icon_delete = ExtResource("5_gxvwa")
+icon_filesystem_godot = ExtResource("6_bd1co")
+icon_filesystem_os = ExtResource("7_py1br")
+icon_reload = ExtResource("8_d3kf6")
