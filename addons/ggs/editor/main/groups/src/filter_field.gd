@@ -2,7 +2,7 @@
 extends LineEdit
 
 @export_group("Nodes")
-@export var List: ggsItemList
+@export var List: ggsBaseItemList
 
 
 func _ready() -> void:

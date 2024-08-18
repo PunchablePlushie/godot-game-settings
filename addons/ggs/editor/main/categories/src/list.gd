@@ -1,5 +1,5 @@
 @tool
-extends ggsItemList
+extends ggsBaseItemList
 
 signal loaded
 

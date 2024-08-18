@@ -4,3 +4,23 @@
 
 [resource]
 script = ExtResource("1_6udwc")
+paths = {
+"components": "res://addons/ggs/components",
+"game_config": "user://settings.cfg",
+"settings": "res://game_settings",
+"templates": "res://addons/ggs/templates"
+}
+ui_vis = {
+"categories": {
+"filter_field": true,
+"new_field": true
+},
+"groups": {
+"filter_field": true,
+"new_field": true
+},
+"settings": {
+"add_bar": true,
+"filter_field": true
+}
+}

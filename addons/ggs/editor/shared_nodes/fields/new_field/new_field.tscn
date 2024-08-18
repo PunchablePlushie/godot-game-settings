@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfhdd68iercdr"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/shared_nodes/new_field/src/new_field.gd" id="1_qmi1s"]
+[ext_resource type="Script" path="res://addons/ggs/editor/shared_nodes/fields/new_field/src/new_field.gd" id="1_qmi1s"]
 
 [node name="NewField" type="LineEdit"]
 anchors_preset = 15

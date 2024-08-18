@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://dhwbhrb1q27h3"]
 
-[ext_resource type="PackedScene" uid="uid://cfhdd68iercdr" path="res://addons/ggs/editor/shared_nodes/new_field/new_field.tscn" id="1_cayqe"]
+[ext_resource type="PackedScene" uid="uid://cfhdd68iercdr" path="res://addons/ggs/editor/shared_nodes/fields/new_field/new_field.tscn" id="1_cayqe"]
 [ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/list.gd" id="1_dd653"]
 [ext_resource type="PackedScene" uid="uid://rcjwjrntfpgm" path="res://addons/ggs/editor/shared_nodes/vis_manager/vis_manager.tscn" id="1_neaee"]
 [ext_resource type="Texture2D" uid="uid://c2t5bnnw5wntg" path="res://addons/ggs/assets/main/rename.svg" id="2_rx7b3"]
-[ext_resource type="Script" path="res://addons/ggs/editor/main/groups/src/filter_field.gd" id="3_q30ii"]
+[ext_resource type="PackedScene" uid="uid://c7ofbdisxru3i" path="res://addons/ggs/editor/shared_nodes/fields/filter_field/filter_field.tscn" id="3_d35je"]
 [ext_resource type="Texture2D" uid="uid://bn0d5k8dd06qr" path="res://addons/ggs/assets/main/delete.svg" id="3_uw371"]
 [ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="4_ti6ut"]
 [ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="5_f2oxu"]
@@ -26,31 +26,29 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewField" parent="MainCtnr" node_paths=PackedStringArray("_List") instance=ExtResource("1_cayqe")]
+[node name="NewField" parent="MainCtnr" node_paths=PackedStringArray("List") instance=ExtResource("1_cayqe")]
 layout_mode = 2
 placeholder_text = "New Group..."
 editable = false
-_mode = 2
-_List = NodePath("../ListCtnr/Ctnr/List")
+mode = 2
+List = NodePath("../ListCtnr/Ctnr/List")
 
 [node name="VisManager" parent="MainCtnr/NewField" instance=ExtResource("1_neaee")]
 section = "groups"
 key = "new_field"
 
-[node name="FilterField" type="LineEdit" parent="MainCtnr" node_paths=PackedStringArray("List")]
+[node name="HSep" type="HSeparator" parent="MainCtnr"]
 layout_mode = 2
-placeholder_text = "Filter Groups..."
-clear_button_enabled = true
-script = ExtResource("3_q30ii")
+theme_override_constants/separation = 0
+
+[node name="FilterField" parent="MainCtnr" node_paths=PackedStringArray("List") instance=ExtResource("3_d35je")]
+layout_mode = 2
+mode = 2
 List = NodePath("../ListCtnr/Ctnr/List")
 
 [node name="VisManager" parent="MainCtnr/FilterField" instance=ExtResource("1_neaee")]
 section = "groups"
 key = "filter_field"
-
-[node name="HSep" type="HSeparator" parent="MainCtnr"]
-layout_mode = 2
-theme_override_constants/separation = 0
 
 [node name="ListCtnr" type="MarginContainer" parent="MainCtnr"]
 layout_mode = 2

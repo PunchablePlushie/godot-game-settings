@@ -4,7 +4,7 @@ class_name ggsPrefRes
 ## Plugin preferences resource.
 
 ## Various paths used throughout the plugin.
-var paths: Dictionary = {
+@export var paths: Dictionary = {
 	"settings": "res://game_settings",
 	"templates": "res://addons/ggs/templates",
 	"components": "res://addons/ggs/components",
@@ -12,7 +12,7 @@ var paths: Dictionary = {
 }
 
 ## Visibility state of specific GGS editor elements.
-var ui_vis: Dictionary = {
+@export var ui_vis: Dictionary = {
 	"categories": {
 		"new_field": true,
 		"filter_field": true,
