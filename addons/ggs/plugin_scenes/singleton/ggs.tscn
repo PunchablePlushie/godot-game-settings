@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://esw7j7or7gpd"]
 
-[ext_resource type="Script" path="res://addons/ggs/singleton/ggs.gd" id="1_6v3cu"]
+[ext_resource type="Script" path="res://addons/ggs/plugin_scenes/singleton/ggs.gd" id="1_6v3cu"]
 [ext_resource type="Script" path="res://addons/ggs/classes/ggs_game_config.gd" id="5_hjnpp"]
 
 [node name="GGS" type="Node" node_paths=PackedStringArray("GameConfig")]
