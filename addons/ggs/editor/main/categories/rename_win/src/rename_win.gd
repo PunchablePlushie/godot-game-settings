@@ -47,6 +47,7 @@ func _on_OkBtn_pressed() -> void:
 
 
 func _on_Global_notif_closed(_type: ggsCore.NotifType) -> void:
-	grab_focus()
-	_Field.grab_focus()
-	_Field.select_all()
+	if visible:
+		grab_focus()
+		_Field.grab_focus()
+		_Field.select_all()

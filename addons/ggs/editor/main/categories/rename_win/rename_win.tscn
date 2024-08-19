@@ -1,13 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://u2vig40n5byw"]
 
-[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/rename_win/src/rename_win_category.gd" id="1_oqys5"]
+[ext_resource type="Script" path="res://addons/ggs/editor/main/categories/rename_win/src/rename_win.gd" id="1_oqys5"]
 
 [node name="RenameWin" type="ConfirmationDialog" node_paths=PackedStringArray("_DialogText", "_Field")]
 auto_translate_mode = 1
-title = "Rename Item"
+title = "Rename Category"
 position = Vector2i(0, 36)
 size = Vector2i(493, 127)
-visible = true
 unresizable = true
 min_size = Vector2i(400, 100)
 dialog_hide_on_ok = false

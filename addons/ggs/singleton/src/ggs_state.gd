@@ -23,3 +23,4 @@ func _on_Global_item_selected(item_type: ggsCore.ItemType ,item_name: String) ->
 		ggsCore.ItemType.SETTING:
 			selected_setting = item_name
 	
+	_Event.item_post_select.emit(item_type, item_name)

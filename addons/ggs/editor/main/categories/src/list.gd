@@ -43,8 +43,7 @@ func _load_from_disc() -> PackedStringArray:
 
 #endregion
 
-
-#region Context Menu
+#region Context Menu Visibility
 func _show_menu(at_position: Vector2, disable_item_actions: bool) -> void:
 	# For some reason the menu won't popup at the exact cursor location
 	# without this offset.
@@ -64,10 +63,20 @@ func _on_empty_clicked(at_position: Vector2, mouse_button_index: int) -> void:
 	if mouse_button_index == MOUSE_BUTTON_RIGHT:
 		_show_menu(at_position, true)
 
+#endregion
 
+#region Context Menu Items
 func _on_Menu_id_pressed(id: int) -> void:
-	var selected_idx: int = get_selected_items()[0]
-	var item: String = get_item_text(selected_idx)
+	var selected_items: PackedInt32Array = get_selected_items()
+	var selected_idx: int
+	var item: String
+	
+	if selected_items.is_empty():
+		selected_idx = -1
+		item = ""
+	else:
+		selected_idx = selected_items[0]
+		item = get_item_text(selected_items[0])
 	
 	match id:
 		Menu.ItemId.RENAME:

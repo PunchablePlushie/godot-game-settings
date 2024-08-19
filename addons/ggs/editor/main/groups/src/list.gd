@@ -3,7 +3,13 @@ extends ItemList
 
 const _TYPE: ggsCore.ItemType = ggsCore.ItemType.GROUP
 
-@onready var Menu: PopupMenu = $ContextMenu
+@export_group("Nodes")
+@export var Menu: PopupMenu
+@export var Occluder: MarginContainer
+@export var RenameWin: ConfirmationDialog
+@export var DeleteWin: ConfirmationDialog
+@export var SettingsResetWin: ConfirmationDialog
+@export var SettingsDeleteWin: ConfirmationDialog
 
 
 func _ready() -> void:
@@ -11,7 +17,17 @@ func _ready() -> void:
 	item_clicked.connect(_on_item_clicked)
 	empty_clicked.connect(_on_empty_clicked)
 	Menu.id_pressed.connect(_on_Menu_id_pressed)
-	GGS.Event.item_selected.connect(_on_Global_item_selected)
+	GGS.Event.item_post_select.connect(_on_Global_item_post_select)
+	RenameWin.rename_confirmed.connect(_on_RenameWin_rename_confirmed)
+	DeleteWin.delete_confirmed.connect(_on_DeleteWin_delete_confirmed)
+	
+	_set_disabled(true)
+
+
+func _set_disabled(disabled: bool) -> void:
+	Occluder.visible = disabled
+	if disabled:
+		clear()
 
 
 func _on_item_selected(item_index: int) -> void:
@@ -23,11 +39,15 @@ func _on_item_selected(item_index: int) -> void:
 func load_items() -> void:
 	clear()
 	
+	if GGS.State.selected_category.is_empty():
+		return
+	
 	var items: PackedStringArray = _load_from_disc()
 	for item in items:
 		add_item(item)
 	
 	GGS.Event.item_selected.emit(_TYPE, "")
+	Occluder.visible = false
 
 
 func _load_from_disc() -> PackedStringArray:
@@ -38,19 +58,17 @@ func _load_from_disc() -> PackedStringArray:
 	return GGS.Util.remove_underscored(dirs)
 
 
-func _on_Global_item_selected(item_type: ggsCore.ItemType, item_name: String) -> void:
+func _on_Global_item_post_select(item_type: ggsCore.ItemType, item_name: String) -> void:
 	if item_type == ggsCore.ItemType.CATEGORY:
 		if item_name.is_empty():
-			clear()
-			print("TODO: disabling the list - group/list.gd::45")
+			_set_disabled(true)
 			return
 		
 		load_items()
 
 #endregion
 
-
-#region Context Menu
+#region Context Menu Visibility
 func _show_menu(at_position: Vector2, disable_item_actions: bool) -> void:
 	# For some reason the menu won't popup at the exact cursor location
 	# without this offset.
@@ -70,17 +88,35 @@ func _on_empty_clicked(at_position: Vector2, mouse_button_index: int) -> void:
 	if mouse_button_index == MOUSE_BUTTON_RIGHT:
 		_show_menu(at_position, true)
 
+#endregion
 
+#region Context Menu Items
 func _on_Menu_id_pressed(id: int) -> void:
-	var selected_idx: int = get_selected_items()[0]
-	var item: String = get_item_text(selected_idx)
+	var selected_items: PackedInt32Array = get_selected_items()
+	var selected_idx: int
+	var item: String
+	
+	if selected_items.is_empty():
+		selected_idx = -1
+		item = ""
+	else:
+		selected_idx = selected_items[0]
+		item = get_item_text(selected_items[0])
 	
 	match id:
 		Menu.ItemId.RENAME:
-			GGS.Event.rename_requested.emit(_TYPE, item)
+			RenameWin.item_name = item
+			RenameWin.popup_centered(RenameWin.min_size)
 		
 		Menu.ItemId.DELETE:
-			GGS.Event.delete_requested.emit(_TYPE, item)
+			DeleteWin.item_name = item
+			DeleteWin.popup_centered(DeleteWin.min_size)
+		
+		Menu.ItemId.SETTINGS_RESET:
+			pass
+		
+		Menu.ItemId.SETTINGS_DELETE:
+			pass
 		
 		Menu.ItemId.FILESYSTEM_GODOT:
 			GGS.Util.show_item_in_filesystem_godot(_TYPE, item)
@@ -90,20 +126,32 @@ func _on_Menu_id_pressed(id: int) -> void:
 		
 		Menu.ItemId.RELOAD:
 			load_items()
-			print("GGS - Reload Categories: Successful.")
+			print("GGS - Reload Groups: Successful.")
 
 
-func _on_Global_rename_confirmed(item_type: ggsCore.ItemType, _prev_name: String, _new_name: String) -> void:
-	if item_type != ggsCore.ItemType.CATEGORY:
-		return
+func _on_RenameWin_rename_confirmed(prev_name: String, new_name: String) -> void:
+	var path: String = GGS.Pref.data.paths["settings"]
+	path = path.path_join(GGS.State.selected_category)
+	var from: String = path.path_join(prev_name)
+	var to: String = path.path_join(new_name)
+	DirAccess.rename_absolute(from, to)
 	
+	EditorInterface.get_resource_filesystem().scan()
 	load_items()
 
 
-func _on_Global_delete_confirmed(item_type: ggsCore.ItemType, _item_name: String) -> void:
-	if item_type != ggsCore.ItemType.CATEGORY:
-		return
+func _on_DeleteWin_delete_confirmed(item_name: String, is_permanent: bool) -> void:
+	var path: String = GGS.Pref.data.paths["settings"]
+	path = path.path_join(GGS.State.selected_category)
+	path = path.path_join(item_name)
 	
+	if is_permanent:
+		DirAccess.remove_absolute(path)
+	else:
+		path = ProjectSettings.globalize_path(path)
+		OS.move_to_trash(path)
+	
+	EditorInterface.get_resource_filesystem().scan()
 	load_items()
 
 #endregion

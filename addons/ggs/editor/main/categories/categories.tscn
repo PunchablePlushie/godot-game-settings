@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b3k4xysnjjo6y" path="res://addons/ggs/assets/main/filesystem_godot.svg" id="7_1f6b7"]
 [ext_resource type="Texture2D" uid="uid://buvhmwckm6s2e" path="res://addons/ggs/assets/main/filesystem_os.svg" id="8_a00k7"]
 [ext_resource type="Texture2D" uid="uid://ve54bl3r7ljc" path="res://addons/ggs/assets/main/reload.svg" id="9_3t8my"]
-[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/main/categories/rename_win/rename_win_category.tscn" id="9_21t0j"]
-[ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/main/categories/delete_win/delete_win_category.tscn" id="10_3u0ql"]
+[ext_resource type="PackedScene" uid="uid://u2vig40n5byw" path="res://addons/ggs/editor/main/categories/rename_win/rename_win.tscn" id="9_21t0j"]
+[ext_resource type="PackedScene" uid="uid://cipgbptnweeq5" path="res://addons/ggs/editor/main/categories/delete_win/delete_win.tscn" id="10_3u0ql"]
 
 [node name="Categories" type="VBoxContainer"]
 anchors_preset = 15
@@ -69,7 +69,7 @@ label_rename = "Rename"
 label_delete = "Delete"
 label_filesystem_godot = "Show in FileSystem Dock"
 label_filesystem_os = "Open in OS File Manager"
-label_reload = "Reload"
+label_reload = "Reload List"
 icon_rename = ExtResource("5_wwf6u")
 icon_delete = ExtResource("6_kf2qh")
 icon_filesystem_godot = ExtResource("7_1f6b7")
