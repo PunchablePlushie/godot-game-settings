@@ -3,10 +3,20 @@ extends EditorInspectorPlugin
 class_name ggsInspectorPlugin
 
 var input_selector_scn: PackedScene = preload("./input_selector/input_selector.tscn")
-
+const TYPE_SELECTOR_SCN: PackedScene = preload("./type_selector/type_selector.tscn")
 
 func _can_handle(object: Object) -> bool:
-	return object is ggsInputSetting
+	return object is ggsSetting
+
+
+func _parse_property(object: Object, type: Variant.Type, name: String,
+		hint_type: PropertyHint, hint_string: String, usage_flags: int,
+		wide: bool) -> bool:
+	if name == "value_type":
+		add_property_editor(name, TYPE_SELECTOR_SCN.instantiate())
+		return true
+	
+	return false
 
 
 func _parse_category(object: Object, category: String) -> void:

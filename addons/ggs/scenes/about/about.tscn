@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bv72i2o5g8qxl"]
 
-[ext_resource type="Script" path="res://addons/ggs/plugin_scenes/about/about.gd" id="1_udp4e"]
+[ext_resource type="Script" path="res://addons/ggs/scenes/about/about.gd" id="1_udp4e"]
 [ext_resource type="Texture2D" uid="uid://b16vjyxohf7mc" path="res://icon.svg" id="2_jgjm0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vqsc1"]

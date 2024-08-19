@@ -5,7 +5,6 @@
 [resource]
 script = ExtResource("1_dv4nb")
 file_name = "settings.cfg"
-subsection_behavior = 0
-subsection_seperator = "__"
+subsect_seperator = "__"
 path_settings = "res://game_settings"
 path_templates = "res://addons/ggs/templates"

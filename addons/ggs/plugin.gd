@@ -4,7 +4,7 @@ extends EditorPlugin
 const SINGLETON_NAME: String = "GGS"
 const SINGLETON_PATH: String = "res://addons/ggs/globals/ggs.tscn"
 const TOOL_ITEM: String = "About Godot Game Settings"
-const ABOUT_SCN = preload("res://addons/ggs/plugin_scenes/about/about.tscn")
+const ABOUT_SCN = preload("res://addons/ggs/scenes/about/about.tscn")
 
 var inspector_plugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
 

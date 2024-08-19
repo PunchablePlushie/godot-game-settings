@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk1iyx1srawvv"]
+
+[ext_resource type="Script" path="res://addons/ggs/scenes/inspector/type_selector/type_selector.gd" id="1_vlpv0"]
+
+[node name="TypeSelector" type="EditorProperty" node_paths=PackedStringArray("Btn")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vlpv0")
+Btn = NodePath("Btn")
+
+[node name="Btn" type="Button" parent="."]
+layout_mode = 2
+alignment = 0
+text_overrun_behavior = 3
+clip_text = true

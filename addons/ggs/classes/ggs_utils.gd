@@ -4,17 +4,30 @@ class_name ggsUtils
 ## Provides utility methods used in GGS.
 
 
-static func get_enum_string(target_enum: String) -> String:
-	var types: PackedStringArray = [
-		"Nil","Bool","Int","Float","String","Vector2","Vector2i","Rect2",
-		"Rect2i","Vector3","Vector3i","Transform2D","Vector4","Vector4i","Plane",
-		"Quaternion","AABB","Basis","Transform3D","Projection","Color",
-		"StringName","NodePath","RID","Object","Callable","Signal","Dictionary",
-		"Array","PackedByteArray","PackedInt32Array","PackedInt64Array",
-		"PackedFloat32Array","PackedFloat64Array","PackedStringArray",
-		"PackedVector2Array","PackedVector3Array","PackedColorArray"
+static func get_all_types() -> PackedStringArray:
+	return [
+		"Nil","bool","int","float","String","Vector2","Vector2i","Rect2",
+		"Rect2i","Vector3","Vector3i","Transform2D","Vector4","Vector4i",
+		"Plane", "Quaternion","AABB","Basis","Transform3D","Projection",
+		"Color", "StringName","NodePath","RID","Object","Callable",
+		"Signal","Dictionary", "Array","PackedByteArray","PackedInt32Array",
+		"PackedInt64Array", "PackedFloat32Array","PackedFloat64Array",
+		"PackedStringArray", "PackedVector2Array","PackedVector3Array",
+		"PackedColorArray",
 	]
-	
+
+
+static func get_type_string(type: Variant.Type) -> String:
+	return get_all_types()[type]
+
+
+static func get_type_icon(type: Variant.Type) -> Texture2D:
+	var BaseControl: Control = EditorInterface.get_base_control()
+	var type_string: String = get_type_string(type)
+	return BaseControl.get_theme_icon(type_string, "EditorIcons")
+
+
+static func get_enum_string(target_enum: String) -> String:
 	var property_hints: PackedStringArray = [
 		"None","Range","Enum","Enum Suggestion","Exp Easing","Link","Flags",
 		"Layers 2D Render","Layers 2D Physics","Layers 2D Navigation",
@@ -29,8 +42,6 @@ static func get_enum_string(target_enum: String) -> String:
 	
 	var enum_string: String
 	match target_enum:
-		"Variant.Type":
-			enum_string = ",".join(types)
 		"PropertyHint":
 			enum_string = ",".join(property_hints)
 	
