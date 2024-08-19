@@ -1,37 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://esw7j7or7gpd"]
+[gd_scene load_steps=3 format=3 uid="uid://esw7j7or7gpd"]
 
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs.gd" id="1_6v3cu"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_util.gd" id="2_ly0hh"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_state.gd" id="3_dgje8"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_event.gd" id="4_sh1mk"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_game_config.gd" id="5_hjnpp"]
-[ext_resource type="Script" path="res://addons/ggs/singleton/src/ggs_pref.gd" id="6_okuxg"]
-[ext_resource type="Resource" uid="uid://b2xq0og71kabn" path="res://addons/ggs/preferences.tres" id="7_uuxqp"]
+[ext_resource type="Script" path="res://addons/ggs/singleton/ggs.gd" id="1_6v3cu"]
+[ext_resource type="Script" path="res://addons/ggs/classes/ggs_game_config.gd" id="5_hjnpp"]
 
-[node name="GGS" type="Node" node_paths=PackedStringArray("Util", "Pref", "State", "Event", "GameConfig")]
+[node name="GGS" type="Node" node_paths=PackedStringArray("GameConfig")]
 script = ExtResource("1_6v3cu")
-Util = NodePath("Util")
-Pref = NodePath("Pref")
-State = NodePath("State")
-Event = NodePath("Event")
 GameConfig = NodePath("GameConfig")
-
-[node name="Util" type="Node" parent="." node_paths=PackedStringArray("_Pref", "_State", "_Event")]
-script = ExtResource("2_ly0hh")
-_Pref = NodePath("../Pref")
-_State = NodePath("../State")
-_Event = NodePath("../Event")
-
-[node name="Pref" type="Node" parent="."]
-script = ExtResource("6_okuxg")
-data = ExtResource("7_uuxqp")
-
-[node name="State" type="Node" parent="." node_paths=PackedStringArray("_Event")]
-script = ExtResource("3_dgje8")
-_Event = NodePath("../Event")
-
-[node name="Event" type="Node" parent="."]
-script = ExtResource("4_sh1mk")
 
 [node name="GameConfig" type="Node" parent="."]
 script = ExtResource("5_hjnpp")
