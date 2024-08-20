@@ -3,6 +3,50 @@ extends RefCounted
 class_name ggsUtils
 ## Provides utility methods used in GGS.
 
+const ALL_TYPES: Dictionary = {
+	0: "Nil",
+	1: "bool",
+	2: "int",
+	3: "float",
+	4: "String",
+	5: "Vector2",
+	6: "Vector2i",
+	7: "Rect2",
+	8: "Rect2i",
+	9: "Vector3",
+	10: "Vector3i",
+	11: "Transform2D",
+	12: "Vector4",
+	13: "Vector4i",
+	14: "Plane",
+	15: "Quaternion",
+	16: "AABB",
+	17: "Basis",
+	18: "Transform3D",
+	19: "Projection",
+	20: "Color",
+	21: "StringName",
+	22: "NodePath",
+	23: "RID",
+	24: "Object",
+	25: "Callable",
+	26: "Signal",
+	27: "Dictionary",
+	28: "Array",
+	29: "PackedByteArray",
+	30: "PackedInt32Array",
+	31: "PackedInt64Array",
+	32: "PackedFloat32Array",
+	33: "PackedFloat64Array",
+	34: "PackedStringArray",
+	35: "PackedVector2Array",
+	36: "PackedVector3Array",
+	37: "PackedColorArray",
+	38: "PackedVector4Array",
+	39: "_MAX (Enum Size = 39)",
+}
+
+
 const ALL_HINTS: Dictionary = {
 	0: "None",
 	1: "Range",
@@ -46,26 +90,9 @@ const ALL_HINTS: Dictionary = {
 }
 
 
-static func get_all_types() -> PackedStringArray:
-	return [
-		"Nil","bool","int","float","String","Vector2","Vector2i","Rect2",
-		"Rect2i","Vector3","Vector3i","Transform2D","Vector4","Vector4i",
-		"Plane", "Quaternion","AABB","Basis","Transform3D","Projection",
-		"Color", "StringName","NodePath","RID","Object","Callable",
-		"Signal","Dictionary", "Array","PackedByteArray","PackedInt32Array",
-		"PackedInt64Array", "PackedFloat32Array","PackedFloat64Array",
-		"PackedStringArray", "PackedVector2Array","PackedVector3Array",
-		"PackedColorArray",
-	]
-
-
-static func get_type_string(type: Variant.Type) -> String:
-	return get_all_types()[type]
-
-
-static func get_type_icon(type: Variant.Type) -> Texture2D:
+static func type_get_icon(type: Variant.Type) -> Texture2D:
 	var BaseControl: Control = EditorInterface.get_base_control()
-	var type_string: String = get_type_string(type)
+	var type_string: String = ALL_TYPES[type]
 	return BaseControl.get_theme_icon(type_string, "EditorIcons")
 
 

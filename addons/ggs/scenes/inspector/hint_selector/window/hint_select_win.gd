@@ -48,11 +48,10 @@ func _on_Global_hint_selector_requested(type: Variant.Type) -> void:
 func _on_confirmed() -> void:
 	var selected_items: PackedInt32Array = _List.get_selected_items()
 	var item_idx: int = 0
-	return
+	
 	if _List.item_count > 1:
 		item_idx = selected_items[0]
 	
-	item_idx = selected_items[0]
 	var item: String = _List.get_item_text(item_idx)
 	var hint_idx = ggsUtils.ALL_HINTS.find_key(item)
 	_confirm_selection(hint_idx)

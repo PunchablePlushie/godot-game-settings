@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://b2xq0og71kabn" path="res://addons/ggs/preferences.tres" id="2_hb27a"]
 [ext_resource type="Script" path="res://addons/ggs/scenes/singleton/ggs_events.gd" id="3_bf0o6"]
 [ext_resource type="Script" path="res://addons/ggs/scenes/singleton/ggs_game_config.gd" id="5_hjnpp"]
-[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/scenes/inspector/type_selector/select_window/select_window.tscn" id="5_t3ax3"]
+[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/scenes/inspector/type_selector/window/type_select_win.tscn" id="5_t3ax3"]
 [ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/scenes/inspector/hint_selector/window/hint_select_win.tscn" id="6_cn0rp"]
 
 [node name="GGS" type="Node" node_paths=PackedStringArray("Events", "GameConfig")]
@@ -20,7 +20,6 @@ script = ExtResource("3_bf0o6")
 script = ExtResource("5_hjnpp")
 
 [node name="TypeSelectWin" parent="." node_paths=PackedStringArray("_Events") instance=ExtResource("5_t3ax3")]
-visible = false
 _Events = NodePath("../Events")
 
 [node name="HintSelectWin" parent="." node_paths=PackedStringArray("_Events") instance=ExtResource("6_cn0rp")]

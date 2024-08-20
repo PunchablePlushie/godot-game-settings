@@ -8,7 +8,6 @@ extends ConfirmationDialog
 @export var _List: ItemList
 
 var _field_value_is_valid: bool
-var _types: PackedStringArray = ggsUtils.get_all_types()
 
 @onready var OkBtn: Button = get_ok_button()
 
@@ -18,7 +17,6 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	visibility_changed.connect(_on_visibility_changed)
 	confirmed.connect(_on_confirmed)
 	_Events.type_selector_requested.connect(_on_Global_type_selector_requested)
 	
@@ -35,26 +33,25 @@ func _confirm_selection(selection: Variant.Type) -> void:
 
 
 func _on_Global_type_selector_requested() -> void:
+	_field_value_is_valid = false
+	
 	popup_centered()
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		OkBtn.disabled = true
-		_field_value_is_valid = false
-		_FilterField.clear()
-		_FilterField.grab_focus()
+	
+	OkBtn.disabled = true
+	_FilterField.clear()
+	_FilterField.grab_focus()
 
 
 func _on_confirmed() -> void:
-	if _List.item_count == 1:
-		var item: String = _List.get_item_text(0)
-		var idx: int = _types.find(item)
-		_confirm_selection(idx)
-		return
+	var selected_items: PackedInt32Array = _List.get_selected_items()
+	var item_idx: int = 0
 	
-	var selected: int = _List.get_selected_items()[0]
-	_confirm_selection(selected)
+	if _List.item_count > 1:
+		item_idx = selected_items[0]
+	
+	var item: String = _List.get_item_text(item_idx)
+	var hint_idx = ggsUtils.ALL_TYPES.find_key(item)
+	_confirm_selection(hint_idx)
 
 
 # Confirming through filter list #
@@ -68,7 +65,7 @@ func _on_FilterField_text_changed(new_text: String) -> void:
 func _on_FilterField_text_submitted(submitted_text: String) -> void:
 	if _field_value_is_valid:
 		var item: String = _List.get_item_text(0)
-		var idx: int = _types.find(item)
+		var idx: int = ggsUtils.ALL_TYPES.find_key(item)
 		_confirm_selection(idx)
 
 
@@ -79,5 +76,5 @@ func _on_List_item_selected(idx: int) -> void:
 
 func _on_List_item_activated(index: int) -> void:
 	var item: String = _List.get_item_text(index)
-	var idx: int = _types.find(item)
+	var idx: int = ggsUtils.ALL_TYPES.find_key(item)
 	_confirm_selection(idx)
