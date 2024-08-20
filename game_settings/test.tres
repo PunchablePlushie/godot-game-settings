@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_domsf")
-current = null
-default = null
-value_type = 2
+read_only_properties = PackedStringArray()
+current = false
+default = 0.0
+value_type = 3
 value_hint = 1
-value_hint_string = ""
+value_hint_string = "0,1"

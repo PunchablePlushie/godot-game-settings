@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bk1iyx1srawvv"]
+[gd_scene load_steps=2 format=3 uid="uid://guy0hof7ufw4"]
 
-[ext_resource type="Script" path="res://addons/ggs/scenes/inspector/type_selector/type_selector.gd" id="1_vlpv0"]
+[ext_resource type="Script" path="res://addons/ggs/scenes/inspector/hint_selector/hint_selector.gd" id="1_mt5sg"]
 
-[node name="TypeSelector" type="EditorProperty" node_paths=PackedStringArray("Btn", "Value")]
+[node name="HintSelector" type="EditorProperty" node_paths=PackedStringArray("Btn", "Value")]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_vlpv0")
+script = ExtResource("1_mt5sg")
 Btn = NodePath("Ctnr/Btn")
 Value = NodePath("Ctnr/Value")
 

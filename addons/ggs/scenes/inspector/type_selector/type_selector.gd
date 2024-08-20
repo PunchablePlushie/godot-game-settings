@@ -1,10 +1,9 @@
 @tool
 extends EditorProperty
 
-const TOOLTIP_PREFIX: String = "Actual Value: "
-
 @export_group("Nodes")
 @export var Btn: Button
+@export var Value: Label
 
 @onready var obj: ggsSetting = get_edited_object()
 @onready var property: StringName = get_edited_property()
@@ -14,10 +13,15 @@ func _ready() -> void:
 	Btn.pressed.connect(_on_Btn_pressed)
 	GGS.Events.type_selector_confirmed.connect(_on_Global_type_selector_confirmed)
 	
+	_update_controls()
+
+
+func _update_controls() -> void:
 	var type: Variant.Type = obj.get(property)
 	Btn.text = ggsUtils.get_type_string(type)
 	Btn.icon = ggsUtils.get_type_icon(type)
-	Btn.tooltip_text = TOOLTIP_PREFIX + str(type)
+	Btn.tooltip_text = Btn.text
+	Value.text = str(type)
 
 
 func _on_Btn_pressed() -> void:
@@ -27,7 +31,6 @@ func _on_Btn_pressed() -> void:
 func _on_Global_type_selector_confirmed(type: Variant.Type) -> void:
 	obj.set(property, type)
 	emit_changed(property, type)
+	obj.notify_property_list_changed()
 	
-	Btn.text = ggsUtils.get_type_string(type)
-	Btn.icon = ggsUtils.get_type_icon(type)
-	Btn.tooltip_text = TOOLTIP_PREFIX + str(type)
+	_update_controls()

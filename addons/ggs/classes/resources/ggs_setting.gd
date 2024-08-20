@@ -1,26 +1,40 @@
 @tool
 extends Resource
 class_name ggsSetting
+## Base resource for a game setting. Keeps track of the current and default
+## values of the setting and provides its "address" when needed.
 
+## The current value of the setting.
 var current: Variant#: set = set_current, get = get_current
+
+## The default value of the setting.
 var default: Variant
-var value_type: Variant.Type
-var value_hint: PropertyHint
+
+## The value type this setting accepts when running [method apply].
+## Also determines the type of [param current] and [param default].[br]
+## See [enum @GlobalScope.Variant.Type] for more details.
+var value_type: int
+# (Static Typing) Type.Variant is not used as it clutters the tooltip.
+
+## The [enum @GlobalScope.PropertyHint] used for the value. Can be used to customize
+## how [param current] and [param default] are exported and shown in the
+## inspector.
+var value_hint: int
+# (Static Typing) PropertyHint is not used as it clutters the tooltip.
+
+## Hint string used to provide additional information for certain
+## property hints. See [enum @GlobalScope.PropertyHint] for details.
 var value_hint_string: String
-var read_only_properties: PackedStringArray
+
+## Any property in this array will be read-only if exported to the
+## inspector via [method Object._get_property_list]. May not work with 
+## [annotation @GDScript.@export] annotations.
+@export_storage var read_only_properties: PackedStringArray
 
 
 func _get_property_list() -> Array:
-	var enum_string_types: String = ggsUtils.get_enum_string("Variant.Type")
-	var enum_string_property_hints: String = ggsUtils.get_enum_string("PropertyHint")
-	
 	var properties: Array
 	properties.append_array([
-		{
-			"name": "Setting",
-			"type": TYPE_NIL,
-			"usage": PROPERTY_USAGE_CATEGORY,
-		},
 		{
 			"name": "current",
 			"type": value_type,
@@ -31,33 +45,29 @@ func _get_property_list() -> Array:
 		{
 			"name": "default",
 			"type": value_type,
-			"usage": _get_property_usage("current"),
+			"usage": _get_property_usage("default"),
 			"hint": value_hint,
 			"hint_string": value_hint_string,
 		},
 		{
-			"name": "Internal",
+			"name": "Value Info",
 			"type": TYPE_NIL,
 			"usage": PROPERTY_USAGE_GROUP,
 		},
 		{
 			"name": "value_type",
 			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": enum_string_types,
+			"usage": _get_property_usage("value_type"),
 		},
 		{
 			"name": "value_hint",
 			"type": TYPE_INT,
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"hint": PROPERTY_HINT_ENUM,
-			"hint_string": enum_string_property_hints,
+			"usage": _get_property_usage("value_hint"),
 		},
 		{
 			"name": "value_hint_string",
 			"type": TYPE_STRING,
-			"usage": PROPERTY_USAGE_DEFAULT,
+			"usage": _get_property_usage("value_hint_string"),
 		},
 	])
 	
