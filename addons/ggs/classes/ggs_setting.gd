@@ -5,7 +5,7 @@ class_name ggsSetting
 ## values of the setting and provides its "address" when needed.
 
 ## The current value of the setting.
-var current: Variant#: set = set_current, get = get_current
+var current: Variant: set = _set_current, get = _get_current
 
 ## The default value of the setting.
 var default: Variant
@@ -32,14 +32,10 @@ var value_hint_string: String
 @export_storage var read_only_properties: PackedStringArray
 
 ## Name of section this setting will be saved under.
-var _section: String: get = _get_section
+var section: String: get = get_section
 
 ## Name of the key this setting will be saved in.
-var _key: String: get =_get_key
-
-## List of subsections. Every parent folder after the first one will be
-## treated as a subsection.
-var _subsections: PackedStringArray: get = _get_subsections
+var key: String: get = get_key
 
 
 func _get_property_list() -> Array:
@@ -60,7 +56,7 @@ func _get_property_list() -> Array:
 			"hint_string": value_hint_string,
 		},
 		{
-			"name": "Value Info",
+			"name": "Setting Properties",
 			"type": TYPE_NIL,
 			"usage": PROPERTY_USAGE_GROUP,
 		},
@@ -85,18 +81,13 @@ func _get_property_list() -> Array:
 			"usage": PROPERTY_USAGE_GROUP,
 		},
 		{
-			"name": "_section",
+			"name": "section",
 			"type": TYPE_STRING,
 			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
 		},
 		{
-			"name": "_key",
+			"name": "key",
 			"type": TYPE_STRING,
-			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
-		},
-		{
-			"name": "_subsections",
-			"type": TYPE_ARRAY,
 			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
 		},
 	])
@@ -118,35 +109,58 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 		#return resource_name
 	#
 	#return null
-#
-#func set_current(value: Variant) -> void:
-	#current = value
-	#
-	#if not category.is_empty() or not name.is_empty():
-		#ggsSaveFile.new().set_key(category, name, value)
-#
-#func get_current() -> Variant:
-	#var save_file: ggsSaveFile = ggsSaveFile.new()
-	#if save_file.has_section_key(category, name):
-		#return save_file.get_value(category, name)
-	#else:
-		#return default
 
-
-
-func _get_path_components() -> PackedStringArray:
-	var settings: String = GGS.Pref.path_settings
-	var base_path: String = resource_path.trim_prefix(settings)
-	return base_path.split("/", false)
-
-
-func _get_section() -> String:
+#region Setters & Getters
+func get_section() -> String:
 	var components: PackedStringArray = _get_path_components()
 	
 	if components.size() == 1: # Resource file is not in a folder at all
 		return ""
 	
 	return components[0]
+
+
+func get_key() -> String:
+	var path_components: PackedStringArray = _get_path_components()
+	var file: String = path_components[path_components.size() - 1]
+	
+	var subsects: PackedStringArray = _get_subsections()
+	var prefix: String
+	for subsect: String in subsects:
+		prefix += subsect + GGS.Pref.subsect_seperator
+	
+	return prefix + file.get_basename()
+
+
+func _set_current(value: Variant) -> void:
+	current = value
+	
+	var file: ConfigFile = ConfigFile.new()
+	var path: String = GGS.Pref.path_file
+	file.load(path)
+	file.set_value(section, key, value)
+	file.save(path)
+
+
+func _get_current() -> Variant:
+	var file: ConfigFile = ConfigFile.new()
+	var path: String = GGS.Pref.path_file
+	
+	file.load(path)
+	if file.has_section_key(section, key):
+		return file.get_value(section, key)
+	
+	file.set_value(section, key, default)
+	file.save(path)
+	return default
+
+#endregion
+
+
+func _get_path_components() -> PackedStringArray:
+	var settings: String = GGS.Pref.path_settings
+	var base_path: String = resource_path.trim_prefix(settings)
+	return base_path.split("/", false)
 
 
 func _get_subsections() -> PackedStringArray:
@@ -158,15 +172,3 @@ func _get_subsections() -> PackedStringArray:
 	components.remove_at(0)
 	components.remove_at(components.size() - 1)
 	return components
-
-
-func _get_key() -> String:
-	var path_components: PackedStringArray = _get_path_components()
-	var file: String = path_components[path_components.size() - 1]
-	
-	var subsects: PackedStringArray = _get_subsections()
-	var prefix: String
-	for subsect: String in subsects:
-		prefix += subsect + GGS.Pref.subsect_seperator
-	
-	return prefix + file.get_basename()

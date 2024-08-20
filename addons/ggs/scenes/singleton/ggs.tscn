@@ -16,8 +16,10 @@ GameConfig = NodePath("GameConfig")
 [node name="Events" type="Node" parent="."]
 script = ExtResource("3_bf0o6")
 
-[node name="GameConfig" type="Node" parent="."]
+[node name="GameConfig" type="Node" parent="." node_paths=PackedStringArray("_GGS", "_Events")]
 script = ExtResource("5_hjnpp")
+_GGS = NodePath("..")
+_Events = NodePath("../Events")
 
 [node name="TypeSelectWin" parent="." node_paths=PackedStringArray("_Events") instance=ExtResource("5_t3ax3")]
 _Events = NodePath("../Events")

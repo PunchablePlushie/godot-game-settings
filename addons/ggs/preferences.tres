@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ggsPreferences" load_steps=2 format=3 uid="uid://b2xq0og71kabn"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_preferences.gd" id="1_dv4nb"]
+[ext_resource type="Script" path="res://addons/ggs/classes/ggs_preferences.gd" id="1_w1a00"]
 
 [resource]
-script = ExtResource("1_dv4nb")
-file_name = "settings.cfg"
+script = ExtResource("1_w1a00")
 subsect_seperator = "__"
 path_settings = "res://game_settings"
 path_templates = "res://addons/ggs/templates"
+path_file = "user://settings.cfg"
