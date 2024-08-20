@@ -32,6 +32,8 @@ func _on_Global_type_selector_confirmed(type: Variant.Type) -> void:
 	obj.set(property, type)
 	emit_changed(property, type)
 	
+	obj.default = ggsUtils.TYPE_DEFAULTS[type]
+	obj.current = ggsUtils.TYPE_DEFAULTS[type]
 	obj.value_hint = PROPERTY_HINT_NONE
 	obj.value_hint_string = ""
 	obj.notify_property_list_changed()

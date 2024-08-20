@@ -31,6 +31,16 @@ var value_hint_string: String
 ## [annotation @GDScript.@export] annotations.
 @export_storage var read_only_properties: PackedStringArray
 
+## Name of section this setting will be saved under.
+var _section: String: get = _get_section
+
+## Name of the key this setting will be saved in.
+var _key: String: get =_get_key
+
+## List of subsections. Every parent folder after the first one will be
+## treated as a subsection.
+var _subsections: PackedStringArray: get = _get_subsections
+
 
 func _get_property_list() -> Array:
 	var properties: Array
@@ -69,6 +79,26 @@ func _get_property_list() -> Array:
 			"type": TYPE_STRING,
 			"usage": _get_property_usage("value_hint_string"),
 		},
+		{
+			"name": "Address",
+			"type": TYPE_NIL,
+			"usage": PROPERTY_USAGE_GROUP,
+		},
+		{
+			"name": "_section",
+			"type": TYPE_STRING,
+			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
+		},
+		{
+			"name": "_key",
+			"type": TYPE_STRING,
+			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
+		},
+		{
+			"name": "_subsections",
+			"type": TYPE_ARRAY,
+			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
+		},
 	])
 	
 	return properties
@@ -81,7 +111,7 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 	
 	return usage
 
-#
+
 #func _get(property: StringName) -> Variant:
 	#if property == "resource_name":
 		#resource_name = name
@@ -89,13 +119,11 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 	#
 	#return null
 #
-#
 #func set_current(value: Variant) -> void:
 	#current = value
 	#
 	#if not category.is_empty() or not name.is_empty():
 		#ggsSaveFile.new().set_key(category, name, value)
-#
 #
 #func get_current() -> Variant:
 	#var save_file: ggsSaveFile = ggsSaveFile.new()
@@ -103,48 +131,6 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 		#return save_file.get_value(category, name)
 	#else:
 		#return default
-#
-#
-#func get_name() -> String:
-	#var path_dict: Dictionary = _get_path_dict()
-	#var group: String = ""
-	#
-	#if path_dict["group"].is_empty():
-		#return path_dict["name"]
-	#else:
-		#return "%s_%s"%[path_dict["group"], path_dict["name"]]
-#
-#
-#func get_category() -> String:
-	#return ""
-#
-#
-#func _get_path_dict() -> Dictionary:
-	#return {}
-	#var result: Dictionary = {
-		#"category": "",
-		#"group": "",
-		#"name": "",
-	#}
-	#
-	#if not ggsUtils.path_is_in_dir_settings(resource_path):
-		#return result
-	#
-	#var dir_settings: String = ggsUtils.get_plugin_data().dir_settings
-	#var base_path: String = resource_path.trim_prefix(dir_settings)
-	#var path_components: PackedStringArray = base_path.split("/", false)
-	#
-	#if path_components.size() < 2 or path_components.size() > 3:
-		#return result
-	#
-	#result["category"] = path_components[0]
-	#if path_components.size() == 3:
-		#result["group"] = path_components[1]
-		#result["name"] = path_components[2].get_basename()
-	#else:
-		#result["name"] = path_components[1].get_basename()
-	#
-	#return result
 
 
 

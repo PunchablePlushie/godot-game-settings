@@ -5,6 +5,7 @@ class_name ggsInspectorPlugin
 var input_selector_scn: PackedScene = preload("./input_selector/input_selector.tscn")
 const TYPE_SELECTOR_SCN: PackedScene = preload("./type_selector/type_selector.tscn")
 const HINT_SELECTOR_SCN: PackedScene = preload("./hint_selector/hint_selector.tscn")
+const HINT_STRING_FIELD_SCN: PackedScene = preload("./hint_string_field/hint_string_field.tscn")
 
 func _can_handle(object: Object) -> bool:
 	return object is ggsSetting
@@ -19,6 +20,10 @@ func _parse_property(object: Object, type: Variant.Type, name: String,
 	
 	if name == "value_hint":
 		add_property_editor(name, HINT_SELECTOR_SCN.instantiate())
+		return true
+	
+	if name == "value_hint_string":
+		add_property_editor(name, HINT_STRING_FIELD_SCN.instantiate())
 		return true
 	
 	return false

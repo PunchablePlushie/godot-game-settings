@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ggsSetting" load_steps=2 format=3 uid="uid://pho3t5jobb2k"]
+
+[ext_resource type="Script" path="res://addons/ggs/classes/resources/ggs_setting.gd" id="1_26b1x"]
+
+[resource]
+script = ExtResource("1_26b1x")
+read_only_properties = PackedStringArray()
+current = 0
+default = 0
+value_type = 2
+value_hint = 0
+value_hint_string = ""
