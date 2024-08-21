@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bjl3qlh8yn0pt"]
 
-[ext_resource type="Theme" uid="uid://djcu6ues0nvmg" path="res://addons/ggs/editor/ggs_theme.tres" id="1_maqhj"]
+[ext_resource type="Theme" uid="uid://djcu6ues0nvmg" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_maqhj"]
 [ext_resource type="Texture2D" uid="uid://elle1t13lw1o" path="res://addons/ggs/assets/add.svg" id="2_6pxb8"]
 [ext_resource type="Texture2D" uid="uid://coxirir6phgmq" path="res://addons/ggs/assets/docs.svg" id="2_t6kn5"]
 [ext_resource type="Texture2D" uid="uid://mgpup8wf7x5n" path="res://addons/ggs/assets/remove.svg" id="2_vpv6l"]

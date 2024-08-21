@@ -3,34 +3,36 @@ extends EditorPlugin
 
 const SINGLETON_NAME: String = "GGS"
 const SINGLETON_PATH: String = "res://addons/ggs/globals/ggs.tscn"
-const TOOL_ITEM: String = "About Godot Game Settings"
-const ABOUT_SCN = preload("res://addons/ggs/scenes/about/about.tscn")
-const CORE = preload("res://addons/ggs/editor/core/core.tscn")
+const EDITOR_NAME: String = "Game Settings"
+const EDITOR_SCN = preload("res://addons/ggs/editor/core/core.tscn")
+const THEME: Theme = preload("res://addons/ggs/editor/theme/ggs_theme.tres")
 
-var inspector_plugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
-var Core: MarginContainer
+var _InspectorPlugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
+var _Editor: MarginContainer
+
 
 func _enter_tree() -> void:
-	Core = CORE.instantiate()
-	add_control_to_bottom_panel(Core, "Game Settings")
+	_set_editor_enabled(true)
 	_add_singleton()
-	add_tool_menu_item(TOOL_ITEM, _show_about)
-	add_inspector_plugin(inspector_plugin)
+	add_inspector_plugin(_InspectorPlugin)
+	THEME.update()
 
 
 func _exit_tree() -> void:
-	if Core:
-		remove_control_from_bottom_panel(Core)
-	remove_tool_menu_item(TOOL_ITEM)
-	remove_inspector_plugin(inspector_plugin)
+	_set_editor_enabled(false)
+	remove_inspector_plugin(_InspectorPlugin)
 
 
-func _show_about() -> void:
-	var About: AcceptDialog = ABOUT_SCN.instantiate()
-	EditorInterface.popup_dialog_centered(About, About.min_size)
+func _set_editor_enabled(enabled: bool) -> void:
+	match enabled:
+		true:
+			_Editor = EDITOR_SCN.instantiate()
+			add_control_to_bottom_panel(_Editor, EDITOR_NAME)
+		false:
+			if _Editor:
+				remove_control_from_bottom_panel(_Editor)
 
 
-# Singleton #
 func _add_singleton() -> void:
 	if not ProjectSettings.has_setting("autoload/" + SINGLETON_NAME):
 		add_autoload_singleton(SINGLETON_NAME, SINGLETON_PATH)
