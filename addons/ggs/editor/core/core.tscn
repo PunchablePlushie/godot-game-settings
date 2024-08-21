@@ -1,16 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjl3qlh8yn0pt"]
+[gd_scene load_steps=16 format=3 uid="uid://bjl3qlh8yn0pt"]
 
 [ext_resource type="Theme" uid="uid://djcu6ues0nvmg" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_maqhj"]
 [ext_resource type="Texture2D" uid="uid://elle1t13lw1o" path="res://addons/ggs/assets/add.svg" id="2_6pxb8"]
 [ext_resource type="Texture2D" uid="uid://coxirir6phgmq" path="res://addons/ggs/assets/docs.svg" id="2_t6kn5"]
 [ext_resource type="Texture2D" uid="uid://mgpup8wf7x5n" path="res://addons/ggs/assets/remove.svg" id="2_vpv6l"]
-[ext_resource type="Texture2D" uid="uid://bgpnuydaht0me" path="res://addons/ggs/assets/reload.svg" id="3_1unbh"]
 [ext_resource type="Texture2D" uid="uid://cyrbai8u8cve6" path="res://addons/ggs/assets/bug.svg" id="3_4ccat"]
 [ext_resource type="Texture2D" uid="uid://caajrkkuvle0e" path="res://addons/ggs/assets/expand_all.svg" id="3_6wr7c"]
-[ext_resource type="Texture2D" uid="uid://ff0g5gou56p7" path="res://addons/ggs/assets/filesystem.svg" id="3_n1mf5"]
 [ext_resource type="Texture2D" uid="uid://l0mve5lc0okm" path="res://addons/ggs/assets/collapse_all.svg" id="4_4eiaq"]
 [ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/assets/search.svg" id="4_mr6hk"]
-[ext_resource type="Texture2D" uid="uid://blcmyrnuexf8n" path="res://addons/ggs/assets/green_check.svg" id="4_sh2g0"]
+[ext_resource type="PackedScene" uid="uid://brfniovock4f6" path="res://addons/ggs/editor/buttons/new_btn/new_btn.tscn" id="6_cabnw"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/list.gd" id="6_xoumx"]
+[ext_resource type="PackedScene" uid="uid://h4ryvy52fu3v" path="res://addons/ggs/editor/buttons/reload_btn/reload_btn.tscn" id="7_laful"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/list2.gd" id="13_pwwlj"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/list3.gd" id="13_vcexe"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/list4.gd" id="14_ongkr"]
+[ext_resource type="Texture2D" uid="uid://63siutwk6rxh" path="res://addons/ggs/assets/green_check.svg" id="15_g2pg8"]
 
 [node name="Core" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 350)
@@ -23,247 +27,221 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_maqhj")
 
-[node name="MainCtnr" type="VBoxContainer" parent="."]
+[node name="BasePanel" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_type_variation = &"DarkPanel"
 
-[node name="PanelContainer2" type="PanelContainer" parent="MainCtnr"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer2"]
+[node name="HBox" type="VBoxContainer" parent="BasePanel"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainCtnr/PanelContainer2/HBoxContainer"]
+[node name="Topbar" type="HBoxContainer" parent="BasePanel/HBox"]
 layout_mode = 2
 
-[node name="Button" type="MenuButton" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="BasePanel/HBox/Topbar"]
 layout_mode = 2
-text = "Config File"
+
+[node name="Button5" type="MenuButton" parent="BasePanel/HBox/Topbar/HBoxContainer2"]
+layout_mode = 2
+text = "Show"
 item_count = 4
-popup/item_0/text = "aaa"
-popup/item_1/text = "bbb"
+popup/item_0/text = "Templates"
+popup/item_1/text = "UI Nodes"
 popup/item_1/id = 1
-popup/item_2/text = "ccc"
+popup/item_2/text = "User Directory"
 popup/item_2/id = 2
-popup/item_3/text = "ddd"
+popup/item_3/text = "Game Config File"
 popup/item_3/id = 3
 
-[node name="Button4" type="MenuButton" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer2"]
+[node name="Button" type="MenuButton" parent="BasePanel/HBox/Topbar/HBoxContainer2"]
 layout_mode = 2
-text = "Preferences"
-item_count = 4
-popup/item_0/text = "aaa"
-popup/item_1/text = "bbb"
-popup/item_1/id = 1
-popup/item_2/text = "ccc"
-popup/item_2/id = 2
-popup/item_3/text = "ddd"
-popup/item_3/id = 3
+text = "Game Config"
+item_count = 2
+popup/item_0/text = "Remake"
+popup/item_1/text = "Remake from Default Values"
+popup/item_1/id = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Topbar"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Button" type="Button" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer"]
+[node name="Button6" type="Button" parent="BasePanel/HBox/Topbar/HBoxContainer"]
+layout_mode = 2
+text = "Preferences"
+flat = true
+
+[node name="Button" type="Button" parent="BasePanel/HBox/Topbar/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("2_t6kn5")
 flat = true
 
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="BasePanel/HBox/Topbar/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("3_4ccat")
 flat = true
 
-[node name="VSeparator" type="VSeparator" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BasePanel/HBox/Topbar/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="MainCtnr/PanelContainer2/HBoxContainer/HBoxContainer"]
+[node name="Button3" type="Button" parent="BasePanel/HBox/Topbar/HBoxContainer"]
 layout_mode = 2
 text = "GGS v3.2.0"
 icon = ExtResource("4_mr6hk")
 flat = true
 
-[node name="PanelContainer" type="PanelContainer" parent="MainCtnr"]
+[node name="Lists" type="HBoxContainer" parent="BasePanel/HBox"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer"]
-layout_mode = 2
-
-[node name="sec" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer"]
+[node name="Sections" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
-theme_type_variation = &"panel_alt"
+theme_type_variation = &"LightPanel"
 
-[node name="section" type="VBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/sec"]
+[node name="Main" type="VBoxContainer" parent="BasePanel/HBox/Lists/Sections"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/sec/section"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="VSeparator" type="VSeparator" parent="MainCtnr/PanelContainer/HBoxContainer/sec/section/HBoxContainer"]
+[node name="Top" type="HBoxContainer" parent="BasePanel/HBox/Lists/Sections/Main"]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/sec/section/HBoxContainer"]
+[node name="NewBtn" parent="BasePanel/HBox/Lists/Sections/Main/Top" instance=ExtResource("6_cabnw")]
 layout_mode = 2
-size_flags_horizontal = 8
-icon = ExtResource("3_n1mf5")
+size_flags_horizontal = 0
 
-[node name="ItemList" type="ItemList" parent="MainCtnr/PanelContainer/HBoxContainer/sec/section"]
+[node name="Right" type="HBoxContainer" parent="BasePanel/HBox/Lists/Sections/Main/Top"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer/sec"]
+[node name="VSep" type="VSeparator" parent="BasePanel/HBox/Lists/Sections/Main/Top/Right"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"panel2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/sec/PanelContainer"]
+[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Sections/Main/Top/Right" instance=ExtResource("7_laful")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_constants/separation = 2
 
-[node name="LineEdit" type="LineEdit" parent="MainCtnr/PanelContainer/HBoxContainer/sec/PanelContainer/HBoxContainer"]
+[node name="NewField" type="LineEdit" parent="BasePanel/HBox/Lists/Sections/Main"]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 8
-right_icon = ExtResource("4_sh2g0")
+placeholder_text = "Item name..."
 
-[node name="Button" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/sec/PanelContainer/HBoxContainer"]
+[node name="List" type="Tree" parent="BasePanel/HBox/Lists/Sections/Main"]
 layout_mode = 2
-theme_type_variation = &"btn1"
+size_flags_vertical = 3
+hide_folding = true
+hide_root = true
+script = ExtResource("6_xoumx")
+
+[node name="Subsecs" type="PanelContainer" parent="BasePanel/HBox/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_type_variation = &"LightPanel"
+
+[node name="section" type="VBoxContainer" parent="BasePanel/HBox/Lists/Subsecs"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Subsecs/section"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button6" type="Button" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+disabled = true
 icon = ExtResource("2_6pxb8")
 
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/sec/PanelContainer/HBoxContainer"]
+[node name="Button8" type="Button" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"btn1"
-icon = ExtResource("3_1unbh")
+size_flags_horizontal = 0
+disabled = true
+icon = ExtResource("2_vpv6l")
 
-[node name="subsec" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer"]
+[node name="Button7" type="Button" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-theme_type_variation = &"panel_alt"
+size_flags_horizontal = 0
+disabled = true
+icon = ExtResource("2_vpv6l")
 
-[node name="section" type="VBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section"]
+[node name="VSeparator" type="VSeparator" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button4" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer"]
+[node name="Button4" type="Button" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 disabled = true
 icon = ExtResource("3_6wr7c")
 
-[node name="Button5" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer"]
+[node name="Button5" type="Button" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 disabled = true
 icon = ExtResource("4_4eiaq")
 
-[node name="Button" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer"]
+[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("7_laful")]
 layout_mode = 2
-size_flags_horizontal = 0
-disabled = true
-icon = ExtResource("2_vpv6l")
 
-[node name="Button3" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-disabled = true
-icon = ExtResource("2_vpv6l")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="VSeparator" type="VSeparator" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section/VBoxContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-disabled = true
-icon = ExtResource("3_n1mf5")
-
-[node name="LineEdit" type="LineEdit" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section"]
+[node name="LineEdit" type="LineEdit" parent="BasePanel/HBox/Lists/Subsecs/section"]
 visible = false
 layout_mode = 2
 placeholder_text = "New subsection..."
 
-[node name="ItemList" type="ItemList" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/section"]
+[node name="ItemList" type="Tree" parent="BasePanel/HBox/Lists/Subsecs/section"]
 layout_mode = 2
 size_flags_vertical = 3
+hide_folding = true
+hide_root = true
+select_mode = 2
+script = ExtResource("13_pwwlj")
 
-[node name="PanelContainer2" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"panel2"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/PanelContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="Button" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/PanelContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"btn1"
-disabled = true
-icon = ExtResource("2_6pxb8")
-
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/PanelContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"btn1"
-disabled = true
-icon = ExtResource("3_1unbh")
-
-[node name="PanelContainer3" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer/subsec"]
-layout_mode = 2
+[node name="Label" type="Label" parent="BasePanel/HBox/Lists/Subsecs/section/ItemList"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -11.5
+offset_right = 76.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_type_variation = &"btn1"
-
-[node name="Label" type="Label" parent="MainCtnr/PanelContainer/HBoxContainer/subsec/PanelContainer3"]
-layout_mode = 2
 text = "No Section Selected"
+horizontal_alignment = 1
 
-[node name="set" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer"]
+[node name="Settings" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"panel_alt"
+theme_type_variation = &"LightPanel"
 
-[node name="section" type="VBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/set"]
+[node name="section" type="VBoxContainer" parent="BasePanel/HBox/Lists/Settings"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/set/section"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Settings/section"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer/HBoxContainer2"]
+[node name="LineEdit" type="LineEdit" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New setting..."
 
-[node name="OptionButton" type="OptionButton" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer/HBoxContainer2"]
+[node name="OptionButton" type="OptionButton" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 item_count = 12
@@ -294,66 +272,66 @@ popup/item_10/separator = true
 popup/item_11/text = "Ipsum"
 popup/item_11/id = 11
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="VSeparator" type="VSeparator" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/set/section/HBoxContainer/HBoxContainer"]
+[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer/HBoxContainer" instance=ExtResource("7_laful")]
 layout_mode = 2
-size_flags_horizontal = 0
-disabled = true
-icon = ExtResource("3_n1mf5")
 
-[node name="ItemList" type="ItemList" parent="MainCtnr/PanelContainer/HBoxContainer/set/section"]
+[node name="ItemList" type="Tree" parent="BasePanel/HBox/Lists/Settings/section"]
 layout_mode = 2
 size_flags_vertical = 3
+hide_folding = true
+hide_root = true
+script = ExtResource("13_vcexe")
 
-[node name="PanelContainer3" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer/set"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"panel2"
-
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/set/PanelContainer3"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_type_variation = &"btn1"
-icon = ExtResource("3_1unbh")
-
-[node name="ui" type="PanelContainer" parent="MainCtnr/PanelContainer/HBoxContainer"]
+[node name="Elements" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_type_variation = &"panel_alt"
+theme_type_variation = &"LightPanel"
 
-[node name="section" type="VBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/ui"]
+[node name="section" type="VBoxContainer" parent="BasePanel/HBox/Lists/Elements"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainCtnr/PanelContainer/HBoxContainer/ui/section"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BasePanel/HBox/Lists/Elements/section"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/ui/section/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="BasePanel/HBox/Lists/Elements/section/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.5
-icon = ExtResource("2_vpv6l")
+size_flags_horizontal = 3
+placeholder_text = "Filter elements..."
+clear_button_enabled = true
+right_icon = ExtResource("4_mr6hk")
 
-[node name="Button2" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/ui/section/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="BasePanel/HBox/Lists/Elements/section/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.5
-icon = ExtResource("2_vpv6l")
 
-[node name="Button3" type="Button" parent="MainCtnr/PanelContainer/HBoxContainer/ui/section/HBoxContainer"]
+[node name="Button" type="Button" parent="BasePanel/HBox/Lists/Elements/section/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_stretch_ratio = 0.5
 icon = ExtResource("2_vpv6l")
 
-[node name="ItemList" type="ItemList" parent="MainCtnr/PanelContainer/HBoxContainer/ui/section"]
+[node name="Button2" type="Button" parent="BasePanel/HBox/Lists/Elements/section/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.5
+icon = ExtResource("2_vpv6l")
+
+[node name="Button3" type="Button" parent="BasePanel/HBox/Lists/Elements/section/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.5
+icon = ExtResource("2_vpv6l")
+
+[node name="ItemList" type="Tree" parent="BasePanel/HBox/Lists/Elements/section"]
 layout_mode = 2
 size_flags_vertical = 3
+hide_root = true
+script = ExtResource("14_ongkr")
+icon = ExtResource("15_g2pg8")
