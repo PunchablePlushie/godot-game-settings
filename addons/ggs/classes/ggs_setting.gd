@@ -38,6 +38,12 @@ var section: String: get = get_section
 var key: String: get = get_key
 
 
+func _init(script_path: String = "") -> void:
+	if not script_path.is_empty():
+		var script = load(script_path)
+		set_script(script)
+
+
 func _get_property_list() -> Array:
 	var properties: Array
 	properties.append_array([
@@ -110,11 +116,15 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 	#
 	#return null
 
+
 #region Setters & Getters
 func get_section() -> String:
 	var components: PackedStringArray = _get_path_components()
 	
-	if components.size() == 1: # Resource file is not in a folder at all
+	if components.is_empty():
+		return ""
+	
+	if components.size() == 1: # Resource file is not in a section folder
 		return ""
 	
 	return components[0]
@@ -122,6 +132,10 @@ func get_section() -> String:
 
 func get_key() -> String:
 	var path_components: PackedStringArray = _get_path_components()
+	
+	if path_components.is_empty():
+		return ""
+	
 	var file: String = path_components[path_components.size() - 1]
 	
 	var subsects: PackedStringArray = _get_subsections()

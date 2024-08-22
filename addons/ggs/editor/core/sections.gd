@@ -6,11 +6,12 @@ extends PanelContainer
 @export var _NewBtn: Button
 @export var _ReloadBtn: Button
 @export var _NewField: LineEdit
-@export var _List: ItemList
+@export var List: ItemList
 @export var _Subsecs: PanelContainer
+@export var _Settings: PanelContainer
 
+var base_path: String
 var _item_name_is_valid: bool
-var _base_path: String
 
 
 func _ready() -> void:
@@ -19,10 +20,10 @@ func _ready() -> void:
 	_NewField.text_submitted.connect(_on_NewField_text_submitted)
 	
 	_ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
-	_List.item_activated.connect(_on_List_item_activated)
-	_List.item_selected.connect(_on_List_item_selected)
+	List.item_activated.connect(_on_List_item_activated)
+	List.item_selected.connect(_on_List_item_selected)
 	
-	_base_path = GGS.Pref.path_settings
+	base_path = GGS.Pref.path_settings
 	_NewField.hide()
 	_load_list()
 
@@ -34,7 +35,7 @@ func _set_item_name_valid(valid: bool) -> void:
 
 
 func _item_name_exists(item_name: String) -> bool:
-	var path: String = _base_path.path_join(item_name)
+	var path: String = base_path.path_join(item_name)
 	return DirAccess.dir_exists_absolute(path)
 
 
@@ -64,7 +65,7 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 	
 	_NewField.clear()
 	
-	var path: String = _base_path.path_join(new_text)
+	var path: String = base_path.path_join(new_text)
 	DirAccess.make_dir_absolute(path)
 	EditorInterface.get_resource_filesystem().scan()
 	_load_list()
@@ -74,13 +75,14 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 
 #region List
 func _load_list() -> void:
-	_List.clear()
+	List.clear()
 	_Subsecs.set_panel_disabled(true)
+	_Settings.set_panel_disabled(true)
 	
-	var items: PackedStringArray = DirAccess.get_directories_at(_base_path)
+	var items: PackedStringArray = DirAccess.get_directories_at(base_path)
 	for item: String in items:
-		var idx: int = _List.add_item(item)
-		_List.set_item_metadata(idx, _base_path.path_join(item))
+		var idx: int = List.add_item(item)
+		List.set_item_metadata(idx, base_path.path_join(item))
 
 
 func _on_ReloadBtn_pressed() -> void:
@@ -89,13 +91,17 @@ func _on_ReloadBtn_pressed() -> void:
 
 
 func _on_List_item_activated(idx: int) -> void:
-	var path: String = _List.get_item_metadata(idx)
+	var path: String = List.get_item_metadata(idx)
 	EditorInterface.get_file_system_dock().navigate_to_path(path)
 
 
 func _on_List_item_selected(idx: int) -> void:
-	_Subsecs.base_path = _List.get_item_metadata(idx)
+	_Subsecs.base_path = List.get_item_metadata(idx)
 	_Subsecs.set_panel_disabled(false)
 	_Subsecs.load_list()
+	
+	_Settings.base_path = List.get_item_metadata(idx)
+	_Settings.set_panel_disabled(false)
+	_Settings.load_list()
 
 #endregion

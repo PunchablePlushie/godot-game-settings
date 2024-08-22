@@ -1,6 +1,9 @@
 @tool
 extends PanelContainer
 
+const LABEL_DISABLED: String = "No Section Selected"
+const LABEL_NO_ITEMS: String = "No Subsection Available"
+
 @export_group("Nodes")
 @export var _Core: MarginContainer
 @export var _NewBtn: Button
@@ -9,8 +12,10 @@ extends PanelContainer
 @export var _DeselectAllBtn: Button
 @export var _ReloadBtn: Button
 @export var _NewField: LineEdit
-@export var _List: ItemList
-@export var _DisabledLabel: Label
+@export var List: ItemList
+@export var _ListLabel: Label
+@export var _Sections: PanelContainer
+@export var _Settings: PanelContainer
 
 var base_path: String
 var _item_name_is_valid: bool
@@ -24,11 +29,11 @@ func _ready() -> void:
 	_ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
 	_SelectAllBtn.pressed.connect(_on_SelectAllBtn_pressed)
 	_DeselectAllBtn.pressed.connect(_on_DeselectAllBtn_pressed)
-	_List.item_activated.connect(_on_List_item_activated)
-	_List.item_selected.connect(_on_List_item_selected)
-	_List.gui_input.connect(_on_List_gui_input)
+	List.item_activated.connect(_on_List_item_activated)
+	List.multi_selected.connect(_on_List_multi_selected)
+	List.gui_input.connect(_on_List_gui_input)
 	
-	_NewField.hide()
+	set_panel_disabled(true)
 
 
 func set_panel_disabled(disabled: bool) -> void:
@@ -37,13 +42,14 @@ func set_panel_disabled(disabled: bool) -> void:
 	_SelectAllBtn.disabled = disabled
 	_DeselectAllBtn.disabled = disabled
 	_ReloadBtn.disabled = disabled
-	_DisabledLabel.visible = disabled
-	_List.clear()
+	List.clear()
 	
 	if disabled:
 		_NewBtn.set_pressed_no_signal(false)
 		_NewField.hide()
 		_NewField.clear()
+		_ListLabel.show()
+		_ListLabel.text = LABEL_DISABLED
 
 
 #region Adding Items
@@ -94,12 +100,27 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 
 #region List
 func load_list() -> void:
-	_List.clear()
+	List.clear()
 	
 	var items: PackedStringArray = DirAccess.get_directories_at(base_path)
+	
+	if items.is_empty():
+		_ListLabel.show()
+		_ListLabel.text = LABEL_NO_ITEMS
+	else:
+		_ListLabel.hide()
+	
 	for item: String in items:
-		var idx: int = _List.add_item(item)
-		_List.set_item_metadata(idx, base_path.path_join(item))
+		var idx: int = List.add_item(item)
+		List.set_item_metadata(idx, base_path.path_join(item))
+	
+	_reset_settings_base_path()
+
+
+func _reset_settings_base_path() -> void:
+	var selected_section: int = _Sections.List.get_selected_items()[0]
+	_Settings.base_path = _Sections.List.get_item_metadata(selected_section)
+	_Settings.load_list()
 
 
 func _on_ReloadBtn_pressed() -> void:
@@ -108,21 +129,28 @@ func _on_ReloadBtn_pressed() -> void:
 
 
 func _on_SelectAllBtn_pressed() -> void:
-	for idx: int in _List.item_count:
-		_List.select(idx, false)
+	for idx: int in List.item_count:
+		List.select(idx, false)
 
 
 func _on_DeselectAllBtn_pressed() -> void:
-	_List.deselect_all()
+	List.deselect_all()
+	_reset_settings_base_path()
 
 
 func _on_List_item_activated(idx: int) -> void:
-	var path: String = _List.get_item_metadata(idx)
+	var path: String = List.get_item_metadata(idx)
 	EditorInterface.get_file_system_dock().navigate_to_path(path)
 
 
-func _on_List_item_selected(idx: int) -> void:
-	pass
+func _on_List_multi_selected(idx: int, selected: bool) -> void:
+	if List.get_selected_items().is_empty():
+		_reset_settings_base_path()
+		return
+	
+	if selected:
+		_Settings.base_path = List.get_item_metadata(idx)
+		_Settings.load_list()
 
 
 func _on_List_gui_input(event: InputEvent) -> void:
@@ -133,6 +161,8 @@ func _on_List_gui_input(event: InputEvent) -> void:
 	):
 		return
 	
-	_List.deselect_all()
+	grab_focus()
+	List.deselect_all()
+	_reset_settings_base_path()
 
 #endregion
