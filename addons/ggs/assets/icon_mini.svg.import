@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://63siutwk6rxh"
-path="res://.godot/imported/green_check.svg-d10cd7e319ede11fac5ec2783bce4315.ctex"
+uid="uid://bxu8v5325tupd"
+path="res://.godot/imported/icon_mini.svg-5e00867268e00b8e3e5eaa22b6fe9735.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/green_check.svg"
-dest_files=["res://.godot/imported/green_check.svg-d10cd7e319ede11fac5ec2783bce4315.ctex"]
+source_file="res://addons/ggs/assets/icon_mini.svg"
+dest_files=["res://.godot/imported/icon_mini.svg-5e00867268e00b8e3e5eaa22b6fe9735.ctex"]
 
 [params]
 

@@ -208,6 +208,14 @@ static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 	return result
 
 
+static func item_name_is_valid(name: String) -> bool:
+	return (
+		name.is_valid_filename()
+		and not name.begins_with(".")
+		and not name.begins_with("_")
+	)
+
+
 # Window
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
 	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect()

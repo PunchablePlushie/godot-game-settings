@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjl3qlh8yn0pt"]
+[gd_scene load_steps=13 format=3 uid="uid://bjl3qlh8yn0pt"]
 
 [ext_resource type="Theme" uid="uid://djcu6ues0nvmg" path="res://addons/ggs/editor/theme/ggs_theme.tres" id="1_maqhj"]
 [ext_resource type="Texture2D" uid="uid://elle1t13lw1o" path="res://addons/ggs/assets/add.svg" id="2_6pxb8"]
@@ -8,13 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://caajrkkuvle0e" path="res://addons/ggs/assets/expand_all.svg" id="3_6wr7c"]
 [ext_resource type="Texture2D" uid="uid://l0mve5lc0okm" path="res://addons/ggs/assets/collapse_all.svg" id="4_4eiaq"]
 [ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/assets/search.svg" id="4_mr6hk"]
-[ext_resource type="PackedScene" uid="uid://brfniovock4f6" path="res://addons/ggs/editor/buttons/new_btn/new_btn.tscn" id="6_cabnw"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/list.gd" id="6_xoumx"]
-[ext_resource type="PackedScene" uid="uid://h4ryvy52fu3v" path="res://addons/ggs/editor/buttons/reload_btn/reload_btn.tscn" id="7_laful"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/list2.gd" id="13_pwwlj"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/list3.gd" id="13_vcexe"]
-[ext_resource type="Script" path="res://addons/ggs/editor/core/list4.gd" id="14_ongkr"]
-[ext_resource type="Texture2D" uid="uid://63siutwk6rxh" path="res://addons/ggs/assets/green_check.svg" id="15_g2pg8"]
+[ext_resource type="Script" path="res://addons/ggs/editor/core/sections.gd" id="5_drw5q"]
+[ext_resource type="Texture2D" uid="uid://blcmyrnuexf8n" path="res://addons/ggs/assets/invalid.svg" id="6_yh8rg"]
+[ext_resource type="Texture2D" uid="uid://bgpnuydaht0me" path="res://addons/ggs/assets/reload.svg" id="7_hm7f8"]
+[ext_resource type="Texture2D" uid="uid://63siutwk6rxh" path="res://addons/ggs/assets/valid.svg" id="15_g2pg8"]
 
 [node name="Core" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 350)
@@ -92,11 +89,18 @@ flat = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Sections" type="PanelContainer" parent="BasePanel/HBox/Lists"]
+[node name="Sections" type="PanelContainer" parent="BasePanel/HBox/Lists" node_paths=PackedStringArray("_NewBtn", "_ReloadBtn", "_NewField", "_List")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 theme_type_variation = &"LightPanel"
+script = ExtResource("5_drw5q")
+_icon_valid = ExtResource("15_g2pg8")
+_icon_invalid = ExtResource("6_yh8rg")
+_NewBtn = NodePath("Main/Top/NewBtn")
+_ReloadBtn = NodePath("Main/Top/Right/ReloadBtn")
+_NewField = NodePath("Main/NewField")
+_List = NodePath("Main/List")
 
 [node name="Main" type="VBoxContainer" parent="BasePanel/HBox/Lists/Sections"]
 layout_mode = 2
@@ -105,9 +109,12 @@ size_flags_vertical = 3
 [node name="Top" type="HBoxContainer" parent="BasePanel/HBox/Lists/Sections/Main"]
 layout_mode = 2
 
-[node name="NewBtn" parent="BasePanel/HBox/Lists/Sections/Main/Top" instance=ExtResource("6_cabnw")]
+[node name="NewBtn" type="Button" parent="BasePanel/HBox/Lists/Sections/Main/Top"]
+custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
-size_flags_horizontal = 0
+tooltip_text = "New Section..."
+toggle_mode = true
+icon = ExtResource("2_6pxb8")
 
 [node name="Right" type="HBoxContainer" parent="BasePanel/HBox/Lists/Sections/Main/Top"]
 layout_mode = 2
@@ -116,8 +123,11 @@ size_flags_horizontal = 10
 [node name="VSep" type="VSeparator" parent="BasePanel/HBox/Lists/Sections/Main/Top/Right"]
 layout_mode = 2
 
-[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Sections/Main/Top/Right" instance=ExtResource("7_laful")]
+[node name="ReloadBtn" type="Button" parent="BasePanel/HBox/Lists/Sections/Main/Top/Right"]
+custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
+tooltip_text = "Reload Sections"
+icon = ExtResource("7_hm7f8")
 
 [node name="NewField" type="LineEdit" parent="BasePanel/HBox/Lists/Sections/Main"]
 visible = false
@@ -126,12 +136,13 @@ layout_mode = 2
 size_flags_vertical = 8
 placeholder_text = "Item name..."
 
-[node name="List" type="Tree" parent="BasePanel/HBox/Lists/Sections/Main"]
+[node name="List" type="ItemList" parent="BasePanel/HBox/Lists/Sections/Main"]
 layout_mode = 2
 size_flags_vertical = 3
-hide_folding = true
-hide_root = true
-script = ExtResource("6_xoumx")
+item_count = 3
+item_0/text = "cxz"
+item_1/text = "dsa"
+item_2/text = "ggg"
 
 [node name="Subsecs" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
@@ -187,21 +198,151 @@ size_flags_horizontal = 0
 disabled = true
 icon = ExtResource("4_4eiaq")
 
-[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Subsecs/section/VBoxContainer/HBoxContainer/HBoxContainer" instance=ExtResource("7_laful")]
-layout_mode = 2
-
 [node name="LineEdit" type="LineEdit" parent="BasePanel/HBox/Lists/Subsecs/section"]
 visible = false
 layout_mode = 2
 placeholder_text = "New subsection..."
 
-[node name="ItemList" type="Tree" parent="BasePanel/HBox/Lists/Subsecs/section"]
+[node name="ItemList" type="ItemList" parent="BasePanel/HBox/Lists/Subsecs/section"]
 layout_mode = 2
 size_flags_vertical = 3
-hide_folding = true
-hide_root = true
 select_mode = 2
-script = ExtResource("13_pwwlj")
+item_count = 135
+item_0/text = "some subsection/group"
+item_1/text = "some subsection/group"
+item_2/text = "some subsection/group"
+item_3/text = "some subsection/group"
+item_4/text = "some subsection/group"
+item_5/text = "some subsection/group"
+item_6/text = "some subsection/group"
+item_7/text = "some subsection/group"
+item_8/text = "some subsection/group"
+item_9/text = "some subsection/group"
+item_10/text = "some subsection/group"
+item_11/text = "some subsection/group"
+item_12/text = "some subsection/group"
+item_13/text = "some subsection/group"
+item_14/text = "some subsection/group"
+item_15/text = "some subsection/group"
+item_16/text = "some subsection/group"
+item_17/text = "some subsection/group"
+item_18/text = "some subsection/group"
+item_19/text = "some subsection/group"
+item_20/text = "some subsection/group"
+item_21/text = "some subsection/group"
+item_22/text = "some subsection/group"
+item_23/text = "some subsection/group"
+item_24/text = "some subsection/group"
+item_25/text = "some subsection/group"
+item_26/text = "some subsection/group"
+item_27/text = "some subsection/group"
+item_28/text = "some subsection/group"
+item_29/text = "some subsection/group"
+item_30/text = "some subsection/group"
+item_31/text = "some subsection/group"
+item_32/text = "some subsection/group"
+item_33/text = "some subsection/group"
+item_34/text = "some subsection/group"
+item_35/text = "some subsection/group"
+item_36/text = "some subsection/group"
+item_37/text = "some subsection/group"
+item_38/text = "some subsection/group"
+item_39/text = "some subsection/group"
+item_40/text = "some subsection/group"
+item_41/text = "some subsection/group"
+item_42/text = "some subsection/group"
+item_43/text = "some subsection/group"
+item_44/text = "some subsection/group"
+item_45/text = "some subsection/group"
+item_46/text = "some subsection/group"
+item_47/text = "some subsection/group"
+item_48/text = "some subsection/group"
+item_49/text = "some subsection/group"
+item_50/text = "some subsection/group"
+item_51/text = "some subsection/group"
+item_52/text = "some subsection/group"
+item_53/text = "some subsection/group"
+item_54/text = "some subsection/group"
+item_55/text = "some subsection/group"
+item_56/text = "some subsection/group"
+item_57/text = "some subsection/group"
+item_58/text = "some subsection/group"
+item_59/text = "some subsection/group"
+item_60/text = "some subsection/group"
+item_61/text = "some subsection/group"
+item_62/text = "some subsection/group"
+item_63/text = "some subsection/group"
+item_64/text = "some subsection/group"
+item_65/text = "some subsection/group"
+item_66/text = "some subsection/group"
+item_67/text = "some subsection/group"
+item_68/text = "some subsection/group"
+item_69/text = "some subsection/group"
+item_70/text = "some subsection/group"
+item_71/text = "some subsection/group"
+item_72/text = "some subsection/group"
+item_73/text = "some subsection/group"
+item_74/text = "some subsection/group"
+item_75/text = "some subsection/group"
+item_76/text = "some subsection/group"
+item_77/text = "some subsection/group"
+item_78/text = "some subsection/group"
+item_79/text = "some subsection/group"
+item_80/text = "some subsection/group"
+item_81/text = "some subsection/group"
+item_82/text = "some subsection/group"
+item_83/text = "some subsection/group"
+item_84/text = "some subsection/group"
+item_85/text = "some subsection/group"
+item_86/text = "some subsection/group"
+item_87/text = "some subsection/group"
+item_88/text = "some subsection/group"
+item_89/text = "some subsection/group"
+item_90/text = "some subsection/group"
+item_91/text = "some subsection/group"
+item_92/text = "some subsection/group"
+item_93/text = "some subsection/group"
+item_94/text = "some subsection/group"
+item_95/text = "some subsection/group"
+item_96/text = "some subsection/group"
+item_97/text = "some subsection/group"
+item_98/text = "some subsection/group"
+item_99/text = "some subsection/group"
+item_100/text = "some subsection/group"
+item_101/text = "some subsection/group"
+item_102/text = "some subsection/group"
+item_103/text = "some subsection/group"
+item_104/text = "some subsection/group"
+item_105/text = "some subsection/group"
+item_106/text = "some subsection/group"
+item_107/text = "some subsection/group"
+item_108/text = "some subsection/group"
+item_109/text = "some subsection/group"
+item_110/text = "some subsection/group"
+item_111/text = "some subsection/group"
+item_112/text = "some subsection/group"
+item_113/text = "some subsection/group"
+item_114/text = "some subsection/group"
+item_115/text = "some subsection/group"
+item_116/text = "some subsection/group"
+item_117/text = "some subsection/group"
+item_118/text = "some subsection/group"
+item_119/text = "some subsection/group"
+item_120/text = "some subsection/group"
+item_121/text = "some subsection/group"
+item_122/text = "some subsection/group"
+item_123/text = "some subsection/group"
+item_124/text = "some subsection/group"
+item_125/text = "some subsection/group"
+item_126/text = "some subsection/group"
+item_127/text = "some subsection/group"
+item_128/text = "some subsection/group"
+item_129/text = "some subsection/group"
+item_130/text = "some subsection/group"
+item_131/text = "some subsection/group"
+item_132/text = "some subsection/group"
+item_133/text = "some subsection/group"
+item_134/text = "some subsection/group"
 
 [node name="Label" type="Label" parent="BasePanel/HBox/Lists/Subsecs/section/ItemList"]
 visible = false
@@ -280,15 +421,55 @@ size_flags_horizontal = 8
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="ReloadBtn" parent="BasePanel/HBox/Lists/Settings/section/HBoxContainer/HBoxContainer" instance=ExtResource("7_laful")]
-layout_mode = 2
-
-[node name="ItemList" type="Tree" parent="BasePanel/HBox/Lists/Settings/section"]
+[node name="ItemList" type="ItemList" parent="BasePanel/HBox/Lists/Settings/section"]
 layout_mode = 2
 size_flags_vertical = 3
-hide_folding = true
-hide_root = true
-script = ExtResource("13_vcexe")
+item_count = 45
+item_0/text = "some setting"
+item_1/text = "some setting"
+item_2/text = "some setting"
+item_3/text = "some setting"
+item_4/text = "some setting"
+item_5/text = "some setting"
+item_6/text = "some setting"
+item_7/text = "some setting"
+item_8/text = "some setting"
+item_9/text = "some setting"
+item_10/text = "some setting"
+item_11/text = "some setting"
+item_12/text = "some setting"
+item_13/text = "some setting"
+item_14/text = "some setting"
+item_15/text = "some setting"
+item_16/text = "some setting"
+item_17/text = "some setting"
+item_18/text = "some setting"
+item_19/text = "some setting"
+item_20/text = "some setting"
+item_21/text = "some setting"
+item_22/text = "some setting"
+item_23/text = "some setting"
+item_24/text = "some setting"
+item_25/text = "some setting"
+item_26/text = "some setting"
+item_27/text = "some setting"
+item_28/text = "some setting"
+item_29/text = "some setting"
+item_30/text = "some setting"
+item_31/text = "some setting"
+item_32/text = "some setting"
+item_33/text = "some setting"
+item_34/text = "some setting"
+item_35/text = "some setting"
+item_36/text = "some setting"
+item_37/text = "some setting"
+item_38/text = "some setting"
+item_39/text = "some setting"
+item_40/text = "some setting"
+item_41/text = "some setting"
+item_42/text = "some setting"
+item_43/text = "some setting"
+item_44/text = "some setting"
 
 [node name="Elements" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
@@ -333,5 +514,3 @@ icon = ExtResource("2_vpv6l")
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
-script = ExtResource("14_ongkr")
-icon = ExtResource("15_g2pg8")

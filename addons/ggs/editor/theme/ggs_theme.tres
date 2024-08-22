@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/ggs/editor/theme/ggs_theme.gd" id="1_kh3eu"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pe5ig"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cynw5"]
 content_margin_left = 6.0
 content_margin_top = 5.0
 content_margin_right = 6.0
@@ -16,7 +16,7 @@ corner_radius_bottom_left = 3
 corner_detail = 3
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ho8bv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxkx6"]
 content_margin_left = 6.0
 content_margin_top = 5.0
 content_margin_right = 6.0
@@ -32,7 +32,9 @@ anti_aliasing = false
 
 [resource]
 DarkPanel/base_type = &"PanelContainer"
-DarkPanel/styles/panel = SubResource("StyleBoxFlat_pe5ig")
+DarkPanel/styles/panel = SubResource("StyleBoxFlat_cynw5")
+ItemList/styles/focus = null
+ItemList/styles/panel = null
 LightPanel/base_type = &"PanelContainer"
-LightPanel/styles/panel = SubResource("StyleBoxFlat_ho8bv")
+LightPanel/styles/panel = SubResource("StyleBoxFlat_pxkx6")
 script = ExtResource("1_kh3eu")
