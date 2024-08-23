@@ -87,8 +87,8 @@ func _set_item_name_valid(valid: bool) -> void:
 	_NewField.right_icon = _Core.icon_valid if valid else _Core.icon_invalid
 
 
-func _item_name_exists(item_name: String) -> bool:
-	var path: String = base_path.path_join(item_name + ".tres")
+func _item_name_exists(item_name: String, _path_: String) -> bool:
+	var path: String = _path_.path_join(item_name + ".tres")
 	return FileAccess.file_exists(path)
 
 
@@ -97,7 +97,7 @@ func _validate_name(item_name: String) -> void:
 		_set_item_name_valid(false)
 		return
 	
-	if _item_name_exists(item_name):
+	if _item_name_exists(item_name, base_path):
 		_set_item_name_valid(false)
 		return
 	
@@ -120,13 +120,15 @@ func _on_NewField_text_changed(new_text: String) -> void:
 	_validate_name(new_text)
 
 
-func _on_NewField_text_submitted(new_text: String) -> void:
-	if not _item_name_is_valid:
-		return
-	
+func _create_setting(new_text: String, _path_: String) -> void:
 	_NewField.clear()
 	
-	var path: String = base_path.path_join(new_text)
+	var path: String = _path_.path_join(new_text)
+	
+	if _item_name_exists(new_text, _path_):
+		printerr("GGS - Mass Create Setting: Failed to create setting '%s' at '%s'. Item already exists."%[new_text, _path_])
+		return
+	
 	var script_path: String
 	if _TemplateBtn.selected == 0:
 		var new_script: Script = empty_setting.duplicate()
@@ -137,6 +139,20 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 	
 	var new_setting: ggsSetting = ggsSetting.new(script_path)
 	ResourceSaver.save(new_setting, path + ".tres")
+	
+
+
+func _on_NewField_text_submitted(new_text: String) -> void:
+	if not _item_name_is_valid:
+		return
+	
+	var selected_subsecs: PackedInt32Array = Subsecs.List.get_selected_items()
+	var paths: PackedStringArray
+	for subsec: int in selected_subsecs:
+		paths.append(Subsecs.List.get_item_metadata(subsec))
+	
+	for path: String in paths:
+		_create_setting(new_text, path)
 	
 	EditorInterface.get_resource_filesystem().scan()
 	load_list()

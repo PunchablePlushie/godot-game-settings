@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dk5nahvnj1tmq"]
+
+[ext_resource type="Script" path="res://game_settings/dsa/d/a.gd" id="1_hi0lk"]
+
+[resource]
+script = ExtResource("1_hi0lk")
+read_only_properties = PackedStringArray()
+current = null
+default = null
+value_type = 0
+value_hint = 0
+value_hint_string = ""
