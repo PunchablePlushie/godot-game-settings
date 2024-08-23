@@ -21,7 +21,7 @@ buses/default_bus_layout=""
 
 [autoload]
 
-GGS="*res://addons/ggs/scenes/singleton/ggs.tscn"
+GGS="*res://addons/ggs/plugin/singleton/ggs.tscn"
 
 [debug]
 

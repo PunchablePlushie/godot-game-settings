@@ -2,10 +2,10 @@
 extends EditorPlugin
 
 const SINGLETON_NAME: String = "GGS"
-const SINGLETON_PATH: String = "res://addons/ggs/scenes/singleton/ggs.tscn"
+const SINGLETON_PATH: String = "res://addons/ggs/plugin/singleton/ggs.tscn"
 const EDITOR_NAME: String = "Game Settings"
-const EDITOR_SCN = preload("res://addons/ggs/editor/core/core.tscn")
-const THEME: Theme = preload("res://addons/ggs/editor/theme/ggs_theme.tres")
+const EDITOR_SCN = preload("res://addons/ggs/plugin/core/core.tscn")
+const THEME: Theme = preload("res://addons/ggs/plugin/theme/ggs_theme.tres")
 
 var _InspectorPlugin: EditorInspectorPlugin = ggsInspectorPlugin.new()
 var _Editor: MarginContainer

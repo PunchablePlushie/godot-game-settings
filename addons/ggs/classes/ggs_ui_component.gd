@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/ggs/assets/nodes/base_node.svg")
 extends MarginContainer
 class_name ggsUIComponent
 
@@ -10,7 +11,7 @@ const WARNING_INCOMPATIBLE_SETTING: String = "The value type of the assigned set
 @export_category("GGS UI Component")
 @export var setting: ggsSetting: set = set_setting
 @export var apply_on_change: bool
-@export var grab_focus_on_mouse_over: bool
+@export var grab_focus_on_mouse_over: bool = true
 
 var setting_value: Variant
 var compatible_types: Array[Variant.Type] = []
