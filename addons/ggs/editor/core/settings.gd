@@ -23,12 +23,12 @@ func _ready() -> void:
 	_NewField.focus_entered.connect(_on_NewField_focus_entered)
 	_NewField.text_changed.connect(_on_NewField_text_changed)
 	_NewField.text_submitted.connect(_on_NewField_text_submitted)
-	#_TemplateBtn.item_selected.connect(_on_TemplateBtn_item_selected)
 	_ReloadBtn.pressed.connect(_on_ReloadBtn_pressed)
 	_List.item_selected.connect(_on_List_item_selected)
 	_List.item_activated.connect(_on_List_item_activated)
 	
 	set_panel_disabled(true)
+	_load_templates()
 
 
 func set_panel_disabled(disabled: bool) -> void:
@@ -36,12 +36,49 @@ func set_panel_disabled(disabled: bool) -> void:
 	_NewField.right_icon = null
 	_NewField.editable = !disabled
 	_TemplateBtn.disabled = disabled
+	_TemplateBtn.select(0)
 	_ReloadBtn.disabled = disabled
 	_List.clear()
 	
 	if disabled:
 		_ListLabel.show()
 		_ListLabel.text = LABEL_DISABLED
+
+
+func _load_templates() -> void:
+	_TemplateBtn.clear()
+	_TemplateBtn.add_item("No Template")
+	_TemplateBtn.add_separator()
+	
+	var templates_path: String = GGS.Pref.path_templates
+	var dirs: PackedStringArray = DirAccess.get_directories_at(templates_path)
+	var root_items: PackedStringArray = DirAccess.get_files_at(templates_path)
+	
+	var idx: int = 2
+	for item: String in root_items:
+		if not item.ends_with(".gd"):
+			continue
+		
+		_TemplateBtn.add_item(item.get_basename().capitalize())
+		_TemplateBtn.set_item_metadata(idx, templates_path.path_join(item))
+		idx += 1
+	
+	for dir: String in dirs:
+		if dir.begins_with("_"):
+			continue
+		
+		_TemplateBtn.add_separator(dir.capitalize())
+		idx += 1
+		
+		var path: String = templates_path.path_join(dir)
+		var items: PackedStringArray = DirAccess.get_files_at(path)
+		for item: String in items:
+			if not item.ends_with(".gd"):
+				continue
+			
+			_TemplateBtn.add_item(item.get_basename().capitalize())
+			_TemplateBtn.set_item_metadata(idx, path.path_join(item))
+			idx += 1
 
 
 #region Adding Items
@@ -90,10 +127,15 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 	_NewField.clear()
 	
 	var path: String = base_path.path_join(new_text)
-	var new_script: Script = empty_setting.duplicate()
-	ResourceSaver.save(new_script, path + ".gd")
+	var script_path: String
+	if _TemplateBtn.selected == 0:
+		var new_script: Script = empty_setting.duplicate()
+		script_path = path + ".gd"
+		ResourceSaver.save(new_script, script_path)
+	else:
+		script_path = _TemplateBtn.get_item_metadata(_TemplateBtn.selected)
 	
-	var new_setting: ggsSetting = ggsSetting.new(path + ".gd")
+	var new_setting: ggsSetting = ggsSetting.new(script_path)
 	ResourceSaver.save(new_setting, path + ".tres")
 	
 	EditorInterface.get_resource_filesystem().scan()
@@ -129,7 +171,8 @@ func load_list() -> void:
 
 func _on_ReloadBtn_pressed() -> void:
 	load_list()
-	print("GGS - Reload Settings: Successful")
+	_load_templates()
+	print("GGS - Reload Settings and Templates: Successful")
 
 
 func _on_List_item_activated(idx: int) -> void:

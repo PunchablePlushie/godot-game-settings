@@ -1,11 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cfx6vq44jvq56"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ufiqki32iplm"]
 
 [ext_resource type="Script" path="res://game_settings/cxz/d/a.gd" id="1_ioyat"]
 
 [resource]
 script = ExtResource("1_ioyat")
 read_only_properties = PackedStringArray()
-current = false
+current = null
 default = null
 value_type = 0
 value_hint = 0

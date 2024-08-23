@@ -138,6 +138,7 @@ tooltip_text = "Reload Sections"
 icon = ExtResource("7_hm7f8")
 
 [node name="NewField" type="LineEdit" parent="BasePanel/HBox/Lists/Sections/Main"]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 8
@@ -227,8 +228,10 @@ disabled = true
 icon = ExtResource("7_hm7f8")
 
 [node name="NewField" type="LineEdit" parent="BasePanel/HBox/Lists/Subsecs/Main"]
+visible = false
 layout_mode = 2
 placeholder_text = "Subsection name..."
+right_icon = ExtResource("6_yh8rg")
 
 [node name="List" type="ItemList" parent="BasePanel/HBox/Lists/Subsecs/Main"]
 layout_mode = 2
@@ -280,10 +283,17 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New setting..."
+editable = false
 
 [node name="TemplateBtn" type="OptionButton" parent="BasePanel/HBox/Lists/Settings/Main/Top/Left"]
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
+selected = 0
+item_count = 2
+popup/item_0/text = "No Template"
+popup/item_1/id = -1
+popup/item_1/separator = true
 
 [node name="Right" type="HBoxContainer" parent="BasePanel/HBox/Lists/Settings/Main/Top"]
 layout_mode = 2
@@ -296,7 +306,7 @@ size_flags_horizontal = 0
 [node name="ReloadBtn" type="Button" parent="BasePanel/HBox/Lists/Settings/Main/Top/Right"]
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
-tooltip_text = "Reload Settings"
+tooltip_text = "Reload Settings and Templates"
 disabled = true
 icon = ExtResource("7_hm7f8")
 
@@ -317,7 +327,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "No Setting Selected"
+text = "No Section Selected"
 
 [node name="Elements" type="PanelContainer" parent="BasePanel/HBox/Lists"]
 layout_mode = 2
