@@ -7,8 +7,9 @@
 script = ExtResource("2_mn25k")
 audio_bus = "None"
 read_only_properties = PackedStringArray()
-current = null
 default = false
+section = ""
+key = ""
 value_type = 1
 value_hint = 0
 value_hint_string = ""

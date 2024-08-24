@@ -4,9 +4,6 @@ class_name ggsSetting
 ## Base resource for a game setting. Keeps track of the current and default
 ## values of the setting and provides its "address" when needed.
 
-## The current value of the setting.
-var current: Variant = false: set = _set_current, get = _get_current
-
 ## The default value of the setting.
 var default: Variant = false
 
@@ -42,23 +39,11 @@ func _get_property_list() -> Array:
 	var properties: Array
 	properties.append_array([
 		{
-			"name": "current",
-			"type": value_type,
-			"usage": _get_property_usage("current"),
-			"hint": value_hint,
-			"hint_string": value_hint_string,
-		},
-		{
 			"name": "default",
 			"type": value_type,
 			"usage": _get_property_usage("default"),
 			"hint": value_hint,
 			"hint_string": value_hint_string,
-		},
-		{
-			"name": "Setting Properties",
-			"type": TYPE_NIL,
-			"usage": PROPERTY_USAGE_GROUP,
 		},
 		{
 			"name": "section",
@@ -71,6 +56,12 @@ func _get_property_list() -> Array:
 			"name": "key",
 			"type": TYPE_STRING,
 			"usage": _get_property_usage("key"),
+		},
+		{
+			"name": "Value Properties",
+			"type": TYPE_NIL,
+			"usage": PROPERTY_USAGE_GROUP,
+			"hint_string": "value_",
 		},
 		{
 			"name": "value_type",
@@ -90,21 +81,6 @@ func _get_property_list() -> Array:
 	])
 	
 	return properties
-
-
-func _set_current(value: Variant) -> void:
-	current = value
-	GGS.set_value(section, key, value)
-
-
-func _get_current() -> Variant:
-	GGS.file_reload()
-	var value: Variant = GGS.get_value(section, key)
-	
-	if value == null:
-		return default
-	
-	return value
 
 
 func _set_key(value: String) -> void:

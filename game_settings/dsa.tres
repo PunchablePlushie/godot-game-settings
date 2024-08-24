@@ -1,15 +1,14 @@
-[gd_resource type="Resource" script_class="ggsSetting" load_steps=2 format=3 uid="uid://bri4wvl2vlrs1"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://chs6xhuort37l"]
 
-[ext_resource type="Script" path="res://addons/ggs/classes/ggs_setting.gd" id="1_xek5e"]
+[ext_resource type="Script" path="res://game_settings/dsa.gd" id="1_qpgmo"]
 
 [resource]
-resource_name = "dsa"
-script = ExtResource("1_xek5e")
+resource_name = "volume"
+script = ExtResource("1_qpgmo")
 read_only_properties = PackedStringArray()
-current = false
-default = true
-section = "test"
-key = "dsa"
-value_type = 1
-value_hint = 0
-value_hint_string = ""
+default = 80.0
+section = "audio"
+key = "volume"
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"

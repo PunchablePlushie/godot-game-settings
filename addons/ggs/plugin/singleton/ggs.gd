@@ -32,23 +32,13 @@ func _ready() -> void:
 	_file_clean_up()
 
 
-func file_reload() -> void:
-	file.load(file_path)
-
-
 func set_value(section: String, key: String, value: Variant) -> void:
 	file.set_value(section, key, value)
 	file.save(file_path)
 
 
-func get_value(section: String, key: String) -> Variant:
-	if (
-		file.has_section(section)
-		and file.has_section_key(section, key)
-	):
-		return file.get_value(section, key)
-	
-	return null
+func get_value(setting: ggsSetting) -> Variant:
+	return file.get_value(setting.section, setting.key, setting.default)
 
 
 func _file_init() -> void:
@@ -59,7 +49,6 @@ func _file_init() -> void:
 	file.save(file_path)
 
 
-# Removes unused keys and adds missing ones to the save file
 func _file_clean_up() -> void:
 	var temp: Dictionary
 	for section: String in file.get_sections():
@@ -70,7 +59,10 @@ func _file_clean_up() -> void:
 	file.clear()
 	
 	for setting: ggsSetting in settings:
-		file.set_value(setting.section, setting.key, setting.current)
+		if setting.key.is_empty():
+			continue
+		
+		file.set_value(setting.section, setting.key, setting.default)
 	
 	for section: String in temp:
 		if not file.has_section(section):

@@ -35,7 +35,6 @@ func _on_Global_hint_selector_confirmed(hint: PropertyHint) -> void:
 	
 	var type: Variant.Type = obj.get("value_type")
 	obj.default = ggsUtils.TYPE_DEFAULTS[type]
-	obj.current = ggsUtils.TYPE_DEFAULTS[type]
 	obj.value_hint_string = "0,1" if (hint == PROPERTY_HINT_RANGE) else ""
 	obj.notify_property_list_changed()
 	
