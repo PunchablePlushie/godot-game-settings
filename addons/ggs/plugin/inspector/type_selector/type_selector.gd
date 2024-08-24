@@ -11,7 +11,7 @@ extends EditorProperty
 
 func _ready() -> void:
 	Btn.pressed.connect(_on_Btn_pressed)
-	GGS.Events.type_selector_confirmed.connect(_on_Global_type_selector_confirmed)
+	GGS.type_selector_confirmed.connect(_on_Global_type_selector_confirmed)
 	
 	_update_controls()
 
@@ -25,7 +25,7 @@ func _update_controls() -> void:
 
 
 func _on_Btn_pressed() -> void:
-	GGS.Events.type_selector_requested.emit()
+	GGS.type_selector_requested.emit()
 
 
 func _on_Global_type_selector_confirmed(type: Variant.Type) -> void:

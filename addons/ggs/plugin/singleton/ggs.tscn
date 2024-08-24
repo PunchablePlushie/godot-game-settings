@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://esw7j7or7gpd"]
+[gd_scene load_steps=7 format=3 uid="uid://esw7j7or7gpd"]
 
 [ext_resource type="Script" path="res://addons/ggs/plugin/singleton/ggs.gd" id="1_6v3cu"]
-[ext_resource type="Resource" uid="uid://b2xq0og71kabn" path="res://addons/ggs/preferences.tres" id="2_hb27a"]
-[ext_resource type="Script" path="res://addons/ggs/plugin/singleton/ggs_events.gd" id="3_bf0o6"]
-[ext_resource type="Script" path="res://addons/ggs/plugin/singleton/ggs_game_config.gd" id="5_hjnpp"]
+[ext_resource type="Script" path="res://addons/ggs/classes/ggs_setting.gd" id="2_6w5fg"]
+[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.tscn" id="2_75hnh"]
+[ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="3_ouye7"]
+[ext_resource type="Resource" uid="uid://bri4wvl2vlrs1" path="res://game_settings/dsa.tres" id="3_ur2nd"]
+[ext_resource type="Resource" uid="uid://4feqaedkt5k4" path="res://game_settings/cxz.tres" id="4_d8jrh"]
 
-[node name="GGS" type="Node" node_paths=PackedStringArray("Events", "GameConfig")]
+[node name="GGS" type="Node"]
 script = ExtResource("1_6v3cu")
-Pref = ExtResource("2_hb27a")
-Events = NodePath("Events")
-GameConfig = NodePath("GameConfig")
+settings = Array[ExtResource("2_6w5fg")]([ExtResource("3_ur2nd"), ExtResource("4_d8jrh")])
 
-[node name="Events" type="Node" parent="."]
-script = ExtResource("3_bf0o6")
+[node name="AudioPlayers" type="Node" parent="."]
 
-[node name="GameConfig" type="Node" parent="." node_paths=PackedStringArray("_GGS", "_Events")]
-script = ExtResource("5_hjnpp")
-_GGS = NodePath("..")
-_Events = NodePath("../Events")
+[node name="Popups" type="Node" parent="."]
+
+[node name="TypeSelectWin" parent="Popups" instance=ExtResource("2_75hnh")]
+
+[node name="HintSelectWin" parent="Popups" instance=ExtResource("3_ouye7")]

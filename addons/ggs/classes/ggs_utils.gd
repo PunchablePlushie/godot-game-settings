@@ -4,7 +4,6 @@ class_name ggsUtils
 ## Provides utility methods used in GGS.
 
 const ALL_TYPES: Dictionary = {
-	TYPE_NIL: "Nil",
 	TYPE_BOOL: "bool",
 	TYPE_INT: "int",
 	TYPE_FLOAT: "float",
@@ -87,7 +86,6 @@ const ALL_HINTS: Dictionary = {
 }
 
 static var TYPE_DEFAULTS: Dictionary = {
-	TYPE_NIL: null,
 	TYPE_BOOL: false,
 	TYPE_INT: 0,
 	TYPE_FLOAT: 0.0,

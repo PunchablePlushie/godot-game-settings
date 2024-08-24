@@ -5,43 +5,37 @@ class_name ggsSetting
 ## values of the setting and provides its "address" when needed.
 
 ## The current value of the setting.
-var current: Variant: set = set_current, get = get_current
+var current: Variant = false: set = _set_current, get = _get_current
 
 ## The default value of the setting.
-var default: Variant
+var default: Variant = false
 
 ## The value type this setting accepts when running [method apply].
 ## Also determines the type of [param current] and [param default].[br]
 ## See [enum @GlobalScope.Variant.Type] for more details.
-var value_type: int
+var value_type: int = TYPE_BOOL
 # (Static Typing) Type.Variant is not used as it clutters the tooltip.
 
 ## The [enum @GlobalScope.PropertyHint] used for the value. Can be used to customize
 ## how [param current] and [param default] are exported and shown in the
 ## inspector.
-var value_hint: int
+var value_hint: int = PROPERTY_HINT_NONE
 # (Static Typing) PropertyHint is not used as it clutters the tooltip.
 
 ## Hint string used to provide additional information for certain
 ## property hints. See [enum @GlobalScope.PropertyHint] for details.
-var value_hint_string: String
+var value_hint_string: String = ""
+
+## Section name used to save this setting.
+var section: String = ""
+
+## Key name used to save this setting.
+var key: String: set = _set_key
 
 ## Any property in this array will be read-only if exported to the
 ## inspector via [method Object._get_property_list]. May not work with 
 ## [annotation @GDScript.@export] annotations.
 @export_storage var read_only_properties: PackedStringArray
-
-## Name of section this setting will be saved under.
-var section: String: get = get_section
-
-## Name of the key this setting will be saved in.
-var key: String: get = get_key
-
-
-func _init(script_path: String = "") -> void:
-	if not script_path.is_empty():
-		var script = load(script_path)
-		set_script(script)
 
 
 func _get_property_list() -> Array:
@@ -67,6 +61,18 @@ func _get_property_list() -> Array:
 			"usage": PROPERTY_USAGE_GROUP,
 		},
 		{
+			"name": "section",
+			"type": TYPE_STRING,
+			"usage": _get_property_usage("section"),
+			"hint": PROPERTY_HINT_ENUM_SUGGESTION,
+			"hint_string": ",".join(GGS.sections)
+		},
+		{
+			"name": "key",
+			"type": TYPE_STRING,
+			"usage": _get_property_usage("key"),
+		},
+		{
 			"name": "value_type",
 			"type": TYPE_INT,
 			"usage": _get_property_usage("value_type"),
@@ -81,24 +87,29 @@ func _get_property_list() -> Array:
 			"type": TYPE_STRING,
 			"usage": _get_property_usage("value_hint_string"),
 		},
-		{
-			"name": "Address",
-			"type": TYPE_NIL,
-			"usage": PROPERTY_USAGE_GROUP,
-		},
-		{
-			"name": "section",
-			"type": TYPE_STRING,
-			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
-		},
-		{
-			"name": "key",
-			"type": TYPE_STRING,
-			"usage": PROPERTY_USAGE_READ_ONLY | PROPERTY_USAGE_EDITOR,
-		},
 	])
 	
 	return properties
+
+
+func _set_current(value: Variant) -> void:
+	current = value
+	GGS.set_value(section, key, value)
+
+
+func _get_current() -> Variant:
+	GGS.file_reload()
+	var value: Variant = GGS.get_value(section, key)
+	
+	if value == null:
+		return default
+	
+	return value
+
+
+func _set_key(value: String) -> void:
+	key = value
+	resource_name = value
 
 
 func _get_property_usage(property: String) -> PropertyUsageFlags:
@@ -107,96 +118,3 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 		usage |= PROPERTY_USAGE_READ_ONLY
 	
 	return usage
-
-
-#func _get(property: StringName) -> Variant:
-	#if property == "resource_name":
-		#resource_name = name
-		#return resource_name
-	#
-	#return null
-
-
-func get_section() -> String:
-	if not resource_path.begins_with(GGS.Pref.path_settings):
-		return ""
-	
-	var components: PackedStringArray = _get_path_components()
-	
-	if components.is_empty():
-		return ""
-	
-	if components.size() == 1: # Resource file is not in a section folder
-		return ""
-	
-	return components[0]
-
-
-func get_key() -> String:
-	if not resource_path.begins_with(GGS.Pref.path_settings):
-		return ""
-	
-	var path_components: PackedStringArray = _get_path_components()
-	
-	if path_components.is_empty():
-		return ""
-	
-	var file: String = path_components[path_components.size() - 1]
-	
-	var subsects: PackedStringArray = _get_subsection()
-	var prefix: String
-	for subsect: String in subsects:
-		prefix += subsect + "_"
-	
-	return prefix + file.get_basename()
-
-
-func set_current(value: Variant) -> void:
-	current = value
-	
-	if section.is_empty() or key.is_empty():
-		return
-	
-	var file: ConfigFile = ConfigFile.new()
-	var path: String = GGS.Pref.path_file
-	file.load(path)
-	file.set_value(section, key, value)
-	file.save(path)
-
-
-func get_current() -> Variant:
-	if section.is_empty() or key.is_empty():
-		return current
-	
-	var file: ConfigFile = ConfigFile.new()
-	var path: String = GGS.Pref.path_file
-	
-	file.load(path)
-	
-	
-	if (
-		file.has_section(section)
-		and file.has_section_key(section, key)
-	):
-		return file.get_value(section, key)
-	
-	file.set_value(section, key, default)
-	file.save(path)
-	return default
-
-
-func _get_path_components() -> PackedStringArray:
-	var settings: String = GGS.Pref.path_settings
-	var base_path: String = resource_path.trim_prefix(settings)
-	return base_path.split("/", false)
-
-
-func _get_subsection() -> PackedStringArray:
-	var components: PackedStringArray = _get_path_components()
-	
-	if components.size() == 2: # There are no subsections
-		return []
-	
-	components.remove_at(0)
-	components.remove_at(components.size() - 1)
-	return components

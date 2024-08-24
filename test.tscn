@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgrrcr4a75op2"]
+[gd_scene load_steps=4 format=3 uid="uid://bgrrcr4a75op2"]
 
 [ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://addons/ggs/setting_nodes/switch/setting_node_switch.tscn" id="1_0hauj"]
+[ext_resource type="Script" path="res://addons/ggs/templates/audio/audio_mute.gd" id="2_mn25k"]
+
+[sub_resource type="Resource" id="Resource_nypht"]
+script = ExtResource("2_mn25k")
+audio_bus = "None"
+read_only_properties = PackedStringArray()
+current = null
+default = false
+value_type = 1
+value_hint = 0
+value_hint_string = ""
 
 [node name="Test" type="Control"]
 layout_mode = 3
@@ -12,6 +23,7 @@ offset_left = 143.0
 offset_top = 48.0
 offset_right = 259.0
 offset_bottom = 88.0
+setting = SubResource("Resource_nypht")
 apply_on_changed = true
 
 [node name="Btn" parent="Switch" index="0"]

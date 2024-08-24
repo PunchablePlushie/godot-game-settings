@@ -16,7 +16,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	confirmed.connect(_on_confirmed)
-	GGS.Events.type_selector_requested.connect(_on_Global_type_selector_requested)
+	GGS.type_selector_requested.connect(_on_Global_type_selector_requested)
 	
 	_FilterField.text_changed.connect(_on_FilterField_text_changed)
 	_FilterField.text_submitted.connect(_on_FilterField_text_submitted)
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _confirm_selection(selection: Variant.Type) -> void:
-	GGS.Events.type_selector_confirmed.emit(selection)
+	GGS.type_selector_confirmed.emit(selection)
 	hide()
 
 

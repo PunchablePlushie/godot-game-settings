@@ -12,7 +12,7 @@ const PROPERTY: StringName = "value_hint"
 
 func _ready() -> void:
 	Btn.pressed.connect(_on_Btn_pressed)
-	GGS.Events.hint_selector_confirmed.connect(_on_Global_hint_selector_confirmed)
+	GGS.hint_selector_confirmed.connect(_on_Global_hint_selector_confirmed)
 	
 	_update_controls()
 
@@ -26,7 +26,7 @@ func _update_controls() -> void:
 
 func _on_Btn_pressed() -> void:
 	var type: Variant.Type = obj.get("value_type")
-	GGS.Events.hint_selector_requested.emit(type)
+	GGS.hint_selector_requested.emit(type)
 
 
 func _on_Global_hint_selector_confirmed(hint: PropertyHint) -> void:
