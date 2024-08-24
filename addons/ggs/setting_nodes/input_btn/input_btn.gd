@@ -59,7 +59,7 @@ func _on_ICW_input_selected(event: InputEvent) -> void:
 	setting_value = [input_helper.get_event_type(event), input_helper.get_event_id(event)]
 	_set_btn_text_or_icon(event)
 	
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

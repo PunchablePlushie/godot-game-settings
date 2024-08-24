@@ -1,7 +1,7 @@
 @tool
-@icon("res://addons/ggs/assets/bug.svg")
-extends ggsUIComponent
-class_name ggsSwitch
+@icon("res://addons/ggs/assets/nodes/checkbox.svg")
+extends ggsSettingNode
+class_name ggsCheckbox
 
 @onready var Btn: Button = $Btn
 
@@ -26,7 +26,7 @@ func _on_Btn_toggled(btn_state: bool) -> void:
 	setting_value = btn_state
 	GGS.play_sfx(GGS.SFX.INTERACT)
 	
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

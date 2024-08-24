@@ -1,8 +1,6 @@
 @tool
 extends ConfirmationDialog
 
-@export_group("Nodes")
-@export var _Events: Node
 @export_subgroup("Internal")
 @export var _FilterField: LineEdit
 @export var _List: ItemList
@@ -19,7 +17,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	confirmed.connect(_on_confirmed)
-	_Events.hint_selector_requested.connect(_on_Global_hint_selector_requested)
+	GGS.Events.hint_selector_requested.connect(_on_Global_hint_selector_requested)
 	
 	_FilterField.text_changed.connect(_on_FilterField_text_changed)
 	_FilterField.text_submitted.connect(_on_FilterField_text_submitted)
@@ -29,7 +27,7 @@ func _ready() -> void:
 
 
 func _confirm_selection(selection: PropertyHint) -> void:
-	_Events.hint_selector_confirmed.emit(selection)
+	GGS.Events.hint_selector_confirmed.emit(selection)
 	hide()
 
 

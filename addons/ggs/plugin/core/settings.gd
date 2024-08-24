@@ -147,6 +147,7 @@ func _on_NewField_text_submitted(new_text: String) -> void:
 	
 	var selected_subsecs: PackedInt32Array = Subsecs.List.get_selected_items()
 	var paths: PackedStringArray
+	
 	for subsec: int in selected_subsecs:
 		paths.append(Subsecs.List.get_item_metadata(subsec))
 	
@@ -180,7 +181,7 @@ func load_list() -> void:
 		if res is not ggsSetting:
 			continue
 		
-		var idx: int = _List.add_item(item.get_basename())
+		var idx: int = _List.add_item(item.get_basename().capitalize())
 		_List.set_item_metadata(idx, path)
 
 

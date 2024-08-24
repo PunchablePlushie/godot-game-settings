@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_w1a00")
-subsect_seperator = "__"
 path_settings = "res://game_settings"
 path_templates = "res://addons/ggs/templates"
 path_file = "user://settings.cfg"

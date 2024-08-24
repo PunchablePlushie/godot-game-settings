@@ -21,7 +21,7 @@ func init_value() -> void:
 func _on_TextField_text_submitted(submitted_text: String) -> void:
 	setting_value = submitted_text
 	GGS.play_sfx(GGS.SFX.INTERACT)
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

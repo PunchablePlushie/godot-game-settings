@@ -3,11 +3,6 @@ extends Resource
 class_name ggsPreferences
 ## GGS preferences resource.
 
-## String used as a separator between subsection. When organizing settings
-## inside the settings directory, any folder beyond the first counts as a
-## subsection. View documentation for examples.
-@export var subsect_seperator: String = "__"
-
 @export_group("Paths", "path_")
 ## Location of invdividual game setting. This should be where your
 ## [ggsSetting] resource instances are.

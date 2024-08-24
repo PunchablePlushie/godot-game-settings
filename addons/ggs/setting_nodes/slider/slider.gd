@@ -23,7 +23,7 @@ func init_value() -> void:
 func _on_Slider_value_changed(new_value: float) -> void:
 	setting_value = new_value
 	
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

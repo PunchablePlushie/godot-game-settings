@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dbsaauuegx61o"]
+
+[ext_resource type="Script" path="res://addons/ggs/templates/audio/audio_mute.gd" id="1_jw5ds"]
+
+[resource]
+script = ExtResource("1_jw5ds")
+audio_bus = "None"
+read_only_properties = PackedStringArray()
+current = null
+default = false
+value_type = 1
+value_hint = 0
+value_hint_string = ""

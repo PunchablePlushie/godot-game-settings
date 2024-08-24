@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cjivpradkwilk"]
+
+[ext_resource type="Script" path="res://game_settings/audio/master/aaa.gd" id="1_853uy"]
+
+[resource]
+script = ExtResource("1_853uy")
+read_only_properties = PackedStringArray()
+current = null
+default = null
+value_type = 0
+value_hint = 0
+value_hint_string = ""

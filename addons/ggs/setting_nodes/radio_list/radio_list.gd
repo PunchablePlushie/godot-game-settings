@@ -64,7 +64,7 @@ func _on_pressed(button: BaseButton) -> void:
 	else:
 		setting_value = child_index
 	
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

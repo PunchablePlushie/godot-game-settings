@@ -38,7 +38,7 @@ func init_value() -> void:
 
 
 func _on_option_selected(_option_index: int) -> void:
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

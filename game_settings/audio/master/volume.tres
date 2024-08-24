@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://hl105qyt4o7p"]
+
+[ext_resource type="Script" path="res://addons/ggs/templates/audio/audio_volume.gd" id="1_hwnul"]
+
+[resource]
+script = ExtResource("1_hwnul")
+audio_bus = "None"
+read_only_properties = PackedStringArray()
+current = 80.0
+default = 80.0
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"

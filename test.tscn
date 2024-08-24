@@ -1,5 +1,20 @@
-[gd_scene format=3 uid="uid://bgrrcr4a75op2"]
+[gd_scene load_steps=2 format=3 uid="uid://bgrrcr4a75op2"]
+
+[ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://addons/ggs/setting_nodes/switch/setting_node_switch.tscn" id="1_0hauj"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+
+[node name="Switch" parent="." instance=ExtResource("1_0hauj")]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 48.0
+offset_right = 259.0
+offset_bottom = 88.0
+apply_on_changed = true
+
+[node name="Btn" parent="Switch" index="0"]
+text = "Foobarw"
+
+[editable path="Switch"]

@@ -36,7 +36,7 @@ func _on_Btn_item_selected(item_index: int) -> void:
 		setting_value = Btn.get_item_id(item_index)
 	else:
 		setting_value = item_index
-	if apply_on_change:
+	if apply_on_changed:
 		apply_setting()
 
 

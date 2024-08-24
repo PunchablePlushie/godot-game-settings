@@ -5,7 +5,7 @@ class_name ggsSetting
 ## values of the setting and provides its "address" when needed.
 
 ## The current value of the setting.
-var current: Variant: set = _set_current, get = _get_current
+var current: Variant: set = set_current, get = get_current
 
 ## The default value of the setting.
 var default: Variant
@@ -117,8 +117,10 @@ func _get_property_usage(property: String) -> PropertyUsageFlags:
 	#return null
 
 
-#region Setters & Getters
 func get_section() -> String:
+	if not resource_path.begins_with(GGS.Pref.path_settings):
+		return ""
+	
 	var components: PackedStringArray = _get_path_components()
 	
 	if components.is_empty():
@@ -131,6 +133,9 @@ func get_section() -> String:
 
 
 func get_key() -> String:
+	if not resource_path.begins_with(GGS.Pref.path_settings):
+		return ""
+	
 	var path_components: PackedStringArray = _get_path_components()
 	
 	if path_components.is_empty():
@@ -138,16 +143,19 @@ func get_key() -> String:
 	
 	var file: String = path_components[path_components.size() - 1]
 	
-	var subsects: PackedStringArray = _get_subsections()
+	var subsects: PackedStringArray = _get_subsection()
 	var prefix: String
 	for subsect: String in subsects:
-		prefix += subsect + GGS.Pref.subsect_seperator
+		prefix += subsect + "_"
 	
 	return prefix + file.get_basename()
 
 
-func _set_current(value: Variant) -> void:
+func set_current(value: Variant) -> void:
 	current = value
+	
+	if section.is_empty() or key.is_empty():
+		return
 	
 	var file: ConfigFile = ConfigFile.new()
 	var path: String = GGS.Pref.path_file
@@ -156,19 +164,25 @@ func _set_current(value: Variant) -> void:
 	file.save(path)
 
 
-func _get_current() -> Variant:
+func get_current() -> Variant:
+	if section.is_empty() or key.is_empty():
+		return current
+	
 	var file: ConfigFile = ConfigFile.new()
 	var path: String = GGS.Pref.path_file
 	
 	file.load(path)
-	if file.has_section_key(section, key):
+	
+	
+	if (
+		file.has_section(section)
+		and file.has_section_key(section, key)
+	):
 		return file.get_value(section, key)
 	
 	file.set_value(section, key, default)
 	file.save(path)
 	return default
-
-#endregion
 
 
 func _get_path_components() -> PackedStringArray:
@@ -177,7 +191,7 @@ func _get_path_components() -> PackedStringArray:
 	return base_path.split("/", false)
 
 
-func _get_subsections() -> PackedStringArray:
+func _get_subsection() -> PackedStringArray:
 	var components: PackedStringArray = _get_path_components()
 	
 	if components.size() == 2: # There are no subsections

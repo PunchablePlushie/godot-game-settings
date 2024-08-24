@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bjl3qlh8yn0pt"]
+[gd_scene load_steps=19 format=3 uid="uid://bjl3qlh8yn0pt"]
 
 [ext_resource type="Theme" uid="uid://djcu6ues0nvmg" path="res://addons/ggs/plugin/theme/ggs_theme.tres" id="1_maqhj"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/core/core.gd" id="2_3yfb4"]
@@ -9,14 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://um81pudsk77e" path="res://addons/ggs/assets/config.svg" id="5_mk14h"]
 [ext_resource type="Texture2D" uid="uid://blcmyrnuexf8n" path="res://addons/ggs/assets/invalid.svg" id="6_yh8rg"]
 [ext_resource type="Texture2D" uid="uid://bgpnuydaht0me" path="res://addons/ggs/assets/reload.svg" id="7_hm7f8"]
-[ext_resource type="Texture2D" uid="uid://bxu8v5325tupd" path="res://addons/ggs/assets/icon_mini.svg" id="8_dil30"]
+[ext_resource type="Texture2D" uid="uid://bmsphj1ioly08" path="res://addons/ggs/assets/icon_mono.svg" id="8_mhla2"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/core/subsecs.gd" id="10_0omxs"]
-[ext_resource type="Texture2D" uid="uid://dubp3e0mgbn21" path="res://addons/ggs/assets/reset_setting.svg" id="12_m41c1"]
 [ext_resource type="Texture2D" uid="uid://d25qpoya6byu3" path="res://addons/ggs/assets/select_all.svg" id="13_x13nu"]
 [ext_resource type="Texture2D" uid="uid://cr751yg23f3ej" path="res://addons/ggs/assets/deselect_all.svg" id="14_q5r7y"]
 [ext_resource type="Texture2D" uid="uid://63siutwk6rxh" path="res://addons/ggs/assets/valid.svg" id="15_g2pg8"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/core/settings.gd" id="15_tnqio"]
 [ext_resource type="Script" path="res://addons/ggs/empty_setting.gd" id="16_sql8g"]
+[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.tscn" id="18_iyto6"]
+[ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="19_w0y3o"]
 
 [node name="Core" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 350)
@@ -90,7 +91,7 @@ layout_mode = 2
 [node name="Button3" type="Button" parent="BasePanel/HBox/Topbar/HBoxContainer"]
 layout_mode = 2
 text = "GGS v3.2.0"
-icon = ExtResource("8_dil30")
+icon = ExtResource("8_mhla2")
 flat = true
 
 [node name="Lists" type="HBoxContainer" parent="BasePanel/HBox"]
@@ -148,9 +149,9 @@ placeholder_text = "Section name..."
 layout_mode = 2
 size_flags_vertical = 3
 item_count = 1
-item_0/text = "dsa"
+item_0/text = "Audio"
 
-[node name="Subsecs" type="PanelContainer" parent="BasePanel/HBox/Lists" node_paths=PackedStringArray("_Core", "_NewBtn", "_ResetBtn", "_SelectAllBtn", "_DeselectAllBtn", "_ReloadBtn", "_NewField", "List", "_ListLabel", "_Sections", "_Settings")]
+[node name="Subsecs" type="PanelContainer" parent="BasePanel/HBox/Lists" node_paths=PackedStringArray("_Core", "_NewBtn", "_SelectAllBtn", "_DeselectAllBtn", "_ReloadBtn", "_NewField", "List", "_ListLabel", "_Sections", "_Settings")]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 1
@@ -158,7 +159,6 @@ theme_type_variation = &"LightPanel"
 script = ExtResource("10_0omxs")
 _Core = NodePath("../../../..")
 _NewBtn = NodePath("Main/Top/NewBtn")
-_ResetBtn = NodePath("Main/Top/ResetBtn")
 _SelectAllBtn = NodePath("Main/Top/Right/SelectAllBtn")
 _DeselectAllBtn = NodePath("Main/Top/Right/DeselectAllBtn")
 _ReloadBtn = NodePath("Main/Top/Right/ReloadBtn")
@@ -184,22 +184,9 @@ disabled = true
 toggle_mode = true
 icon = ExtResource("2_6pxb8")
 
-[node name="ResetBtn" type="Button" parent="BasePanel/HBox/Lists/Subsecs/Main/Top"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 0
-tooltip_text = "Reset settings of the selected subsections to their default value.
-Resets settings that don't belong to a subsection if no subsection is selected."
-disabled = true
-icon = ExtResource("12_m41c1")
-
 [node name="Right" type="HBoxContainer" parent="BasePanel/HBox/Lists/Subsecs/Main/Top"]
 layout_mode = 2
 size_flags_horizontal = 10
-
-[node name="Vsep" type="VSeparator" parent="BasePanel/HBox/Lists/Subsecs/Main/Top/Right"]
-layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="SelectAllBtn" type="Button" parent="BasePanel/HBox/Lists/Subsecs/Main/Top/Right"]
 custom_minimum_size = Vector2(0, 29)
@@ -343,3 +330,8 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "No Section Selected"
+
+[node name="TypeSelectWin" parent="." instance=ExtResource("18_iyto6")]
+
+[node name="HintSelectWin" parent="." instance=ExtResource("19_w0y3o")]
+position = Vector2i(218, 185)

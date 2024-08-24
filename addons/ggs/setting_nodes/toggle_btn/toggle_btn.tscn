@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d10row618jwcs"]
 
-[ext_resource type="Script" path="res://addons/ggs/setting_nodes/_shared_scripts/binary_selection.gd" id="1_j77ap"]
+[ext_resource type="Script" path="res://addons/ggs/setting_nodes/switch/setting_node_switch.gd" id="1_j77ap"]
 
 [node name="ToggleBtn" type="MarginContainer"]
 offset_right = 40.0

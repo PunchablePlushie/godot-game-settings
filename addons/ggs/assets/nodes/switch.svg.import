@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxu8v5325tupd"
-path="res://.godot/imported/icon_mini.svg-5e00867268e00b8e3e5eaa22b6fe9735.ctex"
+uid="uid://bn1m6etm3ivk6"
+path="res://.godot/imported/switch.svg-f3466a5c8c7d990d5a92688f12a7e5bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/ggs/assets/icon_mini.svg"
-dest_files=["res://.godot/imported/icon_mini.svg-5e00867268e00b8e3e5eaa22b6fe9735.ctex"]
+source_file="res://addons/ggs/assets/nodes/switch.svg"
+dest_files=["res://.godot/imported/switch.svg-f3466a5c8c7d990d5a92688f12a7e5bc.ctex"]
 
 [params]
 

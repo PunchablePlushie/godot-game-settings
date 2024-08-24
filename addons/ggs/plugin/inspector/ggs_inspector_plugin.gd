@@ -6,7 +6,6 @@ var input_selector_scn: PackedScene = preload("./input_selector/input_selector.t
 const TYPE_SELECTOR_SCN: PackedScene = preload("./type_selector/type_selector.tscn")
 const HINT_SELECTOR_SCN: PackedScene = preload("./hint_selector/hint_selector.tscn")
 const HINT_STRING_FIELD_SCN: PackedScene = preload("./hint_string_field/hint_string_field.tscn")
-const TEMPLATE_SELECTOR_SCN: PackedScene = preload("./template_selector/template_selector.tscn")
 
 func _can_handle(object: Object) -> bool:
 	return object is ggsSetting
@@ -28,11 +27,6 @@ func _parse_property(object: Object, type: Variant.Type, name: String,
 		return true
 	
 	return false
-
-
-func _parse_group(object: Object, group: String) -> void:
-	if group == "Setting Properties":
-		add_custom_control(TEMPLATE_SELECTOR_SCN.instantiate())
 
 
 func _parse_category(object: Object, category: String) -> void:

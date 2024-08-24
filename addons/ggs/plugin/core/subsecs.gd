@@ -7,7 +7,6 @@ const LABEL_NO_ITEMS: String = "No Subsection Available"
 @export_group("Nodes")
 @export var _Core: MarginContainer
 @export var _NewBtn: Button
-@export var _ResetBtn: Button
 @export var _SelectAllBtn: Button
 @export var _DeselectAllBtn: Button
 @export var _ReloadBtn: Button
@@ -38,7 +37,6 @@ func _ready() -> void:
 
 func set_panel_disabled(disabled: bool) -> void:
 	_NewBtn.disabled = disabled
-	_ResetBtn.disabled = disabled
 	_SelectAllBtn.disabled = disabled
 	_DeselectAllBtn.disabled = disabled
 	_ReloadBtn.disabled = disabled
@@ -111,7 +109,7 @@ func load_list() -> void:
 		_ListLabel.hide()
 	
 	for item: String in items:
-		var idx: int = List.add_item(item)
+		var idx: int = List.add_item(item.capitalize())
 		List.set_item_metadata(idx, base_path.path_join(item))
 	
 	_reset_settings_base_path()

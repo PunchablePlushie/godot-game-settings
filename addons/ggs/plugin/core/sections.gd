@@ -81,7 +81,7 @@ func _load_list() -> void:
 	
 	var items: PackedStringArray = DirAccess.get_directories_at(base_path)
 	for item: String in items:
-		var idx: int = List.add_item(item)
+		var idx: int = List.add_item(item.capitalize())
 		List.set_item_metadata(idx, base_path.path_join(item))
 
 
