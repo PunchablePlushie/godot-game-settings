@@ -1,5 +1,6 @@
 @tool
 extends ggsSetting
+class_name settingAudioMute
 
 var audio_bus: String = "None"
 
@@ -7,6 +8,7 @@ var audio_bus: String = "None"
 func _init() -> void:
 	value_type = TYPE_BOOL
 	default = false
+	print("test")
 
 
 func apply(value: bool) -> void:
