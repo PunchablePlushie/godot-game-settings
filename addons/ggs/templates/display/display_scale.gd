@@ -1,13 +1,26 @@
 @tool
 extends ggsSetting
+class_name settingDisplayScale
+## Sets the window scale. The window will be resized by multiplying its
+## dimensions by a flat number.
 
-@export var scales: Array[float]: set = set_scales
+## List of available scales.
+@export var scales: Array[float]: set = _set_scales
 
 
 func _init() -> void:
 	value_type = TYPE_INT
 	value_hint = PROPERTY_HINT_ENUM
-	value_hint_string = ",".join(_get_scales_strings())
+	default = 0
+	section = "display"
+
+
+func _set_scales(value: Array[float]) -> void:
+	scales = value
+	
+	if Engine.is_editor_hint():
+		value_hint_string = ",".join(_get_scales_strings())
+		notify_property_list_changed()
 
 
 func apply(value: int) -> void:
@@ -16,24 +29,14 @@ func apply(value: int) -> void:
 	var base_h: int = ProjectSettings.get_setting("display/window/size/viewport_height")
 	var size: Vector2 = Vector2(base_w, base_h) * scale
 	size = ggsUtils.window_clamp_to_screen(size)
-
-	DisplayServer.window_set_size(size)
-	ggsUtils.center_window()
-
-
-### Scales
-
-func set_scales(value: Array[float]) -> void:
-	scales = value
 	
-	if Engine.is_editor_hint():
-		value_hint_string = ",".join(_get_scales_strings())
-		ggsUtils.get_editor_interface().call_deferred("inspect_object", self)
+	DisplayServer.window_set_size(size)
+	ggsUtils.window_center()
 
 
 func _get_scales_strings() -> PackedStringArray:
-	var scales_strings: PackedStringArray = []
-	for scale in scales:
-		scales_strings.append("x%s"%[str(scale)])
+	var result: PackedStringArray = []
+	for scale: float in scales:
+		result.append("x%s"%[scale])
 	
-	return scales_strings
+	return result

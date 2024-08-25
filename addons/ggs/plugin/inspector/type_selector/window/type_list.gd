@@ -3,10 +3,14 @@ extends ItemList
 
 var _types: PackedStringArray = ggsUtils.ALL_TYPES.values()
 
-@onready var EditorControl: Control = EditorInterface.get_base_control()
+var EditorControl: Control
 
 
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		return
+	
+	EditorControl = EditorInterface.get_base_control()
 	clear()
 	_create_from_arr(_types)
 

@@ -214,19 +214,17 @@ static func item_name_is_valid(name: String) -> bool:
 	)
 
 
-# Window
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
-	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect()
-	size.x = min(size.x, screen_size.size.x)
-	size.y = min(size.y, screen_size.size.y)
-	
-	return size
-
-
-static func center_window() -> void:
 	var screen_id: int = DisplayServer.window_get_current_screen()
-	var display_size: Vector2i = DisplayServer.screen_get_size(screen_id)
+	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect(screen_id)
+	
+	return size.clamp(size, screen_size.size)
+
+
+static func window_center() -> void:
+	var screen_id: int = DisplayServer.window_get_current_screen()
+	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect(screen_id)
 	var window_size: Vector2i = DisplayServer.window_get_size()
 	var origin: Vector2i = DisplayServer.screen_get_position(screen_id)
-	var target_pos: Vector2 = origin + (display_size / 2) - (window_size / 2)
+	var target_pos: Vector2 = origin + (screen_size.size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)

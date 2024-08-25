@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="settingDisplaySize" load_steps=2 format=3 uid="uid://dljdfin7gxjid"]
+
+[ext_resource type="Script" path="res://addons/ggs/templates/display/display_size.gd" id="1_phxo8"]
+
+[resource]
+resource_name = "size"
+script = ExtResource("1_phxo8")
+sizes = Array[Vector2]([])
+read_only_properties = PackedStringArray()
+default = 0
+section = "display"
+key = ""
+value_type = 2
+value_hint = 2
+value_hint_string = ""

@@ -4,12 +4,12 @@ extends MarginContainer
 class_name ggsSettingNode
 
 const WARNING_NO_SETTING: String = "No setting is assigned."
-const WARNING_DELETED_SETTING: String = "The assigned setting was deleted or is invalid."
-const WARNING_SETTING_NOT_IN_DIR: String = "The assigned setting is not in the settings directory."
+const WARNING_INVALID: String = "The assigned setting is invalid. Make sure it's in the settings directory and is saved on disc."
+const WARNING_EMPTY_KEY: String = "Setting key is empty and won't be saved to or loaded from the file."
 const WARNING_INCOMPATIBLE_SETTING: String = "The value type of the assigned setting is not compatible with this component."
 
 @export_category("GGS UI Component")
-@export var setting: ggsSetting: set = set_setting
+@export var setting: ggsSetting: set = _set_setting
 @export var apply_on_changed: bool
 @export var grab_focus_on_mouse_over: bool = true
 
@@ -23,39 +23,62 @@ func _ready() -> void:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	if setting == null:
-		return PackedStringArray([WARNING_NO_SETTING])
+		return [WARNING_NO_SETTING]
 	
-	if setting.resource_path.is_empty():
-		return PackedStringArray([WARNING_DELETED_SETTING])
+	var warnings: PackedStringArray
+	if (
+		setting.resource_path.is_empty()
+		or not setting.resource_path.begins_with(GGS.settings_dir)
+	):
+		warnings.append(WARNING_INVALID)
 	
-	if not setting.resource_path.begins_with(GGS.Pref.path_settings):
-		return PackedStringArray([WARNING_SETTING_NOT_IN_DIR])
+	if setting.key.is_empty():
+		warnings.append(WARNING_EMPTY_KEY)
 	
 	if (
-		not compatible_types.is_empty() and
-		not compatible_types.has(setting.value_type)
+		not compatible_types.is_empty()
+		and not compatible_types.has(setting.value_type)
 	):
-		return PackedStringArray([WARNING_INCOMPATIBLE_SETTING])
+		warnings.append(WARNING_INCOMPATIBLE_SETTING)
 	
-	
-	return PackedStringArray()
+	return warnings
 
 
-func set_setting(value: ggsSetting) -> void:
+func _set_setting(value: ggsSetting) -> void:
+	if (
+		setting != null
+		and setting.changed.is_connected(_on_setting_resource_changed)
+	):
+		setting.changed.disconnect(_on_setting_resource_changed)
+	
 	setting = value
 	update_configuration_warnings()
+	
+	if setting != null:
+		setting.changed.connect(_on_setting_resource_changed)
 
 
 func init_value() -> void:
-	if setting != null:
-		setting_value = setting.current
+	setting_value = GGS.get_value(setting)
 
 
 func apply_setting() -> void:
-	setting.current = setting_value
+	GGS.set_value(setting.section, setting.key, setting_value)
 	setting.apply(setting_value)
 
 
 func reset_setting() -> void:
-	setting_value = setting.default
-	apply_setting()
+	GGS.set_value(setting.section, setting.key, setting.default)
+	setting.apply(setting_value)
+
+
+func validate_setting() -> bool:
+	if setting == null:
+		printerr("GGS - Get Setting Value (%s) - No setting is assigned."%name)
+		return false
+	
+	return true
+
+
+func _on_setting_resource_changed() -> void:
+	update_configuration_warnings()

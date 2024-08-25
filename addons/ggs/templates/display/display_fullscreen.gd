@@ -1,12 +1,17 @@
 @tool
 extends ggsSetting
+class_name settingDisplayFullscreen
+## Toggles window fullscreen mode.
 
+## A setting that can handle window size. Used to set the game window to
+## the correct size after its fullscreen state changes.
 @export var size_setting: ggsSetting
 
 
 func _init() -> void:
 	value_type = TYPE_BOOL
 	default = false
+	section = "display"
 
 
 func apply(value: bool) -> void:
@@ -20,4 +25,5 @@ func apply(value: bool) -> void:
 	DisplayServer.window_set_mode(window_mode)
 	
 	if size_setting != null:
-		size_setting.apply(size_setting.current)
+		var size_value: String = GGS.get_value(size_setting)
+		size_setting.apply(size_value)

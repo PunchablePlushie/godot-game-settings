@@ -1,2 +1,0 @@
-Prevents this directory from being deleted when it's empty.
-Feel free to remove this text file once the directory is no longer empty.
