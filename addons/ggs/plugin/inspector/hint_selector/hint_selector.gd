@@ -39,4 +39,3 @@ func _on_Global_hint_selector_confirmed(hint: PropertyHint) -> void:
 	obj.notify_property_list_changed()
 	
 	_update_controls()
-	

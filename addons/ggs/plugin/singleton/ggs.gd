@@ -5,13 +5,9 @@ extends Node
 
 const BASE_PATH: String = "user://"
 
-signal type_selector_requested
 signal hint_selector_requested(type: Variant.Type)
-signal input_selector_requested
 
-signal type_selector_confirmed(type: Variant.Type)
 signal hint_selector_confirmed(hint: PropertyHint)
-signal input_selector_confirmed
 
 ## Name of the config _file that will be used to save and load game settings.
 @export var config_file: String = "settings.cfg"
@@ -22,7 +18,6 @@ var _file_path: String
 var _file: ConfigFile = ConfigFile.new()
 var _settings: Array[ggsSetting]
 
-@onready var Popups: Node = $Popups
 @onready var Audio: Node = $Audio
 
 
@@ -32,7 +27,6 @@ func _ready() -> void:
 	_file_clean_up()
 	
 	if not Engine.is_editor_hint():
-		Popups.queue_free()
 		_apply_all()
 
 

@@ -1,6 +1,7 @@
 @tool
 extends EditorProperty
 
+@export var window_scn: PackedScene
 @export_group("Nodes")
 @export var Btn: Button
 @export var Value: Label
@@ -11,8 +12,6 @@ extends EditorProperty
 
 func _ready() -> void:
 	Btn.pressed.connect(_on_Btn_pressed)
-	GGS.type_selector_confirmed.connect(_on_Global_type_selector_confirmed)
-	
 	_update_controls()
 
 
@@ -25,10 +24,13 @@ func _update_controls() -> void:
 
 
 func _on_Btn_pressed() -> void:
-	GGS.type_selector_requested.emit()
+	var TypeWin: ConfirmationDialog = window_scn.instantiate()
+	TypeWin.type_confirmed.connect(_on_TypeWin_confirmed)
+	add_child(TypeWin)
+	TypeWin.popup()
 
 
-func _on_Global_type_selector_confirmed(type: Variant.Type) -> void:
+func _on_TypeWin_confirmed(type: Variant.Type) -> void:
 	obj.set(property, type)
 	emit_changed(property, type)
 	

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://esw7j7or7gpd"]
+[gd_scene load_steps=3 format=3 uid="uid://esw7j7or7gpd"]
 
 [ext_resource type="Script" path="res://addons/ggs/plugin/singleton/ggs.gd" id="1_6v3cu"]
-[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.tscn" id="2_75hnh"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/singleton/audio.gd" id="2_ghko5"]
-[ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="3_ouye7"]
 
 [node name="GGS" type="Node"]
 script = ExtResource("1_6v3cu")
@@ -16,11 +14,3 @@ script = ExtResource("2_ghko5")
 [node name="MouseOver" type="AudioStreamPlayer" parent="Audio"]
 
 [node name="Focus" type="AudioStreamPlayer" parent="Audio"]
-
-[node name="Popups" type="Node" parent="."]
-
-[node name="TypeSelectWin" parent="Popups" instance=ExtResource("2_75hnh")]
-position = Vector2i(218, 185)
-visible = true
-
-[node name="HintSelectWin" parent="Popups" instance=ExtResource("3_ouye7")]

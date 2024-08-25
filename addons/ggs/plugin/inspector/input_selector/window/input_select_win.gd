@@ -1,7 +1,7 @@
 @tool
 extends ConfirmationDialog
 
-signal type_confirmed(type: Variant.Type)
+signal input_confirmed(action: String)
 
 @export_subgroup("Internal")
 @export var _FilterField: LineEdit
@@ -18,7 +18,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	confirmed.connect(_on_confirmed)
-	visibility_changed.connect(_on_visibilit_changed)
+	visibility_changed.connect(_on_visibility_changed)
 	
 	_FilterField.text_changed.connect(_on_FilterField_text_changed)
 	_FilterField.text_submitted.connect(_on_FilterField_text_submitted)
@@ -27,12 +27,12 @@ func _ready() -> void:
 	_List.item_activated.connect(_on_List_item_activated)
 
 
-func _confirm_selection(selection: Variant.Type) -> void:
-	type_confirmed.emit(selection)
+func _confirm_selection(selection: String) -> void:
+	input_confirmed.emit(selection)
 	hide()
 
 
-func _on_visibilit_changed() -> void:
+func _on_visibility_changed() -> void:
 	if visible:
 		_field_value_is_valid = false
 		
@@ -53,8 +53,7 @@ func _on_confirmed() -> void:
 		item_idx = selected_items[0]
 	
 	var item: String = _List.get_item_text(item_idx)
-	var hint_idx = ggsUtils.ALL_TYPES.find_key(item)
-	_confirm_selection(hint_idx)
+	_confirm_selection(item)
 
 
 # Confirming through filter list #
@@ -68,8 +67,7 @@ func _on_FilterField_text_changed(new_text: String) -> void:
 func _on_FilterField_text_submitted(submitted_text: String) -> void:
 	if _field_value_is_valid:
 		var item: String = _List.get_item_text(0)
-		var idx: int = ggsUtils.ALL_TYPES.find_key(item)
-		_confirm_selection(idx)
+		_confirm_selection(item)
 
 
 # Confirming through list actions #
@@ -79,5 +77,4 @@ func _on_List_item_selected(idx: int) -> void:
 
 func _on_List_item_activated(index: int) -> void:
 	var item: String = _List.get_item_text(index)
-	var idx: int = ggsUtils.ALL_TYPES.find_key(item)
-	_confirm_selection(idx)
+	_confirm_selection(item)
