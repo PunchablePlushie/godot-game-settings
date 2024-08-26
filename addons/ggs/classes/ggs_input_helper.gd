@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 class_name ggsInputHelper
+## Provides input-related methods used throughout GGS.
 
 enum InputType {
 	INVALID,
@@ -58,10 +59,10 @@ const TEXT_XBOX: Dictionary = {
 	JOY_BUTTON_RIGHT_STICK: "RS",
 	JOY_BUTTON_LEFT_SHOULDER: "LB",
 	JOY_BUTTON_RIGHT_SHOULDER: "RB",
-	JOY_BUTTON_DPAD_UP: "DPAD Up",
-	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
-	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
-	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_DPAD_UP: "D-Pad Up",
+	JOY_BUTTON_DPAD_DOWN: "D-Pad Down",
+	JOY_BUTTON_DPAD_LEFT: "D-Pad Left",
+	JOY_BUTTON_DPAD_RIGHT: "D-Pad Right",
 	JOY_BUTTON_MISC1: "Share",
 	JOY_BUTTON_PADDLE1: "PAD1",
 	JOY_BUTTON_PADDLE2: "PAD2",
@@ -95,10 +96,10 @@ const TEXT_PS: Dictionary = {
 	JOY_BUTTON_RIGHT_STICK: "R3",
 	JOY_BUTTON_LEFT_SHOULDER: "L1",
 	JOY_BUTTON_RIGHT_SHOULDER: "R1",
-	JOY_BUTTON_DPAD_UP: "DPAD Up",
-	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
-	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
-	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_DPAD_UP: "D-Pad Up",
+	JOY_BUTTON_DPAD_DOWN: "D-Pad Down",
+	JOY_BUTTON_DPAD_LEFT: "D-Pad Left",
+	JOY_BUTTON_DPAD_RIGHT: "D-Pad Right",
 	JOY_BUTTON_MISC1: "Microphone",
 	JOY_BUTTON_PADDLE1: "PAD1",
 	JOY_BUTTON_PADDLE2: "PAD2",
@@ -132,10 +133,10 @@ const TEXT_SWITCH: Dictionary = {
 	JOY_BUTTON_RIGHT_STICK: "RS",
 	JOY_BUTTON_LEFT_SHOULDER: "L",
 	JOY_BUTTON_RIGHT_SHOULDER: "R",
-	JOY_BUTTON_DPAD_UP: "DPAD Up",
-	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
-	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
-	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_DPAD_UP: "D-Pad Up",
+	JOY_BUTTON_DPAD_DOWN: "D-Pad Down",
+	JOY_BUTTON_DPAD_LEFT: "D-Pad Left",
+	JOY_BUTTON_DPAD_RIGHT: "D-Pad Right",
 	JOY_BUTTON_MISC1: "Capture",
 	JOY_BUTTON_PADDLE1: "PAD1",
 	JOY_BUTTON_PADDLE2: "PAD2",
@@ -169,10 +170,10 @@ const TEXT_OTHER: Dictionary = {
 	JOY_BUTTON_RIGHT_STICK: "RS",
 	JOY_BUTTON_LEFT_SHOULDER: "L",
 	JOY_BUTTON_RIGHT_SHOULDER: "R",
-	JOY_BUTTON_DPAD_UP: "DPAD Up",
-	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
-	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
-	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_DPAD_UP: "D-Pad Up",
+	JOY_BUTTON_DPAD_DOWN: "D-Pad Down",
+	JOY_BUTTON_DPAD_LEFT: "D-Pad Left",
+	JOY_BUTTON_DPAD_RIGHT: "D-Pad Right",
 	JOY_BUTTON_MISC1: "MISC1",
 	JOY_BUTTON_PADDLE1: "PAD1",
 	JOY_BUTTON_PADDLE2: "PAD2",
@@ -197,7 +198,26 @@ const TEXT_OTHER_AXIS: Dictionary = {
 const MODIFIERS_MASK: int = KEY_MASK_SHIFT | KEY_MASK_CTRL | KEY_MASK_ALT
 
 
-func serialize_event(event: InputEvent) -> Array[int]:
+## Retrieves the user-defined input map from the project settings.
+## Unlike [InputMap], it works in the editor as well.
+static func get_input_map() -> Dictionary:
+	var input_map: Dictionary
+	
+	var project_file: ConfigFile = ConfigFile.new()
+	project_file.load("res://project.godot")
+	
+	var actions: PackedStringArray = project_file.get_section_keys("input")
+	for action: String in actions:
+		var action_properties: Dictionary = project_file.get_value("input", action)
+		var action_events: Array = action_properties["events"]
+		
+		input_map[action] = action_events
+	
+	return input_map
+
+
+## Serializes the given event by saving its important properties in an array.
+static func serialize_event(event: InputEvent) -> Array:
 	var type: int = -1
 	var id: int = -1
 	var aux: int = -1
@@ -217,12 +237,13 @@ func serialize_event(event: InputEvent) -> Array[int]:
 	if event is InputEventJoypadMotion:
 		type = InputType.JOYPAD_MOTION
 		id = event.axis
-		aux = event.axis_value
+		aux = 0 if event.axis_value > 0 else 1
 	
 	return [type, id, aux]
 
 
-func deserialize_event(data: Array[int]) -> InputEvent:
+## Recreates the [InputEvent] created via [method serialize_event].
+static func deserialize_event(data: Array) -> InputEvent:
 	var type: int = data[0]
 	var id: int = data[1]
 	var aux: int = data[2]
@@ -249,11 +270,15 @@ func deserialize_event(data: Array[int]) -> InputEvent:
 	if type == InputType.JOYPAD_MOTION:
 		event = InputEventJoypadMotion.new()
 		event.axis = id
-		event.axis_value = aux
+		event.axis_value = -1 if aux == 1 else 1
 	
 	return event
 
 
+## Returns a string representation of the event. Unlike
+## [method InputEvent.as_text], it returns a shorter string that also
+## changes based on gamepad type. Uses [code]TEXT_*[/code] and
+## [code]TEXT_*_AXIS[/code] constants.
 func event_get_text(event: InputEvent) -> String:
 	var text: String = "INVALID EVENT"
 	
@@ -280,21 +305,8 @@ func event_get_text(event: InputEvent) -> String:
 	return text
 
 
-func _event_get_modifiers_text(event: InputEventWithModifiers) -> String:
-	var modifiers: PackedStringArray
-	if event.shift_pressed:
-		modifiers.append("Shift")
-	
-	if event.ctrl_pressed:
-		modifiers.append("Ctrl")
-	
-	if event.alt_pressed:
-		modifiers.append("Alt")
-	
-	var modifiers_string: String = "+".join(modifiers) 
-	return modifiers_string
-
-
+## Returns a [Texture2D] representation of the event. Uses a [ggsJoyGlyphDB]
+## to retreive appropriate textures.
 func event_get_glyph(event: InputEvent, db: ggsJoyGlyphDB) -> Texture2D:
 	var glyph: Texture2D = null
 	
@@ -316,6 +328,21 @@ func event_get_glyph(event: InputEvent, db: ggsJoyGlyphDB) -> Texture2D:
 		glyph = db.get(property)
 	
 	return glyph
+
+
+func _event_get_modifiers_text(event: InputEventWithModifiers) -> String:
+	var modifiers: PackedStringArray
+	if event.shift_pressed:
+		modifiers.append("Shift")
+	
+	if event.ctrl_pressed:
+		modifiers.append("Ctrl")
+	
+	if event.alt_pressed:
+		modifiers.append("Alt")
+	
+	var modifiers_string: String = "+".join(modifiers) 
+	return modifiers_string
 
 
 func _joypad_get_device_abbreviated(event: InputEvent) -> String:

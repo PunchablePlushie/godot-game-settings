@@ -5,7 +5,7 @@ var _actions: PackedStringArray
 
 
 func _ready() -> void:
-	_actions = ggsUtils.get_input_map().keys()
+	_actions = ggsInputHelper.get_input_map().keys()
 	clear()
 	_create_from_arr(_actions)
 

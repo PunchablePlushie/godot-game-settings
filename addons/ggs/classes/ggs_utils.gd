@@ -228,21 +228,3 @@ static func window_center() -> void:
 	var origin: Vector2i = DisplayServer.screen_get_position(screen_id)
 	var target_pos: Vector2 = origin + (screen_size.size / 2) - (window_size / 2)
 	DisplayServer.window_set_position(target_pos)
-
-
-# The built-in InputMap singleton does not load the user-defined actions
-# when used in the editor.
-static func get_input_map() -> Dictionary:
-	var input_map: Dictionary
-	
-	var project_file: ConfigFile = ConfigFile.new()
-	project_file.load("res://project.godot")
-	
-	var actions: PackedStringArray = project_file.get_section_keys("input")
-	for action: String in actions:
-		var action_properties: Dictionary = project_file.get_value("input", action)
-		var action_events: Array = action_properties["events"]
-		
-		input_map[action] = action_events
-	
-	return input_map

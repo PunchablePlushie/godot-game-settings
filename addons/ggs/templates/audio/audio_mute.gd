@@ -15,13 +15,15 @@ func _init() -> void:
 
 func _get_property_list() -> Array:
 	var hint_string: String = ",".join(_get_audio_buses())
-	return [{
-		"name": "audio_bus",
-		"type": TYPE_STRING,
-		"usage": get_property_usage("audio_bus"),
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": hint_string,
-	}]
+	return [
+		{
+			"name": "audio_bus",
+			"type": TYPE_STRING,
+			"usage": get_property_usage("audio_bus"),
+			"hint": PROPERTY_HINT_ENUM,
+			"hint_string": hint_string,
+		}
+	]
 
 
 func apply(value: bool) -> void:

@@ -1,6 +1,8 @@
 @tool
 extends Resource
 class_name ggsJoyGlyphDB
+## Stores varius textures used to display an input as a glyph. View
+## [method ggsInputHelper.event_get_glyph] for more info. 
 
 const MOUSE: Dictionary = {
 	MOUSE_BUTTON_LEFT: "left",
