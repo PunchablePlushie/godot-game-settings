@@ -2,9 +2,30 @@
 extends RefCounted
 class_name ggsInputHelper
 
-enum InputType {INVALID, KEYBOARD, MOUSE, GP_BTN, GP_MOTION}
+enum InputType {
+	INVALID,
+	KEYBOARD,
+	MOUSE,
+	JOYPAD_BUTTON,
+	JOYPAD_MOTION,
+}
 
-var joy_name_abbr: Dictionary = {
+enum Axis {
+	LS_LEFT, LS_RIGHT, LS_UP, LS_DOWN,
+	RS_LEFT, RS_RIGHT, RS_UP, RS_DOWN,
+	LT, RT
+}
+
+const AXIS_MAP: Dictionary = {
+	JOY_AXIS_LEFT_X: [Axis.LS_RIGHT, Axis.LS_LEFT],
+	JOY_AXIS_LEFT_Y: [Axis.LS_DOWN, Axis.LS_UP],
+	JOY_AXIS_RIGHT_X: [Axis.RS_RIGHT, Axis.RS_LEFT],
+	JOY_AXIS_RIGHT_Y: [Axis.RS_DOWN, Axis.RS_UP],
+	JOY_AXIS_TRIGGER_LEFT: [Axis.LT],
+	JOY_AXIS_TRIGGER_RIGHT: [Axis.RT],
+}
+
+const JOYPAD_DEVICE_ABBREVIATIONS: Dictionary = {
 	"XInput Gamepad": "xbox",
 	"Xbox Series Controller": "xbox",
 	"Sony DualSense": "ps",
@@ -13,151 +34,253 @@ var joy_name_abbr: Dictionary = {
 	"Switch": "switch",
 } 
 
-var labels: Dictionary = {
-	"mouse": [
-		"LMB", "RMB", "MMB", "MW Up", "MW Down", "MW Left", "MW Right", "MB1", "MB2"
-	],
-	
-	"xbox": [
-		"A", "B", "X", "Y", "Back", "Home", "Start", "L", "R", "LB", "RB",
-		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Share"
-	],
-	
-	"ps": [
-		"Cross", "Circle", "Square", "Triangle", "Select", "PS", "Start",
-		"L3", "R3", "L1", "R1", "DPad Up", "DPad Down", "DPad Left",
-		"DPad Right", "Microphone"
-	],
-	
-	"switch": [
-		"B", "A", "Y", "X", "Minus", "", "Plus", "", "", "", "",
-		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Capture"
-	],
-	
-	"other": [
-		"A", "B", "X", "Y", "Back", "Home", "Start", "L", "R", "LB", "RB",
-		"DPad Up", "DPad Down", "DPad Left", "DPad Right", "Share",
-		"Paddle 1", "Paddle 2", "Paddle 3", "Paddle 4", "Touch"
-	],
-	
-	"motion": [
-		{"-": "LStick Left", "+": "LStick Right"},
-		{"-": "LStick Up", "+": "LStick Down"},
-		{"-": "RStick Left", "+": "RStick Right"},
-		{"-": "RStick Up", "+": "RStick Down"},
-		{"+": "Left Trigger"},
-		{"+": "Right Trigger"}
-	],
+const TEXT_MOUSE: Dictionary = {
+	MOUSE_BUTTON_LEFT: "LMB",
+	MOUSE_BUTTON_RIGHT: "RMB",
+	MOUSE_BUTTON_MIDDLE: "MMB",
+	MOUSE_BUTTON_WHEEL_UP: "MW Up",
+	MOUSE_BUTTON_WHEEL_DOWN: "MW Down",
+	MOUSE_BUTTON_WHEEL_LEFT: "MW Left",
+	MOUSE_BUTTON_WHEEL_RIGHT: "MW Right",
+	MOUSE_BUTTON_XBUTTON1: "MB1",
+	MOUSE_BUTTON_XBUTTON2: "MB2",
 }
 
+const TEXT_XBOX: Dictionary = {
+	JOY_BUTTON_A: "A",
+	JOY_BUTTON_B: "B",
+	JOY_BUTTON_X: "X",
+	JOY_BUTTON_Y: "Y",
+	JOY_BUTTON_BACK: "Back",
+	JOY_BUTTON_GUIDE: "Home",
+	JOY_BUTTON_START: "Start",
+	JOY_BUTTON_LEFT_STICK: "LS",
+	JOY_BUTTON_RIGHT_STICK: "RS",
+	JOY_BUTTON_LEFT_SHOULDER: "LB",
+	JOY_BUTTON_RIGHT_SHOULDER: "RB",
+	JOY_BUTTON_DPAD_UP: "DPAD Up",
+	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
+	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
+	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_MISC1: "Share",
+	JOY_BUTTON_PADDLE1: "PAD1",
+	JOY_BUTTON_PADDLE2: "PAD2",
+	JOY_BUTTON_PADDLE3: "PAD3",
+	JOY_BUTTON_PADDLE4: "PAD4",
+	JOY_BUTTON_TOUCHPAD: "Touchpad",
+}
 
-func get_event_id(event: InputEvent) -> int:
+const TEXT_XBOX_AXIS: Dictionary = {
+	Axis.LS_LEFT: "LStick Left",
+	Axis.LS_RIGHT: "LStick Right",
+	Axis.LS_UP: "LStick Up",
+	Axis.LS_DOWN: "LStick Down",
+	Axis.RS_LEFT: "RStick Left",
+	Axis.RS_RIGHT: "RStick Right",
+	Axis.RS_UP: "RStick Up",
+	Axis.RS_DOWN: "RStick Down",
+	Axis.LT: "LT",
+	Axis.RT: "RT",
+}
+
+const TEXT_PS: Dictionary = {
+	JOY_BUTTON_A: "Cross",
+	JOY_BUTTON_B: "Circle",
+	JOY_BUTTON_X: "Square",
+	JOY_BUTTON_Y: "Triangle",
+	JOY_BUTTON_BACK: "Select",
+	JOY_BUTTON_GUIDE: "PS",
+	JOY_BUTTON_START: "Start",
+	JOY_BUTTON_LEFT_STICK: "L3",
+	JOY_BUTTON_RIGHT_STICK: "R3",
+	JOY_BUTTON_LEFT_SHOULDER: "L1",
+	JOY_BUTTON_RIGHT_SHOULDER: "R1",
+	JOY_BUTTON_DPAD_UP: "DPAD Up",
+	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
+	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
+	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_MISC1: "Microphone",
+	JOY_BUTTON_PADDLE1: "PAD1",
+	JOY_BUTTON_PADDLE2: "PAD2",
+	JOY_BUTTON_PADDLE3: "PAD3",
+	JOY_BUTTON_PADDLE4: "PAD4",
+	JOY_BUTTON_TOUCHPAD: "Touchpad",
+}
+
+const TEXT_PS_AXIS: Dictionary = {
+	Axis.LS_LEFT: "LStick Left",
+	Axis.LS_RIGHT: "LStick Right",
+	Axis.LS_UP: "LStick Up",
+	Axis.LS_DOWN: "LStick Down",
+	Axis.RS_LEFT: "RStick Left",
+	Axis.RS_RIGHT: "RStick Right",
+	Axis.RS_UP: "RStick Up",
+	Axis.RS_DOWN: "RStick Down",
+	Axis.LT: "L2",
+	Axis.RT: "R2",
+}
+
+const TEXT_SWITCH: Dictionary = {
+	JOY_BUTTON_A: "B",
+	JOY_BUTTON_B: "A",
+	JOY_BUTTON_X: "Y",
+	JOY_BUTTON_Y: "X",
+	JOY_BUTTON_BACK: "Minus",
+	JOY_BUTTON_GUIDE: "Home",
+	JOY_BUTTON_START: "Plus",
+	JOY_BUTTON_LEFT_STICK: "LS",
+	JOY_BUTTON_RIGHT_STICK: "RS",
+	JOY_BUTTON_LEFT_SHOULDER: "L",
+	JOY_BUTTON_RIGHT_SHOULDER: "R",
+	JOY_BUTTON_DPAD_UP: "DPAD Up",
+	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
+	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
+	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_MISC1: "Capture",
+	JOY_BUTTON_PADDLE1: "PAD1",
+	JOY_BUTTON_PADDLE2: "PAD2",
+	JOY_BUTTON_PADDLE3: "PAD3",
+	JOY_BUTTON_PADDLE4: "PAD4",
+	JOY_BUTTON_TOUCHPAD: "Touchpad",
+}
+
+const TEXT_SWITCH_AXIS: Dictionary = {
+	Axis.LS_LEFT: "LStick Left",
+	Axis.LS_RIGHT: "LStick Right",
+	Axis.LS_UP: "LStick Up",
+	Axis.LS_DOWN: "LStick Down",
+	Axis.RS_LEFT: "RStick Left",
+	Axis.RS_RIGHT: "RStick Right",
+	Axis.RS_UP: "RStick Up",
+	Axis.RS_DOWN: "RStick Down",
+	Axis.LT: "ZL",
+	Axis.RT: "ZR",
+}
+
+const TEXT_OTHER: Dictionary = {
+	JOY_BUTTON_A: "A",
+	JOY_BUTTON_B: "B",
+	JOY_BUTTON_X: "X",
+	JOY_BUTTON_Y: "Y",
+	JOY_BUTTON_BACK: "Back",
+	JOY_BUTTON_GUIDE: "Guide",
+	JOY_BUTTON_START: "Start",
+	JOY_BUTTON_LEFT_STICK: "LS",
+	JOY_BUTTON_RIGHT_STICK: "RS",
+	JOY_BUTTON_LEFT_SHOULDER: "L",
+	JOY_BUTTON_RIGHT_SHOULDER: "R",
+	JOY_BUTTON_DPAD_UP: "DPAD Up",
+	JOY_BUTTON_DPAD_DOWN: "DPAD Down",
+	JOY_BUTTON_DPAD_LEFT: "DPAD Left",
+	JOY_BUTTON_DPAD_RIGHT: "DPAD Right",
+	JOY_BUTTON_MISC1: "MISC1",
+	JOY_BUTTON_PADDLE1: "PAD1",
+	JOY_BUTTON_PADDLE2: "PAD2",
+	JOY_BUTTON_PADDLE3: "PAD3",
+	JOY_BUTTON_PADDLE4: "PAD4",
+	JOY_BUTTON_TOUCHPAD: "Touchpad",
+}
+
+const TEXT_OTHER_AXIS: Dictionary = {
+	Axis.LS_LEFT: "LStick Left",
+	Axis.LS_RIGHT: "LStick Right",
+	Axis.LS_UP: "LStick Up",
+	Axis.LS_DOWN: "LStick Down",
+	Axis.RS_LEFT: "RStick Left",
+	Axis.RS_RIGHT: "RStick Right",
+	Axis.RS_UP: "RStick Up",
+	Axis.RS_DOWN: "RStick Down",
+	Axis.LT: "LT",
+	Axis.RT: "RT",
+}
+
+const MODIFIERS_MASK: int = KEY_MASK_SHIFT | KEY_MASK_CTRL | KEY_MASK_ALT
+
+
+func serialize_event(event: InputEvent) -> Array[int]:
+	var type: int = -1
+	var id: int = -1
+	var aux: int = -1
+	
 	if event is InputEventKey:
-		if event.physical_keycode == 0:
-			return -1
-		
-		return event.physical_keycode | event.get_modifiers_mask()
+		type = InputType.KEYBOARD
+		id = event.physical_keycode | event.get_modifiers_mask()
 	
 	if event is InputEventMouseButton:
-		return event.button_index | event.get_modifiers_mask()
+		type = InputType.MOUSE
+		id = event.button_index | event.get_modifiers_mask()
 	
 	if event is InputEventJoypadButton:
-		return event.button_index
+		type = InputType.JOYPAD_BUTTON
+		id = event.button_index
 	
 	if event is InputEventJoypadMotion:
-		return event.axis
+		type = InputType.JOYPAD_MOTION
+		id = event.axis
+		aux = event.axis_value
 	
-	return -1
+	return [type, id, aux]
 
 
-func set_event_id(event: InputEvent, id: int) -> void:
-	if event is InputEventKey:
-		event.physical_keycode = id & ~(KEY_MASK_SHIFT | KEY_MASK_CTRL | KEY_MASK_ALT)
-		_set_event_modifiers(event, id)
+func deserialize_event(data: Array[int]) -> InputEvent:
+	var type: int = data[0]
+	var id: int = data[1]
+	var aux: int = data[2]
 	
-	if event is InputEventMouseButton:
-		event.button_index = id & ~(KEY_MASK_SHIFT | KEY_MASK_CTRL | KEY_MASK_ALT)
-		_set_event_modifiers(event, id)
+	var event: InputEvent
+	if type == InputType.KEYBOARD:
+		event = InputEventKey.new()
+		event.physical_keycode = id & ~MODIFIERS_MASK
+		event.shift_pressed = bool(id & KEY_MASK_SHIFT)
+		event.ctrl_pressed = bool(id & KEY_MASK_CTRL)
+		event.alt_pressed = bool(id & KEY_MASK_ALT)
 	
-	if event is InputEventJoypadButton:
+	if type == InputType.MOUSE:
+		event = InputEventMouseButton.new()
+		event.button_index = id & ~MODIFIERS_MASK
+		event.shift_pressed = bool(id & KEY_MASK_SHIFT)
+		event.ctrl_pressed = bool(id & KEY_MASK_CTRL)
+		event.alt_pressed = bool(id & KEY_MASK_ALT)
+	
+	if type == InputType.JOYPAD_BUTTON:
+		event = InputEventJoypadButton.new()
 		event.button_index = id
 	
-	if event is InputEventJoypadMotion:
+	if type == InputType.JOYPAD_MOTION:
+		event = InputEventJoypadMotion.new()
 		event.axis = id
-
-
-func get_event_type(event: InputEvent) -> InputType:
-	if event is InputEventKey:
-		return InputType.KEYBOARD
+		event.axis_value = aux
 	
-	if event is InputEventMouseButton:
-		return InputType.MOUSE
-	
-	if event is InputEventJoypadButton:
-		return InputType.GP_BTN
-	
-	if event is InputEventJoypadMotion:
-		return InputType.GP_MOTION
-	
-	return InputType.INVALID
+	return event
 
 
-func create_event_from_type(type: InputType) -> InputEvent:
-	match type:
-		InputType.KEYBOARD:
-			return InputEventKey.new()
-		InputType.MOUSE:
-			return InputEventMouseButton.new()
-		InputType.GP_BTN:
-			return InputEventJoypadButton.new()
-		InputType.GP_MOTION:
-			return InputEventJoypadMotion.new()
-		_:
-			return null
-
-
-func input_already_exists(event: InputEvent, self_action: String) -> Array:
-	for action in InputMap.get_actions():
-		if action.begins_with("ui_"):
-			continue
-		
-		if action == self_action:
-			continue
-		
-		if InputMap.action_has_event(action, event):
-			return [true, action]
-	
-	return [false, ""]
-
- 
-func _set_event_modifiers(event: InputEventWithModifiers, modifier_mask: int) -> void:
-	event.shift_pressed = bool(modifier_mask & KEY_MASK_SHIFT)
-	event.ctrl_pressed = bool(modifier_mask & KEY_MASK_CTRL)
-	event.alt_pressed = bool(modifier_mask & KEY_MASK_ALT)
-
-
-### Events as Text
-
-func get_event_as_text(event: InputEvent) -> String:
-	if get_event_id(event) == -1:
-		return "INVALID"
+func event_get_text(event: InputEvent) -> String:
+	var text: String = "INVALID EVENT"
 	
 	if event is InputEventKey:
-		return OS.get_keycode_string(event.get_physical_keycode_with_modifiers())
+		var keycode_with_modif: int = event.get_physical_keycode_with_modifiers()
+		text = OS.get_keycode_string(keycode_with_modif)
 	
-	if event is InputEventMouseButton:
-		return _get_mouse_event_as_text(event)
+	if event is InputEventMouse:
+		var modif_text: String = _event_get_modifiers_text(event)
+		var btn_text: String = TEXT_MOUSE[event.button_index]
+		text = btn_text if modif_text.is_empty() else "%s+%s"%[modif_text, btn_text]
 	
 	if event is InputEventJoypadButton:
-		return _get_gp_btn_event_as_text(event)
+		var device: String = _joypad_get_device_abbreviated(event)
+		var property: String = "TEXT_%s"%[device.to_upper()]
+		text = get(property)[event.button_index]
 	
 	if event is InputEventJoypadMotion:
-		return _get_gp_motion_event_as_text(event)
+		var device: String = _joypad_get_device_abbreviated(event)
+		var property: String = "TEXT_%s_AXIS"%[device.to_upper()]
+		var axis: Axis = _joypad_get_axis_mapped(event)
+		text = get(property)[axis]
 	
-	return ""
+	return text
 
 
-func _get_modifiers_as_string(event: InputEventWithModifiers) -> String:
+func _event_get_modifiers_text(event: InputEventWithModifiers) -> String:
 	var modifiers: PackedStringArray
 	if event.shift_pressed:
 		modifiers.append("Shift")
@@ -172,69 +295,38 @@ func _get_modifiers_as_string(event: InputEventWithModifiers) -> String:
 	return modifiers_string
 
 
-func _get_joy_name_abbr(name: String) -> String:
-	if joy_name_abbr.has(name):
-		return joy_name_abbr[name]
+func event_get_glyph(event: InputEvent, db: ggsJoyGlyphDB) -> Texture2D:
+	var glyph: Texture2D = null
+	
+	if event is InputEventMouseButton:
+		var property: String = "mouse_%s"%db.MOUSE[event.button_index]
+		glyph = db.get(property)
+	
+	if event is InputEventJoypadButton:
+		var device: String = _joypad_get_device_abbreviated(event)
+		var btn_text: String = db.JOYPAD_BUTTON[event.button_index]
+		var property: String = "%s_%s"%[device, btn_text]
+		glyph = db.get(property)
+	
+	if event is InputEventJoypadMotion:
+		var device: String = _joypad_get_device_abbreviated(event)
+		var axis: Axis = _joypad_get_axis_mapped(event)
+		var axis_text: String = db.JOYPAD_AXIS[axis]
+		var property: String = "%s_%s"%[device, axis_text]
+		glyph = db.get(property)
+	
+	return glyph
+
+
+func _joypad_get_device_abbreviated(event: InputEvent) -> String:
+	var device_name: String = Input.get_joy_name(event.device)
+	
+	if JOYPAD_DEVICE_ABBREVIATIONS.has(device_name):
+		return JOYPAD_DEVICE_ABBREVIATIONS[device_name]
 	else:
 		return "other"
 
 
-func _get_mouse_event_as_text(event: InputEventMouseButton) -> String:
-	var modifiers: String = _get_modifiers_as_string(event)
-	var btn: String = labels["mouse"][event.button_index - 1]
-	var result: String = "%s"%btn if modifiers.is_empty() else "%s+%s"%[modifiers, btn]
-	return result
-
-
-func _get_gp_btn_event_as_text(event: InputEventJoypadButton) -> String:
-	var device_name: String = Input.get_joy_name(event.device)
-	device_name = _get_joy_name_abbr(device_name)
-	return labels[device_name][event.button_index]
-
-
-func _get_gp_motion_event_as_text(event: InputEventJoypadMotion) -> String:
-	var axis_value: String = "-" if event.axis_value < 0 else "+"
-	return labels["motion"][event.axis][axis_value]
-
-
-### Events as Icons
-
-func get_event_as_icon(event: InputEvent, icon_db: ggsIconDB) -> Texture2D:
-	if event is InputEventMouseButton:
-		return _get_mouse_event_as_icon(event, icon_db)
-	
-	if event is InputEventJoypadButton:
-		return _get_gp_btn_event_as_icon(event, icon_db)
-	
-	if event is InputEventJoypadMotion:
-		return _get_gp_motion_event_as_icon(event, icon_db)
-	
-	return null
-
-
-func _get_mouse_event_as_icon(event: InputEventMouse, icon_db: ggsIconDB) -> Texture2D:
-	var button_index: int = event.button_index
-	var icon: Texture2D = icon_db.get_mouse_button_texture(button_index)
-	
-	return icon
-
-
-func _get_gp_btn_event_as_icon(event: InputEventJoypadButton, icon_db: ggsIconDB) -> Texture2D:
-	var device_name: String = Input.get_joy_name(event.device)
-	device_name = _get_joy_name_abbr(device_name)
-	
-	var button_index: int = event.button_index
-	var icon: Texture2D = icon_db.get_gp_button_texture(device_name, button_index)
-	
-	return icon
-
-
-func _get_gp_motion_event_as_icon(event: InputEventJoypadMotion, icon_db: ggsIconDB) -> Texture2D:
-	var device_name: String = Input.get_joy_name(event.device)
-	device_name = _get_joy_name_abbr(device_name)
-	
-	var axis: int = event.axis
-	var axis_dir: String = "-" if event.axis_value < 1 else "+"
-	var icon: Texture2D = icon_db.get_gp_motion_texture(device_name, axis, axis_dir)
-	
-	return icon
+func _joypad_get_axis_mapped(event: InputEvent) -> Axis:
+	var idx: int = 1 if event.axis_value < 0 else 0
+	return AXIS_MAP[event.axis][idx]

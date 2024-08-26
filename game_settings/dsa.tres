@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ggsJoyGlyphDB" load_steps=2 format=3 uid="uid://c5h2el6n2gqal"]
+
+[ext_resource type="Script" path="res://addons/ggs/classes/ggs_joy_glyph_db.gd" id="1_evii6"]
+
+[resource]
+script = ExtResource("1_evii6")
