@@ -1,7 +1,7 @@
 [gd_scene load_steps=80 format=3 uid="uid://olqgnh0d2kg2"]
 
 [ext_resource type="Script" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.gd" id="1_5c22w"]
-[ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/assets/search.svg" id="2_ukygr"]
+[ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/plugin/assets/search.svg" id="2_ukygr"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/inspector/type_selector/window/type_list.gd" id="2_v8p48"]
 
 [sub_resource type="Image" id="Image_wcr4v"]

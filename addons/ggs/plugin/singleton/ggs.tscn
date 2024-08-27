@@ -11,6 +11,8 @@ script = ExtResource("2_ghko5")
 
 [node name="Interact" type="AudioStreamPlayer" parent="Audio"]
 
-[node name="MouseOver" type="AudioStreamPlayer" parent="Audio"]
+[node name="MouseEntered" type="AudioStreamPlayer" parent="Audio"]
 
-[node name="Focus" type="AudioStreamPlayer" parent="Audio"]
+[node name="FocusEntered" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="InputAccepted" type="AudioStreamPlayer" parent="Audio"]

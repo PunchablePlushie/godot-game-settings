@@ -33,6 +33,6 @@ func _on_InputWin_confirmed(action: String) -> void:
 	emit_changed(PROPERTY, action)
 	obj.notify_property_list_changed()
 	
-	obj.event = 0
+	obj.event_idx = 0
 	
 	_update_controls()

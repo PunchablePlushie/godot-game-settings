@@ -12,7 +12,28 @@ signal hint_selector_confirmed(hint: PropertyHint)
 ## Name of the config _file that will be used to save and load game settings.
 @export var config_file: String = "settings.cfg"
 
+## Location of your setting resources.
 @export_dir var settings_dir: String = "res://game_settings"
+
+@export_group("Input Preferences")
+## Time the input component listens for input. When this expires, it
+## automatically stops listening for input.
+@export_range(0.001, 4096, 0.001, "exp", "suffix:s")
+var listen_time: float = 3.0
+
+## Delay before accepting the chosen input. Mainly used to give enough time
+## to process modifiers for keyboard and mouse events.[br]
+## If you don't plan to accept modifiers, you can set this to its minimum
+## value.[br]
+## If you do, choosing a number that's too low may prevent the users from
+## inputting a key with modifier.
+@export_range(0.001, 4096, 0.001, "exp", "suffix:s")
+var accept_delay: float = 0.33
+
+## The button text animation speed when an input component is listening for
+## input.
+@export var anim_speed: float = 1.5
+
 
 var _file_path: String
 var _file: ConfigFile = ConfigFile.new()

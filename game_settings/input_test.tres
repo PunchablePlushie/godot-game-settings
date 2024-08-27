@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="settingInput" load_steps=2 format=3 uid="uid://buvhrgdsxclme"]
+
+[ext_resource type="Script" path="res://addons/ggs/templates/setting_input.gd" id="1_cceev"]
+
+[resource]
+resource_name = "test"
+script = ExtResource("1_cceev")
+action = "move_right"
+event_idx = 0
+read_only_properties = PackedStringArray("default", "type", "event", "event", "event")
+default = [1, 68, -1]
+section = "input"
+key = "test"
+value_type = 28
+value_hint = 0
+value_hint_string = ""
