@@ -23,7 +23,7 @@ func init_value() -> void:
 
 func _on_SpinBox_value_changed(new_value: float) -> void:
 	setting_value = new_value
-	GGS.play_sfx(GGS.SFX.INTERACT)
+	GGS.Audio.Interact.play()
 	if apply_on_changed:
 		apply_setting()
 

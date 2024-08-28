@@ -1,7 +1,6 @@
 @tool
 @icon("res://addons/ggs/plugin/assets/checkbox.svg")
 extends ggsComponent
-class_name ggsCheckbox
 
 @onready var Btn: Button = $Btn
 
@@ -11,40 +10,36 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	super()
+	init_value()
 	Btn.toggled.connect(_on_Btn_toggled)
 	Btn.mouse_entered.connect(_on_Btn_mouse_entered)
 	Btn.focus_entered.connect(_on_Btn_focus_entered)
 
 
 func init_value() -> void:
+	value = GGS.get_value(setting)
+	Btn.set_pressed_no_signal(value)
+
+
+func reset_setting() -> void:
 	super()
-	Btn.set_pressed_no_signal(setting_value)
+	Btn.set_pressed_no_signal(value)
 
 
 func _on_Btn_toggled(btn_state: bool) -> void:
-	setting_value = btn_state
-	GGS.play_sfx(GGS.SFX.INTERACT)
+	value = btn_state
+	GGS.Audio.Interact.play()
 	
 	if apply_on_changed:
 		apply_setting()
 
 
-### Setting
-
-func reset_setting() -> void:
-	super()
-	Btn.set_pressed_no_signal(setting_value)
-
-
-### SFX
-
 func _on_Btn_mouse_entered() -> void:
-	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 
 
 func _on_Btn_focus_entered() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()

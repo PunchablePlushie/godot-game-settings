@@ -56,7 +56,7 @@ func _get_child_index(target_child: BaseButton) -> int:
 
 
 func _on_pressed(button: BaseButton) -> void:
-	GGS.play_sfx(GGS.SFX.INTERACT)
+	GGS.Audio.Interact.play()
 	
 	var child_index: int = _get_child_index(button)
 	if not option_ids.is_empty():
@@ -78,11 +78,11 @@ func reset_setting() -> void:
 ### SFX
 
 func _on_AnyBtn_mouse_entered(Btn: Button) -> void:
-	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 
 
 func _on_AnyBtn_focus_entered() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()

@@ -16,7 +16,7 @@ const WARNING_INCOMPATIBLE_SETTING: String = "The value type of the assigned set
 @export var setting: ggsSetting: set = _set_setting
 
 ## If true, the setting is applied when the component is interacted with.
-## Otherwise, an [settingApplyBtn] is needed.
+## Otherwise, an ApplyBtn is needed.
 @export var apply_on_changed: bool
 
 ## If true, the main control(s) of the component will grab focus when

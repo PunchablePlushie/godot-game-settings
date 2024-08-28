@@ -30,7 +30,7 @@ func init_value() -> void:
 
 
 func _on_Btn_item_selected(item_index: int) -> void:
-	GGS.play_sfx(GGS.SFX.INTERACT)
+	GGS.Audio.Interact.play()
 	
 	if use_ids:
 		setting_value = Btn.get_item_id(item_index)
@@ -50,19 +50,19 @@ func reset_setting() -> void:
 ### SFX
 
 func _on_Btn_pressed() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()
 
 
 func _on_Btn_mouse_entered() -> void:
-	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 
 
 func _on_Btn_focus_entered() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()
 
 
 func _on_Btn_item_focused(_index: int) -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()

@@ -37,11 +37,11 @@ func reset_setting() -> void:
 ### SFX
 
 func _on_Slider_mouse_entered() -> void:
-	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		slider.grab_focus()
 
 
 func _on_Slider_focus_entered() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()

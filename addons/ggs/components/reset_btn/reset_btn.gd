@@ -12,15 +12,15 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	get_tree().call_group(group, "reset_setting")
-	GGS.play_sfx(GGS.SFX.INTERACT)
+	GGS.Audio.Interact.play()
 
 
 func _on_mouse_entered() -> void:
-	GGS.play_sfx(GGS.SFX.MOUSE_OVER)
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		grab_focus()
 
 
 func _on_focus_entered() -> void:
-	GGS.play_sfx(GGS.SFX.FOCUS)
+	GGS.Audio.FocusEntered.play()
