@@ -85,7 +85,7 @@ func _set_default(value: Variant) -> void:
 	default = value
 	
 	if Engine.is_editor_hint() and not key.is_empty():
-		GGS.set_value(section, key, value)
+		GGS.set_value(self, value)
 
 
 func _set_value_type(value: Variant.Type) -> void:

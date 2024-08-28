@@ -54,12 +54,12 @@ func _set_setting(value: ggsSetting) -> void:
 
 
 func apply_setting() -> void:
-	GGS.set_value(setting.section, setting.key, value)
+	GGS.set_value(setting, value)
 	setting.apply(value)
 
 
 func reset_setting() -> void:
-	GGS.set_value(setting.section, setting.key, setting.default)
+	GGS.set_value(setting, setting.default)
 	setting.apply(value)
 
 

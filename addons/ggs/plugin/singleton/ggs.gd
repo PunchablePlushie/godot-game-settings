@@ -3,11 +3,8 @@ extends Node
 ## The core GGS singleton. Handles everything that needs a persistent
 ## and global instance to function.
 
+## Base directory where the save file will be saved.
 const BASE_PATH: String = "user://"
-
-signal hint_selector_requested(type: Variant.Type)
-
-signal hint_selector_confirmed(hint: PropertyHint)
 
 ## Name of the config _file that will be used to save and load game settings.
 @export var config_file: String = "settings.cfg"
@@ -39,6 +36,7 @@ var _file_path: String
 var _file: ConfigFile = ConfigFile.new()
 var _settings: Array[ggsSetting]
 
+## Used to group and access audio players (e.g. [code]GGS.Audio.Interact[/code])
 @onready var Audio: Node = $Audio
 
 
@@ -51,12 +49,24 @@ func _ready() -> void:
 		_apply_all()
 
 
+## Saves the provided [param value] in the provided [param setting] key of
+## the save file.
+func set_value(setting: ggsSetting, value: Variant) -> void:
+	_file.set_value(setting.section, setting.key, value)
+	_file.save(_file_path)
+
+
+## Loads the current value of the provided [param setting] from the save
+## file. Returns the setting's default if its key doesn't exist.
+func get_value(setting: ggsSetting) -> Variant:
+	return _file.get_value(setting.section, setting.key, setting.default)
+
+
 func _get_all_settings() -> Array[ggsSetting]:
 	var result: Array[ggsSetting]
 	var settings: PackedStringArray = _get_dir_settings(settings_dir)
 	for setting: String in settings:
 		var obj: Resource = load(setting)
-		
 		if obj is not ggsSetting:
 			continue
 		
@@ -84,15 +94,6 @@ func _get_dir_settings(path: String) -> PackedStringArray:
 	return result
 
 
-func set_value(section: String, key: String, value: Variant) -> void:
-	_file.set_value(section, key, value)
-	_file.save(_file_path)
-
-
-func get_value(setting: ggsSetting) -> Variant:
-	return _file.get_value(setting.section, setting.key, setting.default)
-
-
 func _file_init() -> void:
 	_file_path = BASE_PATH.path_join(config_file)
 	if FileAccess.file_exists(_file_path):
@@ -101,21 +102,27 @@ func _file_init() -> void:
 	_file.save(_file_path)
 
 
+# Removes unused keys and adds missing ones to the save file.
 func _file_clean_up() -> void:
+	# 1. Save the current keys in a temp variable for later.
 	var temp: Dictionary
 	for section: String in _file.get_sections():
 		temp[section] = {}
 		for key: String in _file.get_section_keys(section):
 			temp[section][key] = _file.get_value(section, key)
 	
+	# 2. Clear the file.
 	_file.clear()
 	
+	# 3. Recreate keys from the default value of settings.
 	for setting: ggsSetting in _settings:
 		if setting.key.is_empty():
 			continue
 		
 		_file.set_value(setting.section, setting.key, setting.default)
 	
+	# 4. If the key exists in this new file, use temp to restore the value
+	# it had before clearing the file.
 	for section: String in temp:
 		if not _file.has_section(section):
 			continue

@@ -1,24 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgrrcr4a75op2"]
-
-[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://addons/ggs/components/input_btn/input_btn.tscn" id="1_a4k5q"]
-[ext_resource type="Resource" uid="uid://buvhrgdsxclme" path="res://game_settings/input_test.tres" id="2_pt6v1"]
+[gd_scene format=3 uid="uid://bgrrcr4a75op2"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-
-[node name="InputBtn" parent="." instance=ExtResource("1_a4k5q")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 108.0
-offset_top = 59.0
-offset_right = 208.0
-offset_bottom = 67.0
-grow_horizontal = 1
-grow_vertical = 1
-_accepted_types = 3
-_accept_modifiers = true
-setting = ExtResource("2_pt6v1")
-apply_on_changed = true

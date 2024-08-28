@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://addons/ggs/plugin/inspector/type_selector/type_selector.gd" id="1_vlpv0"]
 [ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.tscn" id="2_t4vyx"]
 
-[node name="TypeSelector" type="EditorProperty" node_paths=PackedStringArray("Btn", "Value")]
+[node name="TypeSelector" type="EditorProperty" node_paths=PackedStringArray("_Btn", "_Value")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_vlpv0")
-window_scn = ExtResource("2_t4vyx")
-Btn = NodePath("HBox/Btn")
-Value = NodePath("HBox/Value")
+_window_scn = ExtResource("2_t4vyx")
+_Btn = NodePath("HBox/Btn")
+_Value = NodePath("HBox/Value")
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2

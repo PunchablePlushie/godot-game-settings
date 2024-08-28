@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://addons/ggs/plugin/inspector/hint_selector/hint_selector.gd" id="1_mt5sg"]
 [ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="2_7h0xs"]
 
-[node name="HintSelector" type="EditorProperty" node_paths=PackedStringArray("Btn", "Value")]
+[node name="HintSelector" type="EditorProperty" node_paths=PackedStringArray("_Btn", "_Value")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_mt5sg")
-window_scn = ExtResource("2_7h0xs")
-Btn = NodePath("Ctnr/Btn")
-Value = NodePath("Ctnr/Value")
+_window_scn = ExtResource("2_7h0xs")
+_Btn = NodePath("Ctnr/Btn")
+_Value = NodePath("Ctnr/Value")
 
 [node name="Ctnr" type="HBoxContainer" parent="."]
 layout_mode = 2
