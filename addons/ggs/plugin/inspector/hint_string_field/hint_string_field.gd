@@ -11,11 +11,6 @@ const PROPERTY: String = "value_hint_string"
 
 func _ready() -> void:
 	_Field.text_submitted.connect(_on_Field_text_submitted)
-	
-	_Field.text = _obj.get(PROPERTY)
-
-
-func _update_property() -> void:
 	_Field.text = _obj.get(PROPERTY)
 
 

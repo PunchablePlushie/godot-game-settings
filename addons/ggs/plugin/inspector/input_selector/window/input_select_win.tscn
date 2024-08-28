@@ -4,17 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/plugin/assets/search.svg" id="2_lt6gi"]
 [ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/window/input_list.gd" id="3_pn1tt"]
 
-[node name="InputSelectWin" type="ConfirmationDialog" node_paths=PackedStringArray("_FilterField", "_List")]
+[node name="InputSelectWin" type="ConfirmationDialog" node_paths=PackedStringArray("FilterField", "List")]
 auto_translate_mode = 1
 title = "Select Input"
 position = Vector2i(0, 36)
 size = Vector2i(600, 300)
-visible = true
 unresizable = true
 min_size = Vector2i(400, 300)
 script = ExtResource("1_4dvxc")
-_FilterField = NodePath("VBox/FilterField")
-_List = NodePath("VBox/List")
+FilterField = NodePath("VBox/FilterField")
+List = NodePath("VBox/List")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 offset_left = 8.0

@@ -7,11 +7,13 @@ const HINT_SELECTOR_SCN: PackedScene = preload("./hint_selector/hint_selector.ts
 const HINT_STRING_FIELD_SCN: PackedScene = preload("./hint_string_field/hint_string_field.tscn")
 const INPUT_SELECTOR_SCN: PackedScene = preload("./input_selector/input_selector.tscn")
 
+
 func _can_handle(object: Object) -> bool:
 	return object is ggsSetting
 
 
-func _parse_property(object: Object, type: Variant.Type, name: String,
+func _parse_property(
+		object: Object, type: Variant.Type, name: String,
 		hint_type: PropertyHint, hint_string: String, usage_flags: int,
 		wide: bool) -> bool:
 	if name == "value_type":

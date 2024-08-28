@@ -1,38 +1,15 @@
 @tool
-extends ItemList
-
-var _types: PackedStringArray = ggsUtils.ALL_TYPES.values()
-
-var EditorControl: Control
+extends ggsBaseSelectList
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		return
-	
-	EditorControl = EditorInterface.get_base_control()
+	base_items = ggsUtils.ALL_TYPES.values()
 	clear()
-	_create_from_arr(_types)
+	create_from_arr(base_items)
 
 
-func filter(input: String) -> void:
-	clear()
-	
-	if input.is_empty():
-		_create_from_arr(_types)
-		return
-	
-	var types_filtered: Array = Array(_types).filter(_filter_method.bind(input))
-	_create_from_arr(PackedStringArray(types_filtered))
-
-
-func _create_from_arr(arr: PackedStringArray) -> void:
+func create_from_arr(arr: PackedStringArray) -> void:
+	var EditorControl: Control = EditorInterface.get_base_control()
 	for type: String in arr:
 		var icon: Texture2D = EditorControl.get_theme_icon(type, "EditorIcons")
 		add_item(type, icon)
-
-
-func _filter_method(element: String, input: String) -> bool:
-	var element_lowered: String = element.to_lower()
-	var input_lowered: String = input.to_lower()
-	return element_lowered.begins_with(input_lowered)
