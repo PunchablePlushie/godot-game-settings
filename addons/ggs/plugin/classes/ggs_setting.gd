@@ -109,9 +109,9 @@ func get_property_usage(property: String) -> PropertyUsageFlags:
 	return usage
 
 
-## This method is called when GGS tries to apply the setting. In other words,
-## it should contain the setting logic.
 # (Static Typing) No type hint for 'value' is provided to prevent error in
 # child scripts that provide type hint when overriding this method.
+## This method is called when GGS tries to apply the setting. In other words,
+## it should contain the setting logic.
 func apply(value) -> void:
 	pass

@@ -6,7 +6,7 @@
 resource_name = "dsa"
 script = ExtResource("1_a48wi")
 read_only_properties = PackedStringArray()
-default = ""
+default = "dsa"
 section = "test"
 key = "dsa"
 value_type = 4

@@ -85,6 +85,8 @@ const ALL_HINTS: Dictionary = {
 	PROPERTY_HINT_PASSWORD: "Password",
 }
 
+## Used to create the default value of a type when the user changes the
+## [member ggsSetting.value_type] of a [ggsSetting].
 static var TYPE_DEFAULTS: Dictionary = {
 	TYPE_BOOL: false,
 	TYPE_INT: 0,
@@ -126,13 +128,14 @@ static var TYPE_DEFAULTS: Dictionary = {
 	TYPE_PACKED_COLOR_ARRAY: PackedVector4Array(),
 }
 
-
+## Returns the Editor icon associated with the given [param type].
 static func type_get_icon(type: Variant.Type) -> Texture2D:
 	var BaseControl: Control = EditorInterface.get_base_control()
 	var type_string: String = ALL_TYPES[type]
 	return BaseControl.get_theme_icon(type_string, "EditorIcons")
 
 
+## Returns [PropertyHints] associated with the given [param type].
 static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 	var result: PackedStringArray
 	var temp: PackedInt32Array
@@ -206,14 +209,8 @@ static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 	return result
 
 
-static func item_name_is_valid(name: String) -> bool:
-	return (
-		name.is_valid_filename()
-		and not name.begins_with(".")
-		and not name.begins_with("_")
-	)
-
-
+## Clamps game window size to the current screen size. Used when window
+## scale would resize the window to something larger than the user's screen.
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
 	var screen_id: int = DisplayServer.window_get_current_screen()
 	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect(screen_id)
@@ -221,6 +218,7 @@ static func window_clamp_to_screen(size: Vector2) -> Vector2:
 	return size.clamp(size, screen_size.size)
 
 
+## Centers game window on the current screen.
 static func window_center() -> void:
 	var screen_id: int = DisplayServer.window_get_current_screen()
 	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect(screen_id)
