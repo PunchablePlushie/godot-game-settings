@@ -1,6 +1,12 @@
+@icon("res://addons/ggs/plugin/assets/reset_btn.svg")
 extends Button
 
+## Node group associated with the button. When pressed, the button calls
+## [method ggsComponent.reset_setting] on all nodes in this node group.
 @export var group: String
+
+## If true, the main control(s) of the component will grab focus when
+## mouse enters it.
 @export var grab_focus_on_mouse_over: bool
 
 

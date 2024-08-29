@@ -52,6 +52,8 @@ func apply(value: Array) -> void:
 	InputMap.action_erase_events(action)
 	for input_event: InputEvent in new_events:
 		InputMap.action_add_event(action, input_event)
+	
+	GGS.setting_applied.emit(key, value)
 
 
 func _action_get_events() -> PackedStringArray:

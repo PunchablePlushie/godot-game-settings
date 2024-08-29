@@ -3,6 +3,11 @@ extends Node
 ## The core GGS singleton. Handles everything that needs a persistent
 ## and global instance to function.
 
+## Can be used to react to a setting being applied. [param setting] is
+## the [member ggsSetting.key] name of the setting resource this is emitted
+## from.
+signal setting_applied(setting: String, value: Variant)
+
 ## Base directory where the save file will be saved.
 const BASE_PATH: String = "user://"
 

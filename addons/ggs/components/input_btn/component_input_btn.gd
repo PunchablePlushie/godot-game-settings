@@ -200,6 +200,7 @@ func _on_AcceptDelay_timeout() -> void:
 	
 	_new_event = null
 	_update_btn_display()
+	GGS.Audio.InputAccepted.play()
 
 
 func _on_Btn_mouse_entered() -> void:

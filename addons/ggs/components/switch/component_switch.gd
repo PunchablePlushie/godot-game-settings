@@ -2,7 +2,7 @@
 @icon("res://addons/ggs/plugin/assets/switch.svg")
 extends ggsComponent
 
-@onready var Btn: CheckButton = $Btn
+@onready var _Btn: CheckButton = $Btn
 
 
 func _init() -> void:
@@ -16,35 +16,35 @@ func _ready() -> void:
 	if not validate_setting():
 		return
 	
-	super()
-	Btn.toggled.connect(_on_Btn_toggled)
-	Btn.mouse_entered.connect(_on_Btn_mouse_entered)
-	Btn.focus_entered.connect(_on_Btn_focus_entered)
+	init_value()
+	_Btn.toggled.connect(_on_Btn_toggled)
+	_Btn.mouse_entered.connect(_on_Btn_mouse_entered)
+	_Btn.focus_entered.connect(_on_Btn_focus_entered)
 
 
 func init_value() -> void:
+	value = GGS.get_value(setting)
+	_Btn.set_pressed_no_signal(value)
+
+
+func reset_setting() -> void:
 	super()
-	Btn.set_pressed_no_signal(setting_value)
+	_Btn.set_pressed_no_signal(value)
 
 
 func _on_Btn_toggled(toggled_on: bool) -> void:
-	setting_value = toggled_on
+	value = toggled_on
 	GGS.Audio.Interact.play()
 	
 	if apply_on_changed:
 		apply_setting()
 
 
-func reset_setting() -> void:
-	super()
-	Btn.set_pressed_no_signal(setting_value)
-
-
 func _on_Btn_mouse_entered() -> void:
 	GGS.Audio.MouseOver.play()
 	
 	if grab_focus_on_mouse_over:
-		Btn.grab_focus()
+		_Btn.grab_focus()
 
 
 func _on_Btn_focus_entered() -> void:

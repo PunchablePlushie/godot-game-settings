@@ -29,6 +29,7 @@ func apply(value: int) -> void:
 	
 	DisplayServer.window_set_size(size)
 	ggsUtils.window_center()
+	GGS.setting_applied.emit(key, value)
 
 
 func _get_sizes_strings() -> PackedStringArray:

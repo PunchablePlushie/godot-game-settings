@@ -27,3 +27,5 @@ func apply(value: bool) -> void:
 	if size_setting != null:
 		var size_value: String = GGS.get_value(size_setting)
 		size_setting.apply(size_value)
+	
+	GGS.setting_applied.emit(key, value)

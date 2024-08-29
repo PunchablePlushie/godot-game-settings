@@ -33,6 +33,7 @@ func apply(value: bool) -> void:
 	
 	var bus_idx: int = AudioServer.get_bus_index(audio_bus)
 	AudioServer.set_bus_mute(bus_idx, value)
+	GGS.setting_applied.emit(key, value)
 
 
 func _get_audio_buses() -> PackedStringArray:

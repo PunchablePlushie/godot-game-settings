@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://d10row618jwcs"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/switch/setting_node_switch.gd" id="1_j77ap"]
+[ext_resource type="Script" path="res://addons/ggs/components/toggle_btn/component_toggle_btn.gd" id="1_m2okj"]
 
 [node name="ToggleBtn" type="MarginContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_j77ap")
+script = ExtResource("1_m2okj")
 
 [node name="Btn" type="Button" parent="."]
 layout_mode = 2

@@ -36,6 +36,7 @@ func apply(value: float) -> void:
 	var bus_idx: int = AudioServer.get_bus_index(audio_bus)
 	var volume_db: float = linear_to_db(value/100)
 	AudioServer.set_bus_volume_db(bus_idx, volume_db)
+	GGS.setting_applied.emit(key, value)
 
 
 func _get_audio_buses() -> PackedStringArray:
