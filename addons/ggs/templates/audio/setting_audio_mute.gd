@@ -11,6 +11,7 @@ func _init() -> void:
 	value_type = TYPE_BOOL
 	default = false
 	section = "audio"
+	read_only_properties = ["value_type", "value_hint", "value_hint_string"]
 
 
 func _get_property_list() -> Array:

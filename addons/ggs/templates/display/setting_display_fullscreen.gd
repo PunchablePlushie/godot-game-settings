@@ -12,6 +12,7 @@ func _init() -> void:
 	value_type = TYPE_BOOL
 	default = false
 	section = "display"
+	read_only_properties = ["value_type", "value_hint", "value_hint_string"]
 
 
 func apply(value: bool) -> void:

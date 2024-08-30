@@ -4,7 +4,10 @@ class_name settingInput
 ## Changes the input binding of a specific input action defined in the
 ## Input Map.
 
+## The target action from the [InputMap].
 var action: String
+
+## The target event of [member action].
 var event_idx: int: set = _set_event_idx
 
 var _input_helper: ggsInputHelper = ggsInputHelper.new()
@@ -14,7 +17,8 @@ func _init() -> void:
 	value_type = TYPE_ARRAY
 	default = []
 	section = "input"
-	read_only_properties = ["default", "type"]
+	read_only_properties = ["default", "type", "value_type",
+		"value_hint", "value_hint_string"]
 
 
 func _get_property_list() -> Array:

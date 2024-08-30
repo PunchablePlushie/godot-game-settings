@@ -13,6 +13,7 @@ func _init() -> void:
 	value_hint = PROPERTY_HINT_ENUM
 	default = 0
 	section = "display"
+	read_only_properties = ["value_type", "value_hint", "value_hint_string"]
 
 
 func _set_scales(value: Array[float]) -> void:

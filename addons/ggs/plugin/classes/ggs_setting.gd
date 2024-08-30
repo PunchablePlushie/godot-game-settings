@@ -32,6 +32,7 @@ var value_hint_string: String = ""
 ## Any property in this array will be read-only if exported to the
 ## inspector via [method Object._get_property_list]. May not work with 
 ## [annotation @GDScript.@export] annotations.
+
 @export_storage var read_only_properties: PackedStringArray
 
 

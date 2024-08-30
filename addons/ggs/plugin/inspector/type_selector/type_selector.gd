@@ -12,6 +12,9 @@ const PROPERTY: StringName = "value_type"
 
 
 func _ready() -> void:
+	if read_only:
+		_Btn.disabled = true
+	
 	_Btn.pressed.connect(_on_Btn_pressed)
 	_update_controls()
 

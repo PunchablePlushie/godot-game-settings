@@ -4,7 +4,7 @@
 |                                |
 *--------------------------------*
 Documentation:
-	
+	https://github.com/PunchablePlushie/godot-game-settings-docs
 *--------------------------------*
 View on Github:
 	https://github.com/PunchablePlushie/godot-game-settings

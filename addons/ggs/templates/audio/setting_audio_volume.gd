@@ -13,6 +13,7 @@ func _init() -> void:
 	value_hint_string = "0,100"
 	default = 80.0
 	section = "audio"
+	read_only_properties = ["value_type", "value_hint", "value_hint_string"]
 
 
 func _get_property_list() -> Array:

@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="ggsSetting" load_steps=2 format=3 uid="uid://cre2jcrjsr34u"]
+[gd_resource type="Resource" script_class="settingDisplaySize" load_steps=2 format=3 uid="uid://cre2jcrjsr34u"]
 
-[ext_resource type="Script" path="res://addons/ggs/plugin/classes/ggs_setting.gd" id="1_a48wi"]
+[ext_resource type="Script" path="res://addons/ggs/templates/display/setting_display_size.gd" id="1_4tvtk"]
 
 [resource]
 resource_name = "dsa"
-script = ExtResource("1_a48wi")
-read_only_properties = PackedStringArray()
+script = ExtResource("1_4tvtk")
+sizes = Array[Vector2]([])
+read_only_properties = PackedStringArray("value_type", "value_hint", "value_hint_string")
 default = 0
-section = "test"
-key = "dsa"
+section = "display"
+key = ""
 value_type = 2
-value_hint = 0
+value_hint = 2
 value_hint_string = ""
