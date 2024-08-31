@@ -1,13 +1,15 @@
 # Godot Game Settings (GGS)
 Godot Game Settings allows you to create and manage game settings for your small to medium projects. It takes care of all the fundamental functionalities required to have proper game settings, including predefined logic for common settings (e.g. display, audio, input), UI components, saving/loading data, and applying settings.
 
-View the [documentation](docs/home.md) for information on how to use the plugin.
+View the [documentation]([docs/home.md](https://github.com/PunchablePlushie/godot-game-settings-docs/blob/3.1/docs/home.md)) for information on how to use the plugin.
 
-View the [demo branch](https://github.com/PunchablePlushie/godot-game-settings/tree/demo) for information on how to get the demo.
 
 <p align="center">
 	<img src="https://i.postimg.cc/rpKvBkSk/ggs-icon-nobg.png" alt="demo preview">
 </p>
+
+> [!NOTE]
+> If you're just starting out with GGS, it's recommended to use the latest version instead.
 
 
 ## Major Update: v3.1.0
