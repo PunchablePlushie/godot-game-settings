@@ -1,5 +1,11 @@
-[gd_scene format=3 uid="uid://bgrrcr4a75op2"]
+[gd_scene load_steps=2 format=3 uid="uid://bgrrcr4a75op2"]
+
+[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://addons/ggs/components/input_btn/component_input_btn.tscn" id="1_r7r7u"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+
+[node name="InputBtn" parent="." instance=ExtResource("1_r7r7u")]
+layout_mode = 0
 anchors_preset = 0

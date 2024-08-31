@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://addons/ggs/templates/display/setting_display_size.gd" id="1_4tvtk"]
 
 [resource]
-resource_name = "dsa"
 script = ExtResource("1_4tvtk")
 sizes = Array[Vector2]([])
 read_only_properties = PackedStringArray("value_type", "value_hint", "value_hint_string")

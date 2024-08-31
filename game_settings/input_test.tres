@@ -3,12 +3,11 @@
 [ext_resource type="Script" path="res://addons/ggs/templates/setting_input.gd" id="1_cceev"]
 
 [resource]
-resource_name = "test"
 script = ExtResource("1_cceev")
-action = ""
+action = "move_left"
 event_idx = 0
 read_only_properties = PackedStringArray("default", "type", "value_type", "value_hint", "value_hint_string")
-default = []
+default = [1, 65, -1]
 section = "input"
 key = ""
 value_type = 28

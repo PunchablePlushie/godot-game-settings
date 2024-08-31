@@ -36,6 +36,10 @@ var accept_delay: float = 0.33
 ## input.
 @export var anim_speed: float = 1.5
 
+## The default glyph type that should be used when no gamepad device is
+## connected or the device is not recognized.
+@export_custom(PROPERTY_HINT_ENUM, "other, xbox, ps, switch")
+var default_glyph: String = "other"
 
 var _file_path: String
 var _file: ConfigFile = ConfigFile.new()

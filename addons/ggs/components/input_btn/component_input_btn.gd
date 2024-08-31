@@ -12,12 +12,20 @@ enum AcceptedTypes {
 
 const TEXT_ANIM: PackedStringArray = [".", "..", "...", "."]
 
+## Types of input this component listens to.
 @export_flags("Keyboard", "Mouse", "Joypad Button", "Joypad Axis")
 var _accepted_types: int = 1
+
+## Whether modifiers such as shift or ctrl should be accepted. Only relevant
+## for keyboard and mouse events.
 @export var _accept_modifiers: bool
 
 @export_group("Icon")
+## Whether the component should show use glyphs to show mouse and joypad
+## events. Uses a glyph database.
 @export var _use_glyph: bool
+
+## The glyph database used to display inputs.
 @export var _glyph: ggsGlyphDB
 
 var _input_helper: ggsInputHelper = ggsInputHelper.new()
