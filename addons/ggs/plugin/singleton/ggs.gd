@@ -50,6 +50,10 @@ var _settings: Array[ggsSetting]
 
 
 func _ready() -> void:
+	if not DirAccess.dir_exists_absolute(settings_dir):
+		DirAccess.make_dir_absolute(settings_dir)
+		EditorInterface.get_resource_filesystem().scan()
+	
 	_settings = _get_all_settings()
 	_file_init()
 	_file_clean_up()

@@ -41,11 +41,11 @@ func _on_Btn_toggled(toggled_on: bool) -> void:
 
 
 func _on_Btn_mouse_entered() -> void:
-	GGS.Audio.MouseOver.play()
+	GGS.Audio.MouseEntered.play()
 	
 	if grab_focus_on_mouse_over:
 		_Btn.grab_focus()
 
 
 func _on_Btn_focus_entered() -> void:
-	GGS.Audio.Focus.play()
+	GGS.Audio.FocusEntered.play()

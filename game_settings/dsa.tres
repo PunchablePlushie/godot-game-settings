@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="settingDisplaySize" load_steps=2 format=3 uid="uid://cre2jcrjsr34u"]
+[gd_resource type="Resource" script_class="settingDisplayFullscreen" load_steps=2 format=3 uid="uid://cahtemb1vdqno"]
 
-[ext_resource type="Script" path="res://addons/ggs/templates/display/setting_display_size.gd" id="1_4tvtk"]
+[ext_resource type="Script" path="res://addons/ggs/templates/display/setting_display_fullscreen.gd" id="1_kte7m"]
 
 [resource]
-script = ExtResource("1_4tvtk")
-sizes = Array[Vector2]([])
+resource_name = "fullscreen"
+script = ExtResource("1_kte7m")
 read_only_properties = PackedStringArray("value_type", "value_hint", "value_hint_string")
-default = 0
+default = false
 section = "display"
-key = ""
-value_type = 2
-value_hint = 2
+key = "fullscreen"
+value_type = 1
+value_hint = 0
 value_hint_string = ""

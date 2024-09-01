@@ -1,11 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgrrcr4a75op2"]
+[gd_scene load_steps=3 format=3 uid="uid://bgrrcr4a75op2"]
 
-[ext_resource type="PackedScene" uid="uid://dm1av7skxvp1j" path="res://addons/ggs/components/input_btn/component_input_btn.tscn" id="1_r7r7u"]
+[ext_resource type="PackedScene" uid="uid://cha8xesfthpfk" path="res://addons/ggs/components/switch/component_switch.tscn" id="1_fxmnk"]
+[ext_resource type="Resource" uid="uid://cahtemb1vdqno" path="res://game_settings/dsa.tres" id="2_b1mkw"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="InputBtn" parent="." instance=ExtResource("1_r7r7u")]
+[node name="Switch" parent="." instance=ExtResource("1_fxmnk")]
 layout_mode = 0
-anchors_preset = 0
+setting = ExtResource("2_b1mkw")
+apply_on_changed = true
+
+[node name="Btn" parent="Switch" index="0"]
+text = "Fullscreen Mode"
+
+[editable path="Switch"]
