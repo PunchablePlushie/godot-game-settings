@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cww37aayk8gj6"]
+
+[ext_resource type="Script" path="res://addons/ggs/components/apply_btn/component_apply_btn.gd" id="1_dk1tm"]
+
+[node name="ApplyBtn" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dk1tm")

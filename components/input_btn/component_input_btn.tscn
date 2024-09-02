@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm1av7skxvp1j"]
+
+[ext_resource type="Script" path="res://addons/ggs/components/input_btn/component_input_btn.gd" id="1_crgnj"]
+
+[node name="InputBtn" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_crgnj")
+
+[node name="Btn" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+toggle_mode = true
+text_overrun_behavior = 3
+clip_text = true
+icon_alignment = 1
+
+[node name="ListenTime" type="Timer" parent="."]
+one_shot = true
+
+[node name="AcceptDelay" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk1iyx1srawvv"]
+
+[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/type_selector/type_selector.gd" id="1_vlpv0"]
+[ext_resource type="PackedScene" uid="uid://olqgnh0d2kg2" path="res://addons/ggs/plugin/inspector/type_selector/window/type_select_win.tscn" id="2_t4vyx"]
+
+[node name="TypeSelector" type="EditorProperty" node_paths=PackedStringArray("_Btn", "_Value")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vlpv0")
+_window_scn = ExtResource("2_t4vyx")
+_Btn = NodePath("HBox/Btn")
+_Value = NodePath("HBox/Value")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Btn" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 0
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Value" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "23"
+horizontal_alignment = 1

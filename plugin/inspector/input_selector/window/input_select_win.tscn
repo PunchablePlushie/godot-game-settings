@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://0flqleg5pa66"]
+
+[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/window/input_select_win.gd" id="1_4dvxc"]
+[ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/plugin/assets/search.svg" id="2_lt6gi"]
+[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/window/input_list.gd" id="3_pn1tt"]
+
+[node name="InputSelectWin" type="ConfirmationDialog" node_paths=PackedStringArray("FilterField", "List")]
+auto_translate_mode = 1
+title = "Select Input"
+position = Vector2i(0, 36)
+size = Vector2i(600, 300)
+unresizable = true
+min_size = Vector2i(400, 300)
+script = ExtResource("1_4dvxc")
+FilterField = NodePath("VBox/FilterField")
+List = NodePath("VBox/List")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 251.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FilterField" type="LineEdit" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter Actions"
+clear_button_enabled = true
+right_icon = ExtResource("2_lt6gi")
+
+[node name="List" type="ItemList" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 4
+max_columns = 3
+fixed_column_width = 180
+item_0/text = "move_right"
+item_1/text = "move_left"
+item_2/text = "move_up"
+item_3/text = "move_down"
+script = ExtResource("3_pn1tt")

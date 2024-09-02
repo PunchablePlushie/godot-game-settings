@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://guy0hof7ufw4"]
+
+[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/hint_selector/hint_selector.gd" id="1_mt5sg"]
+[ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="2_7h0xs"]
+
+[node name="HintSelector" type="EditorProperty" node_paths=PackedStringArray("_Btn", "_Value")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_mt5sg")
+_window_scn = ExtResource("2_7h0xs")
+_Btn = NodePath("Ctnr/Btn")
+_Value = NodePath("Ctnr/Value")
+
+[node name="Ctnr" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Btn" type="Button" parent="Ctnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 0
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Value" type="Label" parent="Ctnr"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "23"
+horizontal_alignment = 1

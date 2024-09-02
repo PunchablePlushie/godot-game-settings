@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqymtf8fuyj54"]
+
+[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/input_selector.gd" id="1_qjksw"]
+[ext_resource type="PackedScene" uid="uid://0flqleg5pa66" path="res://addons/ggs/plugin/inspector/input_selector/window/input_select_win.tscn" id="2_3q07s"]
+
+[node name="EditorProperty" type="EditorProperty" node_paths=PackedStringArray("_Btn")]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_qjksw")
+_window_scn = ExtResource("2_3q07s")
+_Btn = NodePath("Btn")
+
+[node name="Btn" type="Button" parent="."]
+layout_mode = 2

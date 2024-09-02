@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://esw7j7or7gpd"]
+
+[ext_resource type="Script" path="res://addons/ggs/plugin/singleton/ggs.gd" id="1_6v3cu"]
+[ext_resource type="Script" path="res://addons/ggs/plugin/singleton/audio.gd" id="2_ghko5"]
+
+[node name="GGS" type="Node"]
+script = ExtResource("1_6v3cu")
+default_glyph = " xbox"
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("2_ghko5")
+
+[node name="Interact" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="MouseEntered" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="FocusEntered" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="InputAccepted" type="AudioStreamPlayer" parent="Audio"]

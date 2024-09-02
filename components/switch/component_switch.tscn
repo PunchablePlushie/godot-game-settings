@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cha8xesfthpfk"]
+
+[ext_resource type="Script" path="res://addons/ggs/components/switch/component_switch.gd" id="1_s7nl3"]
+
+[node name="Switch" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_s7nl3")
+
+[node name="Btn" type="CheckButton" parent="."]
+layout_mode = 2
