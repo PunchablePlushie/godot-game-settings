@@ -33,12 +33,12 @@ var listen_time: float = 3.0
 var accept_delay: float = 0.33
 
 ## The button text animation speed when an input component is listening for
-## input.
+## input. A higher value means slower animation.
 @export var anim_speed: float = 1.5
 
 ## The default glyph type that should be used when no gamepad device is
 ## connected or the device is not recognized.
-@export_custom(PROPERTY_HINT_ENUM, "other, xbox, ps, switch")
+@export_custom(PROPERTY_HINT_ENUM, "other,xbox,ps,switch")
 var default_glyph: String = "other"
 
 var _file_path: String

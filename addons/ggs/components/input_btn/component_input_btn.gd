@@ -79,6 +79,7 @@ func _set_state(value: State) -> void:
 			_tween.kill()
 			_update_btn_display()
 		State.LISTENING:
+			_Btn.icon = null
 			_tween = create_tween()
 			_tween.bind_node(self)
 			_tween.set_loops()

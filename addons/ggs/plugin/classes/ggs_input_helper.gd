@@ -294,6 +294,7 @@ func event_get_text(event: InputEvent) -> String:
 	if event is InputEventJoypadButton:
 		var device: String = _joypad_get_device_abbreviated(event)
 		var property: String = "TEXT_%s"%[device.to_upper()]
+		prints(device, property)
 		text = get(property)[event.button_index]
 	
 	if event is InputEventJoypadMotion:
@@ -351,7 +352,7 @@ func _joypad_get_device_abbreviated(event: InputEvent) -> String:
 	if JOYPAD_DEVICE_ABBREVIATIONS.has(device_name):
 		return JOYPAD_DEVICE_ABBREVIATIONS[device_name]
 	else:
-		return "other"
+		return GGS.default_glyph.strip_edges()
 
 
 func _joypad_get_axis_mapped(event: InputEvent) -> Axis:

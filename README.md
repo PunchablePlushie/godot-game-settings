@@ -2,7 +2,7 @@
 
 Godot Game Settings allows you to create and manage game settings for small to medium projects. It takes care of all the fundamental functionalities required to have proper game settings, including predefined logic for common settings (e.g. display, audio, input), UI components for making scenes, and saving/loading data.
 
-View the [documentation](https://github.com/PunchablePlushie/godot-game-settings-docs/blob/main/docs/home.md) for information on how to use the plugin.
+View the [documentation](https://punchableplushie.github.io/godot-game-settings-docs) for information on how to use the plugin.
 
 <p align="center">
 	<img src="https://i.postimg.cc/cCGPB9Kt/ggs-icon.png" alt="GGS icon">
