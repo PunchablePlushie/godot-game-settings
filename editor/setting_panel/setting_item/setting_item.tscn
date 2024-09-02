@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://urg2uin42f3w"]
-
-[ext_resource type="Script" path="res://addons/ggs/editor/setting_panel/setting_item/setting_item.gd" id="1_pwscl"]
-
-[node name="SettingItem" type="Button"]
-toggle_mode = true
-script = ExtResource("1_pwscl")
