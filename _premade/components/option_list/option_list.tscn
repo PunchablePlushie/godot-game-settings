@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7m6l0lvojrsj"]
+
+[ext_resource type="Script" path="res://addons/ggs/components/option_list/component_option_list.gd" id="1_5yk06"]
+
+[node name="OptionList" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5yk06")
+
+[node name="Btn" type="OptionButton" parent="."]
+layout_mode = 2

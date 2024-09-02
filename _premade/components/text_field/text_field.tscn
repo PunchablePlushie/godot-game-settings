@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://di8r6amxunq7q"]
+
+[ext_resource type="Script" path="res://addons/ggs/components/text_field/component_text_field.gd" id="1_u6s1s"]
+
+[node name="TextField" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_u6s1s")
+
+[node name="TextField" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+context_menu_enabled = false
+caret_blink = true
+caret_blink_interval = 0.5
