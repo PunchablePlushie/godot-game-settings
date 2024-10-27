@@ -52,7 +52,13 @@ var _settings: Array[ggsSetting]
 func _ready() -> void:
 	if not DirAccess.dir_exists_absolute(settings_dir):
 		DirAccess.make_dir_absolute(settings_dir)
-		EditorInterface.get_resource_filesystem().scan()
+		
+		# EditorInterface is not available during runtime of an exported project.
+		# Disabling this will prevent parse errors when the game is exported
+		# but will also not auto update the filesystem if settings dir
+		# doesn't exist.
+		
+		#EditorInterface.get_resource_filesystem().scan()
 	
 	_settings = _get_all_settings()
 	_file_init()
@@ -79,7 +85,9 @@ func _get_all_settings() -> Array[ggsSetting]:
 	var result: Array[ggsSetting]
 	var settings: PackedStringArray = _get_dir_settings(settings_dir)
 	for setting: String in settings:
-		var obj: Resource = load(setting)
+		# ".remap" is trimmed to prevent resource loader errors when
+		# the project is exported. 
+		var obj: Resource = load(setting.trim_suffix(".remap"))
 		if obj is not ggsSetting:
 			continue
 		
