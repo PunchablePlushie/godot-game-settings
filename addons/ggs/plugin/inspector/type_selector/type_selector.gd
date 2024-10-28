@@ -14,7 +14,7 @@ const PROPERTY: StringName = "value_type"
 func _ready() -> void:
 	if read_only:
 		_Btn.disabled = true
-	
+
 	_Btn.pressed.connect(_on_Btn_pressed)
 	_update_controls()
 
@@ -37,10 +37,10 @@ func _on_Btn_pressed() -> void:
 func _on_TypeWin_confirmed(type: Variant.Type) -> void:
 	_obj.set(PROPERTY, type)
 	emit_changed(PROPERTY, type)
-	
+
 	_obj.default = ggsUtils.TYPE_DEFAULTS[type]
 	_obj.value_hint = PROPERTY_HINT_NONE
 	_obj.value_hint_string = ""
 	_obj.notify_property_list_changed()
-	
+
 	_update_controls()

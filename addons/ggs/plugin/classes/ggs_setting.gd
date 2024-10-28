@@ -20,7 +20,7 @@ var value_type: int = TYPE_BOOL: set = _set_value_type
 
 ## Can be used to customize how [param default] is exported and shown in the
 ## inspector.[br]
-## See [enum @GlobalScope.PropertyHint] for details. 
+## See [enum @GlobalScope.PropertyHint] for details.
 var value_hint: int = PROPERTY_HINT_NONE
 # (Static Typing) PropertyHint is not used as it clutters the tooltip.
 
@@ -30,7 +30,7 @@ var value_hint: int = PROPERTY_HINT_NONE
 var value_hint_string: String = ""
 
 ## Any property in this array will be read-only if exported to the
-## inspector via [method Object._get_property_list]. May not work with 
+## inspector via [method Object._get_property_list]. May not work with
 ## [annotation @GDScript.@export] annotations.
 
 @export_storage var read_only_properties: PackedStringArray
@@ -78,13 +78,13 @@ func _get_property_list() -> Array:
 			"usage": get_property_usage("value_hint_string"),
 		},
 	])
-	
+
 	return properties
 
 
 func _set_default(value: Variant) -> void:
 	default = value
-	
+
 	if Engine.is_editor_hint() and not key.is_empty():
 		GGS.set_value(self, value)
 
@@ -106,7 +106,7 @@ func get_property_usage(property: String) -> PropertyUsageFlags:
 	var usage: PropertyUsageFlags = PROPERTY_USAGE_DEFAULT
 	if read_only_properties.has(property):
 		usage |= PROPERTY_USAGE_READ_ONLY
-	
+
 	return usage
 
 

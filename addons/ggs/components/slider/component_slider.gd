@@ -9,7 +9,7 @@ func _ready() -> void:
 	compatible_types = [TYPE_INT, TYPE_FLOAT]
 	if Engine.is_editor_hint():
 		return
-	
+
 	init_value()
 	_Slider.value_changed.connect(_on_Slider_value_changed)
 	_Slider.mouse_entered.connect(_on_Slider_mouse_entered)
@@ -28,14 +28,14 @@ func reset_setting() -> void:
 
 func _on_Slider_value_changed(new_value: float) -> void:
 	value = new_value
-	
+
 	if apply_on_changed:
 		apply_setting()
 
 
 func _on_Slider_mouse_entered() -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		_Slider.grab_focus()
 

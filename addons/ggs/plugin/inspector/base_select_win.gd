@@ -20,10 +20,10 @@ func _init() -> void:
 func _ready() -> void:
 	confirmed.connect(_on_confirmed)
 	visibility_changed.connect(_on_visibility_changed)
-	
+
 	FilterField.text_changed.connect(_on_FilterField_text_changed)
 	FilterField.text_submitted.connect(_on_FilterField_text_submitted)
-	
+
 	List.item_selected.connect(_on_List_item_selected)
 	List.item_activated.connect(_on_List_item_activated)
 
@@ -32,10 +32,10 @@ func get_selected_item_idx() -> int:
 	var selected_items: PackedInt32Array = List.get_selected_items()
 	print(selected_items)
 	var item_idx: int = 0
-	
+
 	if List.item_count > 1:
 		item_idx = selected_items[0]
-	
+
 	return item_idx
 
 
@@ -60,7 +60,7 @@ func _on_confirmed() -> void:
 # Confirming through filter list #
 func _on_FilterField_text_changed(new_text: String) -> void:
 	List.filter(new_text)
-	
+
 	field_value_is_valid = (List.item_count == 1)
 	OkBtn.disabled = !field_value_is_valid
 

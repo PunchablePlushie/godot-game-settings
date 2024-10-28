@@ -12,7 +12,7 @@ const PROPERTY: String = "value_hint_string"
 func _ready() -> void:
 	if read_only:
 		_Field.editable = false
-	
+
 	_Field.text_submitted.connect(_on_Field_text_submitted)
 	_Field.text = _obj.get(PROPERTY)
 

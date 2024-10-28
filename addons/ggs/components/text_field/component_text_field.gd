@@ -9,7 +9,7 @@ func _ready() -> void:
 	compatible_types = [TYPE_STRING]
 	if Engine.is_editor_hint():
 		return
-	
+
 	init_value()
 	_TextField.text_submitted.connect(_on_TextField_text_submitted)
 
@@ -27,6 +27,6 @@ func reset_setting() -> void:
 func _on_TextField_text_submitted(submitted_text: String) -> void:
 	value = submitted_text
 	GGS.Audio.Interact.play()
-	
+
 	if apply_on_changed:
 		apply_setting()

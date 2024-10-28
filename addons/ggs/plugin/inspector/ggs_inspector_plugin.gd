@@ -19,20 +19,20 @@ func _parse_property(
 	if name == "value_type":
 		add_property_editor(name, TYPE_SELECTOR_SCN.instantiate())
 		return true
-	
+
 	if name == "value_hint":
 		add_property_editor(name, HINT_SELECTOR_SCN.instantiate())
 		return true
-	
+
 	if name == "value_hint_string":
 		add_property_editor(name, HINT_STRING_FIELD_SCN.instantiate())
 		return true
-	
+
 	if (
 		object is settingInput
 		and name == "action"
 	):
 		add_property_editor(name, INPUT_SELECTOR_SCN.instantiate())
 		return true
-	
+
 	return false

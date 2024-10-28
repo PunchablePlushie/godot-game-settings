@@ -31,8 +31,8 @@ func _on_Btn_pressed() -> void:
 func _on_InputWin_confirmed(action: String) -> void:
 	_obj.set(PROPERTY, action)
 	emit_changed(PROPERTY, action)
-	
+
 	_obj.event_idx = 0
 	_obj.notify_property_list_changed()
-	
+
 	_update_controls()

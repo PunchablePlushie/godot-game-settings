@@ -14,7 +14,7 @@ const PROPERTY: StringName = "value_hint"
 func _ready() -> void:
 	if read_only:
 		_Btn.disabled = true
-	
+
 	_Btn.pressed.connect(_on_Btn_pressed)
 	_update_controls()
 
@@ -39,10 +39,10 @@ func _on_Btn_pressed() -> void:
 func _on_HintWin_confirmed(hint: PropertyHint) -> void:
 	_obj.set(PROPERTY, hint)
 	emit_changed(PROPERTY, hint)
-	
+
 	var type: Variant.Type = _obj.get("value_type")
 	_obj.default = ggsUtils.TYPE_DEFAULTS[type]
 	_obj.value_hint_string = "0,1" if (hint == PROPERTY_HINT_RANGE) else ""
 	_obj.notify_property_list_changed()
-	
+
 	_update_controls()

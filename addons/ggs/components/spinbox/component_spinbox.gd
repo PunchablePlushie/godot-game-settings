@@ -10,7 +10,7 @@ func _ready() -> void:
 	compatible_types = [TYPE_INT, TYPE_FLOAT]
 	if Engine.is_editor_hint():
 		return
-	
+
 	init_value()
 	_SpinBox.value_changed.connect(_on_SpinBox_value_changed)
 	_Field.context_menu_enabled = false
@@ -31,6 +31,6 @@ func reset_setting() -> void:
 func _on_SpinBox_value_changed(new_value: float) -> void:
 	value = new_value
 	GGS.Audio.Interact.play()
-	
+
 	if apply_on_changed:
 		apply_setting()

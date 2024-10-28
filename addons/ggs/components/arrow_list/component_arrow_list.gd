@@ -21,19 +21,19 @@ func _ready() -> void:
 	compatible_types = [TYPE_BOOL, TYPE_INT]
 	if Engine.is_editor_hint():
 		return
-	
+
 	if (
 		not option_ids.is_empty()
 		and option_ids.size() != options.size()
 	):
 		printerr("GGS - Option List (%s): `option_ids` and `options` are not the same size."%name)
 		return
-	
+
 	_init_value()
 	option_selected.connect(_on_option_selected)
 	_LeftBtn.pressed.connect(_on_LeftBtn_pressed)
 	_RightBtn.pressed.connect(_on_RightBtn_pressed)
-	
+
 	_LeftBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(_LeftBtn))
 	_RightBtn.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(_RightBtn))
 	_LeftBtn.focus_entered.connect(_on_AnyBtn_focus_entered)
@@ -47,7 +47,7 @@ func reset_setting() -> void:
 
 func _init_value() -> void:
 	value = GGS.get_value(setting)
-	
+
 	if not option_ids.is_empty():
 		var option_idx: int = option_ids.find(value)
 		_select(option_idx, false)
@@ -57,14 +57,14 @@ func _init_value() -> void:
 
 func _select(index: int, emit_selected: bool = true) -> void:
 	index = index % options.size()
-	
+
 	_OptionLabel.text = options[index]
-	
+
 	if not option_ids.is_empty():
 		value = option_ids[index]
 	else:
 		value = index
-	
+
 	if emit_selected:
 		option_selected.emit(index)
 
@@ -79,7 +79,7 @@ func _on_LeftBtn_pressed() -> void:
 		_select(value - 1)
 	else:
 		_select(option_ids.find(value) - 1)
-	
+
 	GGS.Audio.Interact.play()
 
 
@@ -88,13 +88,13 @@ func _on_RightBtn_pressed() -> void:
 		_select(value + 1)
 	else:
 		_select(option_ids.find(value) + 1)
-	
+
 	GGS.Audio.Interact.play()
 
 
 func _on_AnyBtn_mouse_entered(Btn: Button) -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 

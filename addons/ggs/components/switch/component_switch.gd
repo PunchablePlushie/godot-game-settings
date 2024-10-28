@@ -12,10 +12,10 @@ func _init() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	
+
 	if not validate_setting():
 		return
-	
+
 	init_value()
 	_Btn.toggled.connect(_on_Btn_toggled)
 	_Btn.mouse_entered.connect(_on_Btn_mouse_entered)
@@ -35,14 +35,14 @@ func reset_setting() -> void:
 func _on_Btn_toggled(toggled_on: bool) -> void:
 	value = toggled_on
 	GGS.Audio.Interact.play()
-	
+
 	if apply_on_changed:
 		apply_setting()
 
 
 func _on_Btn_mouse_entered() -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		_Btn.grab_focus()
 

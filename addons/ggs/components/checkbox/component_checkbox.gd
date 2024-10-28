@@ -9,7 +9,7 @@ func _ready() -> void:
 	compatible_types = [TYPE_BOOL]
 	if Engine.is_editor_hint():
 		return
-	
+
 	init_value()
 	_Btn.toggled.connect(_on_Btn_toggled)
 	_Btn.mouse_entered.connect(_on_Btn_mouse_entered)
@@ -29,14 +29,14 @@ func reset_setting() -> void:
 func _on_Btn_toggled(btn_state: bool) -> void:
 	value = btn_state
 	GGS.Audio.Interact.play()
-	
+
 	if apply_on_changed:
 		apply_setting()
 
 
 func _on_Btn_mouse_entered() -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		_Btn.grab_focus()
 
