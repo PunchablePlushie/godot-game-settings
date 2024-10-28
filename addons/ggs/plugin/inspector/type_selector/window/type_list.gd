@@ -9,7 +9,14 @@ func _ready() -> void:
 
 
 func create_from_arr(arr: PackedStringArray) -> void:
-	var EditorControl: Control = EditorInterface.get_base_control()
+	var BaseControl: Control
+	if Engine.is_editor_hint():
+		var editor_interface: Object = Engine.get_singleton("EditorInterface")
+		BaseControl = editor_interface.get_base_control()
+
+	if BaseControl == null:
+		return
+
 	for type: String in arr:
-		var icon: Texture2D = EditorControl.get_theme_icon(type, "EditorIcons")
+		var icon: Texture2D = BaseControl.get_theme_icon(type, "EditorIcons")
 		add_item(type, icon)
