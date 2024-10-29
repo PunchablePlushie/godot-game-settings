@@ -8,7 +8,12 @@ View the [documentation](https://punchableplushie.github.io/godot-game-settings-
 	<img src="https://i.postimg.cc/cCGPB9Kt/ggs-icon.png" alt="GGS icon">
 </p>
 
-## Update 3.2.0
+## 3.2.1
+
+- Fix EditorInterface parse error when the project is exported.
+- Fix resource loader errors when hte project is exported.
+
+## 3.2.0
 
 This version mainly ported the plugin to Godot 4.3 along adding other small improvements.
 

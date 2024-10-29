@@ -34,23 +34,23 @@ var compatible_types: Array[Variant.Type] = []
 func _get_configuration_warnings() -> PackedStringArray:
 	if setting == null:
 		return [WARNING_NO_SETTING]
-	
+
 	var warnings: PackedStringArray
 	if (
 		setting.resource_path.is_empty()
 		or not setting.resource_path.begins_with(GGS.settings_dir)
 	):
 		warnings.append(WARNING_INVALID)
-	
+
 	if setting.key.is_empty():
 		warnings.append(WARNING_EMPTY_KEY)
-	
+
 	if (
 		not compatible_types.is_empty()
 		and not compatible_types.has(setting.value_type)
 	):
 		warnings.append(WARNING_INCOMPATIBLE_SETTING)
-	
+
 	return warnings
 
 
@@ -60,10 +60,10 @@ func _set_setting(value: ggsSetting) -> void:
 		and setting.changed.is_connected(_on_setting_resource_changed)
 	):
 		setting.changed.disconnect(_on_setting_resource_changed)
-	
+
 	setting = value
 	update_configuration_warnings()
-	
+
 	if setting != null:
 		setting.changed.connect(_on_setting_resource_changed)
 
@@ -88,7 +88,7 @@ func validate_setting() -> bool:
 	if setting == null:
 		printerr("GGS - Get Setting Value (%s) - No setting is assigned."%name)
 		return false
-	
+
 	return true
 
 

@@ -31,7 +31,7 @@ func apply(value: bool) -> void:
 	if audio_bus == "None":
 		printerr("GGS - Apply Setting (audio_mute.gd): No audio bus is selected.")
 		return
-	
+
 	var bus_idx: int = AudioServer.get_bus_index(audio_bus)
 	AudioServer.set_bus_mute(bus_idx, value)
 	GGS.setting_applied.emit(key, value)
@@ -42,5 +42,5 @@ func _get_audio_buses() -> PackedStringArray:
 	for bus_idx: int in range(AudioServer.bus_count):
 		var bus: String = AudioServer.get_bus_name(bus_idx)
 		buses.append(bus)
-	
+
 	return buses

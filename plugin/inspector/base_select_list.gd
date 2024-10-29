@@ -12,11 +12,11 @@ func _init() -> void:
 
 func filter(input: String) -> void:
 	clear()
-	
+
 	if input.is_empty():
 		create_from_arr(base_items)
 		return
-	
+
 	var types_filtered: Array = Array(base_items).filter(_filter_method.bind(input))
 	create_from_arr(PackedStringArray(types_filtered))
 

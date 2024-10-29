@@ -52,12 +52,15 @@ var _settings: Array[ggsSetting]
 func _ready() -> void:
 	if not DirAccess.dir_exists_absolute(settings_dir):
 		DirAccess.make_dir_absolute(settings_dir)
-		EditorInterface.get_resource_filesystem().scan()
-	
+
+		if Engine.is_editor_hint():
+			var editor_interface: Object = Engine.get_singleton("EditorInterface")
+			editor_interface.get_resource_filesystem().scan()
+
 	_settings = _get_all_settings()
 	_file_init()
 	_file_clean_up()
-	
+
 	if not Engine.is_editor_hint():
 		_apply_all()
 
@@ -79,31 +82,33 @@ func _get_all_settings() -> Array[ggsSetting]:
 	var result: Array[ggsSetting]
 	var settings: PackedStringArray = _get_dir_settings(settings_dir)
 	for setting: String in settings:
-		var obj: Resource = load(setting)
+		# ".remap" is trimmed to prevent resource loader errors when
+		# the project is exported.
+		var obj: Resource = load(setting.trim_suffix(".remap"))
 		if obj is not ggsSetting:
 			continue
-		
+
 		result.append(obj)
-	
+
 	return result
 
 
 func _get_dir_settings(path: String) -> PackedStringArray:
 	var result: PackedStringArray
 	var dir_access: DirAccess = DirAccess.open(path)
-	
+
 	for file: String in dir_access.get_files():
 		if file.get_extension() == "gd":
 			continue
-		
+
 		var file_path: String = path.path_join(file)
 		result.append(file_path)
-	
+
 	for dir: String in dir_access.get_directories():
 		var dir_path: String = path.path_join(dir)
 		var dir_settings: PackedStringArray = _get_dir_settings(dir_path)
 		result.append_array(dir_settings)
-	
+
 	return result
 
 
@@ -111,7 +116,7 @@ func _file_init() -> void:
 	_file_path = BASE_PATH.path_join(config_file)
 	if FileAccess.file_exists(_file_path):
 		_file.load(_file_path)
-	
+
 	_file.save(_file_path)
 
 
@@ -123,29 +128,29 @@ func _file_clean_up() -> void:
 		temp[section] = {}
 		for key: String in _file.get_section_keys(section):
 			temp[section][key] = _file.get_value(section, key)
-	
+
 	# 2. Clear the file.
 	_file.clear()
-	
+
 	# 3. Recreate keys from the default value of settings.
 	for setting: ggsSetting in _settings:
 		if setting.key.is_empty():
 			continue
-		
+
 		_file.set_value(setting.section, setting.key, setting.default)
-	
+
 	# 4. If the key exists in this new file, use temp to restore the value
 	# it had before clearing the file.
 	for section: String in temp:
 		if not _file.has_section(section):
 			continue
-		
+
 		for key: String in temp[section]:
 			if not _file.has_section_key(section, key):
 				continue
-			
+
 			_file.set_value(section, key, temp[section][key])
-	
+
 	_file.save(_file_path)
 
 
