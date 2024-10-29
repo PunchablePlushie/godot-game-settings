@@ -33,7 +33,7 @@ func apply(value: float) -> void:
 	if audio_bus == "None":
 		printerr("GGS - Apply Setting (audio_volume.gd): No audio bus is selected.")
 		return
-	
+
 	var bus_idx: int = AudioServer.get_bus_index(audio_bus)
 	var volume_db: float = linear_to_db(value/100)
 	AudioServer.set_bus_volume_db(bus_idx, volume_db)
@@ -45,5 +45,5 @@ func _get_audio_buses() -> PackedStringArray:
 	for bus_idx: int in range(AudioServer.bus_count):
 		var bus: String = AudioServer.get_bus_name(bus_idx)
 		buses.append(bus)
-	
+
 	return buses

@@ -40,7 +40,7 @@ func _get_property_list() -> Array:
 
 func _set_event_idx(value: int) -> void:
 	event_idx = value
-	
+
 	var input_map: Dictionary = _input_helper.get_input_map()
 	var target_event: InputEvent = input_map[action][event_idx]
 	default = _input_helper.serialize_event(target_event)
@@ -48,27 +48,27 @@ func _set_event_idx(value: int) -> void:
 
 func apply(value: Array) -> void:
 	var event: InputEvent = _input_helper.deserialize_event(value)
-	
+
 	var new_events: Array[InputEvent] = InputMap.action_get_events(action)
 	new_events.remove_at(event_idx)
 	new_events.insert(event_idx, event)
-	
+
 	InputMap.action_erase_events(action)
 	for input_event: InputEvent in new_events:
 		InputMap.action_add_event(action, input_event)
-	
+
 	GGS.setting_applied.emit(key, value)
 
 
 func _action_get_events() -> PackedStringArray:
 	var input_map: Dictionary = _input_helper.get_input_map()
-	
+
 	var events: PackedStringArray
 	if action.is_empty():
 		return []
-	
+
 	for event: InputEvent in input_map[action]:
 		var event_text: String = _input_helper.event_get_text(event)
 		events.append(event_text)
-	
+
 	return events

@@ -33,7 +33,7 @@ const JOYPAD_DEVICE_ABBREVIATIONS: Dictionary = {
 	"PS5 Controller": "ps",
 	"PS4 Controller": "ps",
 	"Switch": "switch",
-} 
+}
 
 const TEXT_MOUSE: Dictionary = {
 	MOUSE_BUTTON_LEFT: "LMB",
@@ -202,17 +202,17 @@ const MODIFIERS_MASK: int = KEY_MASK_SHIFT | KEY_MASK_CTRL | KEY_MASK_ALT
 ## Unlike [InputMap], it works in the editor as well.
 static func get_input_map() -> Dictionary:
 	var input_map: Dictionary
-	
+
 	var project_file: ConfigFile = ConfigFile.new()
 	project_file.load("res://project.godot")
-	
+
 	var actions: PackedStringArray = project_file.get_section_keys("input")
 	for action: String in actions:
 		var action_properties: Dictionary = project_file.get_value("input", action)
 		var action_events: Array = action_properties["events"]
-		
+
 		input_map[action] = action_events
-	
+
 	return input_map
 
 
@@ -221,24 +221,24 @@ static func serialize_event(event: InputEvent) -> Array:
 	var type: int = -1
 	var id: int = -1
 	var aux: int = -1
-	
+
 	if event is InputEventKey:
 		type = InputType.KEYBOARD
 		id = event.physical_keycode | event.get_modifiers_mask()
-	
+
 	if event is InputEventMouseButton:
 		type = InputType.MOUSE
 		id = event.button_index | event.get_modifiers_mask()
-	
+
 	if event is InputEventJoypadButton:
 		type = InputType.JOYPAD_BUTTON
 		id = event.button_index
-	
+
 	if event is InputEventJoypadMotion:
 		type = InputType.JOYPAD_MOTION
 		id = event.axis
 		aux = 0 if event.axis_value > 0 else 1
-	
+
 	return [type, id, aux]
 
 
@@ -247,7 +247,7 @@ static func deserialize_event(data: Array) -> InputEvent:
 	var type: int = data[0]
 	var id: int = data[1]
 	var aux: int = data[2]
-	
+
 	var event: InputEvent
 	if type == InputType.KEYBOARD:
 		event = InputEventKey.new()
@@ -255,23 +255,23 @@ static func deserialize_event(data: Array) -> InputEvent:
 		event.shift_pressed = bool(id & KEY_MASK_SHIFT)
 		event.ctrl_pressed = bool(id & KEY_MASK_CTRL)
 		event.alt_pressed = bool(id & KEY_MASK_ALT)
-	
+
 	if type == InputType.MOUSE:
 		event = InputEventMouseButton.new()
 		event.button_index = id & ~MODIFIERS_MASK
 		event.shift_pressed = bool(id & KEY_MASK_SHIFT)
 		event.ctrl_pressed = bool(id & KEY_MASK_CTRL)
 		event.alt_pressed = bool(id & KEY_MASK_ALT)
-	
+
 	if type == InputType.JOYPAD_BUTTON:
 		event = InputEventJoypadButton.new()
 		event.button_index = id
-	
+
 	if type == InputType.JOYPAD_MOTION:
 		event = InputEventJoypadMotion.new()
 		event.axis = id
 		event.axis_value = -1 if aux == 1 else 1
-	
+
 	return event
 
 
@@ -281,28 +281,28 @@ static func deserialize_event(data: Array) -> InputEvent:
 ## [code]TEXT_*_AXIS[/code] constants.
 func event_get_text(event: InputEvent) -> String:
 	var text: String = "INVALID EVENT"
-	
+
 	if event is InputEventKey:
 		var keycode_with_modif: int = event.get_physical_keycode_with_modifiers()
 		text = OS.get_keycode_string(keycode_with_modif)
-	
+
 	if event is InputEventMouse:
 		var modif_text: String = _event_get_modifiers_text(event)
 		var btn_text: String = TEXT_MOUSE[event.button_index]
 		text = btn_text if modif_text.is_empty() else "%s+%s"%[modif_text, btn_text]
-	
+
 	if event is InputEventJoypadButton:
 		var device: String = _joypad_get_device_abbreviated(event)
 		var property: String = "TEXT_%s"%[device.to_upper()]
 		prints(device, property)
 		text = get(property)[event.button_index]
-	
+
 	if event is InputEventJoypadMotion:
 		var device: String = _joypad_get_device_abbreviated(event)
 		var property: String = "TEXT_%s_AXIS"%[device.to_upper()]
 		var axis: Axis = _joypad_get_axis_mapped(event)
 		text = get(property)[axis]
-	
+
 	return text
 
 
@@ -310,24 +310,24 @@ func event_get_text(event: InputEvent) -> String:
 ## to retreive appropriate textures.
 func event_get_glyph(event: InputEvent, db: ggsGlyphDB) -> Texture2D:
 	var glyph: Texture2D = null
-	
+
 	if event is InputEventMouseButton:
 		var property: String = "mouse_%s"%db.MOUSE[event.button_index]
 		glyph = db.get(property)
-	
+
 	if event is InputEventJoypadButton:
 		var device: String = _joypad_get_device_abbreviated(event)
 		var btn_text: String = db.JOYPAD_BUTTON[event.button_index]
 		var property: String = "%s_%s"%[device, btn_text]
 		glyph = db.get(property)
-	
+
 	if event is InputEventJoypadMotion:
 		var device: String = _joypad_get_device_abbreviated(event)
 		var axis: Axis = _joypad_get_axis_mapped(event)
 		var axis_text: String = db.JOYPAD_AXIS[axis]
 		var property: String = "%s_%s"%[device, axis_text]
 		glyph = db.get(property)
-	
+
 	return glyph
 
 
@@ -335,20 +335,20 @@ func _event_get_modifiers_text(event: InputEventWithModifiers) -> String:
 	var modifiers: PackedStringArray
 	if event.shift_pressed:
 		modifiers.append("Shift")
-	
+
 	if event.ctrl_pressed:
 		modifiers.append("Ctrl")
-	
+
 	if event.alt_pressed:
 		modifiers.append("Alt")
-	
-	var modifiers_string: String = "+".join(modifiers) 
+
+	var modifiers_string: String = "+".join(modifiers)
 	return modifiers_string
 
 
 func _joypad_get_device_abbreviated(event: InputEvent) -> String:
 	var device_name: String = Input.get_joy_name(event.device)
-	
+
 	if JOYPAD_DEVICE_ABBREVIATIONS.has(device_name):
 		return JOYPAD_DEVICE_ABBREVIATIONS[device_name]
 	else:

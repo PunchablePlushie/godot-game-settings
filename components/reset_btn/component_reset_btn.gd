@@ -23,7 +23,7 @@ func _on_pressed() -> void:
 
 func _on_mouse_entered() -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		grab_focus()
 

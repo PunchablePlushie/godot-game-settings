@@ -53,7 +53,7 @@ const ALL_HINTS: Dictionary = {
 	PROPERTY_HINT_LINK: "Link",
 	PROPERTY_HINT_FLAGS: "Flags",
 	PROPERTY_HINT_LAYERS_2D_RENDER: "Layers 2D Render",
-	PROPERTY_HINT_LAYERS_2D_PHYSICS: "Layers 2D Physics", 
+	PROPERTY_HINT_LAYERS_2D_PHYSICS: "Layers 2D Physics",
 	PROPERTY_HINT_LAYERS_2D_NAVIGATION: "Layers 2D Navigation",
 	PROPERTY_HINT_LAYERS_3D_RENDER: "Layers 3D Render",
 	PROPERTY_HINT_LAYERS_3D_PHYSICS: "Layers 3D Physics",
@@ -130,7 +130,14 @@ static var TYPE_DEFAULTS: Dictionary = {
 
 ## Returns the Editor icon associated with the given [param type].
 static func type_get_icon(type: Variant.Type) -> Texture2D:
-	var BaseControl: Control = EditorInterface.get_base_control()
+	var BaseControl: Control
+	if Engine.is_editor_hint():
+		var editor_interface: Object = Engine.get_singleton("EditorInterface")
+		BaseControl = editor_interface.get_base_control()
+
+	if BaseControl == null:
+		return null
+
 	var type_string: String = ALL_TYPES[type]
 	return BaseControl.get_theme_icon(type_string, "EditorIcons")
 
@@ -139,13 +146,13 @@ static func type_get_icon(type: Variant.Type) -> Texture2D:
 static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 	var result: PackedStringArray
 	var temp: PackedInt32Array
-	
+
 	temp.append(PROPERTY_HINT_NONE)
 	match type:
 		TYPE_FLOAT:
 			temp.append(PROPERTY_HINT_RANGE)
 			temp.append(PROPERTY_HINT_EXP_EASING)
-		
+
 		TYPE_INT:
 			temp.append(PROPERTY_HINT_RANGE)
 			temp.append(PROPERTY_HINT_ENUM)
@@ -158,7 +165,7 @@ static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 			temp.append(PROPERTY_HINT_LAYERS_3D_NAVIGATION)
 			temp.append(PROPERTY_HINT_LAYERS_AVOIDANCE)
 			temp.append(PROPERTY_HINT_INT_IS_POINTER)
-		
+
 		TYPE_STRING:
 			temp.append(PROPERTY_HINT_ENUM)
 			temp.append(PROPERTY_HINT_ENUM_SUGGESTION)
@@ -174,38 +181,38 @@ static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 			temp.append(PROPERTY_HINT_GLOBAL_SAVE_FILE)
 			temp.append(PROPERTY_HINT_LOCALE_ID)
 			temp.append(PROPERTY_HINT_PASSWORD)
-		
+
 		TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I, TYPE_VECTOR4, TYPE_VECTOR4I:
 			temp.append(PROPERTY_HINT_LINK)
-		
+
 		TYPE_VECTOR2:
 			temp.append(PROPERTY_HINT_LINK)
-		
+
 		TYPE_OBJECT:
 			temp.append(PROPERTY_HINT_RESOURCE_TYPE)
 			temp.append(PROPERTY_HINT_OBJECT_ID)
 			temp.append(PROPERTY_HINT_OBJECT_TOO_BIG)
 			temp.append(PROPERTY_HINT_NODE_TYPE)
-		
+
 		TYPE_COLOR:
 			temp.append(PROPERTY_HINT_COLOR_NO_ALPHA)
-		
+
 		TYPE_ARRAY:
 			temp.append(PROPERTY_HINT_TYPE_STRING)
 			temp.append(PROPERTY_HINT_ARRAY_TYPE)
-		
+
 		TYPE_NODE_PATH:
 			temp.append(PROPERTY_HINT_NODE_PATH_VALID_TYPES)
-		
+
 		TYPE_DICTIONARY:
 			temp.append(PROPERTY_HINT_LOCALIZABLE_STRING)
-		
+
 		TYPE_QUATERNION:
 			temp.append(PROPERTY_HINT_HIDE_QUATERNION_EDIT)
-	
+
 	for hint: PropertyHint in temp:
 		result.append(ALL_HINTS[hint])
-	
+
 	return result
 
 
@@ -214,7 +221,7 @@ static func type_get_compatible_hints(type: Variant.Type) -> PackedStringArray:
 static func window_clamp_to_screen(size: Vector2) -> Vector2:
 	var screen_id: int = DisplayServer.window_get_current_screen()
 	var screen_size: Rect2i = DisplayServer.screen_get_usable_rect(screen_id)
-	
+
 	return size.clamp(size, screen_size.size)
 
 

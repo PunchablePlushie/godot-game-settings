@@ -22,11 +22,11 @@ func apply(value: bool) -> void:
 			window_mode = DisplayServer.WINDOW_MODE_FULLSCREEN
 		false:
 			window_mode = DisplayServer.WINDOW_MODE_WINDOWED
-	
+
 	DisplayServer.window_set_mode(window_mode)
-	
+
 	if size_setting != null:
 		var size_value: String = GGS.get_value(size_setting)
 		size_setting.apply(size_value)
-	
+
 	GGS.setting_applied.emit(key, value)

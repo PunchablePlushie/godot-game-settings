@@ -23,18 +23,18 @@ func _ready() -> void:
 	compatible_types = [TYPE_BOOL, TYPE_INT]
 	if Engine.is_editor_hint():
 		return
-	
+
 	if active_list == Lists.HLIST:
 		_ActiveList = _HList
 	else:
 		_ActiveList = _VList
-	
+
 	init_value()
 	_btngrp.pressed.connect(_on_BtnGroup_pressed)
-	
+
 	for child: Button in _ActiveList.get_children():
 		child.button_group = _btngrp
-		
+
 		child.mouse_entered.connect(_on_AnyBtn_mouse_entered.bind(child))
 		child.focus_entered.connect(_on_AnyBtn_focus_entered)
 
@@ -61,28 +61,28 @@ func _get_child_index(target_child: BaseButton) -> int:
 	for child: Button in _ActiveList.get_children():
 		if child == target_child:
 			return i
-		
+
 		i += 1
-	
+
 	return -1
 
 
 func _on_BtnGroup_pressed(button: BaseButton) -> void:
 	GGS.Audio.Interact.play()
-	
+
 	var child_index: int = _get_child_index(button)
 	if not option_ids.is_empty():
 		value = option_ids[child_index]
 	else:
 		value = child_index
-	
+
 	if apply_on_changed:
 		apply_setting()
 
 
 func _on_AnyBtn_mouse_entered(Btn: Button) -> void:
 	GGS.Audio.MouseEntered.play()
-	
+
 	if grab_focus_on_mouse_over:
 		Btn.grab_focus()
 
