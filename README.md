@@ -8,9 +8,14 @@ View the [documentation](https://punchableplushie.github.io/godot-game-settings-
 	<img src="https://i.postimg.cc/cCGPB9Kt/ggs-icon.png" alt="GGS icon">
 </p>
 
+## 3.2.2
+
+- Fix a type error in the fullscreen setting.
+- Change the fullscreen setting to use exclusive fullscreen mode instead.
+
 ## 3.2.1
 
-- Fix EditorInterface parse error when the project is exported.
+- Fix `EditorInterface` parse error when the project is exported.
 - Fix resource loader errors when hte project is exported.
 
 ## 3.2.0
