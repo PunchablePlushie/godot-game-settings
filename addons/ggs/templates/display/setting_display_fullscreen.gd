@@ -21,7 +21,7 @@ func apply(value: bool) -> void:
 		true:
 			window_mode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 		false:
-			window_mode = DisplayServer.MODE_WINDOWED
+			window_mode = DisplayServer.WINDOW_MODE_WINDOWED
 
 	DisplayServer.window_set_mode(window_mode)
 
