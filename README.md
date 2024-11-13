@@ -8,6 +8,10 @@ View the [documentation](https://punchableplushie.github.io/godot-game-settings-
 	<img src="https://i.postimg.cc/cCGPB9Kt/ggs-icon.png" alt="GGS icon">
 </p>
 
+## 3.2.3
+
+- Fix fullscreen setting not having windowed mode.
+
 ## 3.2.2
 
 - Fix a type error in the fullscreen setting.
