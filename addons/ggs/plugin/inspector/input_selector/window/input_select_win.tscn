@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://0flqleg5pa66"]
 
-[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/window/input_select_win.gd" id="1_4dvxc"]
+[ext_resource type="Script" uid="uid://cf4tsa1l3vm4f" path="res://addons/ggs/plugin/inspector/input_selector/window/input_select_win.gd" id="1_4dvxc"]
 [ext_resource type="Texture2D" uid="uid://dbervsl0o0ifw" path="res://addons/ggs/plugin/assets/search.svg" id="2_lt6gi"]
-[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/input_selector/window/input_list.gd" id="3_pn1tt"]
+[ext_resource type="Script" uid="uid://bwsom7qhwu0kl" path="res://addons/ggs/plugin/inspector/input_selector/window/input_list.gd" id="3_pn1tt"]
 
 [node name="InputSelectWin" type="ConfirmationDialog" node_paths=PackedStringArray("FilterField", "List")]
 auto_translate_mode = 1

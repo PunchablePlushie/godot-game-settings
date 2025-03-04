@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhkyf3l4ee800"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/checkbox/component_checkbox.gd" id="1_wjrcm"]
+[ext_resource type="Script" uid="uid://dem3tkp32myx4" path="res://addons/ggs/components/checkbox/component_checkbox.gd" id="1_wjrcm"]
 
 [node name="Checkbox" type="MarginContainer"]
 offset_right = 40.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqi00h7i7sg3u"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/spinbox/component_spinbox.gd" id="1_ovbvt"]
+[ext_resource type="Script" uid="uid://be8u6s11l35uw" path="res://addons/ggs/components/spinbox/component_spinbox.gd" id="1_ovbvt"]
 
 [node name="SpinBox" type="MarginContainer"]
 offset_right = 40.0

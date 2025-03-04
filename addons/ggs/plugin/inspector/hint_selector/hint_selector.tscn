@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://guy0hof7ufw4"]
 
-[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/hint_selector/hint_selector.gd" id="1_mt5sg"]
+[ext_resource type="Script" uid="uid://dhee5733c8k70" path="res://addons/ggs/plugin/inspector/hint_selector/hint_selector.gd" id="1_mt5sg"]
 [ext_resource type="PackedScene" uid="uid://bmc8dc74pu1ei" path="res://addons/ggs/plugin/inspector/hint_selector/window/hint_select_win.tscn" id="2_7h0xs"]
 
 [node name="HintSelector" type="EditorProperty" node_paths=PackedStringArray("_Btn", "_Value")]
