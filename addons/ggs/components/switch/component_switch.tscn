@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cha8xesfthpfk"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/switch/component_switch.gd" id="1_s7nl3"]
+[ext_resource type="Script" uid="uid://cu4hfegg777ng" path="res://addons/ggs/components/switch/component_switch.gd" id="1_s7nl3"]
 
 [node name="Switch" type="MarginContainer"]
 offset_right = 40.0

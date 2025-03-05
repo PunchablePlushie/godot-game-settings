@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c11tbsolk6dnu"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/radio_list/component_radio_list.gd" id="1_47eay"]
+[ext_resource type="Script" uid="uid://n87lxbii0tqk" path="res://addons/ggs/components/radio_list/component_radio_list.gd" id="1_47eay"]
 
 [node name="RadioList" type="MarginContainer"]
 offset_bottom = 648.0

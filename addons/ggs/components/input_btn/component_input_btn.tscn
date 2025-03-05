@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm1av7skxvp1j"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/input_btn/component_input_btn.gd" id="1_crgnj"]
+[ext_resource type="Script" uid="uid://on6pq1nljhji" path="res://addons/ggs/components/input_btn/component_input_btn.gd" id="1_crgnj"]
 
 [node name="InputBtn" type="MarginContainer"]
 anchors_preset = 15

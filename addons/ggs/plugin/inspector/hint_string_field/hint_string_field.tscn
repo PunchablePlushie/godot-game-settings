@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://df1vnh7mng46r"]
 
-[ext_resource type="Script" path="res://addons/ggs/plugin/inspector/hint_string_field/hint_string_field.gd" id="1_yob8v"]
+[ext_resource type="Script" uid="uid://cu6wttjinhw22" path="res://addons/ggs/plugin/inspector/hint_string_field/hint_string_field.gd" id="1_yob8v"]
 
 [node name="HintStringField" type="EditorProperty" node_paths=PackedStringArray("_Field")]
 offset_right = 40.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cww37aayk8gj6"]
 
-[ext_resource type="Script" path="res://addons/ggs/components/apply_btn/component_apply_btn.gd" id="1_dk1tm"]
+[ext_resource type="Script" uid="uid://b0qfqgedsdqi5" path="res://addons/ggs/components/apply_btn/component_apply_btn.gd" id="1_dk1tm"]
 
 [node name="ApplyBtn" type="Button"]
 anchors_preset = 15
