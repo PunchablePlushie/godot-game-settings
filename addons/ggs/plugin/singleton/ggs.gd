@@ -98,7 +98,7 @@ func _get_dir_settings(path: String) -> PackedStringArray:
 	var dir_access: DirAccess = DirAccess.open(path)
 
 	for file: String in dir_access.get_files():
-		if file.get_extension() == "gd":
+		if file.get_extension() == "gd" or file.get_extension() == "uid":
 			continue
 
 		var file_path: String = path.path_join(file)
