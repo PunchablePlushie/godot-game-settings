@@ -96,7 +96,8 @@ func apply_setting() -> void:
 ## Saves the default value of the setting to the save file and applies it to the game, effectively reseting it.[br]
 ## A ResetBtn calls this method to reset its associated settings.
 func reset_setting() -> void:
-	GGSSaveManager.save_setting_value(setting, setting.default)
+	value = setting.default
+	GGSSaveManager.save_setting_value(setting, value)
 	GGS.setting_applied.emit(setting, value)
 	setting.apply(value)
 
